@@ -1281,3 +1281,93 @@
   font-size: 16px;
   font-weight: 300;
 }
+
+/*도서 목록 페이지*/
+
+/* 도서 리스트 아이템 전체 컨테이너 */
+.book-list-container {
+    max-width: 1100px;    /* 리스트의 최대 너비 설정 */
+    margin: 40px auto;    /* 위아래 40px, 좌우 자동(가운데 정렬) */
+    padding: 0 20px;      /* 화면이 작아졌을 때 양옆 여백 확보 */
+}
+
+/* 상단 건수 표시 부분 */
+.list-header {
+    border-bottom: 2px solid #333;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+/* 기존 아이템 스타일 */
+.list-item {
+    display: flex;
+    padding: 30px 0;      /* 상하 여백을 조금 더 줌 */
+    border-bottom: 1px solid #eee;
+    align-items: flex-start;
+}
+
+/* 썸네일 이미지 감싸는 div */
+.thumbnail-container {
+    width: 130px;
+    flex-shrink: 0;
+    margin-right: 30px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+}
+
+/* 실제 이미지 태그 */
+.thumbnail-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 텍스트 정보 컨테이너 */
+.info-container {
+    flex: 1;
+}
+
+/* 도서 제목 */
+.title {
+    fontSize: 18px; /* 브라우저 호환성을 위해 18px 권장 */
+    font-weight: bold;
+    color: #0056b3;
+    margin: 0 0 10px 0;
+    cursor: pointer;
+}
+
+/* 저자/출판사 행 */
+.author-row {
+    margin-bottom: 15px;
+}
+
+/* 일반 텍스트 스타일 */
+.text-item {
+    font-size: 14px;
+    color: #555;
+}
+
+/* 하단 메타 정보(청구기호 등) 컨테이너 */
+.meta-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* 메타 정보 개별 항목 */
+.meta-item {
+    font-size: 13px;
+}
+
+/* 메타 정보 라벨(이름) */
+.meta-label {
+    font-weight: bold;
+    color: #333;
+    margin-right: 8px;
+}
+
+/* 메타 정보 값 */
+.meta-value {
+    color: #666;
+}
