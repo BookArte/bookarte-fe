@@ -7,6 +7,7 @@ import initPage from "@/js/ui";
 import { useEffect } from "react";
 import RegisterBook from "../pages/book/RegisterBook";
 import BookList from "../pages/book/BookList";
+import BookDetail from "../pages/book/BookDetail";
 
 
 
@@ -29,6 +30,9 @@ const RootRoutes = () => {
 
         {/* BookList */}
         <Route path={"/book/list"} element={<BookList />} />
+
+        {/* BookDetail */}
+        <Route path={"/book/view/:bookId"} element={<BookDetail />} />
 
       </Routes>
 
