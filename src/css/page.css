@@ -1286,9 +1286,9 @@
 
 /* 도서 리스트 아이템 전체 컨테이너 */
 .book-list-container {
-    max-width: 1100px;    /* 리스트의 최대 너비 설정 */
-    margin: 40px auto;    /* 위아래 40px, 좌우 자동(가운데 정렬) */
-    padding: 0 20px;      /* 화면이 작아졌을 때 양옆 여백 확보 */
+    max-width: 1100px;    
+    margin: 40px auto;    
+    padding: 0 20px;   
 }
 
 /* 상단 건수 표시 부분 */
@@ -1303,7 +1303,7 @@
 /* 기존 아이템 스타일 */
 .list-item {
     display: flex;
-    padding: 30px 0;      /* 상하 여백을 조금 더 줌 */
+    padding: 30px 0; 
     border-bottom: 1px solid #eee;
     align-items: flex-start;
 }
@@ -1330,7 +1330,7 @@
 
 /* 도서 제목 */
 .title {
-    fontSize: 18px; /* 브라우저 호환성을 위해 18px 권장 */
+    font-size: 18px;
     font-weight: bold;
     color: #0056b3;
     margin: 0 0 10px 0;
@@ -1348,7 +1348,7 @@
     color: #555;
 }
 
-/* 하단 메타 정보(청구기호 등) 컨테이너 */
+/* 하단 메타 정보 컨테이너 */
 .meta-container {
     display: flex;
     flex-wrap: wrap;
