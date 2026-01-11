@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../../css/page.css'
+import '../../css/page.css';
 
 function BookDetail() {
-    const { bookId } = useParams(); // URL 파라미터에서 ID 추출
+    const { bookId } = useParams();
     const navigate = useNavigate();
     const [book, setBook] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -27,18 +27,55 @@ function BookDetail() {
         fetchBookDetail();
     }, [bookId]);
 
+    // 삭제 핸들러
+    const handleDelete = async () => {
+        if (window.confirm("정말로 이 도서를 삭제하시겠습니까?")) {
+            try {
+                const response = await axios.delete(`http://localhost:8080/api/book/${bookId}`);
+
+                if (response.data.success) {
+                    alert("삭제되었습니다.");
+                    navigate('/book/list');
+                } else {
+                    alert("삭제에 실패했습니다: " + response.data.message);
+                }
+            } catch (error) {
+                console.error("삭제 요청 중 오류 발생:", error);
+                alert("삭제 처리 중 서버 오류가 발생했습니다.");
+            }
+        }
+    };
+
     if (loading) return <div className="book-detail-container">로딩 중...</div>;
     if (!book) return <div className="book-detail-container">도서 정보를 찾을 수 없습니다.</div>;
 
     return (
         <div className="book-detail-container">
-            {/* 뒤로가기 버튼 */}
-            <button onClick={() => navigate(-1)} style={{ marginBottom: '20px', cursor: 'pointer' }}>
-                ← 목록으로 돌아가기
-            </button>
+            {/* 상단 버튼 영역 */}
+            <div className='back-btn' style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+                <button onClick={() => navigate(-1)} >
+                    ← 목록으로 돌아가기
+                </button>
+
+                {/* 수정 및 삭제 버튼 세트 */}
+                <div style={{ display: 'flex', gap: '10px' }}>
+                    <button
+                        className='update-btn'
+                        onClick={() => navigate(`/book/modify/${bookId}`)}
+
+                    >
+                        수정
+                    </button>
+                    <button
+                        className='delete-btn'
+                        onClick={handleDelete}
+                    >
+                        삭제
+                    </button>
+                </div>
+            </div>
 
             <div className="detail-header">
-                {/* 도서 표지 */}
                 <img
                     src={book.bookThumbnail || 'https://via.placeholder.com/200x280'}
                     alt={book.bookTitle}
@@ -79,7 +116,6 @@ function BookDetail() {
                 </div>
             </div>
 
-            {/* 책소개 섹션 */}
             <div className="detail-section">
                 <h2 className="section-title">책소개</h2>
                 <div className="contents-box">
@@ -87,8 +123,8 @@ function BookDetail() {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 
-export default BookDetail
+export default BookDetail;

@@ -1456,3 +1456,32 @@
     padding: 20px;
     border: 1px solid #f0f0f0;
 }
+
+/*버튼 영역*/
+.back-btn {
+    padding: '8px 15px';
+    background-color: #fff;
+    border: '1px solid #ccc';
+    cursor: 'pointer';
+    border-radius: 4px;
+
+}
+.update-btn {
+  padding: 8px 20px;
+  background-color: #0056b3;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.delete-btn {
+  padding: 8px 20px;
+  background-color: #d9534f;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+}
