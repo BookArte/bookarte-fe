@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../css/page.css'
+import { useNavigate } from 'react-router-dom'
 
 function BookList() {
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [totalElements, setTotalElements] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchBooks();
@@ -14,7 +16,6 @@ function BookList() {
     const fetchBooks = async () => {
         try {
             const response = await axios.get('http://localhost:8080/api/book/list');
-            // 응답 구조에서 data.content 배열을 추출
             if (response.data.success) {
                 setBooks(response.data.data.content);
                 setTotalElements(response.data.data.totalElements);
@@ -48,7 +49,9 @@ function BookList() {
                     </div>
 
                     <div className="info-container">
-                        <h3 className="title">{book.bookTitle}</h3>
+                        <h3 className="title" onClick={() => navigate(`/book/view/${book.bookId}`)}>
+                            {book.bookTitle}
+                        </h3>
 
                         <div className="author-row">
                             <span className="text-item">{book.bookAuthor} 지음</span>
