@@ -1451,6 +1451,7 @@
     line-height: 1.8;
     color: #444;
     white-space: pre-wrap;
+    white-space: pre-wrap; 
     background: #fcfcfc;
     padding: 20px;
     border: 1px solid #f0f0f0;
