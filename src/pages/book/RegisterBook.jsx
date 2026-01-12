@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../../css/page.css';
 
 function RegisterBook() {
     const [searchQuery, setSearchQuery] = useState('');
@@ -73,49 +74,40 @@ function RegisterBook() {
     };
 
     return (
-        <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto', fontFamily: 'sans-serif' }}>
+        <div className='form-container'>
             <h2 style={{ textAlign: 'center' }}>도서 등록</h2>
 
             {/* 검색 섹션 */}
-            <section style={{ marginBottom: '30px', position: 'relative' }}>
+            <section className='search-section'>
                 <form onSubmit={handleSearch} style={{ display: 'flex' }}>
                     <input
+                        className='search-form'
                         type="text"
                         placeholder="등록할 도서 제목을 검색하세요..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        style={{ padding: '12px', width: '100%', border: '1px solid #007bff', borderRadius: '4px 0 0 4px', outline: 'none' }}
                     />
-                    <button type="submit" style={{ padding: '12px 20px', backgroundColor: '#007bff', color: 'white', border: 'none', borderRadius: '0 4px 4px 0', cursor: 'pointer' }}>
+                    <button className='search-button' type="submit">
                         {isSearching ? '검색 중...' : '검색'}
                     </button>
                 </form>
 
-                {/* 검색 결과 레이어 (결과가 있을 때만 표시) */}
+                {/* 검색 결과 레이어 */}
                 {searchResults.length > 0 && (
-                    <div style={{
-                        position: 'absolute', top: '50px', left: 0, right: 0, backgroundColor: 'white',
-                        border: '1px solid #ccc', borderRadius: '4px', boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-                        zIndex: 100, maxHeight: '400px', overflowY: 'auto'
-                    }}>
+                    <div className='search-result-layer'>
                         {searchResults.map((book) => (
                             <div
+                                className='search-result'
                                 key={book.bookIsbn}
                                 onClick={() => handleSelectBook(book)}
-                                style={{
-                                    display: 'flex', padding: '12px', cursor: 'pointer', borderBottom: '1px solid #eee',
-                                    transition: 'background 0.2s'
-                                }}
-                                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#f8f9fa'}
-                                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
                             >
-                                <img src={book.bookThumbnail} alt="cover" style={{ width: '50px', height: '70px', marginRight: '15px', objectFit: 'cover' }} />
+                                <img src={book.bookThumbnail} alt="cover" className='search-result-img' />
                                 <div>
-                                    <div style={{ fontWeight: 'bold', fontSize: '15px' }}>{book.bookTitle}</div>
-                                    <div style={{ fontSize: '13px', color: '#666', marginTop: '4px' }}>
+                                    <div className='search-result-title'>{book.bookTitle}</div>
+                                    <div className='search-result-element'>
                                         {book.bookAuthor} | {book.publisherName} | {book.bookCategory}
                                     </div>
-                                    <div style={{ fontSize: '12px', color: '#999' }}>ISBN: {book.bookIsbn}</div>
+                                    <div className='search-result-ISBN'>ISBN: {book.bookIsbn}</div>
                                 </div>
                             </div>
                         ))}
@@ -126,68 +118,61 @@ function RegisterBook() {
             <hr style={{ border: '0', borderTop: '1px solid #eee', margin: '30px 0' }} />
 
             {/* 등록 폼 섹션 */}
-            <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '15px' }}>
+            <form onSubmit={handleSubmit} className='input-form'>
                 <div style={{ display: 'flex', gap: '15px' }}>
-                    <div style={{ flex: 2 }}>
-                        <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>제목</label>
-                        <input name="bookTitle" value={bookForm.bookTitle} onChange={handleInputChange} required style={inputStyle} />
+                    <div className='input-title-flex'>
+                        <label className='input-label'>제목</label>
+                        <input name="bookTitle" value={bookForm.bookTitle} onChange={handleInputChange} required className='input-style' />
                     </div>
                     <div style={{ flex: 1 }}>
-                        <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>카테고리</label>
-                        <input name="bookCategory" value={bookForm.bookCategory} onChange={handleInputChange} style={inputStyle} />
-                    </div>
-                </div>
-
-                <div style={{ display: 'flex', gap: '15px' }}>
-                    <div style={{ flex: 1 }}>
-                        <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>저자</label>
-                        <input name="bookAuthor" value={bookForm.bookAuthor} onChange={handleInputChange} required style={inputStyle} />
-                    </div>
-                    <div style={{ flex: 1 }}>
-                        <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>역자</label>
-                        <input name="bookTranslator" value={bookForm.bookTranslator} onChange={handleInputChange} style={inputStyle} />
+                        <label className='input-label'>카테고리</label>
+                        <input name="bookCategory" value={bookForm.bookCategory} onChange={handleInputChange} className='input-style' />
                     </div>
                 </div>
 
                 <div style={{ display: 'flex', gap: '15px' }}>
                     <div style={{ flex: 1 }}>
-                        <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>출판사</label>
-                        <input name="publisherName" value={bookForm.publisherName} onChange={handleInputChange} style={inputStyle} />
+                        <label className='input-label'>저자</label>
+                        <input name="bookAuthor" value={bookForm.bookAuthor} onChange={handleInputChange} required className='input-style' />
                     </div>
                     <div style={{ flex: 1 }}>
-                        <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>출판일</label>
-                        <input type="date" name="publicationDate" value={bookForm.publicationDate} onChange={handleInputChange} style={inputStyle} />
+                        <label className='input-label'>역자</label>
+                        <input name="bookTranslator" value={bookForm.bookTranslator} onChange={handleInputChange} className='input-style' />
+                    </div>
+                </div>
+
+                <div style={{ display: 'flex', gap: '15px' }}>
+                    <div style={{ flex: 1 }}>
+                        <label className='input-label'>출판사</label>
+                        <input name="publisherName" value={bookForm.publisherName} onChange={handleInputChange} className='input-style' />
+                    </div>
+                    <div style={{ flex: 1 }}>
+                        <label className='input-label'>출판일</label>
+                        <input type="date" name="publicationDate" value={bookForm.publicationDate} onChange={handleInputChange} className='input-style' />
                     </div>
                 </div>
 
                 <div>
-                    <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>ISBN</label>
-                    <input name="bookIsbn" value={bookForm.bookIsbn} onChange={handleInputChange} style={inputStyle} />
+                    <label className='input-label'>ISBN</label>
+                    <input name="bookIsbn" value={bookForm.bookIsbn} onChange={handleInputChange} className='input-style' />
                 </div>
 
                 <div>
-                    <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#007bff' }}>청구기호 (필수 입력)</label>
-                    <input name="bookCallNumber" value={bookForm.bookCallNumber} onChange={handleInputChange} placeholder="도서관 내부 청구기호를 입력하세요" style={{ ...inputStyle, borderColor: '#007bff' }} />
+                    <label className='input-unique-label'>청구기호 (필수 입력)</label>
+                    <input name="bookCallNumber" value={bookForm.bookCallNumber} onChange={handleInputChange} className='input-style' placeholder="도서관 내부 청구기호를 입력하세요" />
                 </div>
 
                 <div>
-                    <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>책소개</label>
-                    <textarea name="bookContents" value={bookForm.bookContents} onChange={handleInputChange} rows="4" style={inputStyle} />
+                    <label className='input-label'>책소개</label>
+                    <textarea name="bookContents" value={bookForm.bookContents} onChange={handleInputChange} rows="4" className='input-style' />
                 </div>
 
-                <button type="submit" style={{
-                    padding: '15px', backgroundColor: '#28a745', color: 'white', border: 'none',
-                    borderRadius: '4px', fontSize: '16px', fontWeight: 'bold', cursor: 'pointer', marginTop: '10px'
-                }}>
+                <button type="submit" className='input-btn'>
                     도서 등록
                 </button>
             </form>
         </div>
     );
 }
-
-const inputStyle = {
-    width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: '4px', boxSizing: 'border-box'
-};
 
 export default RegisterBook;
