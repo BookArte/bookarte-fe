@@ -1281,3 +1281,342 @@
   font-size: 16px;
   font-weight: 300;
 }
+
+/*도서 목록 페이지*/
+
+/* 도서 리스트 아이템 전체 컨테이너 */
+.book-list-container {
+    max-width: 1100px;    
+    margin: 40px auto;    
+    padding: 0 20px;   
+}
+
+/* 상단 건수 표시 부분 */
+.list-header {
+    border-bottom: 2px solid #333;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+/* 기존 아이템 스타일 */
+.list-item {
+    display: flex;
+    padding: 30px 0; 
+    border-bottom: 1px solid #eee;
+    align-items: flex-start;
+}
+
+/* 썸네일 이미지 감싸는 div */
+.thumbnail-container {
+    width: 130px;
+    flex-shrink: 0;
+    margin-right: 30px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+}
+
+/* 실제 이미지 태그 */
+.thumbnail-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 텍스트 정보 컨테이너 */
+.info-container {
+    flex: 1;
+}
+
+/* 도서 제목 */
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0056b3;
+    margin: 0 0 10px 0;
+    cursor: pointer;
+}
+
+/* 저자/출판사 행 */
+.author-row {
+    margin-bottom: 15px;
+}
+
+/* 일반 텍스트 스타일 */
+.text-item {
+    font-size: 14px;
+    color: #555;
+}
+
+/* 하단 메타 정보 컨테이너 */
+.meta-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* 메타 정보 개별 항목 */
+.meta-item {
+    font-size: 13px;
+}
+
+/* 메타 정보 라벨(이름) */
+.meta-label {
+    font-weight: bold;
+    color: #333;
+    margin-right: 8px;
+}
+
+/* 메타 정보 값 */
+.meta-value {
+    color: #666;
+}
+
+/*도서 상세 페이지*/
+.book-detail-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.detail-header {
+    display: flex;
+    gap: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #ddd;
+}
+
+.detail-thumbnail {
+    width: 200px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.detail-main-info {
+    flex: 1;
+}
+
+.detail-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+/* 상세 정보 테이블 스타일 */
+.info-table {
+    width: 100%;
+    border-top: 2px solid #555;
+    border-collapse: collapse;
+}
+
+.info-table th {
+    width: 120px;
+    background-color: #f9f9f9;
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    color: #333;
+}
+
+.info-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    color: #666;
+}
+
+.call-number-highlight {
+    color: #d9534f;
+    font-weight: bold;
+}
+
+/* 책소개 영역 */
+.detail-section {
+    margin-top: 40px;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: bold;
+    border-left: 4px solid #0056b3;
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+
+.contents-box {
+    line-height: 1.8;
+    color: #444;
+    white-space: pre-wrap;
+    white-space: pre-wrap; 
+    background: #fcfcfc;
+    padding: 20px;
+    border: 1px solid #f0f0f0;
+}
+
+/*버튼 영역*/
+.back-btn {
+    padding: '8px 15px';
+    background-color: #fff;
+    border: '1px solid #ccc';
+    cursor: 'pointer';
+    border-radius: 4px;
+
+}
+.update-btn {
+  padding: 8px 20px;
+  background-color: #0056b3;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.delete-btn {
+  padding: 8px 20px;
+  background-color: #d9534f;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/*도서 등록, 수정 페이지*/
+.form-container {
+  margin-bottom: 30px;
+  max-width: 800px;
+  margin: auto;
+  font-family: sans-serif;
+}
+
+/*도서 검색*/
+.search-section {
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.search-form {
+  padding: 12px;
+  width: 100%;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  outline: none;
+}
+
+.search-button {
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-result-layer {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 100;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.search-result {
+  display: flex;
+  padding: 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  background-color: white;
+  transition: background-color 0.2s ease-in-out;
+
+
+}
+.search-result:hover {
+  background-color: #f8f9fa;
+}
+
+.search-result-img {
+  width: 50px;
+  height: 70px;
+  margin-right: 15px;
+  min-width: 50px; 
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.search-result-title {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.search-result-element {
+  font-size: 13px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.search-result-ISBN {
+  font-size: 12px;
+  color: #999;
+}
+
+.input-style {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.input-unique-style {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  border-color: #007bff;
+}
+
+.input-form {
+  display: grid;
+  gap: 15px;
+}
+
+.input-title-flex {
+  flex: 2;
+}
+
+.input-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.input-unique-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.input-btn {
+  padding: 15px;
+  background-color:#28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
