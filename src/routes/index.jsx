@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import RegisterBook from "../pages/book/RegisterBook";
 import BookList from "../pages/book/BookList";
 import BookDetail from "../pages/book/BookDetail";
+import UpdateBook from "../pages/book/UpdateBook";
 
 
 
@@ -25,6 +26,8 @@ const RootRoutes = () => {
         {/* MAIN */}
         <Route path={"/"} element={<Main />} />
 
+
+        {/*BOOK*/}
         {/* RegisterBook */}
         <Route path={"/book/register"} element={<RegisterBook />} />
 
@@ -33,6 +36,9 @@ const RootRoutes = () => {
 
         {/* BookDetail */}
         <Route path={"/book/view/:bookId"} element={<BookDetail />} />
+
+        {/* UpdateBook */}
+        <Route path={"/book/update/:bookId"} element={<UpdateBook />} />
 
       </Routes>
 

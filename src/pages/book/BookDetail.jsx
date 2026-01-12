@@ -10,7 +10,7 @@ function BookDetail() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchBookDetail = async () => {
+        const getBookDetail = async () => {
             try {
                 const response = await axios.get(`http://localhost:8080/api/book/view/${bookId}`);
                 if (response.data.success) {
@@ -24,7 +24,7 @@ function BookDetail() {
             }
         };
 
-        fetchBookDetail();
+        getBookDetail();
     }, [bookId]);
 
     // 삭제 핸들러
@@ -61,7 +61,7 @@ function BookDetail() {
                 <div style={{ display: 'flex', gap: '10px' }}>
                     <button
                         className='update-btn'
-                        onClick={() => navigate(`/book/modify/${bookId}`)}
+                        onClick={() => navigate(`/book/update/${bookId}`)}
 
                     >
                         수정
