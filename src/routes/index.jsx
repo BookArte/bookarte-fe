@@ -9,6 +9,8 @@ import RegisterBook from "../pages/book/RegisterBook";
 import BookList from "../pages/book/BookList";
 import BookDetail from "../pages/book/BookDetail";
 import UpdateBook from "../pages/book/UpdateBook";
+import Login from "../pages/member/Login";
+import Join from "../pages/member/Join";
 
 
 
@@ -39,6 +41,13 @@ const RootRoutes = () => {
 
         {/* UpdateBook */}
         <Route path={"/book/update/:bookId"} element={<UpdateBook />} />
+
+        {/* Member */}
+        {/* Login */}
+        <Route path={"/member/login"} element={<Login />} />
+
+        {/* Join */}
+        <Route path={"/member/join"} element={<Join />} />
 
       </Routes>
 
