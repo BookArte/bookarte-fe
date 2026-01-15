@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import BookSearchModal from '../book/BookSearchModal';
+import { useForm } from '../../hooks/useForm';
+import { setRecommendationBook } from '../../api/recommendation.api';
 
 function SetRecommedation() {
     const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedBook, setSelectedBook] = useState(null);
-    const [formData, setFormData] = useState({
+
+    const { form: formData, handleChange } = useForm({
         comments: '',
         startDate: '',
         endDate: ''
-    });
+    })
 
     // 도서 선택 완료 시 호출
     const handleSelectBook = (book) => {
@@ -28,8 +31,8 @@ function SetRecommedation() {
         };
 
         try {
-            const res = await axios.post('http://localhost:8080/api/recommendation/set', requestData);
-            if (res.data.success) {
+            const res = await setRecommendationBook(requestData);
+            if (res.success) {
                 alert("추천 도서로 등록되었습니다.");
                 navigate('/admin/recommend/list');
             }
@@ -39,11 +42,11 @@ function SetRecommedation() {
     };
 
     return (
-        <div className="register-container">
-            <h2>✨ 관리자 추천 도서 등록</h2>
+        <div className="recommendation-set-container">
+            <h2 className='recommendation-set-title'>✨ 관리자 추천 도서 등록</h2>
 
-            {/* 1. 도서 선택 섹션 */}
-            <div className="form-section">
+            {/* 도서 검색 및  선택 섹션 */}
+            <div className="book-search-section">
                 <label>대상 도서</label>
                 <div className="book-selector">
                     {selectedBook ? (
@@ -64,22 +67,23 @@ function SetRecommedation() {
             </div>
 
             {/* 상세 내용 섹션 */}
-            <div className="form-section">
+            <div className="recommendation-form-section">
                 <label>추천 코멘트</label>
                 <textarea
                     placeholder="관리자 추천평을 입력하세요 (최대 200자)"
-                    onChange={(e) => setFormData({ ...formData, comments: e.target.value })}
+                    name='comments'
+                    onChange={handleChange}
                 />
             </div>
 
-            <div className="form-section row">
+            <div className="recommendation-form-section row">
                 <div>
                     <label>전시 시작일</label>
-                    <input type="date" onChange={(e) => setFormData({ ...formData, startDate: e.target.value })} />
+                    <input type="date" name='startDate' onChange={handleChange} />
                 </div>
                 <div>
                     <label>전시 종료일</label>
-                    <input type="date" onChange={(e) => setFormData({ ...formData, endDate: e.target.value })} />
+                    <input type="date" name='endDate' onChange={handleChange} />
                 </div>
             </div>
 

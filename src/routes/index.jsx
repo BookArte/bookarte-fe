@@ -13,9 +13,6 @@ import SetRecommedation from "../pages/recommendation/SetRecommedation";
 import Login from "../pages/member/Login";
 import Join from "../pages/member/Join";
 
-
-
-
 const RootRoutes = () => {
 
   useEffect(() => {
