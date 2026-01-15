@@ -9,6 +9,7 @@ import RegisterBook from "../pages/book/RegisterBook";
 import BookList from "../pages/book/BookList";
 import BookDetail from "../pages/book/BookDetail";
 import UpdateBook from "../pages/book/UpdateBook";
+import SetRecommedation from "../pages/recommendation/SetRecommedation";
 
 
 
@@ -40,6 +41,8 @@ const RootRoutes = () => {
         {/* UpdateBook */}
         <Route path={"/book/update/:bookId"} element={<UpdateBook />} />
 
+        {/* SetRecommednation */}
+        <Route path={"/recommend/set"} element={<SetRecommedation />} />
       </Routes>
 
       <Footer />
