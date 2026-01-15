@@ -12,6 +12,7 @@ import UpdateBook from "../pages/book/UpdateBook";
 import SetRecommedation from "../pages/recommendation/SetRecommedation";
 import Login from "../pages/member/Login";
 import Join from "../pages/member/Join";
+import RecommedationBookList from "../pages/book/RocommendationBookList"
 
 const RootRoutes = () => {
 
@@ -39,6 +40,9 @@ const RootRoutes = () => {
 
         {/* UpdateBook */}
         <Route path={"/book/update/:bookId"} element={<UpdateBook />} />
+
+        {/* RecommendationBookList */}
+        <Route path={"/book/recommend"} element={< RecommedationBookList />} />
 
 
         {/* SetRecommednation */}
