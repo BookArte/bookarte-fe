@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import '../../css/Modal.css';
+import { getBookList } from '../../api/book.api';
 
 function BookSearchModal({ onSelect, onClose }) {
     const [keyword, setKeyword] = useState('');
@@ -13,11 +13,11 @@ function BookSearchModal({ onSelect, onClose }) {
         setLoading(true);
         try {
             //도서  검색
-            const res = await axios.get(`http://localhost:8080/api/book/list`, {
+            const res = await getBookList({
                 params: { [searchType]: keyword, size: 10 }
             });
-            if (res.data.success) {
-                setResults(res.data.data.content);
+            if (res.success) {
+                setResults(res.data.content);
             }
         } catch (error) {
             console.error("검색 실패", error);
@@ -27,14 +27,14 @@ function BookSearchModal({ onSelect, onClose }) {
     };
 
     return (
-        <div className="modal-overlay">
-            <div className="modal-content">
-                <div className="modal-header">
+        <div className="book-search-modal__overlay">
+            <div className="book-search-modal__content">
+                <div className="book-search-modal__header">
                     <h3>추천 도서 검색</h3>
-                    <button className="close-btn" onClick={onClose}>&times;</button>
+                    <button className="book-search-modal__close-btn" onClick={onClose}>&times;</button>
                 </div>
 
-                <div className="modal-search-bar">
+                <div className="book-search-modal__search-bar">
                     <select value={searchType} onChange={(e) => setSearchType(e.target.value)}>
                         <option value="bookTitle">제목</option>
                         <option value="bookAuthor">저자</option>
@@ -42,34 +42,36 @@ function BookSearchModal({ onSelect, onClose }) {
                     </select>
                     <input
                         type="text"
-                        placeholder="검색어를 입력하세요"
+                        placeholder="검색어를 입력하세요..."
                         value={keyword}
                         onChange={(e) => setKeyword(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                     />
-                    <button onClick={handleSearch}>검색</button>
+                    <button className="book-search-modal__search-btn" onClick={handleSearch}>검색</button>
                 </div>
 
-                <div className="modal-results">
-                    {loading ? <p>검색 중...</p> : (
-                        <table>
+                <div className="book-search-modal__results">
+                    {loading ? <p style={{ textAlign: 'center', padding: '40px' }}>데이터를 불러오는 중입니다...</p> : (
+                        <table className="book-search-modal__table">
                             <thead>
                                 <tr>
                                     <th>표지</th>
                                     <th>도서명</th>
                                     <th>저자/출판사</th>
-                                    <th>선택</th>
+                                    <th>ISBN</th>
+                                    <th style={{ textAlign: 'center' }}>선택</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {results.map(book => (
                                     <tr key={book.bookId}>
-                                        <td><img src={book.bookThumbnail} width="40" alt="" /></td>
-                                        <td className="text-left">{book.bookTitle}</td>
-                                        <td className="text-left">{book.bookAuthor} / {book.publisherName}</td>
-                                        <td>
+                                        <td><img src={book.bookThumbnail} className="book-search-modal__img" alt="" /></td>
+                                        <td><strong>{book.bookTitle}</strong></td>
+                                        <td>{book.bookAuthor} <br /> <span style={{ fontSize: '12px', color: '#999' }}>{book.publisherName}</span></td>
+                                        <td style={{ fontSize: '12px', color: '#666' }}>{book.bookIsbn}</td>
+                                        <td style={{ textAlign: 'center' }}>
                                             <button
-                                                className="select-btn"
+                                                className="book-search-modal__select-btn"
                                                 onClick={() => onSelect(book)}
                                             >
                                                 선택
