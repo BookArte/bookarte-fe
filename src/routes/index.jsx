@@ -10,6 +10,9 @@ import BookList from "../pages/book/BookList";
 import BookDetail from "../pages/book/BookDetail";
 import UpdateBook from "../pages/book/UpdateBook";
 import SetRecommedation from "../pages/recommendation/SetRecommedation";
+import Login from "../pages/member/Login";
+import Join from "../pages/member/Join";
+
 
 
 
@@ -27,7 +30,6 @@ const RootRoutes = () => {
         {/* MAIN */}
         <Route path={"/"} element={<Main />} />
 
-
         {/*BOOK*/}
         {/* RegisterBook */}
         <Route path={"/book/register"} element={<RegisterBook />} />
@@ -41,8 +43,17 @@ const RootRoutes = () => {
         {/* UpdateBook */}
         <Route path={"/book/update/:bookId"} element={<UpdateBook />} />
 
+
         {/* SetRecommednation */}
         <Route path={"/recommend/set"} element={<SetRecommedation />} />
+
+        {/* Member */}
+        {/* Login */}
+        <Route path={"/member/login"} element={<Login />} />
+
+        {/* Join */}
+        <Route path={"/member/join"} element={<Join />} />
+
       </Routes>
 
       <Footer />
