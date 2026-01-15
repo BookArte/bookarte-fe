@@ -862,9 +862,9 @@ input[type="email"],
 input[type="search"],
 input[type="image"],
 input[type="tel"] {
-  -webkit-border-radius: 0;
+  /* -webkit-border-radius: 0;
   -moz-border-radius: 0;
-  border-radius: 0;
+  border-radius: 0; */
 }
 
 /* for IE10 */
@@ -888,7 +888,7 @@ input:-mos-input-placeholder {
 }
 
 select {
-  font-family: "NotoSans", sans-serif;
+  /* font-family: "NotoSans", sans-serif; */
   font-weight: 400;
   -moz-appearance: none; /* Firefox */
   -webkit-appearance: none; /* Safari and Chrome */
