@@ -9,3 +9,9 @@ export const recommendationBookList = async (data) => {
     const res = await apiClient.get('/recommendation/pick-10/list', data);
     return res.data;
 };
+
+
+export const reorderRecommendation = async (data) => {
+    const res = await apiClient.patch('/recommendation/reorder', data);
+    return res.data;
+}
