@@ -50,10 +50,10 @@ const RootRoutes = () => {
 
 
         {/* SetRecommednation */}
-        <Route path={"/recommend/set"} element={<SetRecommedation />} />
+        <Route path={"/admin/recommend/set"} element={<SetRecommedation />} />
 
         {/* ReorderRecommednation */}
-        <Route path={"/recommend/reorder"} element={<ReorderRecommendation />} />
+        <Route path={"/admin/recommend/reorder"} element={<ReorderRecommendation />} />
 
         {/* Member */}
         {/* Login */}
