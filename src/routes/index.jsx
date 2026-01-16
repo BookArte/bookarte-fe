@@ -11,6 +11,9 @@ import BookDetail from "../pages/book/BookDetail";
 import UpdateBook from "../pages/book/UpdateBook";
 import Login from "../pages/member/Login";
 import Join from "../pages/member/Join";
+import Agreement from "../pages/member/agreement";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -49,9 +52,24 @@ const RootRoutes = () => {
         {/* Join */}
         <Route path={"/member/join"} element={<Join />} />
 
+        {/* Agreement */}
+        <Route path={"/member/agreement"} element={<Agreement />} />
+
       </Routes>
 
       <Footer />
+      <ToastContainer
+        position="top-center"   // toast 위치
+        autoClose={3000}       // 3초 후 자동 종료
+        toastStyle={{whiteSpace: 'pre-line'}}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </>
   );
 };

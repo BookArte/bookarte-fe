@@ -44,6 +44,7 @@ const URL = {
   NEWS_VIEW: "/board/news/view", // 게시판/새소식/상세
 
   //MEMBER
+  MEMBER_AGREEMENT: "/member/agreement", // 회원가입약관
   MEMBER_JOIN: "/member/join", // 회원가입
   MEMBER_LOGIN: "/member/login", // 로그인
   MEMBER_FIND_ID: "/member/find_id", // 아이디찾기
