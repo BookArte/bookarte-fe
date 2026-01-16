@@ -1919,6 +1919,7 @@
   text-decoration: none;
 }
 
+/* 회원가입 페이지 */
 .join-container {
   max-width: 500px;
   margin: 50px auto;
@@ -1947,6 +1948,18 @@
   display: flex;
 }
 
+.join-form .id-group {
+  display: inline;
+}
+
+.join-form .id-group .id-input-group {
+  display: flex;
+}
+
+.join-form .id-group .id-message-error {
+  color: #dc3545;
+}
+
 .join-form .email-group {
   gap: 10px;
 }
@@ -1956,12 +1969,16 @@
   align-items: center;
 }
 
-.join-form .password-confirm-group {
+.join-form .password-group {
   display: inline;
 }
 
-.join-form .password-confirm-group span {
+.join-form .password-group span {
   font-size: 14px;
+}
+
+.join-form .password-message-error {
+  color: #dc3545;
 }
 
 .join-form .password-match {
@@ -2019,6 +2036,81 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
+}
+
+/* 이용약관 페이지 */
+.agreement-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 30px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.agreement-container .agreement-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #222;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.agreement-container .agree-all-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.agreement-container .agree-all-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
+.agreement-container .agree-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 16px;
+}
+
+.agreement-container .agreement-group {
+  margin-bottom: 30px;
+}
+
+.agreement-container .agreement-group .agree-terms {
+  margin-top: 10px;
+  padding: 15px;
+  height: 150px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+
+.agreement-container .next-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  display: block;
+  margin: 0 auto;
+}
+
+.agreement-container .next-button-disabled {
+  background-color: #999;
+  cursor: not-allowed;
 }
 
 /* 추천 도서 등록 페이지 */

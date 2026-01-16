@@ -15,7 +15,7 @@ function Login() {
                 </div>
                 <button type='submit' className='login-button'>로그인</button>
                 <div className='login-links'>
-                    <a href='/member/join' className='join-link'>회원가입</a>
+                    <a href='/member/agreement' className='join-link'>회원가입</a>
                     <a href='/member/find_id' className='find-id-link'>아이디/비밀번호 찾기</a>
                 </div>
             </form>
