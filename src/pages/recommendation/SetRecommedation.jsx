@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import BookSearchModal from '../book/BookSearchModal';
-import { useForm } from '../../hooks/useForm';
+import { useForm } from '../../hooks/form/useForm';
 import { setRecommendationBook } from '../../api/recommendation.api';
 
 function SetRecommedation() {
