@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export function useForm(initialState) {
     const [form, setForm] = useState(initialState);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setForm((prev) => ({
+        setForm(prev => ({
             ...prev,
-            [name]: value,
+            [name]: value
         }));
     };
 
@@ -18,5 +18,9 @@ export function useForm(initialState) {
         }));
     };
 
-    return { form, setForm, handleChange, setField };
+    return {
+        form,
+        handleChange,
+        setField
+    };
 }
