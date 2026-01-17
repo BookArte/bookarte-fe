@@ -2112,3 +2112,317 @@
   background-color: #999;
   cursor: not-allowed;
 }
+
+/* 추천 도서 등록 페이지 */
+.recommendation-set-container {
+    max-width: 650px; 
+    margin: 60px auto;
+    padding: 40px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.recommendation-set-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-align: center;
+    margin-bottom: 40px;
+    letter-spacing: -0.5px;
+}
+
+/* 섹션 공통 스타일 */
+.book-search-section,
+.recommendation-form-section {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+    margin-left: 2px;
+}
+
+/* 도서 선택 영역 */
+.book-selector {
+    width: 100%;
+}
+
+.search-trigger {
+    width: 100%;
+    padding: 16px;
+    background: #f8f9fa;
+    border: 2px dashed #dee2e6; /* 대시 보더로 '비어있음' 표현 */
+    border-radius: 12px;
+    color: #6c757d;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.search-trigger:hover {
+    background: #f1f3f5;
+    border-color: #0056b3;
+    color: #0056b3;
+}
+
+/* 선택된 도서 카드 */
+.selected-card {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.selected-card img {
+    width: 60px;
+    height: 85px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 15px;
+}
+
+.selected-card .info {
+    flex: 1;
+}
+
+.selected-card .info strong {
+    display: block;
+    font-size: 16px;
+    color: #212529;
+    margin-bottom: 4px;
+}
+
+.selected-card .info span {
+    font-size: 13px;
+    color: #868e96;
+}
+
+.selected-card button {
+    padding: 6px 12px;
+    font-size: 12px;
+    background: #f1f3f5;
+    border: none;
+    border-radius: 6px;
+    color: #495057;
+    cursor: pointer;
+}
+
+/* 입력 필드 */
+.recommendation-set-container textarea,.recommendation-set-container input[type="date"] {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: border-color 0.2s;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.recommendation-set-container textarea {
+    height: 120px;
+    resize: none;
+    line-height: 1.6;
+}
+
+.recommendation-set-container textarea:focus,
+.recommendation-set-container input:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.1);
+}
+
+/* 날짜 행 레이아웃 */
+.recommendation-form-section.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+/* 하단 버튼 */
+.recommendation-set-container.button-group {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 12px;
+    margin-top: 40px;
+}
+
+.recommendation-set-container.submit-btn {
+    padding: 14px;
+    background: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.recommendation-set-container.submit-btn:hover {
+    background: #004494;
+}
+
+.recommendation-set-container.cancel-btn {
+    padding: 14px;
+    background: white;
+    color: #495057;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.recommendation-set-container.cancel-btn:hover {
+    background: #f8f9fa;
+}
+
+/* 우선순위 변경 페이지 */
+.reorder-container {
+    max-width: 700px;
+    margin: 50px auto;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.reorder-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.reorder-guide {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* 버튼 묶음 스타일 */
+.reorder-btn-group {
+    display: flex;
+    gap: 12px;
+}
+
+
+/* 저장 버튼 스타일 */
+.save-btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    background: #e9ecef;
+    color: #adb5bd;
+    font-weight: 600;
+    cursor: not-allowed;
+    transition: all 0.3s;
+}
+
+.save-btn.active {
+    background: #0056b3;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 86, 179, 0.2);
+}
+
+.save-btn.active:hover {
+    background: #004494;
+    transform: translateY(-2px);
+}
+
+/*추천 도서 추가 버튼 스타일*/
+.set-btn{
+    padding: 10px 20px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.set-btn:hover {
+    background-color: #004494;
+}
+
+/* 드래그 가능한 카드 스타일 */
+.reorder-item {
+    display: flex;
+    align-items: center;
+    background: white;
+    margin-bottom: 12px;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #dee2e6;
+    cursor: grab; /* 전체가 잡을 수 있음을 알림 */
+    user-select: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.reorder-item:active {
+    cursor: grabbing;
+}
+
+.reorder-item.dragging {
+    background: #f1f3f5;
+    border-color: #0056b3;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.reorder-rank-badge {
+    font-size: 18px;
+    font-weight: 800;
+    color: #0056b3;
+    width: 40px;
+    text-align: center;
+}
+
+.reorder-card-content {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    gap: 20px;
+}
+
+.reorder-thumb {
+    width: 50px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.reorder-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.reorder-title {
+    font-size: 16px;
+    color: #222;
+}
+
+.reorder-author {
+    font-size: 13px;
+    color: #888;
+}
+
+/*추천 도서 삭제 버튼*/
+.reorder-del-btn {
+    background: none;
+    border: none;
+    color: #dc3545;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.reorder-del-btn:hover {
+    color: #a71d2a;
+}

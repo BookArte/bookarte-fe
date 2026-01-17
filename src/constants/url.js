@@ -25,6 +25,13 @@ const URL = {
   BOOK_VIEW: "/book/" + urlCategory + "/view",  // 도서 상세페이지
   BOOK_SEARCH: "/book/search", // 도서관안내/도서검색
 
+  BOOK_REGISTER: "/admin/book/register", // 관리자 도서등록
+  BOOK_LIST: "/admin/book/list", // 관리자 도서목록
+
+  //RECOMMENDATION
+  RECOMMENDATION_SET: "/admin/recommend/set", // 관리자 추천도서 등록
+  RECOMMENDATION_REORDER: "/admin/recommend/reorder", // 관리자 추천도서 순서변경
+
   //EVENT
   EVENT: "/event", // 행사안내
   EVENT_VIEW: "/event/view", // 행사안내/행사상세
