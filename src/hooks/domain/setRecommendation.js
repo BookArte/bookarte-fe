@@ -35,7 +35,7 @@ export function setRecommendation() {
             const res = await setRecommendationBook(requestData);
 
             if (res.success) {
-                toast.success("추천 도서가 성공적으로 등록되었습니다.");
+                toast.success(res.data);
                 navigate(URL.RECOMMENDATION_REORDER, { replace: true });
             }
         } catch (error) {
