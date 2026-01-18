@@ -1,4 +1,6 @@
-function GetBookList({ books, totalElements, loading, navigate }) {
+import URL from '@/constants/url';
+
+function BookListView({ books, totalElements, loading, handleViewBook }) {
 
 
     if (loading) return <div style={{ textAlign: 'center', padding: '50px' }}>로딩 중...</div>;
@@ -23,7 +25,7 @@ function GetBookList({ books, totalElements, loading, navigate }) {
                     </div>
 
                     <div className="info-container">
-                        <h3 className="title" onClick={() => navigate(`/book/view/${book.bookId}`)}>
+                        <h3 className="title" onClick={() => handleViewBook(book.bookId)}>
                             {book.bookTitle}
                         </h3>
 
@@ -55,4 +57,4 @@ function GetBookList({ books, totalElements, loading, navigate }) {
     );
 }
 
-export default GetBookList;
+export default BookListView;

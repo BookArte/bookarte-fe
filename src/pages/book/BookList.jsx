@@ -1,10 +1,10 @@
-import GetBookList from "../../components/GetBookList"
-import { getBookList } from "../../hooks/domain/getBookList";
+import BookListView from "../../components/BookListView";
+import { useBookList } from "../../hooks/domain/useBookList";
 
 
 function BookList() {
 
-    return < GetBookList {...getBookList()} />;
+    return < BookListView {...useBookList()} />;
 }
 
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getBookDetail, updateBookByAdmin } from "../../api/book.api";
+import { getBookDetailByBookId, updateBookByBookId, } from "../../api/book.api";
 import { toast } from "react-toastify";
 import { useForm } from "../form/useForm";
 
@@ -27,7 +27,7 @@ export function updateBook() {
     useEffect(() => {
         const getBookDetailHandler = async () => {
             try {
-                const res = await getBookDetail(bookId);
+                const res = await getBookDetailByBookId(bookId);
                 if (res.success) {
                     const data = res.data;
                     Object.entries(data).forEach(([fieldName, value]) => {
@@ -48,7 +48,7 @@ export function updateBook() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await updateBookByAdmin(bookId, bookForm);
+            const res = await updateBookByBookId(bookId, bookForm);
             toast.success(res.data);
             navigate(`/book/view/${bookId}`);
 
