@@ -1,5 +1,5 @@
 import BookDetailView from "../../components/book/BookDetailView";
-import { useBookDetail } from "../../hooks/domain/useBookDetail";
+import { useBookDetail } from "../../hooks/domain/book/useBookDetail";
 
 function BookDetail() {
     return <BookDetailView {...useBookDetail()} />;

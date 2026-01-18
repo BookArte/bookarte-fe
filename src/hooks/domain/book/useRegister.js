@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useForm } from "../form/useForm";
-import { registerBookByAdmin, searchBooksWithAPi } from "../../api/book.api";
+import { useForm } from "../../form/useForm";
+import { registerBookByAdmin, searchBooksWithAPi } from "../../../api/book.api";
 import { toast } from "react-toastify";
 
-export function registerBook() {
+export function useRegister() {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [isSearching, setIsSearching] = useState(false); // 로딩 상태

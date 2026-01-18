@@ -1,8 +1,8 @@
 import RegisterBookForm from "../../components/book/RegisterBookForm";
-import { registerBook } from "../../hooks/domain/registerBook";
+import { useRegister } from "../../hooks/domain/book/useRegister";
 
 function RegisterBook() {
-    return <RegisterBookForm {...registerBook()} />;
+    return <RegisterBookForm {...useRegister()} />;
 }
 
 export default RegisterBook;

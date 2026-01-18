@@ -1,4 +1,4 @@
-import { useBookSearch } from '../../hooks/domain/useBookSearch';
+import { useBookSearch } from '../../hooks/domain/book/useBookSearch';
 import '../../css/modal.css';
 
 function BookSearchModal({ onSelect, onClose }) {

@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteBookByBookId, getBookDetailByBookId } from "../../api/book.api";
+import { deleteBookByBookId, getBookDetailByBookId } from "../../../api/book.api";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import URL from '@/constants/url';

@@ -1,8 +1,8 @@
 import UpdateBookForm from "../../components/Book/UpdateBookForm";
-import { updateBook } from "../../hooks/domain/updateBook";
+import { useUpdate } from "../../hooks/domain/book/useUpdate";
 
 function UpdateBook() {
-    return <UpdateBookForm {...updateBook()} />
+    return <UpdateBookForm {...useUpdate()} />
 }
 
 export default UpdateBook

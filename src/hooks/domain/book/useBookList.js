@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAllBookList } from "../../api/book.api";
+import { getAllBookList } from "../../../api/book.api";
 import URL from '@/constants/url';
 
 export function useBookList() {

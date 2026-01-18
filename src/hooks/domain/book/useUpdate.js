@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getBookDetailByBookId, updateBookByBookId, } from "../../api/book.api";
+import { getBookDetailByBookId, updateBookByBookId, } from "../../../api/book.api";
 import { toast } from "react-toastify";
-import { useForm } from "../form/useForm";
+import { useForm } from "../../form/useForm";
 
-export function updateBook() {
+export function useUpdate() {
     const { bookId } = useParams();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
