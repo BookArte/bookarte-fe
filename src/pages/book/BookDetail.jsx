@@ -101,7 +101,7 @@ function BookDetail() {
                             </tr>
                             <tr>
                                 <th>카테고리</th>
-                                <td>{book.bookCategoryName}</td>
+                                <td>{book.bookCategory}</td>
                                 <th>ISBN</th>
                                 <td>{book.bookIsbn}</td>
                             </tr>

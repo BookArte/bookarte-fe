@@ -37,7 +37,7 @@ function GetBookList({ books, totalElements, loading, navigate }) {
                         <div className="meta-container">
                             <div className="meta-item">
                                 <span className="meta-label">자료실명</span>
-                                <span className="meta-value">{book.bookCategoryName}</span>
+                                <span className="meta-value">{book.bookCategory}</span>
                             </div>
                             <div className="meta-item">
                                 <span className="meta-label">청구기호</span>
