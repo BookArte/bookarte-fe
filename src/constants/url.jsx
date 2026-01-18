@@ -1,7 +1,3 @@
-import { useState } from "react";
-
-const [urlCategory, setUrlCategory] = useState("");
-
 const URL = {
   //COMMON
   MAIN: "/", //메인페이지
@@ -24,15 +20,21 @@ const URL = {
   BOOK_NEW: "/book/new", // 도서관안내/신착도서
   BOOK_BEST: "/book/best", // 도서관안내/베스트셀러
   BOOK_POPULAR: "/book/popular", // 도서관안내/인기대출도서
-  BOOK_VIEW: "/book/" + urlCategory + "/view",  // 도서 상세페이지
   BOOK_SEARCH: "/book/search", // 도서관안내/도서검색
 
+  BOOK_VIEW_PATH: "/book/view/:bookId", // 도서 상세페이지
+  BOOK_VIEW: (bookId) => `/book/view/${bookId}`, // 도서 상세페이지 함수
+
+  //BOOK ADMIN
   BOOK_REGISTER: "/admin/book/register", // 관리자 도서등록
   BOOK_LIST: "/admin/book/list", // 관리자 도서목록
 
   //RECOMMENDATION
   RECOMMENDATION_SET: "/admin/recommend/set", // 관리자 추천도서 등록
   RECOMMENDATION_REORDER: "/admin/recommend/reorder", // 관리자 추천도서 순서변경
+
+  BOOK_UPDATE: "/book/update/:bookId", // 도서 수정페이지
+  BOOK_UPDATE: (bookId) => `/book/update/${bookId}`, // 도서 수정페이지 함수
 
   //EVENT
   EVENT: "/event", // 행사안내

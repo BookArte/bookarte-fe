@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import BookSearchModal from '../pages/book/BookSearchModal';
+import BookSearchModal from "./modals/BookSearchModal";
 
 function RecommendationForm({ form, modal, book, handlers }) {
 

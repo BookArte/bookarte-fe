@@ -1,30 +1,10 @@
-import { useState } from 'react';
-import '../../css/Modal.css';
-import { getBookList } from '../../api/book.api';
+import { useBookSearch } from '../../hooks/domain/book/useBookSearch';
+import '../../css/modal.css';
 
 function BookSearchModal({ onSelect, onClose }) {
-    const [keyword, setKeyword] = useState('');
-    const [searchType, setSearchType] = useState('keyword');
-    const [results, setResults] = useState([]);
-    const [loading, setLoading] = useState(false);
-
-    const handleSearch = async () => {
-        if (!keyword.trim()) return alert("검색어를 입력하세요.");
-        setLoading(true);
-        try {
-            //도서  검색
-            const res = await getBookList({
-                params: { [searchType]: keyword, size: 10 }
-            });
-            if (res.success) {
-                setResults(res.data.content);
-            }
-        } catch (error) {
-            console.error("검색 실패", error);
-        } finally {
-            setLoading(false);
-        }
-    };
+    const { state: { bookTitle, setbookTitle, searchType, setSearchType, results, loading },
+        handlers: { handleSearch }
+    } = useBookSearch();
 
     return (
         <div className="book-search-modal__overlay">
@@ -43,8 +23,8 @@ function BookSearchModal({ onSelect, onClose }) {
                     <input
                         type="text"
                         placeholder="검색어를 입력하세요..."
-                        value={keyword}
-                        onChange={(e) => setKeyword(e.target.value)}
+                        value={bookTitle}
+                        onChange={(e) => setbookTitle(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                     />
                     <button className="book-search-modal__search-btn" onClick={handleSearch}>검색</button>
