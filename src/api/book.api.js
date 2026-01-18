@@ -1,7 +1,7 @@
 import { apiClient, fileApiClient } from "./client";
 
 /* DB 내도서 리스트 조회 api */
-export const getBookList = async (data) => {
+export const getAllBookList = async (data) => {
     const res = await apiClient.get('/book/list', data);
     return res.data;
 };
@@ -15,7 +15,7 @@ export const searchBooksWithAPi = async (query) => {
 }
 
 /* DB 내 도서 등록 api */
-export const registerBookAPI = async (data) => {
+export const registerBookByAdmin = async (data) => {
     const res = await apiClient.post('/book/register', data);
     return res.data;
 }

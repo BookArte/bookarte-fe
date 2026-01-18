@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "../form/useForm";
-import { registerBookAPI, searchBooksWithAPi } from "../../api/book.api";
+import { registerBookByAdmin, searchBooksWithAPi } from "../../api/book.api";
 import { toast } from "react-toastify";
 
 export function registerBook() {
@@ -64,7 +64,7 @@ export function registerBook() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await registerBookAPI(form);
+            const res = await registerBookByAdmin(form);
             toast.success(res.data);
         } catch (error) {
             toast.error("도서 등록 중 오류가 발생했습니다.");
