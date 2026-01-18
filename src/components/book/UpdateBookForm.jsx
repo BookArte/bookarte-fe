@@ -1,5 +1,5 @@
 function UpdateBookForm({ loading, bookForm, handlers }) {
-    const { handleChange, handleSubmit } = handlers;
+    const { handleChange, handleSubmit, handleCancel } = handlers;
 
     if (loading) return <div className="book-detail-container">로딩 중...</div>;
 
@@ -57,9 +57,14 @@ function UpdateBookForm({ loading, bookForm, handlers }) {
                     <textarea name="bookContents" value={bookForm.bookContents} onChange={handleChange} rows="4" className='input-style' />
                 </div>
 
-                <button type="submit" className='input-btn'>
-                    도서 등록
-                </button>
+                <div className='form-btn-group'>
+                    <button type="button" className="cnl-btn" onClick={handleCancel}>
+                        취소
+                    </button>
+                    <button type="submit" className='input-btn'>
+                        도서 등록
+                    </button>
+                </div>
             </form>
         </div>
     )

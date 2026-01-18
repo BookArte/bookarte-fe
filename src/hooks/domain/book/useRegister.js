@@ -58,6 +58,10 @@ export function useRegister() {
         }
     };
 
+    const handleCancel = () => {
+        window.history.back();
+    }
+
     return {
         search: {
             searchQuery, setSearchQuery,
@@ -71,7 +75,8 @@ export function useRegister() {
             handleChange,
             handleSearch,
             handleSelectBook,
-            handleSubmit
+            handleSubmit,
+            handleCancel
         }
     };
 }

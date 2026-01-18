@@ -57,13 +57,18 @@ export function useUpdate() {
         }
     }
 
+    const handleCancel = () => {
+        window.history.back();
+    }
+
     return {
         loading,
         bookForm,
 
         handlers: {
             handleChange,
-            handleSubmit
+            handleSubmit,
+            handleCancel
         }
     };
 

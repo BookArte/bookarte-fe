@@ -9,7 +9,8 @@ function RegisterBookForm({ search, form, handlers }) {
         handleChange,
         handleSearch,
         handleSelectBook,
-        handleSubmit
+        handleSubmit,
+        handleCancel
     } = handlers;
     return (
         <div className='form-container'>
@@ -105,10 +106,14 @@ function RegisterBookForm({ search, form, handlers }) {
                     <label className='input-label'>책소개</label>
                     <textarea name="bookContents" value={bookForm.bookContents} onChange={handleChange} rows="4" className='input-style' />
                 </div>
-
-                <button type="submit" className='input-btn'>
-                    도서 등록
-                </button>
+                <div className='form-btn-group'>
+                    <button type="button" className="cnl-btn" onClick={handleCancel}>
+                        취소
+                    </button>
+                    <button type="submit" className='input-btn'>
+                        도서 등록
+                    </button>
+                </div>
             </form>
         </div>
     );
