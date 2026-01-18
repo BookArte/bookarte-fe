@@ -1,30 +1,10 @@
-import { useState } from 'react';
-import '../../css/Modal.css';
-import { getAllBookList } from '../../api/book.api';
+import { useBookSearch } from '../../hooks/domain/useBookSearch';
+import '../../css/modal.css';
 
 function BookSearchModal({ onSelect, onClose }) {
-    const [keyword, setKeyword] = useState('');
-    const [searchType, setSearchType] = useState('keyword');
-    const [results, setResults] = useState([]);
-    const [loading, setLoading] = useState(false);
-
-    const handleSearch = async () => {
-        if (!keyword.trim()) return alert("검색어를 입력하세요.");
-        setLoading(true);
-        try {
-            //도서  검색
-            const res = await getAllBookList({
-                params: { [searchType]: keyword, size: 10 }
-            });
-            if (res.success) {
-                setResults(res.data.content);
-            }
-        } catch (error) {
-            console.error("검색 실패", error);
-        } finally {
-            setLoading(false);
-        }
-    };
+    const { state: { keyword, setKeyword, searchType, setSearchType, results, loading },
+        handlers: { handleSearch }
+    } = useBookSearch();
 
     return (
         <div className="book-search-modal__overlay">
