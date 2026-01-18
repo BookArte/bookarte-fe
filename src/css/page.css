@@ -1515,6 +1515,51 @@
 }
 
 /*도서 목록 페이지*/
+/*도서 목록 검색창*/
+.basic-search-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.search-bar {
+    flex: 1;
+    display: flex;
+    border: 2px solid #000;
+    border-radius: 30px; /* 아주 둥글게 */
+    padding: 10px 20px;
+}
+
+.detail-toggle-btn {
+    background: #000;
+    color: #fff;
+    border-radius: 30px;
+    padding: 12px 25px;
+    white-space: nowrap;
+}
+
+.detail-search-panel {
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-top: 15px;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2열 구조 */
+    gap: 20px;
+}
+
+.detail-btns {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
 
 /* 도서 리스트 아이템 전체 컨테이너 */
 .book-list-container {

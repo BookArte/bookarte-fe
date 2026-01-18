@@ -2,7 +2,7 @@ import { useBookSearch } from '../../hooks/domain/book/useBookSearch';
 import '../../css/modal.css';
 
 function BookSearchModal({ onSelect, onClose }) {
-    const { state: { keyword, setKeyword, searchType, setSearchType, results, loading },
+    const { state: { bookTitle, setbookTitle, searchType, setSearchType, results, loading },
         handlers: { handleSearch }
     } = useBookSearch();
 
@@ -23,8 +23,8 @@ function BookSearchModal({ onSelect, onClose }) {
                     <input
                         type="text"
                         placeholder="검색어를 입력하세요..."
-                        value={keyword}
-                        onChange={(e) => setKeyword(e.target.value)}
+                        value={bookTitle}
+                        onChange={(e) => setbookTitle(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                     />
                     <button className="book-search-modal__search-btn" onClick={handleSearch}>검색</button>

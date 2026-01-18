@@ -2,18 +2,18 @@ import { getAllBookList } from "../../../api/book.api";
 import { useState } from "react";
 
 export function useBookSearch() {
-    const [keyword, setKeyword] = useState('');
-    const [searchType, setSearchType] = useState('keyword');
+    const [bookTitle, setbookTitle] = useState('');
+    const [searchType, setSearchType] = useState('bookTitle');
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
 
     const handleSearch = async () => {
-        if (!keyword.trim()) return alert("검색어를 입력하세요.");
+        if (!bookTitle.trim()) return alert("검색어를 입력하세요.");
         setLoading(true);
         try {
             //도서  검색
             const res = await getAllBookList({
-                params: { [searchType]: keyword, size: 10 }
+                params: { [searchType]: bookTitle, size: 10 }
             });
             if (res.success) {
                 setResults(res.data.content);
@@ -26,8 +26,8 @@ export function useBookSearch() {
     };
     return {
         state: {
-            keyword,
-            setKeyword,
+            bookTitle,
+            setbookTitle,
             searchType,
             setSearchType,
             results,
