@@ -1,4 +1,4 @@
-import RegisterBookForm from "../../components/RegisterBookForm";
+import RegisterBookForm from "../../components/book/RegisterBookForm";
 import { registerBook } from "../../hooks/domain/registerBook";
 
 function RegisterBook() {

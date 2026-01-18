@@ -1,5 +1,3 @@
-import URL from '@/constants/url';
-
 function BookListView({ books, totalElements, loading, handleViewBook }) {
 
 

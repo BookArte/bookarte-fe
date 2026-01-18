@@ -1,4 +1,4 @@
-import BookDetailView from "../../components/BookDetailView";
+import BookDetailView from "../../components/book/BookDetailView";
 import { useBookDetail } from "../../hooks/domain/useBookDetail";
 
 function BookDetail() {

@@ -1,4 +1,4 @@
-import BookListView from "../../components/BookListView";
+import BookListView from "../../components/book/BookListView";
 import { useBookList } from "../../hooks/domain/useBookList";
 
 
