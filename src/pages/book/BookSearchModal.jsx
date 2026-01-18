@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import '../../css/Modal.css';
-import { getBookList } from '../../api/book.api';
+import { getAllBookList } from '../../api/book.api';
 
 function BookSearchModal({ onSelect, onClose }) {
     const [keyword, setKeyword] = useState('');
@@ -13,7 +13,7 @@ function BookSearchModal({ onSelect, onClose }) {
         setLoading(true);
         try {
             //도서  검색
-            const res = await getBookList({
+            const res = await getAllBookList({
                 params: { [searchType]: keyword, size: 10 }
             });
             if (res.success) {
