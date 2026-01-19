@@ -1523,13 +1523,35 @@
     margin-bottom: 10px;
 }
 
+/* 검색바 */
 .search-bar {
     flex: 1;
     display: flex;
+    align-items: center; 
     border: 2px solid #000;
-    border-radius: 30px; /* 아주 둥글게 */
-    padding: 10px 20px;
+    border-radius: 30px;
+    padding: 5px 20px; 
+    background-color: #fff;
 }
+
+.search-bar input {
+    flex: 1; 
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 10px 0;
+    background: transparent;
+}
+
+.search-icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+  }
 
 .detail-toggle-btn {
     background: #000;
@@ -1539,25 +1561,80 @@
     white-space: nowrap;
 }
 
-.detail-search-panel {
-    background: #fff;
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    margin-top: 15px;
+/* 상세 검색 패널 input */
+.input-group input {
+    width: 100%; 
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px; 
+    font-size: 14px;
+    box-sizing: border-box;
+    outline: none;
 }
 
-.detail-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 2열 구조 */
-    gap: 20px;
+.input-group input:focus {
+    border-color: #000;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
+/* 날짜 입력창 특수 스타일 제거 및 통일 */
+.date-input {
+    flex: 1; 
+}
+
+.common-select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #fff;
+    outline: none;
+    cursor: pointer;
+    appearance: none; /* 브라우저 기본 화살표 제거*/
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 15px;
+}
+
+.common-select:focus {
+    border-color: #000;
+}
+
+.reset-btn, .submit-btn {
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.1s active;
+}
 .detail-btns {
     display: flex;
-    justify-content: center;
     gap: 15px;
-    margin-top: 30px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.reset-btn {
+    background-color: #f1f1f1;
+    color: #666;
+}
+
+.submit-btn {
+    background-color: #000;
+    color: #fff;
+}
+
+.reset-btn:hover { background-color: #e5e5e5; }
+.submit-btn:hover { opacity: 0.9; }
+
+/* 4. 그리드 레이아웃 정리 */
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 30px;
 }
 
 

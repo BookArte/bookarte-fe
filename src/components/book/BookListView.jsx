@@ -1,5 +1,5 @@
-function BookListView({ books, searchParams, setSearchParams, status, handlers }) {
-    const { fetchBooks, handleReset, handleViewBook } = handlers;
+function BookListView({ books, categories, searchParams, setSearchParams, status, handlers }) {
+    const { fetchBooks, handleReset, handleViewBook, handleDateChange } = handlers;
     const { loading, totalElements, isDetailOpen, setIsDetailOpen } = status;
 
     if (loading) return <div style={{ textAlign: 'center', padding: '50px' }}>로딩 중...</div>;
@@ -7,12 +7,12 @@ function BookListView({ books, searchParams, setSearchParams, status, handlers }
     return (
         <div className="book-list-container">
             <h2>도서 목록 관리</h2>
-            {/* 1. 기본 검색바 (이미지 8c3325 스타일) */}
+            {/* 기본 검색바 */}
             <div className="basic-search-wrapper">
                 <div className="search-bar">
                     <input
                         type="text"
-                        placeholder="검색어를 입력해주세요"
+                        placeholder="도서명으로 빠르게 검색하세요..."
                         value={searchParams.bookTitle}
                         onChange={(e) => setSearchParams({ ...searchParams, bookTitle: e.target.value })}
                         onKeyPress={(e) => e.key === 'Enter' && fetchBooks()}
@@ -23,29 +23,77 @@ function BookListView({ books, searchParams, setSearchParams, status, handlers }
                     className={`detail-toggle-btn ${isDetailOpen ? 'active' : ''}`}
                     onClick={() => setIsDetailOpen(!isDetailOpen)}
                 >
-                    {isDetailOpen ? '접기' : '상세검색'}
+                    {isDetailOpen ? '접기 ▲' : '상세검색 ▼'}
                 </button>
             </div>
 
-            {/* 2. 상세 검색 패널 (이미지 8c337c 스타일) */}
+            {/* 상세 검색 패널 */}
             {isDetailOpen && (
                 <div className="detail-search-panel">
                     <div className="detail-grid">
                         <div className="input-group">
-                            <label>도서명</label>
-                            <input value={searchParams.bookTitle} onChange={(e) => setSearchParams({ ...searchParams, bookTitle: e.target.value })} />
+                            <label>카테고리</label>
+                            <select
+                                className="common-select"
+                                value={searchParams.category}
+                                onChange={(e) => setSearchParams({ ...searchParams, category: e.target.value })}
+                            >
+                                <option value="">전체</option>
+                                {categories.map((cat) => (
+                                    <option key={cat.code} value={cat.categoryName}>
+                                        {cat.categoryName} ({cat.categoryCode})
+                                    </option>
+                                ))}
+                            </select>
                         </div>
+
                         <div className="input-group">
                             <label>저자</label>
-                            <input value={searchParams.bookAuthor} onChange={(e) => setSearchParams({ ...searchParams, bookAuthor: e.target.value })} />
+                            <input
+                                value={searchParams.bookAuthor}
+                                onChange={(e) => setSearchParams({ ...searchParams, bookAuthor: e.target.value })}
+                                placeholder="저자명 입력"
+                            />
                         </div>
+
                         <div className="input-group">
                             <label>출판사</label>
-                            <input value={searchParams.publisherName} onChange={(e) => setSearchParams({ ...searchParams, publisherName: e.target.value })} />
+                            <input
+                                value={searchParams.publisherName}
+                                onChange={(e) => setSearchParams({ ...searchParams, publisherName: e.target.value })}
+                            />
                         </div>
+
                         <div className="input-group">
                             <label>ISBN</label>
-                            <input value={searchParams.bookIsbn} onChange={(e) => setSearchParams({ ...searchParams, bookIsbn: e.target.value })} />
+                            <input
+                                value={searchParams.bookIsbn}
+                                onChange={(e) => setSearchParams({ ...searchParams, bookIsbn: e.target.value })}
+                            />
+                        </div>
+
+                        {/* 발행년도 기간 필드 */}
+                        <div className="input-group date-range-group" style={{ gridColumn: 'span 2' }}>
+                            <label>발행일</label>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                {/* 시작일 입력창 */}
+                                <input
+                                    type="date"
+                                    max="9999-12-31"
+                                    value={searchParams.publicationDateStart}
+                                    onChange={(e) => handleDateChange(e, 'publicationDateStart')}
+                                    className="date-input"
+                                />
+                                <span>~</span>
+                                {/* 종료일 입력창 */}
+                                <input
+                                    type="date"
+                                    max="9999-12-31"
+                                    value={searchParams.publicationDateEnd}
+                                    onChange={(e) => handleDateChange(e, 'publicationDateEnd')}
+                                    className="date-input"
+                                />
+                            </div>
                         </div>
                     </div>
 
@@ -55,7 +103,6 @@ function BookListView({ books, searchParams, setSearchParams, status, handlers }
                     </div>
                 </div>
             )}
-
             {/* 총 건수 표기 */}
             <div className="list-header">
                 전체 <strong>{totalElements}</strong> 건
