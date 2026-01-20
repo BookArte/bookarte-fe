@@ -59,6 +59,9 @@ export function useBookList() {
             bookAuthor: '',
             publisherName: '',
             bookIsbn: '',
+            publicationDateStart: '',
+            publicationDateEnd: '',
+            category: '',
             sort: 'createdAt,desc'
         });
     };
