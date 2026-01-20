@@ -1,4 +1,6 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useAuthStore } from "@/store/useAuthStore";
+import { logoutMember } from "@/api/member.api";
 
 // import * as EgovNet from "@/api/egovFetch";
 
@@ -6,13 +8,30 @@ import URL from "@/constants/url";
 import CODE from "@/constants/code";
 
 import logoImg from "@/assets/images/logo_w.png";
+import { toast } from "react-toastify";
 
 function Header() {
   const navigate = useNavigate();
+  const { accessToken, userInfo } = useAuthStore.getState();
+  const setLogout = useAuthStore((state) => state.setLogout);
+
+  const isLoggedIn = !!accessToken;
+
+  const logOutHandler = async () => {
+    try {
+      await logoutMember();
+    } catch (error) {
+      console.error("로그아웃 요청 실패:", error);
+    } finally {
+      setLogout();
+      navigate(URL.MAIN);
+      toast.success("로그아웃 되었습니다.");
+    }
+  };
 
   const logInHandler = () => {
     // 로그인 정보 없을 시
-    navigate(URL.LOGIN);
+    navigate(URL.MEMBER_LOGIN);
     // PC와 Mobile 열린메뉴 닫기
     document.querySelector(".all_menu.WEB").classList.add("closed");
     document.querySelector(".btnAllMenu").classList.remove("active");
@@ -31,8 +50,8 @@ function Header() {
         <h1 className="logo">
           <Link to={URL.MAIN} className="w">
             <img
-              // src={logoImg}
-              // alt="표준프레임워크포털 eGovFrame 심플홈페이지"
+            // src={logoImg}
+            // alt="표준프레임워크포털 eGovFrame 심플홈페이지"
             />
           </Link>
         </h1>
@@ -88,10 +107,9 @@ function Header() {
         {/* <!-- PC web에서 보여지는 영역 --> */}
         <div className="user_info">
           {/* 로그아웃 : 로그인 정보 있을때 */}
-          {true && (
+          {isLoggedIn && (
             <>
-              <span className="person">{"tester"} </span> 님이,{" "}
-              {"tester"}로 로그인하셨습니다.
+              <span className="person">{userInfo?.userName}({userInfo?.userId})</span> 님 안녕하세요
               {true && (
                 <NavLink
                   to={URL.MYPAGE_MODIFY}
@@ -102,19 +120,19 @@ function Header() {
                   마이페이지
                 </NavLink>
               )}
-              <button className="btn">
+              <button className="btn" onClick={logOutHandler}>
                 로그아웃
               </button>
             </>
           )}
           {/* 로그인 : 로그인 정보 없을 때 */}
-          {true && (
+          {!isLoggedIn && (
             <>
               <button onClick={logInHandler} className="btn login">
                 로그인
               </button>
               <NavLink
-                to={URL.MYPAGE_CREATE}
+                to={URL.MEMBER_AGREEMENT}
                 className={({ isActive }) =>
                   isActive ? "btn login cur" : "btn login"
                 }
