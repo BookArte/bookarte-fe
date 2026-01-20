@@ -1561,7 +1561,15 @@
     white-space: nowrap;
 }
 
-/* 상세 검색 패널 input */
+
+/* 상세 검색 패널 */
+.detail-search-panel {
+    margin-top: 15px;
+    padding: 20px;
+    border: 1px solid #000;
+    border-radius: 12px;
+}
+
 .input-group input {
     width: 100%; 
     padding: 12px 15px;
@@ -1610,11 +1618,23 @@
     border: none;
     transition: transform 0.1s active;
 }
-.detail-btns {
+.detail-bottom-row {
     display: flex;
     gap: 15px;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: flex-end;
     margin-top: 20px;
+
+}
+.bottom-select-group {
+    display: flex;
+    gap: 10px;
+    flex: 1;
+}
+.bottom-btn-group {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
 }
 
 .reset-btn {
@@ -1629,6 +1649,51 @@
 
 .reset-btn:hover { background-color: #e5e5e5; }
 .submit-btn:hover { opacity: 0.9; }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 40px;
+    padding-bottom: 50px;
+}
+
+/* 페이지 번호 버튼 스타일 */ 
+.page-num-btn {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.page-num-btn.active {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+    font-weight: bold;
+}
+
+.page-num-btn:hover:not(.active) {
+    background: #f8f9fa;
+}
+
+.page-nav-btn {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.page-nav-btn:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+    background: #f9f9f9;
+}
 
 /* 4. 그리드 레이아웃 정리 */
 .detail-grid {
@@ -1649,12 +1714,12 @@
 .list-header {
   border-bottom: 2px solid #333;
   padding-bottom: 15px;
+  margin-top: 10px;
   margin-bottom: 10px;
   font-size: 14px;
   color: #666;
 }
 
-/* 기존 아이템 스타일 */
 .list-item {
   display: flex;
   padding: 30px 0;
@@ -1662,7 +1727,6 @@
   align-items: flex-start;
 }
 
-/* 썸네일 이미지 감싸는 div */
 .thumbnail-container {
   width: 130px;
   flex-shrink: 0;

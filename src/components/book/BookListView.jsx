@@ -1,6 +1,12 @@
-function BookListView({ books, categories, searchParams, setSearchParams, status, handlers }) {
-    const { fetchBooks, handleReset, handleViewBook, handleDateChange } = handlers;
-    const { loading, totalElements, isDetailOpen, setIsDetailOpen } = status;
+function BookListView({ books, categories, params, status, handlers }) {
+    const { fetchBooks, handleReset, handleViewBook, handleDateChange, handlePageChange } = handlers;
+    const { loading, totalElements, isDetailOpen, setIsDetailOpen, totalPages, currentPage } = status;
+    const { searchParams, setSearchParams } = params;
+
+    const PAGE_GROUP_SIZE = 5;
+    const currentGroup = Math.floor(currentPage / PAGE_GROUP_SIZE);
+    const startPage = currentGroup * PAGE_GROUP_SIZE;
+    const endPage = Math.min(startPage + PAGE_GROUP_SIZE, totalPages);
 
     if (loading) return <div style={{ textAlign: 'center', padding: '50px' }}>로딩 중...</div>;
 
@@ -40,7 +46,7 @@ function BookListView({ books, categories, searchParams, setSearchParams, status
                             >
                                 <option value="">전체</option>
                                 {categories.map((cat) => (
-                                    <option key={cat.code} value={cat.categoryName}>
+                                    <option key={cat.categoryCode} value={cat.categoryName}>
                                         {cat.categoryName} ({cat.categoryCode})
                                     </option>
                                 ))}
@@ -97,12 +103,48 @@ function BookListView({ books, categories, searchParams, setSearchParams, status
                         </div>
                     </div>
 
-                    <div className="detail-btns">
-                        <button className="reset-btn" onClick={handleReset}>🔄 초기화</button>
-                        <button className="submit-btn" onClick={fetchBooks}>🔍 검색</button>
+                    <div className="detail-bottom-row">
+                        <div className="bottom-select-group">
+                            {/* 정렬 기준  */}
+                            <div className="input-group">
+                                <label>정렬 기준</label>
+                                <select
+                                    className="common-select"
+                                    value={searchParams.sort}
+                                    onChange={(e) => setSearchParams({ ...searchParams, sort: e.target.value })}
+                                >
+                                    <option value="createdAt,desc">최신 등록순</option>
+                                    <option value="createdAt,asc">오래된 등록순</option>
+                                    <option value="bookTitle,asc">제목 오름차순 (ㄱ-ㅎ)</option>
+                                    <option value="bookTitle,desc">제목 내림차순 (ㅎ-ㄱ)</option>
+                                    <option value="author,asc">저자명 오름차순</option>
+                                    <option value="publicationDate,desc">최신 발행일순</option>
+                                    <option value="publicationDate,asc">오래된 발행일순</option>
+                                </select>
+                            </div>
+                            {/* 건수 설정 */}
+                            <div className="input-group">
+                                <label>한 페이지 당 건수</label>
+                                <select
+                                    className="common-select"
+                                    value={searchParams.size}
+                                    onChange={(e) => setSearchParams({ ...searchParams, size: e.target.value })}
+                                >
+                                    <option value={10}>10</option>
+                                    <option value={20}>20</option>
+                                    <option value={50}>50</option>
+                                    <option value={100}>100</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className="bottom-btn-group">
+                            <button className="reset-btn" onClick={handleReset}>🔄 초기화</button>
+                            <button className="submit-btn" onClick={fetchBooks}>🔍 검색</button>
+                        </div>
                     </div>
                 </div>
             )}
+
             {/* 총 건수 표기 */}
             <div className="list-header">
                 전체 <strong>{totalElements}</strong> 건
@@ -148,6 +190,35 @@ function BookListView({ books, categories, searchParams, setSearchParams, status
                     </div>
                 </div>
             ))}
+            {books.length > 0 && (
+                <div className="pagination">
+                    <button
+                        disabled={currentPage === 0}
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        className="page-nav-btn"
+                    >
+                        이전
+                    </button>
+
+                    {Array.from({ length: endPage - startPage }, (_, i) => startPage + i).map((pageIdx) => (
+                        <button
+                            key={pageIdx}
+                            onClick={() => handlePageChange(pageIdx)}
+                            className={`page-num-btn ${currentPage === pageIdx ? 'active' : ''}`}
+                        >
+                            {pageIdx + 1}
+                        </button>
+                    ))}
+
+                    <button
+                        disabled={currentPage >= totalPages - 1}
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        className="page-nav-btn"
+                    >
+                        다음
+                    </button>
+                </div>
+            )}
         </div>
     );
 }
