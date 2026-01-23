@@ -2046,6 +2046,13 @@
   margin-top: 10px;
 }
 
+.book-error-message {
+  color: #ff4d4f;
+  margin-top: 5px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
 /* 개별 색상만 따로 지정 */
 .cnl-btn { background-color: #6c757d; color: white; }
 .input-btn { background-color: #28a745; color: white; }

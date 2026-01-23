@@ -3,8 +3,11 @@ function RegisterBookForm({ search, form, handlers }) {
         searchQuery, setSearchQuery,
         searchResults,
         isSearching,
+        duplicateError,
     } = search;
+
     const { form: bookForm } = form;
+
     const {
         handleChange,
         handleSearch,
@@ -12,6 +15,7 @@ function RegisterBookForm({ search, form, handlers }) {
         handleSubmit,
         handleCancel
     } = handlers;
+
     return (
         <div className='form-container'>
             <h2 style={{ textAlign: 'center' }}>도서 등록</h2>
@@ -31,6 +35,8 @@ function RegisterBookForm({ search, form, handlers }) {
                         {isSearching ? '검색 중...' : '검색'}
                     </button>
                 </form>
+                {duplicateError && <div className='book-error-message'>{duplicateError}</div>}
+
 
                 {/* 검색 결과 레이어 */}
                 {searchResults.length > 0 && (
