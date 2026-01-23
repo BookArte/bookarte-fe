@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useForm } from "../../form/useForm";
 import { registerBookByAdmin, searchBooksWithAPi, checkBookDuplicate } from "../../../api/book.api";
+import { validateBookForm } from "../../../utils/validation/book.validation";
 import { toast } from "react-toastify";
 
 export function useRegister() {
@@ -9,6 +10,7 @@ export function useRegister() {
     const [isSearching, setIsSearching] = useState(false); // 로딩 상태
 
     const [duplicateError, setDuplicateError] = useState('');
+    const [fieldErrors, setFieldErrors] = useState({});
 
     const { form, handleChange, setField } = useForm({
         bookTitle: '',
@@ -41,17 +43,17 @@ export function useRegister() {
     };
 
     // 도서 선택 시 폼 매핑
-    const handleSelectBook = (book) => {
+    const handleSelectBook = async (book) => {
         setDuplicateError('');
         try {
-            const isDuplicate = handleDuplicateCheck(book.bookIsbn);
+            const isDuplicate = await handleDuplicateCheck(book.bookIsbn);
             if (isDuplicate) {
                 setSearchResults([]);
                 setDuplicateError('이미 등록된 도서입니다.');
                 return;
             }
             Object.entries(book).forEach(([fieldName, value]) => {
-                setField(fieldName, value);
+                setField(fieldName, value || '');
             });
             setSearchResults([]); // 검색 결과 레이어 닫기
             setDuplicateError('');
@@ -67,7 +69,7 @@ export function useRegister() {
     const handleDuplicateCheck = async (isbn) => {
         try {
             const res = await checkBookDuplicate(isbn);
-            return res.isDuplicate;
+            return res.data;
         } catch (error) {
             console.error("도서 중복 체크 중 오류 발생:", error);
             toast.error("도서 중복 체크 중 오류가 발생했습니다.");
@@ -78,11 +80,37 @@ export function useRegister() {
     // 도서 등록 제출
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setFieldErrors({});
+
+        // 클라이언트 측 검증
+
+        const clientErrors = validateBookForm(form);
+        if (Object.keys(clientErrors).length > 0) {
+            setFieldErrors(clientErrors);
+            toast.error("입력한 도서 정보를 다시 확인해주세요.");
+            return;
+        }
+
+
         try {
             const res = await registerBookByAdmin(form);
             toast.success(res.data);
         } catch (error) {
-            toast.error("도서 등록 중 오류가 발생했습니다.");
+            const serverError = error.response.data;
+            if (serverError && serverError.code === 400 && serverError.data) {
+                const errorPairs = serverError.data.split(', ');
+                const newFieldErrors = {};
+                errorPairs.forEach(pair => {
+                    const [field, message] = pair.split(': ');
+                    if (field && message) {
+                        newFieldErrors[field.trim()] = message.trim();
+                    }
+                });
+                setFieldErrors(newFieldErrors);
+                toast.error("입력한 도서 정보를 다시 확인해주세요.");
+            } else {
+                toast.error("도서 등록 중 오류가 발생했습니다.");
+            }
         }
     };
 
@@ -96,6 +124,7 @@ export function useRegister() {
             searchResults,
             isSearching,
             duplicateError,
+            fieldErrors,
         },
         form: {
             form,
