@@ -83,7 +83,6 @@ export function useRegister() {
         setFieldErrors({});
 
         // 클라이언트 측 검증
-
         const clientErrors = validateBookForm(form);
         if (Object.keys(clientErrors).length > 0) {
             setFieldErrors(clientErrors);

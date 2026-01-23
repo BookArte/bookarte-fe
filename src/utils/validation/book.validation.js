@@ -18,6 +18,13 @@ export function validateBookForm(values) {
 
     // 출판일 검증
     if (!values.publicationDate) errors.publicationDate = '출판일은 필수 입력 항목입니다.';
+    if (values.publicationDate) {
+        const pubDate = new Date(values.publicationDate);
+        const today = new Date();
+        if (pubDate > today) {
+            errors.publicationDate = '출판일은 미래 날짜일 수 없습니다.';
+        }
+    }
 
     // ISBN 검증
     if (!values.bookIsbn) {
