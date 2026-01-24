@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "../../form/useForm";
 import { registerBookByAdmin, searchBooksWithAPi, checkBookDuplicate } from "../../../api/book.api";
 import { validateBookForm } from "../../../utils/validation/book.validation";
@@ -9,11 +9,13 @@ export function useRegister() {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [isSearching, setIsSearching] = useState(false); // 로딩 상태
+    const searchInputRef = useRef(null);
 
     const [duplicateError, setDuplicateError] = useState('');
     const [fieldErrors, setFieldErrors] = useState({});
 
-    const { form, handleChange, setField } = useForm({
+    //초기 폼
+    const initForm = {
         bookTitle: '',
         bookAuthor: '',
         bookTranslator: '',
@@ -24,7 +26,9 @@ export function useRegister() {
         bookThumbnail: '',
         bookCallNumber: '',
         bookCategory: ''
-    });
+    }
+
+    const { form, handleChange, setField } = useForm({ initForm });
 
     // 검색 API 호출
     const handleSearch = async (e) => {
@@ -78,6 +82,18 @@ export function useRegister() {
         }
     };
 
+    const resetAllFields = () => {
+        Object.entries(initForm).forEach(([key, value]) => {
+            setField(key, value);
+        });
+        setSearchQuery('');
+        setSearchResults([]);
+        // 검색창으로 포커스 이동
+        if (searchInputRef.current) {
+            searchInputRef.current.focus();
+        }
+    }
+
     // 도서 등록 제출
     const handleSubmit = async (e) => {
         await handleFormSubmission({
@@ -85,10 +101,8 @@ export function useRegister() {
             form,
             validateFunc: validateBookForm,
             apiFunc: registerBookByAdmin,
-            onSuccess: (res) => {
-                //초기화
-                setField(fieldName, '');
-
+            onSuccess: () => {
+                resetAllFields();
             },
             setFieldErrors
         });
@@ -105,6 +119,7 @@ export function useRegister() {
             isSearching,
             duplicateError,
             fieldErrors,
+            searchInputRef
         },
         form: {
             form,

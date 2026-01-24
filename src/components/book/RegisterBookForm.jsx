@@ -4,6 +4,7 @@ function RegisterBookForm({ search, form, handlers }) {
         searchResults,
         isSearching,
         duplicateError,
+        searchInputRef,
     } = search;
 
     const { form: bookForm } = form;
@@ -33,6 +34,7 @@ function RegisterBookForm({ search, form, handlers }) {
             <section className='search-section'>
                 <form onSubmit={handleSearch} style={{ display: 'flex' }}>
                     <input
+                        ref={searchInputRef}
                         className='search-form'
                         type="text"
                         placeholder="등록할 도서 제목을 검색하세요..."
