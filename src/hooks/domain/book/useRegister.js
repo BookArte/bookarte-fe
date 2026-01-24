@@ -3,6 +3,7 @@ import { useForm } from "../../form/useForm";
 import { registerBookByAdmin, searchBooksWithAPi, checkBookDuplicate } from "../../../api/book.api";
 import { validateBookForm } from "../../../utils/validation/book.validation";
 import { toast } from "react-toastify";
+import { handleFormSubmission } from "../../form/handleFormSubmisson";
 
 export function useRegister() {
     const [searchQuery, setSearchQuery] = useState('');
@@ -79,38 +80,18 @@ export function useRegister() {
 
     // 도서 등록 제출
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setFieldErrors({});
+        await handleFormSubmission({
+            e,
+            form,
+            validateFunc: validateBookForm,
+            apiFunc: registerBookByAdmin,
+            onSuccess: (res) => {
+                //초기화
+                setField(fieldName, '');
 
-        // 클라이언트 측 검증
-        const clientErrors = validateBookForm(form);
-        if (Object.keys(clientErrors).length > 0) {
-            setFieldErrors(clientErrors);
-            toast.error("입력한 도서 정보를 다시 확인해주세요.");
-            return;
-        }
-
-
-        try {
-            const res = await registerBookByAdmin(form);
-            toast.success(res.data);
-        } catch (error) {
-            const serverError = error.response.data;
-            if (serverError && serverError.code === 400 && serverError.data) {
-                const errorPairs = serverError.data.split(', ');
-                const newFieldErrors = {};
-                errorPairs.forEach(pair => {
-                    const [field, message] = pair.split(': ');
-                    if (field && message) {
-                        newFieldErrors[field.trim()] = message.trim();
-                    }
-                });
-                setFieldErrors(newFieldErrors);
-                toast.error("입력한 도서 정보를 다시 확인해주세요.");
-            } else {
-                toast.error("도서 등록 중 오류가 발생했습니다.");
-            }
-        }
+            },
+            setFieldErrors
+        });
     };
 
     const handleCancel = () => {
