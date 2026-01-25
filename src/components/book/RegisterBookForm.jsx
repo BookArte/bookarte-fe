@@ -75,34 +75,22 @@ function RegisterBookForm({ search, form, handlers }) {
 
             {/* 등록 폼 섹션 */}
             <form onSubmit={handleSubmit} className='input-form' autoComplete="off">
-                {/* 상단 레이아웃: 섬네일(좌) + 제목/카테고리(우) */}
-                <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', marginBottom: '15px' }}>
-
+                {/* 상단 레이아웃: 썸네일(좌) + 정보 영역(우) */}
+                <div style={{ display: 'flex', gap: '25px', alignItems: 'flex-start', marginBottom: '20px' }}>
                     {/* 섬네일 미리보기 영역 */}
-                    <div className='input-thumbnail-flex' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <div className='input-thumbnail-flex'>
                         <label className='input-label'>썸네일</label>
-                        <div style={{
-                            width: '120px',
-                            height: '170px',
-                            border: '1px solid #ddd',
-                            borderRadius: '4px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            overflow: 'hidden',
-                            backgroundColor: '#f9f9f9'
-                        }}>
+                        <div className="thumbnail-preview-section">
                             {bookForm.bookThumbnail ? (
                                 <img
                                     src={bookForm.bookThumbnail}
                                     alt="미리보기"
-                                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                    className="thumbnail-preview-style"
                                 />
                             ) : (
                                 <span style={{ fontSize: '12px', color: '#aaa' }}>이미지 없음</span>
                             )}
                         </div>
-                        {/* 입력창은 숨기되 값은 유지 */}
                         <input
                             name="bookThumbnail"
                             value={bookForm.bookThumbnail}
@@ -113,15 +101,32 @@ function RegisterBookForm({ search, form, handlers }) {
                     </div>
 
                     {/* 제목 및 카테고리 영역 */}
-                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                        <div className='input-title-flex'>
+                    <div className="input-tc-flex">
+                        {/* 제목 */}
+                        <div style={{ flex: 3 }}>
                             <label className='input-label'>제목</label>
-                            <input name="bookTitle" value={bookForm.bookTitle} onChange={handleChange} className='input-style' />
+                            <input
+                                name="bookTitle"
+                                value={bookForm.bookTitle}
+                                onChange={handleChange}
+                                className='input-style'
+                                style={{ width: '100%' }}
+                                placeholder="도서 제목을 입력하세요"
+                            />
                             <ErrorMsg field="bookTitle" />
                         </div>
-                        <div style={{ flex: 1 }}>
+
+                        {/* 카테고리 */}
+                        <div style={{ flex: 1, minWidth: '150px' }}>
                             <label className='input-label'>카테고리</label>
-                            <input name="bookCategory" value={bookForm.bookCategory} onChange={handleChange} className='input-style' />
+                            <input
+                                name="bookCategory"
+                                value={bookForm.bookCategory}
+                                onChange={handleChange}
+                                className='input-style'
+                                style={{ width: '100%' }}
+                                placeholder="카테고리"
+                            />
                             <ErrorMsg field="bookCategory" />
                         </div>
                     </div>

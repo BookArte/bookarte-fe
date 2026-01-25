@@ -1957,8 +1957,6 @@
   border-bottom: 1px solid #eee;
   background-color: white;
   transition: background-color 0.2s ease-in-out;
-
-
 }
 
 .search-result:hover {
@@ -1990,6 +1988,38 @@
   color: #999;
 }
 
+.input-thumbnail-flex{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.thumbnail-preview-section {
+  width: 120px;
+  height: 170px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #f9f9f9;
+}
+
+.thumbnail-preview-style {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.input-tc-flex{
+  flex: 1;
+  display: flex;
+  gap: 15px;
+  align-self: center;
+  padding-top: 20px;
+}
+
 .input-style {
   width: 100%;
   padding: 10px;
@@ -2010,10 +2040,6 @@
 .input-form {
   display: grid;
   gap: 15px;
-}
-
-.input-title-flex {
-  flex: 2;
 }
 
 .input-label {

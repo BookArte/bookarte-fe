@@ -13,11 +13,6 @@ export const handleFormSubmission = async ({
 
     setFieldErrors({});
 
-    console.log("handleFormSubmission 호출")
-    console.log(form)
-    console.log(validateFunc)
-    console.log(apiFunc)
-
     // 클라이언트 측 검증
     const clientErrors = validateFunc(form);
     console.log(clientErrors)
@@ -29,10 +24,12 @@ export const handleFormSubmission = async ({
 
     try {
         const res = await apiFunc(form);
+        console.log(res)
         toast.success(res.data);
         if (onSuccess) onSuccess(res);
     } catch (error) {
-        const serverError = error.response.data;
+        console.log(error)
+        const serverError = error.response?.data;
         if (serverError && serverError.code === 400 && serverError.data) {
             const newFieldErrors = parserServerValidationErrors(serverError);
             setFieldErrors(newFieldErrors);
