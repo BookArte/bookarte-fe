@@ -13,6 +13,10 @@ export const handleFormSubmission = async ({
 
     setFieldErrors({});
 
+    console.log(form)
+    console.log(validateFunc)
+    console.log(apiFunc)
+
     // 클라이언트 측 검증
     const clientErrors = validateFunc(form);
     console.log(clientErrors)

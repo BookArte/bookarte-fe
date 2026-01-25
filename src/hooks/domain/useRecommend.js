@@ -4,12 +4,16 @@ import { setRecommendationBook } from '../../api/recommendation.api';
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import URL from '@/constants/url';
+import { handleFormSubmission } from "../form/handleFormSubmisson";
+import { validateRecommendationForm } from "../../utils/validation/recommedation.validation";
 
 
-export function setRecommendation() {
+export function useRecommend() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedBook, setSelectedBook] = useState(null);
     const navigate = useNavigate();
+
+    const [fieldErrors, setFieldErrors] = useState({});
 
     const { form, handleChange } = useForm({
         comments: '',
@@ -23,7 +27,7 @@ export function setRecommendation() {
         setIsModalOpen(false);
     };
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
         if (!selectedBook) return toast.info("도서를 먼저 선택해주세요.");
 
         const requestData = {
@@ -31,21 +35,21 @@ export function setRecommendation() {
             ...form
         };
 
-        try {
-            const res = await setRecommendationBook(requestData);
-
-            if (res.success) {
-                toast.success(res.data);
+        await handleFormSubmission({
+            e,
+            form: requestData,
+            validateFunc: validateRecommendationForm,
+            apiFunc: setRecommendationBook,
+            onSuccess: () => {
                 navigate(URL.RECOMMENDATION_REORDER, { replace: true });
-            }
-        } catch (error) {
-            alert("등록 중 오류가 발생했습니다.");
-        }
+            },
+            setFieldErrors
+        })
     };
 
     return {
         form,
-
+        fieldErrors,
         modal: {
             isModalOpen,
             setIsModalOpen,

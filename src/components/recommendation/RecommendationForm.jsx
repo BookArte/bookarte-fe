@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import BookSearchModal from "./modals/BookSearchModal";
+import BookSearchModal from "../modals/BookSearchModal";
+import ErrorMsg from "../common/ErrorMsg";
 
-function RecommendationForm({ form, modal, book, handlers }) {
+function RecommendationForm({ form, fieldErrors, modal, book, handlers }) {
 
     const { selectedBook, setSelectedBook } = book;
     const { isModalOpen, setIsModalOpen } = modal;
@@ -41,16 +42,19 @@ function RecommendationForm({ form, modal, book, handlers }) {
                     name='comments'
                     onChange={handleChange}
                 />
+                <ErrorMsg message={fieldErrors.comments} />
             </div>
 
             <div className="recommendation-form-section row">
                 <div>
                     <label>전시 시작일</label>
                     <input type="date" name='startDate' onChange={handleChange} />
+                    <ErrorMsg message={fieldErrors.startDate} />
                 </div>
                 <div>
                     <label>전시 종료일</label>
                     <input type="date" name='endDate' onChange={handleChange} />
+                    <ErrorMsg message={fieldErrors.endDate} />
                 </div>
             </div>
 

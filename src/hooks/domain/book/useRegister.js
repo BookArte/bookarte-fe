@@ -67,7 +67,6 @@ export function useRegister() {
             console.error("도서 선택 중 오류 발생:", error);
             toast.error("도서 선택 중 오류가 발생했습니다.");
         }
-
     };
 
     // 도서 중복 체크
