@@ -7,7 +7,7 @@ import URL from '@/constants/url';
 import { handleFormSubmission } from "../../form/handleFormSubmisson";
 import { validateRecommendationForm } from "../../../utils/validation/recommedation.validation";
 
-export function useRecommend() {
+export function useRecommendation() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedBook, setSelectedBook] = useState(null);
     const navigate = useNavigate();

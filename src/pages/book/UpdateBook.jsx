@@ -1,4 +1,4 @@
-import UpdateBookForm from "../../components/Book/UpdateBookForm";
+import UpdateBookForm from "../../components/book/UpdateBookForm";
 import { useUpdate } from "../../hooks/domain/book/useUpdate";
 
 function UpdateBook() {

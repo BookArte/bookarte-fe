@@ -1,9 +1,9 @@
-import { useRecommend } from '../../hooks/domain/recommendation/useRecommend';
 import RecommendationForm from '../../components/recommendation/RecommendationForm';
+import { useRecommendation } from '../../hooks/domain/recommendation/useRecommendation';
 
 
 function SetRecommedation() {
-    return <RecommendationForm {...useRecommend()} />
+    return <RecommendationForm {...useRecommendation()} />
 }
 
 export default SetRecommedation;
