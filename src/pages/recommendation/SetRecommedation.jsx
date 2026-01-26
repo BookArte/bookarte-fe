@@ -1,4 +1,4 @@
-import { useRecommend } from '../../hooks/domain/useRecommend';
+import { useRecommend } from '../../hooks/domain/recommendation/useRecommend';
 import RecommendationForm from '../../components/recommendation/RecommendationForm';
 
 

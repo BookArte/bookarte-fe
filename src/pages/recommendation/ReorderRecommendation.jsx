@@ -1,4 +1,4 @@
-import { reorderRecommendation } from '../../hooks/domain/reorderRecommendation';
+import { reorderRecommendation } from '../../hooks/domain/recommendation/reorderRecommendation';
 import ReorderForm from '../../components/recommendation/ReorderForm';
 
 function ReorderRecommendation() {

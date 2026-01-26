@@ -12,7 +12,7 @@ import UpdateBook from "../pages/book/UpdateBook";
 import SetRecommedation from "../pages/recommendation/SetRecommedation";
 import Login from "../pages/member/Login";
 import Join from "../pages/member/Join";
-import RecommedationBookList from "../pages/book/RocommendationBookList"
+import RecommedationBookList from "../pages/recommendation/RocommendationBookList"
 import Agreement from "../pages/member/agreement";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -47,7 +47,6 @@ const RootRoutes = () => {
 
         {/* RecommendationBookList */}
         <Route path={"/book/recommend"} element={< RecommedationBookList />} />
-
 
         {/* SetRecommednation */}
         <Route path={"/admin/recommend/set"} element={<SetRecommedation />} />
