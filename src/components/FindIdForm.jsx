@@ -1,13 +1,12 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import URL from '@/constants/url';
 import { EMAIL_DOMAINS } from "@/constants/email";
 import FindTab from './FindTab';
+import { useFindId } from '@/hooks/domain/useFindId';
 
-function FindIdForm({ form, status, handlers }) {
-    const location = useLocation();
-    const isLoading = false;
-    // const foundIds = ["qwer1***", "testuser****", "guest12***"];
-    const foundIds = null;
+function FindIdForm() {
+    const { form, foundIds, handlers, status } = useFindId();
+    const { handleInput, handleTelChange, selectEmailDomain, submitFindIdHandler } = handlers;
 
     if (foundIds && foundIds.length > 0) {
         return (
@@ -60,33 +59,71 @@ function FindIdForm({ form, status, handlers }) {
                         name='memberName'
                         className='find-id-input'
                         placeholder='이름'
+                        value={form.memberName}
+                        onChange={handleInput}
                     />
                 </div>
 
                 <div className='form-group tel-group'>
-                    <select name="memberTel01" className="find-id-input">
+                    <select
+                        name="memberTel01"
+                        className="find-id-input"
+                        value={form.memberTel01}
+                        onChange={handleInput}
+                    >
                         <option value="010">010</option>
                     </select>
                     <span>-</span>
-                    <input type='text' name='memberTel02' className='find-id-input' placeholder='1234' maxLength={4} />
+                    <input
+                        type='text'
+                        name='memberTel02'
+                        className='find-id-input'
+                        placeholder='1234'
+                        maxLength={4}
+                        value={form.memberTel02}
+                        onChange={handleTelChange('memberTel02')}
+                    />
                     <span>-</span>
-                    <input type='text' name='memberTel03' className='find-id-input' placeholder='5678' maxLength={4} />
+                    <input
+                        type='text'
+                        name='memberTel03'
+                        className='find-id-input'
+                        placeholder='5678'
+                        maxLength={4}
+                        value={form.memberTel03}
+                        onChange={handleTelChange('memberTel03')}
+                    />
                 </div>
 
                 <div className='form-group email-group'>
-                    <input type='text' name='memberEmail01' className='find-id-input email-input' placeholder='이메일' />
+                    <input
+                        type='text'
+                        name='memberEmail01'
+                        className='find-id-input email-input'
+                        placeholder='이메일'
+                        value={form.memberEmail01}
+                        onChange={handleInput}
+                    />
                     <span>@</span>
-                    <input type='text' name='memberEmail02' className='find-id-input email-input' placeholder='직접입력' />
-                    <select className="find-id-input email-input">
+                    <input
+                        type='text'
+                        name='memberEmail02'
+                        className='find-id-input email-input'
+                        placeholder='직접입력'
+                        value={form.memberEmail02}
+                        onChange={handleInput}
+                    />
+                    <select
+                        className="find-id-input email-input"
+                        value={EMAIL_DOMAINS.includes(form.memberEmail02) ? form.memberEmail02 : ''}
+                        onChange={selectEmailDomain}>
                         <option value="">직접입력</option>
-                        {EMAIL_DOMAINS.map(domain => (
-                            <option key={domain} value={domain}>{domain}</option>
-                        ))}
+                        {EMAIL_DOMAINS.map(domain => <option key={domain} value={domain}>{domain}</option>)}
                     </select>
                 </div>
 
-                <button type='button' className='find-id-button'>
-                    아이디 찾기
+                <button type='button' className='find-id-button' onClick={submitFindIdHandler} disabled={status.isSubmitting}>
+                    {status.isSubmitting ? '조회 중...' : '아이디 찾기'}
                 </button>
 
                 <div className='login-links'>
