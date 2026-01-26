@@ -14,6 +14,7 @@ import Join from "../pages/member/Join";
 import Agreement from "../pages/member/agreement";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import FindId from "../pages/member/FindId";
 
 
 
@@ -55,13 +56,16 @@ const RootRoutes = () => {
         {/* Agreement */}
         <Route path={"/member/agreement"} element={<Agreement />} />
 
+        {/* FindId */}
+        <Route path={"/member/find_id"} element={<FindId />} />
+
       </Routes>
 
       <Footer />
       <ToastContainer
         position="top-center"   // toast 위치
         autoClose={3000}       // 3초 후 자동 종료
-        toastStyle={{whiteSpace: 'pre-line'}}
+        toastStyle={{ whiteSpace: 'pre-line' }}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

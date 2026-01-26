@@ -30,7 +30,7 @@ function App() {
           });
         }
       } catch (err) {
-        console.log("비로그인 상태 또는 토큰 만료");
+        // console.log("비로그인 상태 또는 토큰 만료");
       } finally {
         setIsInitialized(true);
       }
