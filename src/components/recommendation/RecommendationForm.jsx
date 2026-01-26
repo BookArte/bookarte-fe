@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import BookSearchModal from "../modals/BookSearchModal";
 import ErrorMsg from "../common/ErrorMsg";
 
-function RecommendationForm({ form, fieldErrors, modal, book, handlers }) {
+function RecommendationForm({ fieldErrors, modal, book, handlers }) {
 
     const { selectedBook, setSelectedBook } = book;
     const { isModalOpen, setIsModalOpen } = modal;

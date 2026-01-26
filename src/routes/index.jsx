@@ -17,6 +17,7 @@ import Agreement from "../pages/member/agreement";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReorderRecommendation from "../pages/recommendation/ReorderRecommendation";
+import UpdateRecommendation from "../pages/recommendation/UpdateRecommendation";
 
 const RootRoutes = () => {
 
@@ -46,13 +47,16 @@ const RootRoutes = () => {
         <Route path={"/book/update/:bookId"} element={<UpdateBook />} />
 
         {/* RecommendationBookList */}
-        <Route path={"/book/recommend"} element={< RecommedationBookList />} />
+        <Route path={"/book/recommendation"} element={< RecommedationBookList />} />
 
         {/* SetRecommednation */}
-        <Route path={"/admin/recommend/set"} element={<SetRecommedation />} />
+        <Route path={"/admin/recommendation/set"} element={<SetRecommedation />} />
 
         {/* ReorderRecommednation */}
-        <Route path={"/admin/recommend/reorder"} element={<ReorderRecommendation />} />
+        <Route path={"/admin/recommendation/reorder"} element={<ReorderRecommendation />} />
+
+        {/* UpdateRecommendation */}
+        <Route path={"/admin/recommendation/update/:recommendationId"} element={<UpdateRecommendation />} />
 
         {/* Member */}
         {/* Login */}
