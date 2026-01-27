@@ -2284,3 +2284,64 @@ body {
   color: #555;
   border: 1px solid #ccc;
 }
+
+/* 코드 입력 페이지 */
+.code-verify-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 80px 0;
+}
+
+.code-guide-text {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 40px;
+    letter-spacing: -0.5px;
+}
+
+.code-input-wrapper {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 60px;
+}
+
+.code-square {
+    width: 54px;
+    height: 64px;
+    background-color: #f5f5f5;
+    border-radius: 12px;
+}
+
+.code-next-btn {
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: #333;
+    cursor: pointer;
+}
+
+.code-square-input {
+    width: 54px;
+    height: 64px;
+    background-color: #f5f5f5;
+    border: none;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    outline: none;
+    transition: background-color 0.2s;
+}
+
+.code-square-input:focus {
+    background-color: #e8e8e8;
+    border: 1px solid #ccc;
+}
+
+.code-square-input::-webkit-inner-spin-button,
+.code-square-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

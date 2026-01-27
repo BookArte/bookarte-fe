@@ -15,6 +15,7 @@ import Agreement from "../pages/member/agreement";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FindId from "../pages/member/FindId";
+import FindPassword from "../pages/member/FindPassword";
 
 
 
@@ -58,6 +59,9 @@ const RootRoutes = () => {
 
         {/* FindId */}
         <Route path={"/member/find_id"} element={<FindId />} />
+
+        {/* FindPassword */}
+        <Route path={"/member/find_password"} element={<FindPassword />} />
 
       </Routes>
 
