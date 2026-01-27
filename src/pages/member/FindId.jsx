@@ -1,8 +1,12 @@
 import FindIdForm from "@/components/FindIdForm";
+import { useFindId } from '@/hooks/domain/useFindId';
 
 function FindId() {
+
+    const findIdProps = useFindId();
+
     return (
-        <FindIdForm />
+        <FindIdForm {...findIdProps} />
     )
 }
 

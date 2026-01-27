@@ -2,11 +2,19 @@ import { Link } from 'react-router-dom';
 import URL from '@/constants/url';
 import { EMAIL_DOMAINS } from "@/constants/email";
 import FindTab from './FindTab';
-import { useFindId } from '@/hooks/domain/useFindId';
 
-function FindIdForm() {
-    const { form, foundIds, handlers, status } = useFindId();
-    const { handleInput, handleTelChange, selectEmailDomain, submitFindIdHandler } = handlers;
+function FindIdForm({
+    form,
+    foundIds,
+    handlers,
+    status
+}) {
+    const {
+        handleInput,
+        handleTelChange,
+        selectEmailDomain,
+        submitFindIdHandler
+    } = handlers;
 
     if (foundIds && foundIds.length > 0) {
         return (
