@@ -9,8 +9,10 @@ import RegisterBook from "../pages/book/RegisterBook";
 import BookList from "../pages/book/BookList";
 import BookDetail from "../pages/book/BookDetail";
 import UpdateBook from "../pages/book/UpdateBook";
+import SetRecommedation from "../pages/recommendation/SetRecommedation";
 import Login from "../pages/member/Login";
 import Join from "../pages/member/Join";
+import RecommedationBookList from "../pages/book/RocommendationBookList"
 import Agreement from "../pages/member/agreement";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,6 +20,7 @@ import FindId from "../pages/member/FindId";
 import FindPassword from "../pages/member/FindPassword";
 
 
+import ReorderRecommendation from "../pages/recommendation/ReorderRecommendation";
 
 const RootRoutes = () => {
 
@@ -33,7 +36,6 @@ const RootRoutes = () => {
         {/* MAIN */}
         <Route path={"/"} element={<Main />} />
 
-
         {/*BOOK*/}
         {/* RegisterBook */}
         <Route path={"/book/register"} element={<RegisterBook />} />
@@ -46,6 +48,16 @@ const RootRoutes = () => {
 
         {/* UpdateBook */}
         <Route path={"/book/update/:bookId"} element={<UpdateBook />} />
+
+        {/* RecommendationBookList */}
+        <Route path={"/book/recommend"} element={< RecommedationBookList />} />
+
+
+        {/* SetRecommednation */}
+        <Route path={"/admin/recommend/set"} element={<SetRecommedation />} />
+
+        {/* ReorderRecommednation */}
+        <Route path={"/admin/recommend/reorder"} element={<ReorderRecommendation />} />
 
         {/* Member */}
         {/* Login */}
