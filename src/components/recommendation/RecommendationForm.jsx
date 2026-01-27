@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import BookSearchModal from "../modals/BookSearchModal";
 import ErrorMsg from "../common/ErrorMsg";
 
-function RecommendationForm({ fieldErrors, modal, book, handlers }) {
+function RecommendationForm({ recommended, fieldErrors, modal, book, handlers }) {
 
     const { selectedBook, setSelectedBook } = book;
     const { isModalOpen, setIsModalOpen } = modal;
@@ -11,7 +11,7 @@ function RecommendationForm({ fieldErrors, modal, book, handlers }) {
 
     return (
         <div className="recommendation-set-container">
-            <h2 className='recommendation-set-title'>✨ 관리자 추천 도서 등록</h2>
+            <h2 className='recommendation-set-title'>관리자 추천 도서 등록</h2>
 
             {/* 도서 검색 및  선택 섹션 */}
             <div className="book-search-section">
@@ -33,6 +33,7 @@ function RecommendationForm({ fieldErrors, modal, book, handlers }) {
                     )}
                 </div>
             </div>
+            {recommended && <div className='book-error-message'>{recommended}</div>}
 
             {/* 상세 내용 섹션 */}
             <div className="recommendation-form-section">

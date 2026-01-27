@@ -31,6 +31,6 @@ export const getRecommedBookDetail = async (recommendationId) => {
 }
 
 export const isRecommend = async (bookId) => {
-    const res = await apiClient.get(`/recommendation?bookId=${bookId}`);
+    const res = await apiClient.get(`/recommendation/is-recommend?bookId=${bookId}`);
     return res.data;
 }
