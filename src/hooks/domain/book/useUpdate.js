@@ -4,6 +4,7 @@ import { getBookDetailByBookId, updateBookByBookId, } from "../../../api/book.ap
 import { toast } from "react-toastify";
 import { useForm } from "../../form/useForm";
 import { validateBookForm } from "../../../utils/validation/book.validation";
+import { handleFormSubmission } from "../../form/handleFormSubmisson";
 
 export function useUpdate() {
     const { bookId } = useParams();
@@ -48,38 +49,15 @@ export function useUpdate() {
     }, [bookId]);
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setFieldErrors({});
-
-        // 클라이언트 측 검증
-        const clientErrors = validateBookForm(bookForm);
-        if (Object.keys(clientErrors).length > 0) {
-            setFieldErrors(clientErrors);
-            toast.error("입력한 도서 정보를 다시 확인해주세요.");
-            return;
-        }
-
-        try {
-            const res = await updateBookByBookId(bookId, bookForm);
-            toast.success(res.data);
-            navigate(`/book/view/${bookId}`);
-
-        } catch (error) {
-            const serverError = error.response.data;
-            if (serverError && serverError.code === 400 && serverError.data) {
-                const newFieldErrors = {};
-                const errorPairs = serverError.data.split(', ');
-                errorPairs.forEach(pair => {
-                    const [field, message] = pair.split(': ');
-                    if (field && message) {
-                        newFieldErrors[field.trim()] = message.trim();
-                    }
-                });
-                setFieldErrors(newFieldErrors);
-                toast.error("입력한 도서 정보를 다시 확인해주세요.");
-            }
-            toast.error("입력한 도서 정보를 다시 확인해주세요.");
-        }
+        const { bookId: _, ...updateData } = bookForm;
+        await handleFormSubmission({
+            e,
+            form: updateData,
+            validateFunc: validateBookForm,
+            apiFunc: (data) => updateBookByBookId(bookId, data),
+            onSuccess: () => navigate(-1),
+            setFieldErrors,
+        });
     }
 
     const handleCancel = () => {
@@ -96,6 +74,4 @@ export function useUpdate() {
             handleCancel
         }
     };
-
-
 }
