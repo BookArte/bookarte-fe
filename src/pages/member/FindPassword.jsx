@@ -1,12 +1,11 @@
-import { useState } from 'react';
 import FindPasswordForm from "@/components/FindPasswordForm";
+import { useFindPassword } from '@/hooks/domain/useFindPassword';
 
 function FindPassword() {
-
-    const [isStepCode, setIsStepCode] = useState(false);
+    const findPwProps = useFindPassword();
 
     return (
-        <FindPasswordForm isStepCode={isStepCode} />
+        <FindPasswordForm {...findPwProps} />
     );
 }
 

@@ -29,3 +29,13 @@ export const findMemberId = async (data) => {
         const res = await apiClient.post('/member/find_id', data);
     return res.data;
 }
+
+export const findMemberPassword = async (data) => {
+    const res = await apiClient.post('/auth/find_password', data);
+    return res.data;
+};
+
+export const verifyEmailCode = async (data) => {
+    const res = await apiClient.post('/auth/verify_code', data);
+    return res.data;
+};
