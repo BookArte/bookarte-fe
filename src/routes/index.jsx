@@ -16,6 +16,10 @@ import RecommedationBookList from "../pages/book/RocommendationBookList"
 import Agreement from "../pages/member/agreement";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import FindId from "../pages/member/FindId";
+import FindPassword from "../pages/member/FindPassword";
+
+
 import ReorderRecommendation from "../pages/recommendation/ReorderRecommendation";
 
 const RootRoutes = () => {
@@ -64,6 +68,12 @@ const RootRoutes = () => {
 
         {/* Agreement */}
         <Route path={"/member/agreement"} element={<Agreement />} />
+
+        {/* FindId */}
+        <Route path={"/member/find_id"} element={<FindId />} />
+
+        {/* FindPassword */}
+        <Route path={"/member/find_password"} element={<FindPassword />} />
 
       </Routes>
 
