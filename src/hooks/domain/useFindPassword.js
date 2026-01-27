@@ -66,6 +66,23 @@ export function useFindPassword() {
         }
     };
 
+    const handlePaste = (e) => {
+    e.preventDefault();
+    const pasteData = e.clipboardData.getData('text').slice(0, 6);
+    
+    if (!/^\d+$/.test(pasteData)) return;
+
+    const newCodes = [...codes];
+    pasteData.split('').forEach((char, index) => {
+        if (index < 6) newCodes[index] = char;
+    });
+    
+    setCodes(newCodes);
+
+    const nextIndex = Math.min(pasteData.length, 5);
+    inputRefs.current[nextIndex].focus();
+};
+
     const handleCodeChange = (index, value) => {
         if (!/^[0-9]?$/.test(value)) return;
 
@@ -113,7 +130,8 @@ export function useFindPassword() {
             selectEmailDomain,
             submitFindPasswordHandler,
             handleCodeChange,
-            submitCodeHandler
+            submitCodeHandler,
+            handlePaste
         }
     };
 }
