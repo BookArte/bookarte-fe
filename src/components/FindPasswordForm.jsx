@@ -4,7 +4,7 @@ import { EMAIL_DOMAINS } from "@/constants/email";
 import FindTab from './FindTab';
 
 function FindPasswordForm({ isStepCode, form, codes, inputRefs, handlers, status, timeLeft, formatTime }) {
-    const { handleInput, selectEmailDomain, submitFindPasswordHandler, handleCodeChange, submitCodeHandler } = handlers;
+    const { handleInput, selectEmailDomain, submitFindPasswordHandler, handleCodeChange, submitCodeHandler, handlePaste } = handlers;
 
     if (isStepCode) {
         return (
@@ -27,6 +27,7 @@ function FindPasswordForm({ isStepCode, form, codes, inputRefs, handlers, status
                                 value={code}
                                 ref={el => inputRefs.current[i] = el}
                                 onChange={(e) => handleCodeChange(i, e.target.value)}
+                                onPaste={handlePaste}
                             />
                         ))}
                     </div>
