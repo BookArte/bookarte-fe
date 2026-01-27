@@ -2643,6 +2643,7 @@ body {
 
 .resend-btn:hover {
     background-color: #eee;
+}
 /* 추천 도서 등록 페이지 */
 .recommendation-set-container {
     max-width: 650px; 
