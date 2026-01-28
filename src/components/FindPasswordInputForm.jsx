@@ -5,7 +5,7 @@ import { EMAIL_DOMAINS } from "@/constants/email";
 
 function FindPasswordInputForm({ form, handlers, status }) {
 
-    const { handleInput, selectEmailDomain, submitFindPasswordHandler } = handlers;
+    const { handleChange, selectEmailDomain, submitFindPasswordHandler } = handlers;
 
     return (
         <form className='find-password-form'>
@@ -15,7 +15,7 @@ function FindPasswordInputForm({ form, handlers, status }) {
                     className='find-password-input'
                     placeholder='아이디'
                     value={form.memberUserId}
-                    onChange={handleInput}
+                    onChange={handleChange}
                 />
             </div>
             <div className='form-group'>
@@ -24,7 +24,7 @@ function FindPasswordInputForm({ form, handlers, status }) {
                     className='find-password-input'
                     placeholder='이름'
                     value={form.memberName}
-                    onChange={handleInput}
+                    onChange={handleChange}
                 />
             </div>
             <div className='form-group email-group'>
@@ -33,7 +33,7 @@ function FindPasswordInputForm({ form, handlers, status }) {
                     className='find-password-input email-input'
                     placeholder='이메일'
                     value={form.memberEmail01}
-                    onChange={handleInput}
+                    onChange={handleChange}
                 />
                 <span>@</span>
                 <input type='text'
@@ -41,7 +41,7 @@ function FindPasswordInputForm({ form, handlers, status }) {
                     className='find-password-input email-input'
                     placeholder='직접입력'
                     value={form.memberEmail02}
-                    onChange={handleInput}
+                    onChange={handleChange}
                 />
                 <select
                     className="find-password-input email-input"

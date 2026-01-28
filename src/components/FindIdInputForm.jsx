@@ -4,7 +4,7 @@ import { EMAIL_DOMAINS } from "@/constants/email";
 
 function FindIdInputForm({ form, handlers, status }) {
     
-    const { handleInput, handleTelChange, selectEmailDomain, submitFindIdHandler } = handlers;
+    const { handleChange, handleTelChange, selectEmailDomain, submitFindIdHandler } = handlers;
 
     return (
         <form className='find-id-form'>
@@ -15,7 +15,7 @@ function FindIdInputForm({ form, handlers, status }) {
                     className='find-id-input'
                     placeholder='이름'
                     value={form.memberName}
-                    onChange={handleInput}
+                    onChange={handleChange}
                 />
             </div>
 
@@ -24,7 +24,7 @@ function FindIdInputForm({ form, handlers, status }) {
                     name="memberTel01"
                     className="find-id-input"
                     value={form.memberTel01}
-                    onChange={handleInput}
+                    onChange={handleChange}
                 >
                     <option value="010">010</option>
                 </select>
@@ -57,7 +57,7 @@ function FindIdInputForm({ form, handlers, status }) {
                     className='find-id-input email-input'
                     placeholder='이메일'
                     value={form.memberEmail01}
-                    onChange={handleInput}
+                    onChange={handleChange}
                 />
                 <span>@</span>
                 <input
@@ -66,7 +66,7 @@ function FindIdInputForm({ form, handlers, status }) {
                     className='find-id-input email-input'
                     placeholder='직접입력'
                     value={form.memberEmail02}
-                    onChange={handleInput}
+                    onChange={handleChange}
                 />
                 <select
                     className="find-id-input email-input"
