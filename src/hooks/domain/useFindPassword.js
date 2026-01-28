@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { findMemberPassword, verifyEmailCode } from '@/api/member.api';
-import { useFindPasswordForm } from '@/hooks/form/useFindPasswordForm';
 import { toast } from 'react-toastify';
 import { validateFindPasswordForm } from '@/utils/validation/findPassword.validation';
+import { useForm } from '../form/useForm';
 
 export function useFindPassword() {
     const [timeLeft, setTimeLeft] = useState(0);
@@ -11,7 +11,12 @@ export function useFindPassword() {
     const [codes, setCodes] = useState(Array(6).fill(''));
     const inputRefs = useRef([]);
 
-    const { form, setField, handleInput } = useFindPasswordForm();
+    const { form, setField, handleChange } = useForm({
+        memberUserId: '',
+        memberName: '',
+        memberEmail01: '',
+        memberEmail02: ''
+    })
 
     const selectEmailDomain = (e) => {
         setField('memberEmail02', e.target.value);
@@ -67,21 +72,21 @@ export function useFindPassword() {
     };
 
     const handlePaste = (e) => {
-    e.preventDefault();
-    const pasteData = e.clipboardData.getData('text').slice(0, 6);
-    
-    if (!/^\d+$/.test(pasteData)) return;
+        e.preventDefault();
+        const pasteData = e.clipboardData.getData('text').slice(0, 6);
 
-    const newCodes = [...codes];
-    pasteData.split('').forEach((char, index) => {
-        if (index < 6) newCodes[index] = char;
-    });
-    
-    setCodes(newCodes);
+        if (!/^\d+$/.test(pasteData)) return;
 
-    const nextIndex = Math.min(pasteData.length, 5);
-    inputRefs.current[nextIndex].focus();
-};
+        const newCodes = [...codes];
+        pasteData.split('').forEach((char, index) => {
+            if (index < 6) newCodes[index] = char;
+        });
+
+        setCodes(newCodes);
+
+        const nextIndex = Math.min(pasteData.length, 5);
+        inputRefs.current[nextIndex].focus();
+    };
 
     const handleCodeChange = (index, value) => {
         if (!/^[0-9]?$/.test(value)) return;
@@ -126,7 +131,7 @@ export function useFindPassword() {
         formatTime,
         status: { isSubmitting },
         handlers: {
-            handleInput,
+            handleChange,
             selectEmailDomain,
             submitFindPasswordHandler,
             handleCodeChange,

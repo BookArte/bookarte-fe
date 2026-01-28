@@ -1,14 +1,21 @@
 import { useState } from 'react';
-import { useFindIdForm } from '@/hooks/form/useFindIdForm';
 import { findMemberId } from '@/api/member.api';
 import { toast } from 'react-toastify';
 import { validateFindIdForm } from '@/utils/validation/findId.validation';
+import { useForm } from '../form/useForm';
 
 export function useFindId() {
     const [foundIds, setFoundIds] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const { form, setField, handleInput } = useFindIdForm();
+    const { form, setField, handleChange } = useForm({
+        memberName: '',
+        memberTel01: '010',
+        memberTel02: '',
+        memberTel03: '',
+        memberEmail01: '',
+        memberEmail02: ''
+    });
 
     const handleTelChange = (field) => (e) => {
         setField(field, e.target.value.replace(/[^0-9]/g, ''));
@@ -50,7 +57,7 @@ export function useFindId() {
         form,
         foundIds,
         handlers: {
-            handleInput,
+            handleChange,
             handleTelChange,
             selectEmailDomain,
             submitFindIdHandler
