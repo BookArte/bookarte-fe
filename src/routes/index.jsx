@@ -21,6 +21,7 @@ import FindPassword from "../pages/member/FindPassword";
 
 
 import ReorderRecommendation from "../pages/recommendation/ReorderRecommendation";
+import ResetPassword from "../pages/member/ResetPassword";
 
 const RootRoutes = () => {
 
@@ -74,6 +75,9 @@ const RootRoutes = () => {
 
         {/* FindPassword */}
         <Route path={"/member/find_password"} element={<FindPassword />} />
+
+        {/* ResetPassword */}
+        <Route path={"/member/reset_password"} element={<ResetPassword />} />
 
       </Routes>
 

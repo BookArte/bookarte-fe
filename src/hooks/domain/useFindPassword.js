@@ -3,6 +3,8 @@ import { findMemberPassword, verifyEmailCode } from '@/api/member.api';
 import { toast } from 'react-toastify';
 import { validateFindPasswordForm } from '@/utils/validation/findPassword.validation';
 import { useForm } from '../form/useForm';
+import { useNavigate } from 'react-router-dom';
+import URL from '@/constants/url';
 
 export function useFindPassword() {
     const [timeLeft, setTimeLeft] = useState(0);
@@ -10,6 +12,8 @@ export function useFindPassword() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [codes, setCodes] = useState(Array(6).fill(''));
     const inputRefs = useRef([]);
+    const [memberId, setMemberId] = useState(null);
+    const navigate = useNavigate();
 
     const { form, setField, handleChange } = useForm({
         memberUserId: '',
@@ -58,8 +62,8 @@ export function useFindPassword() {
             const result = await findMemberPassword({ memberUserId, memberName, memberEmail: email });
 
             if (result.success) {
-                const serverTtl = result.data.expiresIn;
-                setTimeLeft(serverTtl);
+                setTimeLeft(result.data.expiresIn);
+                setMemberId(result.data.memberId);
 
                 toast.success("인증 코드가 이메일로 발송되었습니다.");
                 setIsStepCode(true);
@@ -104,18 +108,20 @@ export function useFindPassword() {
         const codeString = codes.join('');
         if (codeString.length < 6) return toast.warning("6자리 코드를 모두 입력해주세요.");
 
-        const { memberEmail01, memberEmail02 } = form;
-        const email = `${memberEmail01}@${memberEmail02}`;
-
         try {
             const result = await verifyEmailCode({
-                memberEmail: email,
+                memberId: memberId,
                 code: codeString
             });
-            console.log(result);
+
             if (result.success) {
                 toast.success("인증에 성공했습니다. 비밀번호 재설정 페이지로 이동합니다.");
-                // navigate(URL.MEMBER_RESET_PASSWORD); // 이후 재설정 페이지 이동 로직
+                navigate(URL.MEMBER_RESET_PASSWORD, {
+                    state: {
+                        id: result.data.memberId,
+                        resetToken: result.data.resetToken
+                    }
+                });
             }
         } catch (err) {
             toast.error(err.response.data.data);
