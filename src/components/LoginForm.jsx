@@ -1,4 +1,5 @@
 import URL from '@/constants/url';
+import { Link } from 'react-router-dom';
 
 function LoginForm({
     form,
@@ -48,8 +49,8 @@ function LoginForm({
                     {isSubmitting ? '로그인 중...' : '로그인'}
                 </button>
                 <div className='login-links'>
-                    <a href={URL.MEMBER_AGREEMENT} className='join-link'>회원가입</a>
-                    <a href={URL.MEMBER_FIND_ID} className='find-id-link'>아이디/비밀번호 찾기</a>
+                    <Link to={URL.MEMBER_AGREEMENT} className='join-link'>회원가입</Link>
+                    <Link to={URL.MEMBER_FIND_ID} className='find-id-link'>아이디/비밀번호 찾기</Link>
                 </div>
             </form>
         </div>
