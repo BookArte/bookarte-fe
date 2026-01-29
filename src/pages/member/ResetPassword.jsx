@@ -1,11 +1,11 @@
-import { useLocation } from "react-router-dom";
+import { useResetPassword } from "../../hooks/domain/useResetPassword";
 import ResetPasswordForm from "../../components/ResetPasswordForm";
 
 function ResetPassword() {
-    const location = useLocation();
+    const resetPwProps = useResetPassword();
 
     return (
-        <ResetPasswordForm />
+        <ResetPasswordForm {...resetPwProps} />
     )
 }
 
