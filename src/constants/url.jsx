@@ -60,6 +60,7 @@ const URL = {
   MEMBER_LOGIN: "/member/login", // 로그인
   MEMBER_FIND_ID: "/member/find_id", // 아이디찾기
   MEMBER_FIND_PASSWORD: "/member/find_password", // 비밀번호찾기
+  MEMBER_RESET_PASSWORD: "/member/reset_password",  // 비밀번호 재설정
   MYPAGE_INFO: "/mypage/info", // 마이페이지/회원정보
   MYPAGE_BORROW: "/mypage/borrow", // 마이페이지/대출현황
   MYPAGE_EVENT: "/mypage/event", // 마이페이지/참여행사

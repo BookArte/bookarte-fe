@@ -39,3 +39,8 @@ export const verifyEmailCode = async (data) => {
     const res = await apiClient.post('/auth/verify_code', data);
     return res.data;
 };
+
+export const resetPassword = async (data) => {
+    const res = await apiClient.patch('/auth/reset_password', data);
+    return res.data;
+};
