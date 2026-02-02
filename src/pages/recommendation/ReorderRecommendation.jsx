@@ -1,5 +1,5 @@
-import { reorderRecommendation } from '../../hooks/domain/reorderRecommendation';
-import ReorderForm from '../../components/ReorderForm';
+import { reorderRecommendation } from '../../hooks/domain/recommendation/reorderRecommendation';
+import ReorderForm from '../../components/recommendation/ReorderForm';
 
 function ReorderRecommendation() {
     return <ReorderForm {...reorderRecommendation()} />

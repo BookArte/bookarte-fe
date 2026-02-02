@@ -1,35 +1,11 @@
-import { useState, useEffect } from 'react';
-import '../../css/page.css'
-import { useNavigate } from 'react-router-dom'
-import { recommendationBookList } from '../../api/recommendation.api';
 
-function RecommendationBookList() {
-    const [books, setBooks] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        fetchBooks();
-    }, []);
-
-    const fetchBooks = async () => {
-        try {
-            const response = await recommendationBookList();
-            if (response.success) {
-                setBooks(response.data);
-            }
-        } catch (error) {
-            console.error("도서 목록 로딩 실패:", error);
-        } finally {
-            setLoading(false);
-        }
-    };
+function RecommendationListView({ books, loading, navigate }) {
 
     if (loading) return <div style={{ textAlign: 'center', padding: '50px' }}>로딩 중...</div>;
 
     return (
         <div className="book-list-container">
-            <h2 className="recommend-list-title">🏆 추천 도서 TOP {books.length}</h2>
+            <h2 className="recommend-list-title"> 추천 도서 TOP {books.length}</h2>
 
             {books.map((book) => (
                 <div key={book.recommendationId} className="list-item recommend-item">
@@ -85,5 +61,4 @@ function RecommendationBookList() {
     );
 }
 
-
-export default RecommendationBookList;
+export default RecommendationListView;

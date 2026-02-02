@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { deleteRecommendationBook, recommendationBookList, reorderRecommendationList } from "../../api/recommendation.api"
+import { deleteRecommendationBook, recommendationBookList, reorderRecommendationList } from "../../../api/recommendation.api"
 import URL from '@/constants/url';
 import { useNavigate } from "react-router-dom";
 
