@@ -30,8 +30,8 @@ const URL = {
   BOOK_LIST: "/admin/book/list", // 관리자 도서목록
 
   //RECOMMENDATION
-  RECOMMENDATION_SET: "/admin/recommend/set", // 관리자 추천도서 등록
-  RECOMMENDATION_REORDER: "/admin/recommend/reorder", // 관리자 추천도서 순서변경
+  RECOMMENDATION_SET: "/admin/recommendation/set", // 관리자 추천도서 등록
+  RECOMMENDATION_REORDER: "/admin/recommendation/reorder", // 관리자 추천도서 순서변경
 
   BOOK_UPDATE: "/book/update/:bookId", // 도서 수정페이지
   BOOK_UPDATE: (bookId) => `/book/update/${bookId}`, // 도서 수정페이지 함수
