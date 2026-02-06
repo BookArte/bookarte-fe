@@ -13,7 +13,7 @@ import SetRecommedation from "../pages/recommendation/SetRecommedation";
 import Login from "../pages/member/Login";
 import Join from "../pages/member/Join";
 import RecommedationBookList from "../pages/recommendation/RocommendationBookList"
-import Agreement from "../pages/member/agreement";
+import Agreement from "../pages/member/Agreement";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FindId from "../pages/member/FindId";
@@ -23,6 +23,7 @@ import FindPassword from "../pages/member/FindPassword";
 import ReorderRecommendation from "../pages/recommendation/ReorderRecommendation";
 import ResetPassword from "../pages/member/ResetPassword";
 import UpdateRecommendation from "../pages/recommendation/UpdateRecommendation";
+import Mypage from "../pages/mypage/Mypage";
 
 const RootRoutes = () => {
 
@@ -81,6 +82,9 @@ const RootRoutes = () => {
 
         {/* ResetPassword */}
         <Route path={"/member/reset_password"} element={<ResetPassword />} />
+
+        {/* Mypage */}
+        <Route path={"/mypage"} element={<Mypage />} />
 
       </Routes>
 
