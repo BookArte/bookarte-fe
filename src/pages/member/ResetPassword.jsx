@@ -1,5 +1,5 @@
-import { useResetPassword } from "../../hooks/domain/useResetPassword";
-import ResetPasswordForm from "../../components/ResetPasswordForm";
+import { useResetPassword } from "@/hooks/domain/useResetPassword";
+import ResetPasswordForm from "@/components/member/ResetPasswordForm";
 
 function ResetPassword() {
     const resetPwProps = useResetPassword();

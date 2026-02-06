@@ -1,4 +1,4 @@
-import FindIdForm from "@/components/FindIdForm";
+import FindIdForm from "@/components/member/FindIdForm";
 import { useFindId } from '@/hooks/domain/useFindId';
 
 function FindId() {

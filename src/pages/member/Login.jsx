@@ -1,5 +1,5 @@
-import LoginForm from '../../components/LoginForm';
-import { useLogin } from '../../hooks/domain/useLogin';
+import LoginForm from '@/components/member/LoginForm';
+import { useLogin } from '@/hooks/domain/useLogin';
 
 function Login() {
     const login = useLogin();

@@ -1,4 +1,4 @@
-import FindPasswordForm from "@/components/FindPasswordForm";
+import FindPasswordForm from "@/components/member/FindPasswordForm";
 import { useFindPassword } from '@/hooks/domain/useFindPassword';
 
 function FindPassword() {
