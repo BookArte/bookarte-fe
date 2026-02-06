@@ -26,7 +26,7 @@ export const logoutMember = async () => {
 }
 
 export const findMemberId = async (data) => {
-        const res = await apiClient.post('/member/find_id', data);
+    const res = await apiClient.post('/member/find_id', data);
     return res.data;
 }
 
@@ -44,3 +44,8 @@ export const resetPassword = async (data) => {
     const res = await apiClient.patch('/auth/reset_password', data);
     return res.data;
 };
+
+export const getMypageData = async () => {
+    const res = await apiClient.get('/member/my');
+    return res.data;
+}

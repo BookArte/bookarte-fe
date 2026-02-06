@@ -1,4 +1,4 @@
-function MypagePointBox({ point = 0 }) {
+function MypagePointBox({ point = 0, grade }) {
     return (
         <div className="mypage-point-box">
             <div className="point-content">
@@ -13,7 +13,7 @@ function MypagePointBox({ point = 0 }) {
                 <div className="point-info-area">
                     <div className="point-status">
                         <span>포인트 등급: </span>
-                        <span className="status-badge">일반회원</span>
+                        <span className="status-badge">{grade}</span>
                     </div>
                     <button className="point-guide-link">포인트 사용 안내</button>
                 </div>

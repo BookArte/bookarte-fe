@@ -3,7 +3,12 @@ import MypageHeader from './MypageHeader';
 import MypageStatusCard from './MypageStatusCard';
 import MypagePointBox from './MypagePointBox';
 
-function MypageForm({ userData, stats }) {
+function MypageForm(data) {
+
+    const { userData, stats } = data;
+
+    console.log(data)
+
     return (
         <div className="mypage-container">
             <MypageSidebar />
@@ -11,16 +16,11 @@ function MypageForm({ userData, stats }) {
             <main className="mypage-content">
                 <MypageHeader name={userData.name} />
 
-                <MypagePointBox point={1250} />
+                <MypagePointBox point={userData.point} grade={userData.grade} />
 
                 <div className="mypage-status-grid">
                     {stats.map((item, index) => (
-                        <MypageStatusCard
-                            key={index}
-                            label={item.label}
-                            count={item.count}
-                            icon={item.icon}
-                        />
+                        <MypageStatusCard key={index} {...item} />
                     ))}
                 </div>
             </main>
