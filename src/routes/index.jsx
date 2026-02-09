@@ -24,6 +24,9 @@ import ReorderRecommendation from "../pages/recommendation/ReorderRecommendation
 import ResetPassword from "../pages/member/ResetPassword";
 import UpdateRecommendation from "../pages/recommendation/UpdateRecommendation";
 import Mypage from "../pages/mypage/Mypage";
+import MypageInfo from "../pages/mypage/MypageInfo";
+import MypageLayout from "../components/mypage/MypageLayout";
+import MypageDashboard from "../components/mypage/MypageDashboard";
 
 const RootRoutes = () => {
 
@@ -86,8 +89,13 @@ const RootRoutes = () => {
         </Route>
 
         {/* Mypage */}
-        <Route path="/mypage" element={<Mypage />}>
-
+        <Route path="/mypage" element={<MypageLayout />}>
+          <Route element={<Mypage />} >
+            {/* MypageDashboard */}
+            <Route index element={<MypageDashboard />} />
+            {/* MypageInfo */}
+            <Route path="info" element={<MypageInfo />} />
+          </Route>
         </Route>
 
       </Routes>

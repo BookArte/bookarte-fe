@@ -21,7 +21,10 @@ export const useMypage = () => {
 
                     setData({
                         userData: {
+                            userId: memberInfo.userId,
                             name: memberInfo.name,
+                            email: memberInfo.email,
+                            tel: memberInfo.tel,
                             point: memberInfo.point,
                             grade: getUserGrade(memberInfo.point)
                         },
