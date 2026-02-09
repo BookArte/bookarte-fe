@@ -1,11 +1,14 @@
 import MypageInfoForm from '@/components/mypage/MypageInfoForm';
 import { useOutletContext } from 'react-router-dom';
+import { useMypageInfo } from '@/hooks/domain/mypage/useMypageInfo';
 
 function MypageInfo() {
 
-    const { userData } = useOutletContext();
+    const { userData, refetch } = useOutletContext();
 
-    return <MypageInfoForm userData={userData} />;
+    const MypageInfoProps = useMypageInfo(userData, refetch);
+
+    return <MypageInfoForm {...MypageInfoProps} />;
 }
 
 export default MypageInfo;

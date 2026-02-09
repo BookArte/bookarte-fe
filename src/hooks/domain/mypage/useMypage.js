@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getMypageData } from '@/api/member.api';
 import { MEMBER_GRADES, MYPAGE_STATS_CONFIG } from '@/constants/mypage';
 
@@ -12,38 +12,38 @@ export const useMypage = () => {
         return MEMBER_GRADES.BASIC.NAME;
     };
 
-    useEffect(() => {
-        const fetchMypage = async () => {
-            try {
-                const res = await getMypageData();
-                if (res.success) {
-                    const memberInfo = res.data;
-
-                    setData({
-                        userData: {
-                            userId: memberInfo.userId,
-                            name: memberInfo.name,
-                            email: memberInfo.email,
-                            tel: memberInfo.tel,
-                            point: memberInfo.point,
-                            grade: getUserGrade(memberInfo.point)
-                        },
-                        stats: MYPAGE_STATS_CONFIG.map(config => ({
-                            label: config.label,
-                            icon: config.icon,
-                            count: memberInfo[config.dataKey] || 0
-                        }))
-                    });
-                }
-            } catch (err) {
-                // console.error("마이페이지 정보 조회 실패:", err);
-            } finally {
-                setIsLoading(false);
+    const fetchMypage = useCallback(async () => {
+        setIsLoading(true);
+        try {
+            const res = await getMypageData();
+            if (res.success) {
+                const memberInfo = res.data;
+                setData({
+                    userData: {
+                        userId: memberInfo.userId,
+                        name: memberInfo.name,
+                        email: memberInfo.email,
+                        tel: memberInfo.tel,
+                        point: memberInfo.point,
+                        grade: getUserGrade(memberInfo.point)
+                    },
+                    stats: MYPAGE_STATS_CONFIG.map(config => ({
+                        label: config.label,
+                        icon: config.icon,
+                        count: memberInfo[config.dataKey] || 0
+                    }))
+                });
             }
-        };
-
-        fetchMypage();
+        } catch (err) {
+            console.error("데이터 로드 실패:", err);
+        } finally {
+            setIsLoading(false);
+        }
     }, []);
 
-    return { data, isLoading };
+    useEffect(() => {
+        fetchMypage();
+    }, [fetchMypage]);
+
+    return { data, isLoading, refetch: fetchMypage };
 };

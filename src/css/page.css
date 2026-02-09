@@ -3391,3 +3391,20 @@ label {
 .edit-button-group {
   display: flex;
 }
+
+.btn-password-change {
+    background-color: transparent;
+    color: #666;
+    border: 1px solid #ccc;
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-password-change:hover {
+    background-color: #f8f9fa;
+    border-color: #0056b3;
+    color: #0056b3;
+}

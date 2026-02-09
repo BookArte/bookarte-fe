@@ -3,11 +3,11 @@ import Loading from '@/components/common/Loading';
 import { Outlet } from 'react-router-dom';
 
 function Mypage() {
-    const { data, isLoading } = useMypage();
+    const { data, isLoading, refetch } = useMypage();
 
     if (isLoading) return <Loading />;
 
-    return <Outlet context={{ userData: data.userData, stats: data.stats }} />;
+    return <Outlet context={{ userData: data.userData, stats: data.stats, refetch }} />;
 }
 
 export default Mypage;

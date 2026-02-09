@@ -49,3 +49,8 @@ export const getMypageData = async () => {
     const res = await apiClient.get('/member/my');
     return res.data;
 }
+
+export const modifyMember = async (data) => {
+    const res = await apiClient.patch('/member/me', data);
+    return res.data;
+}
