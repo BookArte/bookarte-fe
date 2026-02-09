@@ -31,3 +31,15 @@ export const MYPAGE_STATS_CONFIG = [
         dataKey: "heartCount"
     },
 ];
+
+export const MYPAGE_MENUS = [
+    { name: '도서관서비스', path: '' },
+    { name: '내정보', path: 'info' },
+    { name: '대출현황', path: 'borrow' },
+    { name: '대출이력', path: 'borrow' },
+    { name: '프로그램 신청', path: 'event' },
+    { name: '문의내역', path: 'qna' },
+    { name: '나의 관심도서', path: 'wish-list' },
+    { name: '리뷰', path: 'review' },
+    { name: '독서 포인트', path: 'point' },
+];
