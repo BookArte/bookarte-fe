@@ -23,6 +23,7 @@ import FindPassword from "../pages/member/FindPassword";
 import ReorderRecommendation from "../pages/recommendation/ReorderRecommendation";
 import ResetPassword from "../pages/member/ResetPassword";
 import UpdateRecommendation from "../pages/recommendation/UpdateRecommendation";
+import BorrowDashboardPage from "../pages/borrow/BorrowDashboardPage";
 
 const RootRoutes = () => {
 
@@ -62,6 +63,9 @@ const RootRoutes = () => {
 
         {/* UpdateRecommendation */}
         <Route path={"/admin/recommendation/update/:recommendationId"} element={<UpdateRecommendation />} />
+
+        {/*BORROW*/}
+        <Route path={"/admin/borrow/dashboard"} element={<BorrowDashboardPage />} />
 
         {/* Member */}
         {/* Login */}

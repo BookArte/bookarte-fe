@@ -3059,3 +3059,172 @@ label {
   background-color: #ccc;
   cursor: not-allowed;
 }
+
+/*대출 현황 관리 페이지*/
+.borrow-dashboard-background {
+  background-color: #f4f7f9;
+  padding: 30px;
+  min-height: 100vh;
+}
+
+.borrow-dashboard-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.borrow-dashboard-title {
+  text-align: left;
+  margin-bottom: 25px;
+  font-weight: bold;
+  color: #000;
+}
+
+
+/* 대시보드 카드 */
+.stat-card {
+    flex: 1;
+    background: #fff;
+    padding: 25px;
+    border-radius: 4px; 
+    border: 1px solid #dee2e6; 
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.stat-card.active-orange { border-top: 4px solid #f39c12; }
+.stat-card.active-red { border-top: 4px solid #e74c3c; }
+
+.stat-label { font-size: 14px; color: #666; font-weight: 500; }
+.stat-value { font-size: 28px; font-weight: bold; margin-top: 10px; color: #333; }
+
+/* 테이블 컨테이너 박스 */
+.table-card-container {
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.table-header-tool {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    background: #fafafa;
+    font-size: 14px;
+}
+
+/* 테이블 디자인 수정 */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table th {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: 600;
+    padding: 12px 15px;
+    border-bottom: 2px solid #dee2e6;
+    font-size: 14px;
+}
+
+.admin-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eee; 
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.admin-table tr:hover {
+    background-color: #f1f3f5;
+}
+
+/* 상태 배지 */
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+/* 대출 중 */
+.status-badge.blue {
+    background-color: #e7f5ff;
+    color: #1971c2;
+    border: 1px solid #a5d8ff;
+}
+
+/* 반납 신청 */
+.status-badge.orange {
+    background-color: #fff9db;
+    color: #f08c00;
+    border: 1px solid #ffe066;
+}
+
+/* 반납 완료 */
+.status-badge.gray {
+    background-color: #f1f3f5;
+    color: #868e96;
+    border: 1px solid #dee2e6;
+}
+
+.status-badge.red { background: #fff5f5; color: #e03131; border: 1px solid #ffc9c9; }
+.status-badge.blue { background: #e7f5ff; color: #1971c2; border: 1px solid #a5d8ff; }
+
+/* 아이콘 버튼 */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    width: 100%;             
+    height: 100%;
+}
+.action-buttons button {
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    background: #fff;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.text-center {
+    text-align: center;     
+    vertical-align: middle;  
+}
+/* 승인 버튼 기본 스타일 */
+.btn-approve {
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid #dee2e6;
+}
+
+/* 활성화 상태 (반납 신청 중일 때) */
+.btn-approve.active {
+    background-color: #3498db;
+    color: white;
+    border-color: #2980b9;
+}
+.btn-approve.active:hover {
+    background-color: #2980b9;
+}
+
+/* 비활성화 상태 (대출 중이거나 반납 완료일 때) */
+.btn-approve.disabled {
+    background-color: #f8f9fa;
+    color: #adb5bd;
+    cursor: not-allowed;
+    border-color: #e9ecef;
+}
+
+/* 반납 신청 중인 행 강조 */
+.row-highlight {
+    background-color: #fff9db !important; /* 아주 옅은 노란색으로 강조 */
+}
