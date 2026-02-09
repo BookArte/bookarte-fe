@@ -3,6 +3,7 @@ import { deleteBookByBookId, getBookDetailByBookId } from "../../../api/book.api
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import URL from '@/constants/url';
+import { borrowBook } from "../../../api/borrow.api";
 
 
 export function useBookDetail() {
@@ -48,6 +49,24 @@ export function useBookDetail() {
         }
     };
 
+    //대출 핸들러
+    const handleBorrow = async (bookId) => {
+        if (window.confirm("해당 도서를 대출하시겠습니까?")) {
+            try {
+                const res = await borrowBook(bookId);
+
+                if (res.success) {
+                    toast.success(res.data);
+                } else {
+                    toast.error(res.data);
+                }
+            } catch (error) {
+                console.error("삭제 요청 중 오류 발생:", error);
+                toast.error("삭제 처리 중 서버 오류가 발생했습니다.");
+            }
+        }
+    }
+
     const handleUpdate = (bookId) => {
         navigate(URL.BOOK_UPDATE(bookId));
     }
@@ -58,7 +77,8 @@ export function useBookDetail() {
 
         handlers: {
             handleDelete,
-            handleUpdate
+            handleUpdate,
+            handleBorrow
         }
 
     };

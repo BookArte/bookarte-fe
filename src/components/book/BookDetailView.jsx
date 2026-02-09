@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 
 function BookDetailView({ book, loading, handlers }) {
-    const { handleDelete, handleUpdate } = handlers;
+    const { handleDelete, handleUpdate, handleBorrow } = handlers;
     const navigate = useNavigate();
 
     if (loading) return <div className="book-detail-container">로딩 중...</div>;
@@ -11,7 +11,7 @@ function BookDetailView({ book, loading, handlers }) {
     return (
         <div className="book-detail-container">
             {/* 상단 버튼 영역 */}
-            <div className='back-btn' style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+            <div className="back-btn" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
                 <button onClick={() => navigate(-1)} >
                     ← 목록으로 돌아가기
                 </button>
@@ -19,14 +19,14 @@ function BookDetailView({ book, loading, handlers }) {
                 {/* 수정 및 삭제 버튼 세트 */}
                 <div style={{ display: 'flex', gap: '10px' }}>
                     <button
-                        className='update-btn'
+                        className="update-btn"
                         onClick={() => handleUpdate(book.bookId)}
 
                     >
                         수정
                     </button>
                     <button
-                        className='delete-btn'
+                        className="delete-btn"
                         onClick={() => handleDelete(book.bookId)}
                     >
                         삭제
@@ -72,6 +72,15 @@ function BookDetailView({ book, loading, handlers }) {
                             </tr>
                         </tbody>
                     </table>
+                    <div className="button-area">
+                        <button
+                            className={`borrow-btn ${!book.canBorrow ? 'disabled' : ''}`}
+                            onClick={() => handleBorrow(book.bookId)}
+                            disabled={!book.canBorrow}
+                        >
+                            {book.canBorrow ? '대출' : '대출 불가'}
+                        </button>
+                    </div>
                 </div>
             </div>
 

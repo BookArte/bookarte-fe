@@ -1852,6 +1852,43 @@
   font-weight: bold;
 }
 
+.button-area {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+
+/* 대출 버튼 스타일 */
+.borrow-btn {
+    align-self: flex-end; 
+    margin-top: auto;   
+    padding: 10px 30px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.borrow-btn:hover {
+    background-color: #2980b9;
+}
+
+.borrow-btn:hover:not(:disabled) {
+    background-color: #2980b9;
+}
+
+/* 비활성화(대출 불가) 상태 스타일 */
+.borrow-btn:disabled {
+    background-color: #bdc3c7; 
+    color: #ffffff;
+    cursor: not-allowed;     
+    opacity: 0.8;
+}
+
+
 /* 책소개 영역 */
 .detail-section {
   margin-top: 40px;
