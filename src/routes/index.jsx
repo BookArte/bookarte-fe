@@ -24,6 +24,7 @@ import ReorderRecommendation from "../pages/recommendation/ReorderRecommendation
 import ResetPassword from "../pages/member/ResetPassword";
 import UpdateRecommendation from "../pages/recommendation/UpdateRecommendation";
 import BorrowDashboardPage from "../pages/borrow/BorrowDashboardPage";
+import MyBorrowStatusList from "../pages/borrow/MyBorrowStatusList";
 
 const RootRoutes = () => {
 
@@ -65,6 +66,9 @@ const RootRoutes = () => {
         <Route path={"/admin/recommendation/update/:recommendationId"} element={<UpdateRecommendation />} />
 
         {/*BORROW*/}
+        {/* MyBorrowStatus */}
+        <Route path={"/mypage/borrow/status"} element={<MyBorrowStatusList />} />
+        {/* AdminBorrowDashboard */}
         <Route path={"/admin/borrow/dashboard"} element={<BorrowDashboardPage />} />
 
         {/* Member */}

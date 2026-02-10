@@ -63,11 +63,10 @@ function BorrowDashboard({ borrow, stats, loading, handleApprove, getStatusConfi
                                             )}
                                         </td>
                                         <td className="text-center">
-                                            {/* 버튼 활성화 로직 적용 */}
                                             <button
                                                 className={`btn-approve ${isActionRequired ? 'active' : 'disabled'}`}
                                                 onClick={() => handleApprove(item.borrowId)}
-                                                disabled={!isActionRequired} // 반납 신청이 아니면 클릭 방지
+                                                disabled={!isActionRequired}
                                             >
                                                 {isActionRequired ? '승인' : '대기'}
                                             </button>
