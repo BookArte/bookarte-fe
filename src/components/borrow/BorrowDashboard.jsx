@@ -1,6 +1,7 @@
-function BorrowDashboard({ borrow, stats, loading, handleApprove, getStatusConfig }) {
+function BorrowDashboard({ borrow, stats, loading, handlers, getStatusConfig }) {
     const { totalElements, pendingReturns, overdueCount } = stats;
     const { content, pageable } = borrow;
+    const { handleApprove, handleFilterChange } = handlers
 
     if (loading) return <div className="book-detail-container">로딩 중...</div>;
     if (!borrow) return <div className="book-detail-container">대출 이력 정보를 찾을 수 없습니다.</div>;
@@ -12,15 +13,23 @@ function BorrowDashboard({ borrow, stats, loading, handleApprove, getStatusConfi
 
                 {/* 상단 요약 지표 */}
                 <div style={{ display: 'flex', gap: '20px', marginBottom: '30px' }}>
-                    <div className="stat-card">
+                    <div className="stat-card"
+                        onClick={() => handleFilterChange('ALL')}
+                        style={{ cursor: 'pointer' }}>
                         <span className="stat-label">전체 대출</span>
                         <span className="stat-value">{totalElements}</span>
                     </div>
-                    <div className="stat-card active-orange">
+
+                    <div className="stat-card active-orange"
+                        onClick={() => handleFilterChange('PENDING')}
+                        style={{ cursor: 'pointer' }}>
                         <span className="stat-label">반납 승인 대기</span>
                         <span className="stat-value">{pendingReturns}</span>
                     </div>
-                    <div className="stat-card active-red">
+
+                    <div className="stat-card active-red"
+                        onClick={() => handleFilterChange('OVERDUE')}
+                        style={{ cursor: 'pointer' }}>
                         <span className="stat-label">연체 도서</span>
                         <span className="stat-value">{overdueCount}</span>
                     </div>

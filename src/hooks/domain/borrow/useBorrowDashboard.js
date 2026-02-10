@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { getAllBorrowList } from "../../../api/borrow.api";
+import { approveReturn, getAllBorrowList } from "../../../api/borrow.api";
+import { toast } from "react-toastify";
 
 export function useBorrowDashboard() {
     const [borrow, setBorrow] = useState({
@@ -11,11 +12,20 @@ export function useBorrowDashboard() {
 
     const [loading, setLoading] = useState(true);
 
+    const [searchParams, setSearchParams] = useState({
+        bookId: '',
+        status: '',
+        statusNot: 'RETURNED',
+        isOverdue: '',
+        startDate: '',
+        endDate: '',
+        searchKeyword: '',
+    });
     const fetchBorrows = async () => {
+
         setLoading(true);
         try {
-            const res = await getAllBorrowList();
-            console.log(res.data)
+            const res = await getAllBorrowList({ params: { ...searchParams } });
             setBorrow(res.data);
         } catch (error) {
             console.error("대출 현황 목록 로드 실패:", error);
@@ -27,23 +37,45 @@ export function useBorrowDashboard() {
 
     useEffect(() => {
         fetchBorrows();
-    }, []);
+    }, [searchParams]);
 
     const stats = useMemo(() => {
         const content = borrow.content || [];
         return {
             totalElements: borrow.totalElements,
             overdueCount: content.filter(item => item.overdue).length,
-            pendingReturns: content.filter(item => item.status === 'RETURNED' && !item.returnDate).length
+            pendingReturns: content.filter(item => item.status === 'RETURN_REQUESTED' && !item.returnDate).length
         }
     }, [borrow]);
 
     const handleApprove = async (borrowId) => {
         if (!window.confirm("반납 승인 처리를 하시겠습니까?")) return;
-        // 반납승인 api 추후 추가
-        toast.success("반납 승인이 완료되었습니다.");
+        const res = await approveReturn(borrowId);
+        toast.success(res.data);
         fetchBorrows();
     };
+
+    const handleFilterChange = (filterType) => {
+        setSearchParams(prev => {
+            const baseParams = {
+                ...prev,
+                status: '',
+                isOverdue: '',
+                statusNot: 'RETURNED',
+                page: 0
+            };
+
+            switch (filterType) {
+                case 'PENDING':
+                    return { ...baseParams, status: 'RETURN_REQUESTED' };
+                case 'OVERDUE':
+                    return { ...baseParams, isOverdue: true };
+                case 'ALL':
+                default:
+                    return baseParams;
+            }
+        })
+    }
 
     const getStatusConfig = (status) => {
         switch (status) {
@@ -63,7 +95,11 @@ export function useBorrowDashboard() {
         borrow,
         stats,
         loading,
-        handleApprove,
+        handlers: {
+            handleApprove,
+            handleFilterChange
+        },
+
         getStatusConfig
     }
 
