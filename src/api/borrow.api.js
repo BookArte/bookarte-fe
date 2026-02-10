@@ -14,3 +14,13 @@ export const getMyBorrowList = async () => {
     const res = await apiClient.get('borrow');
     return res.data
 }
+
+export const sendReturnRequest = async (borrowId) => {
+    const res = await apiClient.patch(`borrow/request-return/${borrowId}`)
+    return res.data
+}
+
+export const extendBorrow = async (borrowId) => {
+    const res = await apiClient.patch(`borrow/extend/${borrowId}`)
+    return res.data
+}

@@ -20,7 +20,6 @@ function MyBorrowStatus({ borrows, loading, getStatusConfig, handlers }) {
                             const statusConfig = getStatusConfig(item.status);
                             return (
 
-                                /* 카드 객체: shadow와 border로 구분감 부여 */
                                 <div key={item.borrowId} className="list-item borrow-card">
                                     <div className="thumbnail-container">
                                         <img
@@ -39,8 +38,6 @@ function MyBorrowStatus({ borrows, loading, getStatusConfig, handlers }) {
                                             <span className="text-item">{item.bookAuthor} 지음</span>
                                             <span className="text-item"> | {item.publisherName}</span>
                                         </div>
-
-                                        {/* 대출 세부 정보 바 (이미지 참고) */}
                                         <div className="borrow-info-bar">
                                             <div className="info-group">
                                                 <span className="label">대출일</span>
@@ -64,18 +61,18 @@ function MyBorrowStatus({ borrows, loading, getStatusConfig, handlers }) {
                                             </div>
                                         </div>
 
-                                        {/* 우측 하단 버튼 배치 */}
                                         <div className="action-area">
                                             <button
                                                 className="btn-small btn-white"
                                                 onClick={() => handleExtend(item.borrowId)}
                                                 disabled={!item.canExtend}
                                             >
-                                                연장 신청
+                                                연장
                                             </button>
                                             <button
                                                 className="btn-small btn-primary"
                                                 onClick={() => handleReturnRequest(item.borrowId)}
+                                                disabled={item.status == 'RETURN_REQUESTED'}
                                             >
                                                 반납 요청
                                             </button>

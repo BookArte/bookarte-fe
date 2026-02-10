@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getMyBorrowList } from "../../../api/borrow.api";
+import { extendBorrow, getMyBorrowList, sendReturnRequest } from "../../../api/borrow.api";
 import URL from '@/constants/url';
+import { toast } from "react-toastify";
 
 export function useMyBorrowList() {
     const [borrows, setBorrows] = useState([]);
@@ -12,7 +13,6 @@ export function useMyBorrowList() {
         setLoading(true);
         try {
             const res = await getMyBorrowList();
-            console.log(res.data)
             setBorrows(res.data.content);
         } catch (error) {
             toast.error("대출 현황을 불러오지 못했습니다.");
@@ -25,11 +25,25 @@ export function useMyBorrowList() {
         fetchMyBorrows();
     }, []);
 
-    const handleExtend = async () => {
-        //대출 연장 로직
+    const handleExtend = async (borrowId) => {
+        try {
+            const res = await extendBorrow(borrowId);
+            toast.success(res.data);
+            fetchMyBorrows();
+        } catch (error) {
+            console.log(error);
+            toast.error(error.data);
+        }
     }
-    const handleReturnRequest = async () => {
-        //반납 요청 로직
+    const handleReturnRequest = async (borrowId) => {
+        try {
+            const res = await sendReturnRequest(borrowId);
+            toast.success(res.data);
+            fetchMyBorrows();
+        } catch (error) {
+            console.log(error);
+            toast.error(error.data);
+        }
     }
 
     const handleViewBook = (bookId) => {
