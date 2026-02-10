@@ -1912,6 +1912,52 @@
   border: 1px solid #f0f0f0;
 }
 
+.stats-section {
+    margin-top: 40px;
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e1e4e8;
+}
+
+.stats-source {
+    font-size: 13px;
+    color: #27ae60;
+    margin-left: 10px;
+}
+
+.chart-container {
+    margin: 30px 0;
+    padding: 20px;
+    border: 1px solid #f1f3f5;
+    border-radius: 8px;
+    background-color: #fcfcfc;
+}
+
+.stats-grid-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    text-align: center;
+}
+
+.stats-grid-table th {
+    background-color: #fff;
+    border-top: 2px solid #333;
+    border-bottom: 1px solid #ddd;
+    padding: 12px;
+}
+
+.stats-grid-table td {
+    border-bottom: 1px solid #eee;
+    padding: 10px;
+}
+
+.stats-grid-table .bg-light {
+    background-color: #f9f9f9;
+    font-weight: 500;
+}
+
 /*버튼 영역*/
 .back-btn {
   padding: '8px 15px';

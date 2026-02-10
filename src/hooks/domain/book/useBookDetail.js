@@ -3,7 +3,7 @@ import { deleteBookByBookId, getBookDetailByBookId } from "../../../api/book.api
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import URL from '@/constants/url';
-import { borrowBook } from "../../../api/borrow.api";
+import { borrowBook, getBookRollingYear } from "../../../api/borrow.api";
 
 
 export function useBookDetail() {
@@ -11,14 +11,20 @@ export function useBookDetail() {
     const navigate = useNavigate();
     const [book, setBook] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [stats, setStats] = useState([]);
 
     useEffect(() => {
-        const getBookDetailHandler = async (bookId) => {
+        const fetchAllData = async (bookId) => {
             try {
-                const res = await getBookDetailByBookId(bookId);
-                if (res.success) {
-                    setBook(res.data);
-                }
+                const [bookRes, statsRes] = await Promise.all([
+                    getBookDetailByBookId(bookId),
+                    getBookRollingYear(bookId)
+                ]);
+
+                console.log(bookRes)
+                console.log(statsRes)
+                if (bookRes.success) setBook(bookRes.data);
+                if (statsRes.success) setStats(statsRes.data);
             } catch (error) {
                 console.error("상세 정보 로딩 실패:", error);
                 toast.error("존재하지 않는 도서이거나 오류가 발생했습니다.");
@@ -27,7 +33,7 @@ export function useBookDetail() {
             }
         };
 
-        getBookDetailHandler(bookId);
+        fetchAllData(bookId);
     }, [bookId]);
 
     // 삭제 핸들러
@@ -74,7 +80,7 @@ export function useBookDetail() {
     return {
         book,
         loading,
-
+        stats,
         handlers: {
             handleDelete,
             handleUpdate,
