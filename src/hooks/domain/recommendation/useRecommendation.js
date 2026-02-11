@@ -7,8 +7,7 @@ import URL from '@/constants/url';
 import { handleFormSubmission } from "../../form/handleFormSubmisson";
 import { validateRecommendationForm } from "../../../utils/validation/recommedation.validation";
 
-export function useRecommendation() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+export function useRecommendation(closeModal) {
     const [selectedBook, setSelectedBook] = useState(null);
     const navigate = useNavigate();
 
@@ -26,7 +25,7 @@ export function useRecommendation() {
         setRecommended('')
         try {
             const isRecommed = await handleRecommendedCheck(book.bookId);
-            setIsModalOpen(false);
+            if (closeModal) closeModal();
             if (isRecommed) {
                 setSelectedBook(null)
                 setRecommended('이미 추천된 도서입니다.');
@@ -77,10 +76,6 @@ export function useRecommendation() {
         form,
         fieldErrors,
         recommended,
-        modal: {
-            isModalOpen,
-            setIsModalOpen,
-        },
         book: {
             selectedBook,
             setSelectedBook
