@@ -29,7 +29,5 @@ export const validationMypagePassword = ({ currentPassword, newPassword, newPass
 
     if (newPw !== newPwConfirm) return '새 비밀번호가 일치하지 않습니다.';
 
-    if (curPw === newPw) return '새 비밀번호는 현재 비밀번호와 다르게 설정해야 합니다.';
-
     return null;
 };

@@ -54,3 +54,8 @@ export const modifyMember = async (data) => {
     const res = await apiClient.patch('/member/me', data);
     return res.data;
 }
+
+export const modifyPassword = async (data) => {
+    const res = await apiClient.patch('/member/change_password', data);
+    return res.data;
+}
