@@ -13,7 +13,7 @@ import SetRecommedation from "../pages/recommendation/SetRecommedation";
 import Login from "../pages/member/Login";
 import Join from "../pages/member/Join";
 import RecommedationBookList from "../pages/recommendation/RocommendationBookList"
-import Agreement from "../pages/member/agreement";
+import Agreement from "../pages/member/Agreement";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FindId from "../pages/member/FindId";
@@ -23,6 +23,10 @@ import FindPassword from "../pages/member/FindPassword";
 import ReorderRecommendation from "../pages/recommendation/ReorderRecommendation";
 import ResetPassword from "../pages/member/ResetPassword";
 import UpdateRecommendation from "../pages/recommendation/UpdateRecommendation";
+import Mypage from "../pages/mypage/Mypage";
+import MypageInfo from "../pages/mypage/MypageInfo";
+import MypageLayout from "../components/mypage/MypageLayout";
+import MypageDashboard from "../components/mypage/MypageDashboard";
 
 const RootRoutes = () => {
 
@@ -64,23 +68,35 @@ const RootRoutes = () => {
         <Route path={"/admin/recommendation/update/:recommendationId"} element={<UpdateRecommendation />} />
 
         {/* Member */}
-        {/* Login */}
-        <Route path={"/member/login"} element={<Login />} />
+        <Route path="/member">
+          {/* Login */}
+          <Route path="login" element={<Login />} />
 
-        {/* Join */}
-        <Route path={"/member/join"} element={<Join />} />
+          {/* Join */}
+          <Route path="join" element={<Join />} />
 
-        {/* Agreement */}
-        <Route path={"/member/agreement"} element={<Agreement />} />
+          {/* Agreement */}
+          <Route path="agreement" element={<Agreement />} />
 
-        {/* FindId */}
-        <Route path={"/member/find_id"} element={<FindId />} />
+          {/* FindId */}
+          <Route path="find_id" element={<FindId />} />
 
-        {/* FindPassword */}
-        <Route path={"/member/find_password"} element={<FindPassword />} />
+          {/* FindPassword */}
+          <Route path="find_password" element={<FindPassword />} />
 
-        {/* ResetPassword */}
-        <Route path={"/member/reset_password"} element={<ResetPassword />} />
+          {/* ResetPassword */}
+          <Route path="reset_password" element={<ResetPassword />} />
+        </Route>
+
+        {/* Mypage */}
+        <Route path="/mypage" element={<MypageLayout />}>
+          <Route element={<Mypage />} >
+            {/* MypageDashboard */}
+            <Route index element={<MypageDashboard />} />
+            {/* MypageInfo */}
+            <Route path="info" element={<MypageInfo />} />
+          </Route>
+        </Route>
 
       </Routes>
 

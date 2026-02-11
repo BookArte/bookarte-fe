@@ -112,7 +112,7 @@ function Header() {
               <span className="person">{userInfo?.userName}({userInfo?.userId})</span> 님 안녕하세요
               {true && (
                 <NavLink
-                  to={URL.MYPAGE_MODIFY}
+                  to={URL.MYPAGE}
                   className={({ isActive }) =>
                     isActive ? "btn login cur" : "btn login"
                   }
