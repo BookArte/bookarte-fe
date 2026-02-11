@@ -1912,6 +1912,7 @@
   border: 1px solid #f0f0f0;
 }
 
+/* 통계 영역 */
 .stats-section {
     margin-top: 40px;
     padding: 30px;
@@ -1956,6 +1957,75 @@
 .stats-grid-table .bg-light {
     background-color: #f9f9f9;
     font-weight: 500;
+}
+
+/* 연관 도서 영역 */
+.related-books-section {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid #eee;
+}
+
+.related-books-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    align-items: flex-start; 
+}
+
+.related-book-card {
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.related-thumbnail-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1.45; 
+    overflow: hidden;
+    border-radius: 6px;
+    background-color: #f8f9fa;
+    border: 1px solid #eee;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.related-thumbnail-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    object-position: center;
+}
+
+.related-book-info {
+    margin-top: 15px;
+}
+
+.related-book-card:hover img {
+    transform: scale(1.05);
+}
+
+.related-title {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #333;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.related-author, .related-date {
+    font-size: 13px;
+    color: #666;
+    margin: 2px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /*버튼 영역*/

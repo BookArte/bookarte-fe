@@ -40,8 +40,14 @@ export const searchBooksWithAPi = async (query) => {
     return res.data;
 };
 
-/* 도서  중복 체크 api */
+/* 도서 중복 체크 api */
 export const checkBookDuplicate = async (isbn) => {
     const res = await apiClient.get(`/book/is-duplicate-isbn?isbn=${isbn}`);
     return res.data;
 };
+
+/* 연관 도서 목록 조회 */
+export const getRelatedBookList = async (bookId) => {
+    const res = await apiClient.get(`/book/${bookId}/related`);
+    return res.data;
+}

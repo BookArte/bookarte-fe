@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-function BookDetailView({ book, loading, stats, handlers }) {
-    const { handleDelete, handleUpdate, handleBorrow } = handlers;
+function BookDetailView({ book, stats, relatedBooks, loading, handlers }) {
+    const { handleDelete, handleUpdate, handleBorrow, handleViewBook } = handlers;
     const navigate = useNavigate();
 
     if (loading) return <div className="book-detail-container">로딩 중...</div>;
@@ -152,6 +152,40 @@ function BookDetailView({ book, loading, stats, handlers }) {
                             ))}
                         </tbody>
                     </table>
+                </div>
+            </div>
+
+            {/* 연관 도서 섹션 */}
+            <div className="detail-section related-books-section">
+                <div className="section-header">
+                    <h2 className="section-title">연관 도서</h2>
+                    <span className="stats-source">* 본 도서관 사이트에서 제공하는 연관 도서 중 소장하고 있는 자료입니다.</span>
+                </div>
+
+                <div className="related-books-grid">
+                    {relatedBooks && relatedBooks.length > 0 ? (
+                        relatedBooks.map((item) => (
+                            <div key={item.bookId} className="related-book-card" onClick={() => handleViewBook(item.bookId)} >
+                                <div className="related-thumbnail-wrapper">
+                                    <img
+                                        src={item.bookThumbnail}
+                                        alt={item.bookTitle}
+                                    />
+                                </div>
+                                <div className="related-book-info">
+                                    <h3 className="related-title">{item.bookTitle}</h3>
+                                    <p className="related-author-line">
+                                        {item.bookAuthor} | {item.publisherName}
+                                    </p>
+                                    <p className="related-year">
+                                        {item.publicationDate ? item.publicationDate.substring(0, 4) : ''}
+                                    </p>
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <div className="no-contents">연관 도서 정보가 없습니다.</div>
+                    )}
                 </div>
             </div>
         </div>

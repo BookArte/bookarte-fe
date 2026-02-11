@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteBookByBookId, getBookDetailByBookId } from "../../../api/book.api";
+import { deleteBookByBookId, getBookDetailByBookId, getRelatedBookList } from "../../../api/book.api";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import URL from '@/constants/url';
@@ -10,21 +10,23 @@ export function useBookDetail() {
     const { bookId } = useParams();
     const navigate = useNavigate();
     const [book, setBook] = useState(null);
-    const [loading, setLoading] = useState(true);
     const [stats, setStats] = useState([]);
+    const [relatedBooks, setRelatedBooks] = useState([])
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchAllData = async (bookId) => {
+            window.scrollTo(0, 0);
             try {
-                const [bookRes, statsRes] = await Promise.all([
+                const [bookRes, statsRes, relatedRes] = await Promise.all([
                     getBookDetailByBookId(bookId),
-                    getBookRollingYear(bookId)
+                    getBookRollingYear(bookId),
+                    getRelatedBookList(bookId)
                 ]);
 
-                console.log(bookRes)
-                console.log(statsRes)
                 if (bookRes.success) setBook(bookRes.data);
                 if (statsRes.success) setStats(statsRes.data);
+                if (relatedRes.success) setRelatedBooks(relatedRes.data);
             } catch (error) {
                 console.error("상세 정보 로딩 실패:", error);
                 toast.error("존재하지 않는 도서이거나 오류가 발생했습니다.");
@@ -77,14 +79,20 @@ export function useBookDetail() {
         navigate(URL.BOOK_UPDATE(bookId));
     }
 
+    const handleViewBook = (bookId) => {
+        navigate(URL.BOOK_VIEW(bookId));
+    }
+
     return {
         book,
-        loading,
         stats,
+        relatedBooks,
+        loading,
         handlers: {
             handleDelete,
             handleUpdate,
-            handleBorrow
+            handleBorrow,
+            handleViewBook
         }
 
     };
