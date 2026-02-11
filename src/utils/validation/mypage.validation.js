@@ -1,4 +1,4 @@
-import { TEL_REGEX, EMAIL_REGEX } from '@/constants/regex';
+import { TEL_REGEX, EMAIL_REGEX, PASSWORD_REGEX } from '@/constants/regex';
 import { trim } from './trim';
 
 export const validateMemberUpdate = ({ name, tel, email }) => {
@@ -13,6 +13,23 @@ export const validateMemberUpdate = ({ name, tel, email }) => {
 
     if (!userEmail) return '이메일을 입력해주세요.';
     if (!EMAIL_REGEX.test(userEmail)) return '이메일 형식이 올바르지 않습니다.';
+
+    return null;
+};
+
+export const validationMypagePassword = ({ currentPassword, newPassword, newPasswordConfirm }) => {
+    const curPw = trim(currentPassword);
+    const newPw = trim(newPassword);
+    const newPwConfirm = trim(newPasswordConfirm);
+
+    if (!curPw) return '현재 비밀번호를 입력해주세요.';
+
+    if (!newPw) return '새 비밀번호를 입력해주세요.';
+    if (!PASSWORD_REGEX.test(newPw)) return '새 비밀번호는 영문자와 숫자를 포함한 8~16자여야 합니다.';
+
+    if (newPw !== newPwConfirm) return '새 비밀번호가 일치하지 않습니다.';
+
+    if (curPw === newPw) return '새 비밀번호는 현재 비밀번호와 다르게 설정해야 합니다.';
 
     return null;
 };
