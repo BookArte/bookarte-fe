@@ -1,12 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import BookSearchModal from "../modals/BookSearchModal";
 import ErrorMsg from "../common/ErrorMsg";
 
-function RecommendationForm({ recommended, fieldErrors, modal, book, handlers }) {
+function RecommendationForm({ recommended, fieldErrors, book, handlers, openModal }) {
 
     const { selectedBook, setSelectedBook } = book;
-    const { isModalOpen, setIsModalOpen } = modal;
-    const { handleChange, handleSelectBook, handleSubmit } = handlers;
+    const { handleChange, handleSubmit } = handlers;
     const navigate = useNavigate();
 
     return (
@@ -27,7 +25,7 @@ function RecommendationForm({ recommended, fieldErrors, modal, book, handlers })
                             <button onClick={() => setSelectedBook(null)}>변경</button>
                         </div>
                     ) : (
-                        <button className="search-trigger" onClick={() => setIsModalOpen(true)}>
+                        <button className="search-trigger" onClick={openModal}>
                             🔍 추천할 도서 검색하기
                         </button>
                     )}
@@ -64,8 +62,6 @@ function RecommendationForm({ recommended, fieldErrors, modal, book, handlers })
                 <button className="cancel-btn" onClick={() => navigate(-1)}>취소</button>
             </div>
 
-            {/* 도서 검색 모달 */}
-            {isModalOpen && <BookSearchModal onSelect={handleSelectBook} onClose={() => setIsModalOpen(false)} />}
         </div>
     );
 }
