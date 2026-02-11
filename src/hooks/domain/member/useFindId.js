@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { findMemberId } from '@/api/member.api';
 import { toast } from 'react-toastify';
 import { validateFindIdForm } from '@/utils/validation/findId.validation';
-import { useForm } from '../form/useForm';
+import { useForm } from '../../form/useForm';
 
 export function useFindId() {
     const [foundIds, setFoundIds] = useState(null);

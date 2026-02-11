@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useForm } from '../form/useForm';
+import { useForm } from '../../form/useForm';
 import { resetPassword } from '@/api/member.api';
 import { validateResetPasswordForm } from '@/utils/validation/resetPassword.validation';
 import { toast } from 'react-toastify';
