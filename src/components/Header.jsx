@@ -1,19 +1,19 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/store/useAuthStore";
 import { logoutMember } from "@/api/member.api";
-
 // import * as EgovNet from "@/api/egovFetch";
 
 import URL from "@/constants/url";
-import CODE from "@/constants/code";
-
-import logoImg from "@/assets/images/logo_w.png";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
 function Header() {
   const navigate = useNavigate();
   const { accessToken, userInfo } = useAuthStore.getState();
   const setLogout = useAuthStore((state) => state.setLogout);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
 
   const isLoggedIn = !!accessToken;
 
@@ -41,7 +41,10 @@ function Header() {
 
   return (
     // <!-- header -->
-    <div className="header">
+    <div className="header" onMouseLeave={() => {
+      setIsMenuOpen(false);
+      setHoveredIndex(null);
+    }}>
       <div className="inner">
         <Link to={URL.MAIN} className="ico lnk_go_template" target="_blank">
           홈페이지 템플릿 소개 페이지로 이동
@@ -56,49 +59,43 @@ function Header() {
           </Link>
         </h1>
 
-        <div className="gnb">
+        <div className="gnb" onMouseEnter={() => setIsMenuOpen(true)}>
           <h2 className="blind">주메뉴</h2>
           <ul>
-            <li>
-              <NavLink
-                to={URL.ABOUT}
-                className={({ isActive }) => (isActive ? "cur" : "")}
-              >
-                도서관 소개
-              </NavLink>
+            <li
+              onMouseEnter={() => setHoveredIndex(0)}
+              className={hoveredIndex === 0 ? "active" : ""}
+            >
+              <span>도서관 소개</span>
             </li>
-            <li>
-              <NavLink
-                to={URL.BOOK_RECOMMEND}
-                className={({ isActive }) => (isActive ? "cur" : "")}
-              >
-                도서
-              </NavLink>
+            <li
+              onMouseEnter={() => setHoveredIndex(1)}
+              className={hoveredIndex === 1 ? "active" : ""}
+            >
+              <span>도서</span>
             </li>
-            <li>
-              <NavLink
-                to={URL.EVENT}
-                className={({ isActive }) => (isActive ? "cur" : "")}
-              >
-                행사/고객센터
-              </NavLink>
+            <li
+              onMouseEnter={() => setHoveredIndex(2)}
+              className={hoveredIndex === 2 ? "active" : ""}
+            >
+              <span>행사/고객센터</span>
             </li>
-            <li>
-              <NavLink
-                to={URL.NOTICE}
-                className={({ isActive }) => (isActive ? "cur" : "")}
-              >
-                안내/소식
-              </NavLink>
+            <li
+              onMouseEnter={() => setHoveredIndex(3)}
+              className={hoveredIndex === 3 ? "active" : ""}
+            >
+              <span>안내/소식</span>
             </li>
             {true && (
-              <li>
-                <NavLink
+              <li
+                onMouseEnter={() => setHoveredIndex(4)}
+                className={hoveredIndex === 4 ? "active" : ""}
+              >
+                <span
                   to={URL.ADMIN_ACCESS_TRAFFIC}
-                  className={({ isActive }) => (isActive ? "cur" : "")}
                 >
                   사이트관리
-                </NavLink>
+                </span>
               </li>
             )}
           </ul>
@@ -145,30 +142,12 @@ function Header() {
         {/* <!--// PC web에서 보여지는 영역 --> */}
 
         {/* <!-- right area --> */}
-        <div className="right_a">
-          <button
-            type="button"
-            className="btn btnAllMenu"
-            title="전체메뉴 닫힘"
-          >
-            전체메뉴
-          </button>
-          <button
-            type="button"
-            className="btn mobile btnAllMenuM"
-            title="전체메뉴 닫힘"
-          >
-            전체메뉴
-          </button>
-        </div>
       </div>
 
       {/* <!-- All menu : web --> */}
-      <div className="all_menu WEB closed">
-        <h2 className="blind">전체메뉴</h2>
+      <div className={`all_menu WEB ${isMenuOpen ? "" : "closed"}`}>
         <div className="inner">
-          <div className="col">
-            <h3>도서관 소개</h3>
+          <div className="col" onMouseEnter={() => setHoveredIndex(0)}>
             <ul>
               <li>
                 <NavLink
@@ -204,12 +183,19 @@ function Header() {
               </li>
             </ul>
           </div>
-          <div className="col">
-            <h3>도서</h3>
+          <div className="col" onMouseEnter={() => setHoveredIndex(1)}>
             <ul>
               <li>
                 <NavLink
-                  to={URL.INTRO_WORKS}
+                  to={URL.BOOK_SEARCH}
+                  className={({ isActive }) => (isActive ? "cur" : "")}
+                >
+                  도서검색
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to={URL.BOOK_RECOMMEND}
                   className={({ isActive }) => (isActive ? "cur" : "")}
                 >
                   추천도서
@@ -241,8 +227,7 @@ function Header() {
               </li>
             </ul>
           </div>
-          <div className="col">
-            <h3>행사/고객센터</h3>
+          <div className="col" onMouseEnter={() => setHoveredIndex(2)}>
             <ul>
               <li>
                 <NavLink
@@ -270,8 +255,7 @@ function Header() {
               </li>
             </ul>
           </div>
-          <div className="col">
-            <h3>안내/소식</h3>
+          <div className="col" onMouseEnter={() => setHoveredIndex(3)}>
             <ul>
               <li>
                 <NavLink to={URL.INFORM_DAILY}>오늘의 행사</NavLink>
@@ -295,8 +279,7 @@ function Header() {
             </ul>
           </div>
           {true && (
-            <div className="col">
-              <h3>사이트관리</h3>
+            <div className="col" onMouseEnter={() => setHoveredIndex(4)}>
               <ul>
                 <li>
                   <NavLink
