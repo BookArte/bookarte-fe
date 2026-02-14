@@ -1862,6 +1862,43 @@
   font-weight: bold;
 }
 
+.button-area {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+
+/* 대출 버튼 스타일 */
+.borrow-btn {
+    align-self: flex-end; 
+    margin-top: auto;   
+    padding: 10px 30px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.borrow-btn:hover {
+    background-color: #2980b9;
+}
+
+.borrow-btn:hover:not(:disabled) {
+    background-color: #2980b9;
+}
+
+/* 비활성화(대출 불가) 상태 스타일 */
+.borrow-btn:disabled {
+    background-color: #bdc3c7; 
+    color: #ffffff;
+    cursor: not-allowed;     
+    opacity: 0.8;
+}
+
+
 /* 책소개 영역 */
 .detail-section {
   margin-top: 40px;
@@ -1883,6 +1920,122 @@
   background: #fcfcfc;
   padding: 20px;
   border: 1px solid #f0f0f0;
+}
+
+/* 통계 영역 */
+.stats-section {
+    margin-top: 40px;
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e1e4e8;
+}
+
+.stats-source {
+    font-size: 13px;
+    color: #27ae60;
+    margin-left: 10px;
+}
+
+.chart-container {
+    margin: 30px 0;
+    padding: 20px;
+    border: 1px solid #f1f3f5;
+    border-radius: 8px;
+    background-color: #fcfcfc;
+}
+
+.stats-grid-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    text-align: center;
+}
+
+.stats-grid-table th {
+    background-color: #fff;
+    border-top: 2px solid #333;
+    border-bottom: 1px solid #ddd;
+    padding: 12px;
+}
+
+.stats-grid-table td {
+    border-bottom: 1px solid #eee;
+    padding: 10px;
+}
+
+.stats-grid-table .bg-light {
+    background-color: #f9f9f9;
+    font-weight: 500;
+}
+
+/* 연관 도서 영역 */
+.related-books-section {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid #eee;
+}
+
+.related-books-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    align-items: flex-start; 
+}
+
+.related-book-card {
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.related-thumbnail-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1.45; 
+    overflow: hidden;
+    border-radius: 6px;
+    background-color: #f8f9fa;
+    border: 1px solid #eee;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.related-thumbnail-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    object-position: center;
+}
+
+.related-book-info {
+    margin-top: 15px;
+}
+
+.related-book-card:hover img {
+    transform: scale(1.05);
+}
+
+.related-title {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #333;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.related-author, .related-date {
+    font-size: 13px;
+    color: #666;
+    margin: 2px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /*버튼 영역*/
@@ -3083,6 +3236,272 @@ label {
 .reset-password-button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+/*대출 현황 관리 페이지*/
+.borrow-dashboard-background {
+  background-color: #f4f7f9;
+  padding: 30px;
+  min-height: 100vh;
+}
+
+.borrow-dashboard-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.borrow-dashboard-title {
+  text-align: left;
+  margin-bottom: 25px;
+  font-weight: bold;
+  color: #000;
+}
+
+
+/* 대시보드 카드 */
+.stat-card {
+    flex: 1;
+    background: #fff;
+    padding: 25px;
+    border-radius: 4px; 
+    border: 1px solid #dee2e6; 
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.stat-card.active-orange { border-top: 4px solid #f39c12; }
+.stat-card.active-red { border-top: 4px solid #e74c3c; }
+
+.stat-label { font-size: 14px; color: #666; font-weight: 500; }
+.stat-value { font-size: 28px; font-weight: bold; margin-top: 10px; color: #333; }
+
+/* 테이블 컨테이너 박스 */
+.table-card-container {
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.table-header-tool {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    background: #fafafa;
+    font-size: 14px;
+}
+
+/* 테이블 디자인 수정 */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table th {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: 600;
+    padding: 12px 15px;
+    border-bottom: 2px solid #dee2e6;
+    font-size: 14px;
+}
+
+.admin-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eee; 
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.admin-table tr:hover {
+    background-color: #f1f3f5;
+}
+
+/* 상태 배지 */
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+/* 대출 중 */
+.status-badge.blue {
+    background-color: #e7f5ff;
+    color: #1971c2;
+    border: 1px solid #a5d8ff;
+}
+
+/* 반납 신청 */
+.status-badge.orange {
+    background-color: #fff9db;
+    color: #f08c00;
+    border: 1px solid #ffe066;
+}
+
+/* 반납 완료 */
+.status-badge.gray {
+    background-color: #f1f3f5;
+    color: #868e96;
+    border: 1px solid #dee2e6;
+}
+
+.status-badge.red { background: #fff5f5; color: #e03131; border: 1px solid #ffc9c9; }
+.status-badge.blue { background: #e7f5ff; color: #1971c2; border: 1px solid #a5d8ff; }
+
+/* 아이콘 버튼 */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    width: 100%;             
+    height: 100%;
+}
+.action-buttons button {
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    background: #fff;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.text-center {
+    text-align: center;     
+    vertical-align: middle;  
+}
+/* 승인 버튼 기본 스타일 */
+.btn-approve {
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid #dee2e6;
+}
+
+/* 활성화 상태 (반납 신청 중일 때) */
+.btn-approve.active {
+    background-color: #3498db;
+    color: white;
+    border-color: #2980b9;
+}
+.btn-approve.active:hover {
+    background-color: #2980b9;
+}
+
+/* 비활성화 상태 (대출 중이거나 반납 완료일 때) */
+.btn-approve.disabled {
+    background-color: #f8f9fa;
+    color: #adb5bd;
+    cursor: not-allowed;
+    border-color: #e9ecef;
+}
+
+/* 반납 신청 중인 행 강조 */
+.row-highlight {
+    background-color: #fff9db !important;
+}
+
+
+/* 마이페이지 대출 이력 스타일 */
+.borrow-item-card {
+    border: 1px solid #eee;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+}
+
+.borrow-meta {
+    background-color: #f9f9f9;
+    padding: 12px;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+
+.text-red { color: #e74c3c; font-weight: bold; }
+
+/* 버튼 스타일 */
+.btn-small {
+    padding: 8px 16px;
+    font-size: 13px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+}
+
+.btn-white { background: #fff; color: #333; }
+.btn-primary { background: #3498db; color: #fff; border: none; }
+.btn-small:disabled { background: #eee; color: #aaa; cursor: not-allowed; }
+
+/* 비어있는 상태 */
+.empty-state-card {
+    text-align: center;
+    padding: 100px 0;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    color: #999;
+}
+
+/* 전체 화면 구성 */
+.borrow-status-wrapper {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+/* 2. 중앙 정렬 컨테이너 */
+.status-content-container {
+    max-width: 1000px; 
+    margin: 0 auto; 
+}
+
+/* 도서 대출 현황 카드 */
+.borrow-card {
+    background-color: #fff;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 16px;
+    display: flex;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    transition: box-shadow 0.2s;
+}
+
+.borrow-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* 정보 바 디자인 */
+.borrow-info-bar {
+    display: flex;
+    gap: 30px;
+    background-color: #f1f3f5;
+    padding: 12px 20px;
+    border-radius: 4px;
+    margin: 15px 0;
+}
+
+.info-group {
+    font-size: 14px;
+}
+.info-group .label {
+    color: #495057;
+    margin-right: 8px;
+    font-weight: 600;
+}
+
+/* 대출 현황 카드 내 버튼 영역 */
+.action-area {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 10px;
 }
 
 /* 마이페이지 */

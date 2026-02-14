@@ -1,4 +1,3 @@
-
 import { Routes, Route } from "react-router-dom";
 import Main from "@/pages/main/Main";
 import Header from "@/components/Header";
@@ -12,21 +11,22 @@ import UpdateBook from "../pages/book/UpdateBook";
 import SetRecommedation from "../pages/recommendation/SetRecommedation";
 import Login from "../pages/member/Login";
 import Join from "../pages/member/Join";
-import RecommedationBookList from "../pages/recommendation/RocommendationBookList"
+import RecommedationBookList from "../pages/recommendation/RocommendationBookList";
 import Agreement from "../pages/member/Agreement";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FindId from "../pages/member/FindId";
 import FindPassword from "../pages/member/FindPassword";
-
-
 import ReorderRecommendation from "../pages/recommendation/ReorderRecommendation";
 import ResetPassword from "../pages/member/ResetPassword";
 import UpdateRecommendation from "../pages/recommendation/UpdateRecommendation";
+import BorrowDashboardPage from "../pages/borrow/BorrowDashboardPage";
+import MyBorrowStatusList from "../pages/borrow/MyBorrowStatusList";
 import Mypage from "../pages/mypage/Mypage";
 import MypageInfo from "../pages/mypage/MypageInfo";
 import MypageLayout from "../components/mypage/MypageLayout";
 import MypageDashboard from "../components/mypage/MypageDashboard";
+
 
 const RootRoutes = () => {
 
@@ -66,6 +66,12 @@ const RootRoutes = () => {
 
         {/* UpdateRecommendation */}
         <Route path={"/admin/recommendation/update/:recommendationId"} element={<UpdateRecommendation />} />
+
+        {/*BORROW*/}
+        {/* MyBorrowStatus */}
+        <Route path={"/mypage/borrow/status"} element={<MyBorrowStatusList />} />
+        {/* AdminBorrowDashboard */}
+        <Route path={"/admin/borrow/dashboard"} element={<BorrowDashboardPage />} />
 
         {/* Member */}
         <Route path="/member">
