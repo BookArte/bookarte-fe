@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import JoinForm from '@/components/member/JoinForm';
-import { useJoin } from '@/hooks/domain/useJoin';
+import { useJoin } from '@/hooks/domain/member/useJoin';
 import URL from '@/constants/url';
 
 function Join() {

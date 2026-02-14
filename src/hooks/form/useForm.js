@@ -18,9 +18,14 @@ export function useForm(initialState) {
         }));
     };
 
+    const resetForm = (values) => {
+        setForm(values || initialState);
+    };
+
     return {
         form,
         handleChange,
-        setField
+        setField,
+        resetForm
     };
 }

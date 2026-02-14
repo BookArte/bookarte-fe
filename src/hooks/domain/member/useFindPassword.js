@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { findMemberPassword, verifyEmailCode } from '@/api/member.api';
 import { toast } from 'react-toastify';
 import { validateFindPasswordForm } from '@/utils/validation/findPassword.validation';
-import { useForm } from '../form/useForm';
+import { useForm } from '../../form/useForm';
 import { useNavigate } from 'react-router-dom';
 import URL from '@/constants/url';
 

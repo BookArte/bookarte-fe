@@ -1,4 +1,4 @@
-import { useAgreement } from "@/hooks/domain/useAgreement";
+import { useAgreement } from "@/hooks/domain/member/useAgreement";
 import AgreementForm from "@/components/member/AgreementForm";
 
 function Agreement() {

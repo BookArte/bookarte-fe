@@ -1,4 +1,4 @@
-import { useResetPassword } from "@/hooks/domain/useResetPassword";
+import { useResetPassword } from "@/hooks/domain/member/useResetPassword";
 import ResetPasswordForm from "@/components/member/ResetPasswordForm";
 
 function ResetPassword() {

@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import URL from '@/constants/url';
 import { validateLoginForm } from '@/utils/validation/login.validation';
-import { loginMember } from '../../api/member.api';
+import { loginMember } from '@/api/member.api';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@/store/useAuthStore';
-import { useForm } from "../form/useForm";
+import { useForm } from "../../form/useForm";
 
 export function useLogin() {
     const navigate = useNavigate();
