@@ -59,3 +59,8 @@ export const modifyPassword = async (data) => {
     const res = await apiClient.patch('/member/change_password', data);
     return res.data;
 }
+
+export const getMemberList = async (data) => {
+    const res = await apiClient.get(`/member/find_list?userId=${data}`);
+    return res.data;
+}

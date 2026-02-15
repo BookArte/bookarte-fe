@@ -26,6 +26,7 @@ import Mypage from "../pages/mypage/Mypage";
 import MypageInfo from "../pages/mypage/MypageInfo";
 import MypageLayout from "../components/mypage/MypageLayout";
 import MypageDashboard from "../components/mypage/MypageDashboard";
+import PenaltyManagement from "../pages/penalty/PenaltyManagement";
 
 
 const RootRoutes = () => {
@@ -72,6 +73,9 @@ const RootRoutes = () => {
         <Route path={"/mypage/borrow/status"} element={<MyBorrowStatusList />} />
         {/* AdminBorrowDashboard */}
         <Route path={"/admin/borrow/dashboard"} element={<BorrowDashboardPage />} />
+
+        {/*PENALTY*/}
+        <Route path={"/admin/penalty/management"} element={<PenaltyManagement />} />
 
         {/* Member */}
         <Route path="/member">
