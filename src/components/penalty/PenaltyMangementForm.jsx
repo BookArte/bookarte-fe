@@ -1,6 +1,6 @@
 function PenaltyManagementForm({ state, users, searchId, setSearchId, penaltys, handlers }) {
     const { selectedUser, selectedPenalty, setSelectedPenalty, releaseReason, setReleaseReason } = state;
-    const { handleSearch, handleUserClick } = handlers;
+    const { handleSearch, handleUserClick, hanadleRevokePenalty, handleReleasePenalty } = handlers;
 
     return (
         <div className="penalty_main">
@@ -127,8 +127,8 @@ function PenaltyManagementForm({ state, users, searchId, setSearchId, penaltys, 
                                     />
                                 </div>
                                 <div className="detail_btns">
-                                    <button className="btn_revoke" disabled={!selectedPenalty}>패널티 복구</button>
-                                    <button className="btn_release" disabled={!selectedPenalty}>패널티 해제</button>
+                                    <button className="btn_revoke" disabled={!selectedPenalty || selectedPenalty.released === false} onClick={() => hanadleRevokePenalty(selectedPenalty.penaltyId)}>패널티 복구</button>
+                                    <button className="btn_release" disabled={!selectedPenalty || selectedPenalty.released === true} onClick={() => handleReleasePenalty(selectedPenalty.penaltyId)}>패널티 해제</button>
                                 </div>
                             </div>
                         </div>

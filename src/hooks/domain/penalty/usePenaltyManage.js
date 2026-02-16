@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getMemberList } from "../../../api/member.api";
 import { toast } from "react-toastify";
-import { getPenaltyList } from "../../../api/penalty.api";
+import { getPenaltyList, releasePenalty, revokePenalty } from "../../../api/penalty.api";
 
 export function usePenaltyManage() {
 
@@ -33,12 +33,18 @@ export function usePenaltyManage() {
         }
     };
 
-    const fetchPenaltys = async (userId) => {
+    const fetchPenaltys = async (userId, targetPenaltyId = null) => {
         setLoading(true);
         try {
             const res = await getPenaltyList(userId);
-            console.log("패널티 목록:", res.data);
-            setPenaltys(res.data || []);
+            const newPenaltys = res.data || [];
+            setPenaltys(newPenaltys);
+            if (targetPenaltyId) {
+                const updatedPenalty = newPenaltys.find(p => p.penaltyId === targetPenaltyId);
+                if (updatedPenalty) {
+                    setSelectedPenalty(updatedPenalty);
+                }
+            }
         } catch (error) {
             console.log(error);
             toast.error("패널티 목록을 불러오는 과정에서 오류가 발생했습니다.")
@@ -58,6 +64,44 @@ export function usePenaltyManage() {
         setReleaseReason("");
     }
 
+    const hanadleRevokePenalty = async (penaltyId) => {
+        try {
+            const res = await revokePenalty(penaltyId);
+            if (res.data) {
+                toast.success("패널티가 성공적으로 복구되었습니다.");
+
+                if (selectedUser) fetchPenaltys(selectedUser.userId, penaltyId);
+            } else {
+                toast.error("패널티 복구에 실패했습니다.");
+            }
+        }
+        catch (error) {
+            console.log(error);
+            toast.error("패널티 복구 과정에서 오류가 발생했습니다.");
+        }
+    }
+
+    const handleReleasePenalty = async (penaltyId) => {
+        if (!releaseReason.trim()) {
+            toast.warn("해제 사유를 입력해주세요.");
+            return;
+        }
+        try {
+            const res = await releasePenalty(penaltyId, releaseReason);
+            if (res.data) {
+                toast.success("패널티가 성공적으로 해제되었습니다.");
+                if (selectedUser) fetchPenaltys(selectedUser.userId, penaltyId);
+            } else {
+                toast.error("패널티 해제에 실패했습니다.");
+            }
+        }
+        catch (error) {
+            console.log(error);
+            toast.error("패널티 해제 과정에서 오류가 발생했습니다.");
+        }
+    }
+
+
     return {
         state: {
             selectedUser,
@@ -73,7 +117,9 @@ export function usePenaltyManage() {
         loading,
         handlers: {
             handleSearch,
-            handleUserClick
+            handleUserClick,
+            hanadleRevokePenalty,
+            handleReleasePenalty
         }
     }
 }
