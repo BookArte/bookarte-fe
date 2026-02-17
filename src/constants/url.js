@@ -37,6 +37,13 @@ const URL = {
   RECOMMENDATION_SET: "/admin/recommendation/set", // 관리자 추천도서 등록
   RECOMMENDATION_REORDER: "/admin/recommendation/reorder", // 관리자 추천도서 순서변경
 
+  //BORROW
+  BORROW_LIST: "/admin/borrow/list", // 관리자 전체 대출 이력
+  BORROW_DASHBOARD: "/admin/borrow/dashboard", // 관리자 대출 현황
+
+  //PENALTY
+  PENALTY_MANAGEMENT: "/admin/penalty/management", // 관리자 패널티 관리 페이지
+
   //EVENT
   EVENT: "/event", // 행사안내
   EVENT_VIEW: "/event/view", // 행사안내/행사상세

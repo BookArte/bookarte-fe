@@ -601,13 +601,43 @@ text-decoration: underline;
 }
 
 .group_title {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #999;
-  margin-bottom: 12px;
-  padding-left: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.group_title:hover {
+  background-color: #f0f0f0;
+}
+
+.arrow_icon {
+  font-size: 0.7rem;
+  color: #ccc;
+  transition: transform 0.3s;
+}
+
+.submenu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 0; 
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, opacity 0.2s;
+  opacity: 0;
+}
+
+.menu_group.open .submenu {
+  max-height: 500px; /* 넉넉한 높이 부여 */
+  opacity: 1;
+  margin-top: 5px;
+}
+
+.menu_group.open .arrow_icon {
+  color: #1a7d5e;
 }
 
 .menu_group ul {
@@ -618,7 +648,6 @@ text-decoration: underline;
 .menu_group li {
   margin-bottom: 4px;
 }
-
 
 .menu_group a {
   display: block;
