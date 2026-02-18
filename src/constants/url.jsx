@@ -38,7 +38,11 @@ const URL = {
 
   RECOMMENDATEION_UPDATE: "/admin/recommendation/update/:recommendationId", // 관리자 추천도서 수정
   RECOMMENDATEION_UPDATE: (recommendationId) => `/admin/recommendation/update/${recommendationId}`, // 관리자 추천도서 수정 함수
+  RECOMMENDATION_HISTORY: "/admin/recommendation/history", // 관리자 추천도서 이력
 
+  //BORROW
+  BORROW_LIST: "/admin/borrow/list", // 관리자 전체 대출 이력
+  BORROW_DASHBOARD: "/admin/borrow/dashboard", // 관리자 대출 현황
 
   //EVENT
   EVENT: "/event", // 행사안내

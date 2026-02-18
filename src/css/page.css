@@ -3030,6 +3030,44 @@ label {
   margin-bottom: 20px;
 }
 
+/*탭 메뉴 스타일*/
+.reorder-tabs {
+  display: flex;
+  gap: 0;
+  margin: 20px 0;
+  border-bottom: 2px solid #eee;
+}
+
+.tab-btn {
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #888;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent; /* 기본은 투명 */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: -2px; /* 부모 컨테이너 보더와 겹치게 처리 */
+}
+
+.tab-btn:hover {
+    color: #555;
+    background-color: #f8f9fa;
+}
+
+.tab-btn.active {
+    color: #0056b3; /* 포인트 컬러 */
+    font-weight: 700;
+    border-bottom: 2px solid #0056b3; /* 활성화 표시 바 */
+}
+
+.tab-btn .count {
+    font-size: 0.85rem;
+    margin-left: 4px;
+    opacity: 0.7;
+}
+
 .reorder-guide {
   font-size: 13px;
   color: #666;
@@ -3093,7 +3131,6 @@ label {
   border-radius: 12px;
   border: 1px solid #dee2e6;
   cursor: grab;
-  /* 전체가 잡을 수 있음을 알림 */
   user-select: none;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
@@ -3170,6 +3207,46 @@ label {
 .reorder-del-btn:hover {
   color: #a71d2a;
 }
+
+/* 섹션 구분선 */
+.section-divider {
+    padding: 15px 10px;
+    font-weight: bold;
+    color: #555;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px 0 10px 0;
+    font-size: 0.9rem;
+}
+
+/* 상태 배지 */
+.badge {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin-left: 8px;
+}
+.badge.active { background-color: #e6f7ed; color: #1a7d5e; border: 1px solid #1a7d5e; }
+.badge.upcoming { background-color: #e7f3ff; color: #007bff; border: 1px solid #007bff; }
+
+.reorder-item.active { border-left: 5px solid #1a7d5e; }
+.reorder-item.upcoming { border-left: 5px solid #007bff; opacity: 0.9; }
+
+.title-row { 
+  display: flex;
+  align-items: center;
+ }
+
+ .reorder-title {
+    flex: 1;              
+    min-width: 0;         
+    white-space: nowrap;  
+    overflow: hidden;     
+    text-overflow: ellipsis; 
+}
+
+.reorder-date { font-size: 0.8rem; color: #888; display: block; margin-top: 4px; }
 
 /* 비밀번호 재설정 페이지 */
 .reset-password-container {

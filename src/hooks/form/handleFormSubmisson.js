@@ -23,7 +23,6 @@ export const handleFormSubmission = async ({
 
     try {
         const res = await apiFunc(form);
-        console.log(res)
         toast.success(res.data);
         if (onSuccess) onSuccess(res);
     } catch (error) {

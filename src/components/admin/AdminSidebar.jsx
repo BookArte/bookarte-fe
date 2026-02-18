@@ -43,8 +43,8 @@ const AdminSidebar = () => {
                         <span className="arrow_icon">{openMenus.recommend ? '▲' : '▼'}</span>
                     </h3>
                     <ul className="submenu">
-                        <li><NavLink to={URL.RECOMMENDATION_SET} className={({ isActive }) => isActive ? "active" : ""}>추천 도서 설정</NavLink></li>
-                        <li><NavLink to={URL.RECOMMENDATION_REORDER} className={({ isActive }) => isActive ? "active" : ""}>순서 변경</NavLink></li>
+                        <li><NavLink to={URL.RECOMMENDATION_REORDER} className={({ isActive }) => isActive ? "active" : ""}>진행/예약 추천 도서 관리</NavLink></li>
+                        <li><NavLink to={URL.RECOMMENDATION_HISTORY} className={({ isActive }) => isActive ? "active" : ""}>만료 추천 도서 이력</NavLink></li>
                     </ul>
                 </div>
 
