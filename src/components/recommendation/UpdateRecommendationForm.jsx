@@ -1,7 +1,7 @@
 import ErrorMsg from "../common/ErrorMsg";
 
 function UpdateRecommendationForm({ loading, form, fieldErrors, handlers }) {
-    const { handleChange, handleSubmit, handleCancle } = handlers;
+    const { handleChange, handleSubmit, handleCancel } = handlers;
 
     if (loading) return <div className="book-detail-container">로딩 중...</div>;
 
@@ -35,8 +35,8 @@ function UpdateRecommendationForm({ loading, form, fieldErrors, handlers }) {
             </div>
 
             <div className="button-group">
-                <button className="submit-btn" onClick={handleSubmit}>등록하기</button>
-                <button className="cancel-btn" onClick={handleCancle}>취소</button>
+                <button className="cancel-btn" onClick={handleCancel}>취소</button>
+                <button className="submit-btn" onClick={handleSubmit}>수정</button>
             </div>
         </div>
     );

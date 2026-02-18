@@ -4,11 +4,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { handleFormSubmission } from "../../form/handleFormSubmisson";
 import { validateRecommendationForm } from "../../../utils/validation/recommedation.validation";
 import { getRecommedBookDetail, updateRecommendation } from "../../../api/recommendation.api";
+import URL from '@/constants/url';
 
 export function useUpdateRecommendation() {
     const { recommendationId } = useParams();
     const [fieldErrors, setFieldErrors] = useState({});
-    const { loading, setLoading } = useState(true);
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     const { form, handleChange, setField } = useForm({
@@ -18,6 +19,7 @@ export function useUpdateRecommendation() {
     });
 
     useEffect(() => {
+        setLoading(true);
         const getRecommendDetailHandler = async () => {
             try {
                 const res = await getRecommedBookDetail(recommendationId);
@@ -43,13 +45,13 @@ export function useUpdateRecommendation() {
             form,
             validateFunc: validateRecommendationForm,
             apiFunc: (data) => updateRecommendation(recommendationId, data),
-            onSuccess: () => navigate(-1),
+            onSuccess: () => navigate(URL.RECOMMENDATION_REORDER, { replace: true }),
             setFieldErrors,
         });
     };
 
     const handleCancel = () => {
-        window.history.back();
+        navigate(URL.RECOMMENDATION_REORDER, { replace: true });
     }
 
     return {

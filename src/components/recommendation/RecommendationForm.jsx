@@ -1,11 +1,9 @@
-import { useNavigate } from "react-router-dom";
 import ErrorMsg from "../common/ErrorMsg";
 
 function RecommendationForm({ recommended, fieldErrors, book, handlers, openModal }) {
 
     const { selectedBook, setSelectedBook } = book;
-    const { handleChange, handleSubmit } = handlers;
-    const navigate = useNavigate();
+    const { handleChange, handleSubmit, handleCancel } = handlers;
 
     return (
         <div className="recommendation-set-container">
@@ -58,8 +56,8 @@ function RecommendationForm({ recommended, fieldErrors, book, handlers, openModa
             </div>
 
             <div className="button-group">
-                <button className="submit-btn" onClick={handleSubmit}>등록하기</button>
-                <button className="cancel-btn" onClick={() => navigate(-1)}>취소</button>
+                <button className="cancel-btn" onClick={handleCancel}>취소</button>
+                <button className="submit-btn" onClick={handleSubmit}>등록</button>
             </div>
 
         </div>

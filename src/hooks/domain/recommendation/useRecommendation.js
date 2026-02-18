@@ -72,6 +72,10 @@ export function useRecommendation(closeModal) {
         })
     };
 
+    const handleCancel = () => {
+        navigate(URL.RECOMMENDATION_REORDER, { replace: true });
+    }
+
     return {
         form,
         fieldErrors,
@@ -83,7 +87,8 @@ export function useRecommendation(closeModal) {
         handlers: {
             handleChange,
             handleSelectBook,
-            handleSubmit
+            handleSubmit,
+            handleCancel
         }
     }
 }
