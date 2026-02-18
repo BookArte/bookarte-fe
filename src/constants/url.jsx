@@ -29,12 +29,16 @@ const URL = {
   BOOK_REGISTER: "/admin/book/register", // 관리자 도서등록
   BOOK_LIST: "/admin/book/list", // 관리자 도서목록
 
+  BOOK_UPDATE: "/book/update/:bookId", // 도서 수정페이지
+  BOOK_UPDATE: (bookId) => `/book/update/${bookId}`, // 도서 수정페이지 함수
+
   //RECOMMENDATION
   RECOMMENDATION_SET: "/admin/recommendation/set", // 관리자 추천도서 등록
   RECOMMENDATION_REORDER: "/admin/recommendation/reorder", // 관리자 추천도서 순서변경
 
-  BOOK_UPDATE: "/book/update/:bookId", // 도서 수정페이지
-  BOOK_UPDATE: (bookId) => `/book/update/${bookId}`, // 도서 수정페이지 함수
+  RECOMMENDATEION_UPDATE: "/admin/recommendation/update/:recommendationId", // 관리자 추천도서 수정
+  RECOMMENDATEION_UPDATE: (recommendationId) => `/admin/recommendation/update/${recommendationId}`, // 관리자 추천도서 수정 함수
+
 
   //EVENT
   EVENT: "/event", // 행사안내

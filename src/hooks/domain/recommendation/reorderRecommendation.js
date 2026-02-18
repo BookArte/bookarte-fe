@@ -46,12 +46,16 @@ export function reorderRecommendation() {
         navigator(URL.RECOMMENDATION_SET, { replace: true });
     }
 
-    const delHandle = async (id) => {
+    const updateHandle = (recommendationId) => {
+        navigator(URL.RECOMMENDATEION_UPDATE(recommendationId), { replace: true });
+    }
+
+    const delHandle = async (recommendationId) => {
         if (window.confirm("정말로 이 도서를 추천 리스트에서 삭제하시겠습니까?")) {
-            const res = await deleteRecommendationBook(id);
+            const res = await deleteRecommendationBook(recommendationId);
             if (res.success) {
                 toast.success(res.data);
-                fetchBooks(); // 삭제 후 목록 갱신
+                fetchBooks();
             } else {
                 toast.error("삭제에 실패했습니다. 다시 시도해주세요.");
             }
@@ -65,6 +69,7 @@ export function reorderRecommendation() {
         onDragEnd,
         handlers: {
             delHandle,
+            updateHandle,
             setBtn,
             handleSave
         },

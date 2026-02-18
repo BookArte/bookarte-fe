@@ -3147,6 +3147,16 @@ label {
   color: #888;
 }
 
+/*추천 도서 수정 버튼*/
+.reorder-update-btn {
+  background: none;
+  border: none;
+  color: #0056b3;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
 /*추천 도서 삭제 버튼*/
 .reorder-del-btn {
   background: none;

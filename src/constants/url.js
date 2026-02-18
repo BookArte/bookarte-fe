@@ -36,6 +36,8 @@ const URL = {
   //RECOMMENDATION
   RECOMMENDATION_SET: "/admin/recommendation/set", // 관리자 추천도서 등록
   RECOMMENDATION_REORDER: "/admin/recommendation/reorder", // 관리자 추천도서 순서변경
+  RECOMMENDATEION_UPDATE: "/admin/recommendation/update/:recommendationId", // 관리자 추천도서 수정
+  RECOMMENDATEION_UPDATE: (recommendationId) => `/admin/recommendation/update/${recommendationId}`, // 관리자 추천도서 수정 함수
 
   //BORROW
   BORROW_LIST: "/admin/borrow/list", // 관리자 전체 대출 이력

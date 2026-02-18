@@ -1,7 +1,7 @@
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 
 function ReorderForm({ items, isChanged, onDragEnd, handlers }) {
-    const { delHandle, setBtn, handleSave } = handlers;
+    const { delHandle, updateHandle, setBtn, handleSave } = handlers;
 
     return (
         <div className="reorder-container">
@@ -25,7 +25,7 @@ function ReorderForm({ items, isChanged, onDragEnd, handlers }) {
 
             </div>
 
-            <p className="reorder-guide">💡 도서 카드를 아무 곳이나 잡고 드래그하여 순서를 바꿀 수 있습니다.</p>
+            <p className="reorder-guide">도서 카드를 아무 곳이나 잡고 드래그하여 순서를 바꿀 수 있습니다.</p>
 
             <DragDropContext onDragEnd={onDragEnd}>
                 <Droppable droppableId="recommend-list">
@@ -49,9 +49,15 @@ function ReorderForm({ items, isChanged, onDragEnd, handlers }) {
                                                 <img src={item.bookThumbnail} alt="" className="reorder-thumb" />
                                                 <div className="reorder-info">
                                                     <strong className="reorder-title">{item.bookTitle}</strong>
-                                                    <span className="reorder-author">{item.bookAuthor} | {item.publisherName}</span>
+                                                    <span className="reorder-author">{item.bookAuthor} | {item.publisherName} | {item.startDate}~{item.endDate}</span>
                                                 </div>
                                             </div>
+                                            <button
+                                                className="reorder-update-btn"
+                                                onClick={() => updateHandle(item.recommendationId)}
+                                            >
+                                                수정
+                                            </button>
                                             <button
                                                 className="reorder-del-btn"
                                                 onClick={() => delHandle(item.recommendationId)}
