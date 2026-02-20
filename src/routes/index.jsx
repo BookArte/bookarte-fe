@@ -28,6 +28,7 @@ import MypageLayout from "../components/mypage/MypageLayout";
 import MypageDashboard from "../components/mypage/MypageDashboard";
 import PenaltyManagement from "../pages/penalty/PenaltyManagement";
 import AdminLayout from "../components/admin/AdminLayout";
+import RecommendationHistory from "../pages/recommendation/RecommendationHistory";
 
 
 const RootRoutes = () => {
@@ -76,6 +77,8 @@ const RootRoutes = () => {
             <Route path="reorder" element={<ReorderRecommendation />} />
             {/* 추천 도서 수정 */}
             <Route path="update/:recommendationId" element={<UpdateRecommendation />} />
+            {/* 추천 도서 히스토리 */}
+            <Route path="history" element={<RecommendationHistory />} />
           </Route>
 
           { /* 대출 대시보드 */}

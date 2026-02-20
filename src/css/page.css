@@ -4210,3 +4210,143 @@ button:disabled {
   color: #aaa;
   cursor: not-allowed;
 }
+
+/*만료된 추천 도서 이력*/
+.expired-container {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.filter-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding: 18px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  border: 1px solid #e9ecef;
+}
+
+.filter-section input {
+  padding: 10px 14px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.filter-section input:focus {
+  border-color: #0056b3;
+}
+
+.filter-section input[type="text"] {
+  flex: 1;
+}
+
+.search-btn {
+  padding: 10px 20px;
+  background-color: #495057;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.search-btn:hover {
+  background-color: #343a40;
+}
+
+.expired-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin-top: 10px;
+}
+
+.expired-table th {
+    background-color: #f8f9fa;
+    color: #495057;
+    padding: 12px 8px;
+    text-align: center;
+    border-bottom: 2px solid #dee2e6;
+    font-size: 14px;
+}
+
+.expired-table td {
+    padding: 12px 8px;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    color: #333;
+}
+
+.number-column {
+    width: 60px;
+}
+
+.book-info-column {
+  width: auto;
+}
+
+.period-column {
+    width: 200px;
+}
+
+.priority-column {
+    width: 100px;
+}
+
+.manage-column {
+    width: 100px;
+}
+
+.book-info-td {
+    text-align: left !important;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.mini-thumb {
+  width: 45px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.book-title {
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+}
+.book-author {
+  font-size: 12px;
+  color: #868e96;
+}
+
+.expired-table button {
+  padding: 8px 12px;
+  background-color: white;
+  color: #0056b3;
+  border: 1px solid #0056b3;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.expired-table button:hover {
+  background-color: #0056b3;
+  color: white;
+}
