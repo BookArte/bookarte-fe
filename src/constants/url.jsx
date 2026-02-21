@@ -41,7 +41,7 @@ const URL = {
   RECOMMENDATION_HISTORY: "/admin/recommendation/history", // 관리자 추천도서 이력
 
   //BORROW
-  BORROW_LIST: "/admin/borrow/list", // 관리자 전체 대출 이력
+  BORROW_HISTORY: "/admin/borrow/history", // 관리자 전체 대출 이력
   BORROW_DASHBOARD: "/admin/borrow/dashboard", // 관리자 대출 현황
 
   //EVENT

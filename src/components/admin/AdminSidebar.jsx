@@ -55,7 +55,7 @@ const AdminSidebar = () => {
                         <span className="arrow_icon">{openMenus.borrow ? '▲' : '▼'}</span>
                     </h3>
                     <ul className="submenu">
-                        <li><NavLink to={URL.BORROW_LIST} className={({ isActive }) => isActive ? "active" : ""}>전체 대출 이력</NavLink></li>
+                        <li><NavLink to={URL.BORROW_HISTORY} className={({ isActive }) => isActive ? "active" : ""}>전체 대출 이력</NavLink></li>
                         <li><NavLink to={URL.BORROW_DASHBOARD} className={({ isActive }) => isActive ? "active" : ""}>대출 현황</NavLink></li>
                     </ul>
                 </div>

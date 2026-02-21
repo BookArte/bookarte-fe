@@ -4212,7 +4212,7 @@ button:disabled {
 }
 
 /*만료된 추천 도서 이력*/
-.expired-container {
+.work-list-container {
   padding: 20px;
   background-color: #ffffff;
   border-radius: 12px;
@@ -4262,14 +4262,14 @@ button:disabled {
   background-color: #343a40;
 }
 
-.expired-table {
+.work-list-table {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
     margin-top: 10px;
 }
 
-.expired-table th {
+.work-list-table th {
     background-color: #f8f9fa;
     color: #495057;
     padding: 12px 8px;
@@ -4278,7 +4278,7 @@ button:disabled {
     font-size: 14px;
 }
 
-.expired-table td {
+.work-list-table td {
     padding: 12px 8px;
     text-align: center;
     vertical-align: middle;
@@ -4325,7 +4325,6 @@ button:disabled {
 .book-title {
     font-weight: 600;
     white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
     max-width: 300px;
 }
@@ -4334,7 +4333,7 @@ button:disabled {
   color: #868e96;
 }
 
-.expired-table button {
+.work-list-table button {
   padding: 8px 12px;
   background-color: white;
   color: #0056b3;
@@ -4346,7 +4345,7 @@ button:disabled {
   transition: all 0.2s;
 }
 
-.expired-table button:hover {
+.work-list-table button:hover {
   background-color: #0056b3;
   color: white;
 }

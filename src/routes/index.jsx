@@ -29,6 +29,7 @@ import MypageDashboard from "../components/mypage/MypageDashboard";
 import PenaltyManagement from "../pages/penalty/PenaltyManagement";
 import AdminLayout from "../components/admin/AdminLayout";
 import RecommendationHistory from "../pages/recommendation/RecommendationHistory";
+import BorrowHistory from "../pages/borrow/BorrowHistory";
 
 
 const RootRoutes = () => {
@@ -81,8 +82,13 @@ const RootRoutes = () => {
             <Route path="history" element={<RecommendationHistory />} />
           </Route>
 
-          { /* 대출 대시보드 */}
-          <Route path="borrow/dashboard" element={<BorrowDashboardPage />} />
+          {/* 대출 업무 */}
+          <Route path="borrow">
+            {/* 전체 대출 이력 */}
+            <Route path="history" element={<BorrowHistory />} />
+            { /* 대출 대시보드 */}
+            <Route path="dashboard" element={<BorrowDashboardPage />} />
+          </Route>
 
           {/*연체 패널티 관리*/}
           <Route path="penalty/management" element={<PenaltyManagement />} />
