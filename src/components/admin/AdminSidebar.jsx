@@ -31,7 +31,7 @@ const AdminSidebar = () => {
                         <span className="arrow_icon">{openMenus.book ? '▲' : '▼'}</span>
                     </h3>
                     <ul className="submenu">
-                        <li><NavLink to={URL.BOOK_LIST} className={({ isActive }) => isActive ? "active" : ""}>등록된 도서 현황</NavLink></li>
+                        <li><NavLink to={URL.BOOK_STATUS} className={({ isActive }) => isActive ? "active" : ""}>등록된 도서 현황</NavLink></li>
                         <li><NavLink to={URL.BOOK_REGISTER} className={({ isActive }) => isActive ? "active" : ""}>신규 도서 등록</NavLink></li>
                     </ul>
                 </div>

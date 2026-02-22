@@ -28,7 +28,7 @@ const URL = {
 
   //BOOK ADMIN
   BOOK_REGISTER: "/admin/book/register", // 관리자 도서등록
-  BOOK_LIST: "/admin/book/list", // 관리자 도서목록
+  BOOK_STATUS: "/admin/book/status", // 관리자 도서현황
 
   BOOK_UPDATE: "/book/update/:bookId", // 도서 수정페이지
   BOOK_UPDATE: (bookId) => `/book/update/${bookId}`, // 도서 수정페이지 함수

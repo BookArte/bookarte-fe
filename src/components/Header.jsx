@@ -283,7 +283,7 @@ function Header() {
               <ul>
                 <li>
                   <NavLink
-                    to={URL.BOOK_LIST}
+                    to={URL.BOOK_STATUS}
                     className={({ isActive }) => (isActive ? "cur" : "")}
                   >
                     업무관리

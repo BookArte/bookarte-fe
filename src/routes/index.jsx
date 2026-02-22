@@ -30,6 +30,7 @@ import PenaltyManagement from "../pages/penalty/PenaltyManagement";
 import AdminLayout from "../components/admin/AdminLayout";
 import RecommendationHistory from "../pages/recommendation/RecommendationHistory";
 import BorrowHistory from "../pages/borrow/BorrowHistory";
+import BookStatusList from "../pages/book/BookStatusList";
 
 
 const RootRoutes = () => {
@@ -65,7 +66,7 @@ const RootRoutes = () => {
             {/* 도서 등록 */}
             <Route path="register" element={<RegisterBook />} />
             {/* 도서 현황 */}
-            <Route path="list" element={<BookList />} />
+            <Route path="status" element={<BookStatusList />} />
             {/* 도서 수정 */}
             <Route path="update/:bookId" element={<UpdateBook />} />
           </Route>

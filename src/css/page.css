@@ -3401,30 +3401,38 @@ label {
     font-weight: 600;
     display: inline-block;
 }
-
+/* 대출 가능 */
+.status-badge.green {
+    background-color: #e6f7ed;
+    color: #1a7d5e;
+    border: 1px solid #1a7d5e;
+}
 /* 대출 중 */
 .status-badge.blue {
     background-color: #e7f5ff;
     color: #1971c2;
-    border: 1px solid #a5d8ff;
+    border: 1px solid #1971c2;
 }
 
 /* 반납 신청 */
 .status-badge.orange {
     background-color: #fff9db;
     color: #f08c00;
-    border: 1px solid #ffe066;
+    border: 1px solid #f08c00;
 }
 
 /* 반납 완료 */
 .status-badge.gray {
     background-color: #f1f3f5;
     color: #868e96;
-    border: 1px solid #dee2e6;
+    border: 1px solid #868e96;
 }
 
-.status-badge.red { background: #fff5f5; color: #e03131; border: 1px solid #ffc9c9; }
-.status-badge.blue { background: #e7f5ff; color: #1971c2; border: 1px solid #a5d8ff; }
+.status-badge.red { 
+  background: #fff5f5; 
+  color: #e03131; 
+  border: 1px solid 
+  #e03131; }
 
 /* 아이콘 버튼 */
 .action-buttons {
