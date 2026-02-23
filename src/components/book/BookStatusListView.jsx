@@ -1,6 +1,6 @@
 function BookStatusListView({ books, categories, status, handlers }) {
-    const { loading, totalPages, currentPage } = status;
-    const { handlePageChange, handleReset, handleViewBook } = handlers;
+    const { loading, totalPages, currentPage, selectedIds, setSelectedIds } = status;
+    const { handlePageChange, handleReset, handleViewBook, handleSelectAll, handleSelectOne, handleBulkDelete } = handlers;
 
     const PAGE_GROUP_SIZE = 5;
     const currentGroup = Math.floor(currentPage / PAGE_GROUP_SIZE);
@@ -16,10 +16,25 @@ function BookStatusListView({ books, categories, status, handlers }) {
                 <input type="date" name="searchStartDate" /> ~ <input type="date" name="searchEndDate" />
                 <button className="search-btn">조회</button>
             </div>
-
+            <div className="table-actions">
+                <button
+                    className="bulk-del-btn"
+                    disabled={selectedIds.length === 0}
+                    onClick={handleBulkDelete}
+                >
+                    선택 삭제 ({selectedIds.length})
+                </button>
+            </div>
             <table className="work-list-table">
                 <thead>
                     <tr>
+                        <th className="check-column">
+                            <input
+                                type="checkbox"
+                                onChange={handleSelectAll}
+                                checked={selectedIds.length === books.length && books.length > 0}
+                            />
+                        </th>
                         <th className="number-column">번호</th>
                         <th className="book-info-column">도서 정보</th>
                         <th className="publisher-column">출판사</th>
@@ -30,7 +45,14 @@ function BookStatusListView({ books, categories, status, handlers }) {
                 </thead>
                 <tbody>
                     {books.map((item, index) => (
-                        <tr key={item.bookId}>
+                        <tr key={item.bookId} className={selectedIds.includes(item.bookId) ? 'selected-row' : ''}>
+                            <td>
+                                <input
+                                    type="checkbox"
+                                    checked={selectedIds.includes(item.bookId)}
+                                    onChange={() => handleSelectOne(item.bookId)}
+                                />
+                            </td>
                             <td className="number-column">{item.bookId}</td>
                             <td className="book-info-td">
                                 <img src={item.bookThumbnail} alt="" className="mini-thumb" />

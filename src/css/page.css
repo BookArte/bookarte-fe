@@ -4270,6 +4270,38 @@ button:disabled {
   background-color: #343a40;
 }
 
+.check-column {
+    width: 40px;
+    text-align: center;
+}
+
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.selected-row {
+    background-color: #f1f3f5 !important;
+}
+
+.bulk-del-btn {
+    margin-bottom: 10px;
+    padding: 8px 16px;
+    background-color: #fa5252;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    float: right;
+}
+
+.bulk-del-btn:disabled {
+    background-color: #dee2e6;
+    cursor: not-allowed;
+}
+
 .work-list-table {
     width: 100%;
     border-collapse: collapse;
