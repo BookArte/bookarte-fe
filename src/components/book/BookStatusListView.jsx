@@ -1,6 +1,6 @@
 function BookStatusListView({ books, categories, status, handlers }) {
     const { loading, totalPages, currentPage, selectedIds, setSelectedIds } = status;
-    const { handlePageChange, handleReset, handleViewBook, handleSelectAll, handleSelectOne, handleBulkDelete } = handlers;
+    const { handlePageChange, handleReset, handleUpdateBook, handleSelectAll, handleSelectOne, handleBulkDelete } = handlers;
 
     const PAGE_GROUP_SIZE = 5;
     const currentGroup = Math.floor(currentPage / PAGE_GROUP_SIZE);
@@ -69,7 +69,7 @@ function BookStatusListView({ books, categories, status, handlers }) {
                                 </span>
                             </td>
                             <td className="manage-column">
-                                <button onClick={() => handleViewBook(item.bookId)}>상세보기</button>
+                                <button onClick={() => handleUpdateBook(item.bookId)}>수정</button>
                             </td>
                         </tr>
                     ))}

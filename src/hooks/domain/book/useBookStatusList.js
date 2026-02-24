@@ -82,8 +82,8 @@ export function useBookStatusList() {
     const navigate = useNavigate();
 
     // 도서 상세 페이지 이동 함수
-    const handleViewBook = (bookId) => {
-        navigate(URL.BOOK_VIEW(bookId));
+    const handleUpdateBook = (bookId) => {
+        navigate(URL.BOOK_UPDATE(bookId));
     }
 
     const handleSelectAll = (e) => {
@@ -156,7 +156,7 @@ export function useBookStatusList() {
         handlers: {
             handlePageChange,
             handleReset,
-            handleViewBook,
+            handleUpdateBook,
             handleSelectAll,
             handleSelectOne,
             handleBulkDelete

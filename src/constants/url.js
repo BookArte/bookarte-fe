@@ -30,8 +30,8 @@ const URL = {
   BOOK_REGISTER: "/admin/book/register", // 관리자 도서등록
   BOOK_STATUS: "/admin/book/status", // 관리자 도서현황
 
-  BOOK_UPDATE: "/book/update/:bookId", // 도서 수정페이지
-  BOOK_UPDATE: (bookId) => `/book/update/${bookId}`, // 도서 수정페이지 함수
+  BOOK_UPDATE: "/admin/book/update/:bookId", // 도서 수정페이지
+  BOOK_UPDATE: (bookId) => `/admin/book/update/${bookId}`, // 도서 수정페이지 함수
 
   //RECOMMENDATION
   RECOMMENDATION_SET: "/admin/recommendation/set", // 관리자 추천도서 등록
