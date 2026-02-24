@@ -2069,37 +2069,56 @@
 }
 
 /*도서 등록, 수정 페이지*/
-.form-container {
-  margin-bottom: 30px;
-  max-width: 800px;
-  margin: auto;
-  font-family: sans-serif;
+.book-form-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+.book-form-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
 /*도서 검색*/
-.search-section {
-  margin-bottom: 30px;
-  position: relative;
+.book-search-section {
+    margin-bottom: 40px;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
 }
 
-.search-form {
-  padding: 12px;
-  width: 100%;
-  border: 1px solid #007bff;
-  border-radius: 4px;
-  outline: none;
+.book-search-form {
+    padding: 12px 16px;
+    flex: 1;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: border-color 0.2s;
 }
 
-.search-button {
-  padding: 12px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.book-search-form:focus {
+    border-color: #1971c2;
+    outline: none;
 }
 
-.search-result-layer {
+.book-search-button {
+    padding: 0 24px;
+    background-color: #1971c2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.book-search-result-layer {
   position: absolute;
   top: 50px;
   left: 0;
@@ -2113,7 +2132,7 @@
   overflow-y: auto;
 }
 
-.search-result {
+.book-search-result {
   display: flex;
   padding: 12px;
   cursor: pointer;
@@ -2122,11 +2141,11 @@
   transition: background-color 0.2s ease-in-out;
 }
 
-.search-result:hover {
+.book-search-result:hover {
   background-color: #f8f9fa;
 }
 
-.search-result-img {
+.book-search-result-img {
   width: 50px;
   height: 70px;
   margin-right: 15px;
@@ -2135,18 +2154,18 @@
   object-fit: cover;
 }
 
-.search-result-title {
+.book-search-result-title {
   font-weight: bold;
   font-size: 15px;
 }
 
-.search-result-element {
+.book-search-result-element {
   font-size: 13px;
   color: #666;
   margin-top: 4px;
 }
 
-.search-result-ISBN {
+.book-search-result-ISBN {
   font-size: 12px;
   color: #999;
 }
@@ -2159,15 +2178,16 @@
 }
 
 .thumbnail-preview-section {
-  width: 120px;
-  height: 170px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background-color: #f9f9f9;
+    width: 140px;
+    height: 200px;
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    background-color: #f1f3f5;
+    transition: all 0.3s;
+}
+
+.thumbnail-preview-section.has-image {
+    border-style: solid;
 }
 
 .thumbnail-preview-style {
@@ -2185,20 +2205,26 @@
 }
 
 .input-style {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: #fff;
+}
+
+.input-style:focus {
+    border-color: #a5d8ff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(25, 113, 194, 0.1);
+}
+
+.input-unique-label {
+    color: #1971c2;
 }
 
 .input-unique-style {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  border-color: #007bff;
+  border: 2px solid #a5d8ff;
 }
 
 .input-form {
@@ -2207,9 +2233,11 @@
 }
 
 .input-label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #495057;
 }
 
 .input-unique-label {
@@ -2220,21 +2248,36 @@
 }
 
 .form-btn-group {
-  margin-top: 20px;
-  display: flex;
-  gap: 10px;
+    margin-top: 40px;
+    display: flex;
+    gap: 15px;
 }
 
-.cnl-btn,
 .input-btn {
-  flex: 1;
-  padding: 15px;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 10px;
+    flex: 2;
+    background-color: #1971c2;
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.cnl-btn {
+    flex: 1;
+    background-color: #fff;
+    color: #495057;
+    border: 1px solid #dee2e6;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.cnl-btn:hover {
+    background-color: #f8f9fa;
 }
 
 body {
