@@ -8,7 +8,8 @@ function RecommendationHistoryView({ recommendationHistory, handlePageChange, st
 
     if (loading) return <div style={{ textAlign: 'center', padding: '50px' }}>로딩 중...</div>;
     return (
-        <div className="work-list-container">
+        <div className="book-work-container">
+            <h2 className="book-work-title">만료 추천 도서 이력</h2>
             <div className="filter-section">
                 <input type="text" placeholder="도서명 또는 저자 검색..." />
                 <input type="date" name="searchStartDate" /> ~ <input type="date" name="searchEndDate" />

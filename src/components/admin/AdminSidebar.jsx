@@ -31,7 +31,7 @@ const AdminSidebar = () => {
                         <span className="arrow_icon">{openMenus.book ? '▲' : '▼'}</span>
                     </h3>
                     <ul className="submenu">
-                        <li><NavLink to={URL.BOOK_STATUS} className={({ isActive }) => isActive ? "active" : ""}>등록된 도서 현황</NavLink></li>
+                        <li><NavLink to={URL.BOOK_STATUS} className={({ isActive }) => isActive ? "active" : ""}>도서 현황</NavLink></li>
                         <li><NavLink to={URL.BOOK_REGISTER} className={({ isActive }) => isActive ? "active" : ""}>신규 도서 등록</NavLink></li>
                     </ul>
                 </div>
@@ -44,7 +44,7 @@ const AdminSidebar = () => {
                     </h3>
                     <ul className="submenu">
                         <li><NavLink to={URL.RECOMMENDATION_REORDER} className={({ isActive }) => isActive ? "active" : ""}>진행/예약 추천 도서 관리</NavLink></li>
-                        <li><NavLink to={URL.RECOMMENDATION_HISTORY} className={({ isActive }) => isActive ? "active" : ""}>만료 추천 도서 이력</NavLink></li>
+                        <li><NavLink to={URL.RECOMMENDATION_HISTORY} className={({ isActive }) => isActive ? "active" : ""}>만료 추천 도서 기록</NavLink></li>
                     </ul>
                 </div>
 
@@ -55,7 +55,7 @@ const AdminSidebar = () => {
                         <span className="arrow_icon">{openMenus.borrow ? '▲' : '▼'}</span>
                     </h3>
                     <ul className="submenu">
-                        <li><NavLink to={URL.BORROW_HISTORY} className={({ isActive }) => isActive ? "active" : ""}>전체 대출 이력</NavLink></li>
+                        <li><NavLink to={URL.BORROW_HISTORY} className={({ isActive }) => isActive ? "active" : ""}>대출 기록</NavLink></li>
                         <li><NavLink to={URL.BORROW_DASHBOARD} className={({ isActive }) => isActive ? "active" : ""}>대출 현황</NavLink></li>
                     </ul>
                 </div>

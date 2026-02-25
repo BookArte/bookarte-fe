@@ -2068,6 +2068,14 @@
   font-weight: bold;
 }
 
+.book-work-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
 /*도서 등록, 수정 페이지*/
 .book-form-container {
     max-width: 900px;
@@ -2077,20 +2085,14 @@
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
-.book-form-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 30px;
-    text-align: center;
-}
 
 /*도서 검색*/
 .book-search-section {
     margin-bottom: 40px;
-    background: #f8f9fa;
     padding: 20px;
     border-radius: 8px;
+    border: 1px solid #dee2e6;
+    
 }
 
 .book-search-form {
@@ -3086,10 +3088,10 @@ label {
     color: #888;
     background: none;
     border: none;
-    border-bottom: 2px solid transparent; /* 기본은 투명 */
+    border-bottom: 2px solid transparent;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-bottom: -2px; /* 부모 컨테이너 보더와 겹치게 처리 */
+    margin-bottom: -2px; 
 }
 
 .tab-btn:hover {
@@ -3098,9 +3100,9 @@ label {
 }
 
 .tab-btn.active {
-    color: #0056b3; /* 포인트 컬러 */
+    color: #0056b3; 
     font-weight: 700;
-    border-bottom: 2px solid #0056b3; /* 활성화 표시 바 */
+    border-bottom: 2px solid #0056b3; 
 }
 
 .tab-btn .count {
@@ -3118,6 +3120,7 @@ label {
 /* 버튼 묶음 스타일 */
 .reorder-btn-group {
   display: flex;
+  justify-content: flex-end;
   gap: 12px;
 }
 
@@ -3170,7 +3173,7 @@ label {
   margin-bottom: 12px;
   padding: 15px;
   border-radius: 12px;
-  border: 1px solid #dee2e6;
+  border: 1px solid #495057;
   cursor: grab;
   user-select: none;
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -4263,7 +4266,7 @@ button:disabled {
 }
 
 /*만료된 추천 도서 이력*/
-.work-list-container {
+.book-work-container {
   padding: 20px;
   background-color: #ffffff;
   border-radius: 12px;

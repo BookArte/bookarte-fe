@@ -23,7 +23,7 @@ function RegisterBookForm({ search, form, handlers }) {
 
     return (
         <div className='book-form-container'>
-            <h2 className='book-form-title'>새 도서 등록</h2>
+            <h2 className='book-work-title'>새 도서 등록</h2>
 
             <section className='book-search-section'>
                 <form onSubmit={handleSearch} style={{ display: 'flex' }}>

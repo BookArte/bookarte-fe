@@ -7,7 +7,7 @@ function UpdateBookForm({ loading, bookForm, handlers, fieldErrors }) {
 
     return (
         <div className='book-form-container'>
-            <h2 className='book-form-title'>도서 정보 수정</h2>
+            <h2 className='book-work-title'>도서 정보 수정</h2>
 
             {/* 수정 폼 섹션 */}
             <form onSubmit={handleSubmit} className='input-form' autoComplete="off">
