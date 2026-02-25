@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 function BookDetailView({ book, stats, relatedBooks, loading, handlers }) {
-    const { handleDelete, handleUpdate, handleBorrow, handleViewBook } = handlers;
+    const { handleBorrow, handleViewBook } = handlers;
     const navigate = useNavigate();
 
     if (loading) return <div className="book-detail-container">로딩 중...</div>;
@@ -19,23 +19,6 @@ function BookDetailView({ book, stats, relatedBooks, loading, handlers }) {
                 <button onClick={() => navigate(-1)} >
                     ← 목록으로 돌아가기
                 </button>
-
-                {/* 수정 및 삭제 버튼 세트 */}
-                <div style={{ display: 'flex', gap: '10px' }}>
-                    <button
-                        className="update-btn"
-                        onClick={() => handleUpdate(book.bookId)}
-
-                    >
-                        수정
-                    </button>
-                    <button
-                        className="delete-btn"
-                        onClick={() => handleDelete(book.bookId)}
-                    >
-                        삭제
-                    </button>
-                </div>
             </div>
 
             <div className="detail-header">

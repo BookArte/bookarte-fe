@@ -1,4 +1,4 @@
-import { apiClient, fileApiClient } from "./client";
+import { apiClient } from "./client";
 
 export const setRecommendationBook = async (data) => {
     const res = await apiClient.post('/recommendation/set', data);
@@ -32,5 +32,15 @@ export const getRecommedBookDetail = async (recommendationId) => {
 
 export const isRecommend = async (bookId) => {
     const res = await apiClient.get(`/recommendation/is-recommend?bookId=${bookId}`);
+    return res.data;
+}
+
+export const getActiveRecommendationList = async () => {
+    const res = await apiClient.get('/recommendation/admin/active-list');
+    return res.data;
+}
+
+export const getExpiredRecommendationHistory = async (page) => {
+    const res = await apiClient.get(`/recommendation/admin/history?page=${page}`);
     return res.data;
 }

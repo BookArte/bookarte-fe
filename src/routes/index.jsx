@@ -26,6 +26,11 @@ import Mypage from "../pages/mypage/Mypage";
 import MypageInfo from "../pages/mypage/MypageInfo";
 import MypageLayout from "../components/mypage/MypageLayout";
 import MypageDashboard from "../components/mypage/MypageDashboard";
+import PenaltyManagement from "../pages/penalty/PenaltyManagement";
+import AdminLayout from "../components/admin/AdminLayout";
+import RecommendationHistory from "../pages/recommendation/RecommendationHistory";
+import BorrowHistory from "../pages/borrow/BorrowHistory";
+import BookStatusList from "../pages/book/BookStatusList";
 
 
 const RootRoutes = () => {
@@ -42,36 +47,54 @@ const RootRoutes = () => {
         {/* MAIN */}
         <Route path={"/"} element={<Main />} />
 
-        {/*BOOK*/}
-        {/* RegisterBook */}
-        <Route path={"/book/register"} element={<RegisterBook />} />
-
         {/* BookList */}
         <Route path={"/book/list"} element={<BookList />} />
 
         {/* BookDetail */}
         <Route path={"/book/view/:bookId"} element={<BookDetail />} />
 
-        {/* UpdateBook */}
-        <Route path={"/book/update/:bookId"} element={<UpdateBook />} />
-
         {/* RecommendationBookList */}
         <Route path={"/book/recommendation"} element={< RecommedationBookList />} />
 
-        {/* SetRecommednation */}
-        <Route path={"/admin/recommendation/set"} element={<SetRecommedation />} />
-
-        {/* ReorderRecommednation */}
-        <Route path={"/admin/recommendation/reorder"} element={<ReorderRecommendation />} />
-
-        {/* UpdateRecommendation */}
-        <Route path={"/admin/recommendation/update/:recommendationId"} element={<UpdateRecommendation />} />
-
-        {/*BORROW*/}
         {/* MyBorrowStatus */}
         <Route path={"/mypage/borrow/status"} element={<MyBorrowStatusList />} />
-        {/* AdminBorrowDashboard */}
-        <Route path={"/admin/borrow/dashboard"} element={<BorrowDashboardPage />} />
+
+        <Route path="/admin" element={<AdminLayout />} >
+
+          {/* 도서 업무 */}
+          <Route path="book">
+            {/* 도서 등록 */}
+            <Route path="register" element={<RegisterBook />} />
+            {/* 도서 현황 */}
+            <Route path="status" element={<BookStatusList />} />
+            {/* 도서 수정 */}
+            <Route path="update/:bookId" element={<UpdateBook />} />
+          </Route>
+
+          {/* 추천 도서 업무 */}
+          <Route path="recommendation">
+            {/* 추천 도서 설정 */}
+            <Route path="set" element={<SetRecommedation />} />
+            {/* 추천 도서 순서 변경 */}
+            <Route path="reorder" element={<ReorderRecommendation />} />
+            {/* 추천 도서 수정 */}
+            <Route path="update/:recommendationId" element={<UpdateRecommendation />} />
+            {/* 추천 도서 히스토리 */}
+            <Route path="history" element={<RecommendationHistory />} />
+          </Route>
+
+          {/* 대출 업무 */}
+          <Route path="borrow">
+            {/* 전체 대출 이력 */}
+            <Route path="history" element={<BorrowHistory />} />
+            { /* 대출 대시보드 */}
+            <Route path="dashboard" element={<BorrowDashboardPage />} />
+          </Route>
+
+          {/*연체 패널티 관리*/}
+          <Route path="penalty/management" element={<PenaltyManagement />} />
+        </Route>
+
 
         {/* Member */}
         <Route path="/member">

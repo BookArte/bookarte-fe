@@ -7,9 +7,9 @@ function BorrowDashboard({ borrow, stats, loading, handlers, getStatusConfig }) 
     if (!borrow) return <div className="book-detail-container">대출 이력 정보를 찾을 수 없습니다.</div>;
 
     return (
-        <div className='borrow-dashboard-background' >
+        <div className="book-work-container">
             <div className='borrow-dashboard-container'>
-                <h2 className="borrow-dashboard-title">대출 및 반납 현황 관리</h2>
+                <h2 className="book-work-title">대출 및 반납 현황 관리</h2>
 
                 {/* 상단 요약 지표 */}
                 <div style={{ display: 'flex', gap: '20px', marginBottom: '30px' }}>

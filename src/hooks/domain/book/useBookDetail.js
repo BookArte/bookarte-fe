@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteBookByBookId, getBookDetailByBookId, getRelatedBookList } from "../../../api/book.api";
+import { deleteBooks, getBookDetailByBookId, getRelatedBookList } from "../../../api/book.api";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import URL from '@/constants/url';
@@ -42,7 +42,7 @@ export function useBookDetail() {
     const handleDelete = async (bookId) => {
         if (window.confirm("정말로 이 도서를 삭제하시겠습니까?")) {
             try {
-                const res = await deleteBookByBookId(bookId);
+                const res = await deleteBooks({ bookIds: [bookId] });
 
                 if (res.success) {
                     toast.success(res.data);
