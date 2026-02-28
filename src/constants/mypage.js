@@ -35,8 +35,8 @@ export const MYPAGE_STATS_CONFIG = [
 export const MYPAGE_MENUS = [
     { name: '도서관서비스', path: '' },
     { name: '내정보', path: 'info' },
-    { name: '대출현황', path: 'borrow' },
-    { name: '대출이력', path: 'borrow' },
+    { name: '대출현황', path: 'borrow/status' },
+    { name: '대출이력', path: 'borrow/history' },
     { name: '프로그램 신청', path: 'event' },
     { name: '문의내역', path: 'qna' },
     { name: '나의 관심도서', path: 'wish-list' },

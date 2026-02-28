@@ -56,9 +56,6 @@ const RootRoutes = () => {
         {/* RecommendationBookList */}
         <Route path={"/book/recommendation"} element={< RecommedationBookList />} />
 
-        {/* MyBorrowStatus */}
-        <Route path={"/mypage/borrow/status"} element={<MyBorrowStatusList />} />
-
         <Route path="/admin" element={<AdminLayout />} >
 
           {/* 도서 업무 */}
@@ -124,6 +121,12 @@ const RootRoutes = () => {
             <Route index element={<MypageDashboard />} />
             {/* MypageInfo */}
             <Route path="info" element={<MypageInfo />} />
+
+            <Route path="borrow" >
+              {/* MyBorrowStatus */}
+              <Route path="status" element={<MyBorrowStatusList />} />
+            </Route>
+
           </Route>
         </Route>
 
