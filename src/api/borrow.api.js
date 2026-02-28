@@ -5,8 +5,8 @@ export const borrowBook = async (bookId) => {
     return res.data
 }
 
-export const getMyBorrowList = async () => {
-    const res = await apiClient.get('borrow');
+export const getMyBorrowList = async (data) => {
+    const res = await apiClient.get('borrow', data);
     return res.data
 }
 

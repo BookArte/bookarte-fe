@@ -8,11 +8,20 @@ export function useMyBorrowList() {
     const [borrows, setBorrows] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const [searchParam, setSearchParam] = useState({
+        bookId: '',
+        status: '',
+        statusNot: 'RETURNED',
+        isOverdue: '',
+        startDate: '',
+        endDate: '',
+        searchKeyword: '',
+    });
 
     const fetchMyBorrows = async () => {
         setLoading(true);
         try {
-            const res = await getMyBorrowList();
+            const res = await getMyBorrowList({ params: { ...searchParam } });
             setBorrows(res.data.content);
         } catch (error) {
             toast.error("대출 현황을 불러오지 못했습니다.");
