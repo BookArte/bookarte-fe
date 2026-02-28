@@ -77,16 +77,26 @@ export function useBorrowDashboard() {
         })
     }
 
-    const getStatusConfig = (status) => {
-        switch (status) {
+    const getStatusConfig = (item) => {
+
+        if (item.overdue) {
+            return {
+                label: `연체 ${item.overdueDays}일`,
+                className: 'status-badge red'
+            };
+        }
+
+        switch (item.status) {
             case 'BORROWED':
                 return { label: '대출 중', className: 'status-badge blue' };
             case 'RETURN_REQUESTED':
                 return { label: '반납 신청', className: 'status-badge orange' };
             case 'RETURNED':
                 return { label: '반납 완료', className: 'status-badge gray' };
+            case 'OVERDUE':
+                return { label: '연체', className: 'status-badge red' };
             default:
-                return { label: status, className: 'status-badge' };
+                return { label: item.status, className: 'status-badge' };
         }
     };
 
