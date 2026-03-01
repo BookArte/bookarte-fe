@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteBooks, getBookDetailByBookId, getRelatedBookList } from "../../../api/book.api";
+import { getBookDetailByBookId, getRelatedBookList } from "../../../api/book.api";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import URL from '@/constants/url';
@@ -38,25 +38,6 @@ export function useBookDetail() {
         fetchAllData(bookId);
     }, [bookId]);
 
-    // 삭제 핸들러
-    const handleDelete = async (bookId) => {
-        if (window.confirm("정말로 이 도서를 삭제하시겠습니까?")) {
-            try {
-                const res = await deleteBooks({ bookIds: [bookId] });
-
-                if (res.success) {
-                    toast.success(res.data);
-                    navigate('/book/list');
-                } else {
-                    toast.error(res.data);
-                }
-            } catch (error) {
-                console.error("삭제 요청 중 오류 발생:", error);
-                toast.error("삭제 처리 중 서버 오류가 발생했습니다.");
-            }
-        }
-    };
-
     //대출 핸들러
     const handleBorrow = async (bookId) => {
         if (window.confirm("해당 도서를 대출하시겠습니까?")) {
@@ -70,13 +51,9 @@ export function useBookDetail() {
                 }
             } catch (error) {
                 console.error("삭제 요청 중 오류 발생:", error);
-                toast.error("삭제 처리 중 서버 오류가 발생했습니다.");
+                toast.error("대출 처리 중 서버 오류가 발생했습니다.");
             }
         }
-    }
-
-    const handleUpdate = (bookId) => {
-        navigate(URL.BOOK_UPDATE(bookId));
     }
 
     const handleViewBook = (bookId) => {
@@ -89,8 +66,6 @@ export function useBookDetail() {
         relatedBooks,
         loading,
         handlers: {
-            handleDelete,
-            handleUpdate,
             handleBorrow,
             handleViewBook
         }
