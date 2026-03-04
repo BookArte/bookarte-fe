@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { getAllBookList } from "../../../api/book.api";
+import { getAllBookList, getLatestBookRegistrationDate } from "../../../api/book.api";
 import { useNavigate } from "react-router-dom";
 import URL from '@/constants/url';
 
@@ -27,6 +27,20 @@ export function useNewArrivalsList() {
         size: 10,
         sort: 'createdAt,desc'
     });
+
+    useEffect(() => {
+        const latestDate = async () => {
+            try {
+                const res = await getLatestBookRegistrationDate();
+                const latest = new Date(res.data);
+                setSelectedDate(latest);
+            } catch (error) {
+                setSelectedDate(new Date());
+            }
+        };
+
+        latestDate();
+    }, []);
 
     const fetchNewArrivalsList = useCallback(async (page = 0, params) => {
         setLoading(true);
