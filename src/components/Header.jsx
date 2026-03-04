@@ -203,10 +203,10 @@ function Header() {
               </li>
               <li>
                 <NavLink
-                  to={URL.INTRO_SERVICE}
+                  to={URL.BOOK_NEW}
                   className={({ isActive }) => (isActive ? "cur" : "")}
                 >
-                  새로들어온 책
+                  신착 도서
                 </NavLink>
               </li>
               <li>

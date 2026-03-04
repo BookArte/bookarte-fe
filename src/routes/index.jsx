@@ -31,6 +31,7 @@ import AdminLayout from "../components/admin/AdminLayout";
 import RecommendationHistory from "../pages/recommendation/RecommendationHistory";
 import BorrowHistory from "../pages/borrow/BorrowHistory";
 import BookStatusList from "../pages/book/BookStatusList";
+import NewArrivalsList from "../pages/book/NewArrivalsList";
 
 
 const RootRoutes = () => {
@@ -49,6 +50,9 @@ const RootRoutes = () => {
 
         {/* BookList */}
         <Route path={"/book/list"} element={<BookList />} />
+
+        {/* NewArrivalsList */}
+        <Route path={"/book/new"} element={<NewArrivalsList />} />
 
         {/* BookDetail */}
         <Route path={"/book/view/:bookId"} element={<BookDetail />} />
