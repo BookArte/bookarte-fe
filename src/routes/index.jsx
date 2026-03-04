@@ -32,6 +32,7 @@ import RecommendationHistory from "../pages/recommendation/RecommendationHistory
 import BorrowHistory from "../pages/borrow/BorrowHistory";
 import BookStatusList from "../pages/book/BookStatusList";
 import NewArrivalsList from "../pages/book/NewArrivalsList";
+import BestSellerList from "../pages/book/BestSellerList";
 
 
 const RootRoutes = () => {
@@ -53,6 +54,9 @@ const RootRoutes = () => {
 
         {/* NewArrivalsList */}
         <Route path={"/book/new"} element={<NewArrivalsList />} />
+
+        {/* BestSellerList */}
+        <Route path={"/book/best"} element={<BestSellerList />} />
 
         {/* BookDetail */}
         <Route path={"/book/view/:bookId"} element={<BookDetail />} />

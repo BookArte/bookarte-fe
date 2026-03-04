@@ -211,7 +211,7 @@ function Header() {
               </li>
               <li>
                 <NavLink
-                  to={URL.INTRO_SERVICE}
+                  to={URL.BOOK_BEST}
                   className={({ isActive }) => (isActive ? "cur" : "")}
                 >
                   베스트/스테디셀러
