@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { getAllBookList, getLatestBookRegistrationDate } from "../../../api/book.api";
 import { useNavigate } from "react-router-dom";
 import URL from '@/constants/url';
+import { toast } from "react-toastify";
 
 export function useNewArrivalsList() {
     const [arrivals, setArrivals] = useState([]);
@@ -54,6 +55,7 @@ export function useNewArrivalsList() {
             setTotalPages(res.data.totalPages);
             setCurrentPage(page);
         } catch (error) {
+            toast.error("신착 도서 목록을 불러오는 중 오류가 발생했습니다.");
             console.error("Error fetching new arrivals list:", error);
         } finally {
             setLoading(false);
@@ -81,8 +83,6 @@ export function useNewArrivalsList() {
 
         fetchNewArrivalsList(0, params);
     }, [dateRange, searchParams.sort, fetchNewArrivalsList]);
-
-
 
     // 도서 상세 페이지 이동 함수
     const handleViewBook = (bookId) => {
