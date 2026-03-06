@@ -72,8 +72,6 @@ export function useNewArrivalsList() {
     }, [selectedDate]);
 
     useEffect(() => {
-        console.log("Fetching new arrivals for:", dateRange.start, dateRange.end);
-
         const params = {
             ...searchParams,
             createdAtStart: dateRange.start,
