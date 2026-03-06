@@ -41,7 +41,7 @@ function NewArrivalsListView({ arrivals, status, handlers }) {
                             </div>
                             <div className="meta-container">
                                 <div className="meta-item">
-                                    <span className="meta-label">자료실</span>
+                                    <span className="meta-label">카테고리</span>
                                     <span className="meta-value">{book.bookCategoryName}</span>
                                 </div>
                                 <div className="meta-item">
