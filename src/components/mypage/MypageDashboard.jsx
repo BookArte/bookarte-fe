@@ -13,6 +13,8 @@ function MypageDashboard() {
             <MypagePointBox point={userData.point} grade={userData.grade} />
             <div className="mypage-status-grid">
                 {stats.map((item, index) => (
+                    console.log(item),
+                    console.log(index),
                     <MypageStatusCard key={index} {...item} />
                 ))}
             </div>
