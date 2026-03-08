@@ -25,6 +25,11 @@ export const getBookRollingYear = async (bookId) => {
     return res.data
 }
 
+export const getPopularBooks = async (period) => {
+    const res = await apiClient.get(`borrow/popular?period=${period}`)
+    return res.data
+}
+
 //admin
 export const getAllBorrowList = async (data) => {
     const res = await apiClient.get('borrow/admin', data);

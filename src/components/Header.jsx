@@ -219,7 +219,7 @@ function Header() {
               </li>
               <li>
                 <NavLink
-                  to={URL.INTRO_SERVICE}
+                  to={URL.BOOK_POPULAR}
                   className={({ isActive }) => (isActive ? "cur" : "")}
                 >
                   인기대출도서

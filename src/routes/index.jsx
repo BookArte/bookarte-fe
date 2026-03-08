@@ -33,6 +33,7 @@ import BorrowHistory from "../pages/borrow/BorrowHistory";
 import BookStatusList from "../pages/book/BookStatusList";
 import NewArrivalsList from "../pages/book/NewArrivalsList";
 import BestSellerList from "../pages/book/BestSellerList";
+import PopularList from "../pages/book/PopularList";
 
 
 const RootRoutes = () => {
@@ -57,6 +58,9 @@ const RootRoutes = () => {
 
         {/* BestSellerList */}
         <Route path={"/book/best"} element={<BestSellerList />} />
+
+        {/* PopularList */}
+        <Route path={"/book/popular"} element={<PopularList />} />
 
         {/* BookDetail */}
         <Route path={"/book/view/:bookId"} element={<BookDetail />} />
