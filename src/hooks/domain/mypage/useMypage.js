@@ -30,7 +30,8 @@ export const useMypage = () => {
                     stats: MYPAGE_STATS_CONFIG.map(config => ({
                         label: config.label,
                         icon: config.icon,
-                        count: memberInfo[config.dataKey] || 0
+                        count: memberInfo[config.dataKey] || 0,
+                        path: config.path
                     }))
                 });
             }

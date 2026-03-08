@@ -51,3 +51,15 @@ export const getRelatedBookList = async (bookId) => {
     const res = await apiClient.get(`/book/${bookId}/related`);
     return res.data;
 }
+
+/* 최근 등록 도서 등록일 조회 */
+export const getLatestBookRegistrationDate = async () => {
+    const res = await apiClient.get('/book/latest-registration-date');
+    return res.data;
+}
+
+/* 알라딘 api 베스트셀러 도서 목록 조회 */
+export const getBestSellerBookList = async () => {
+    const res = await apiClient.get('/book/bestseller');
+    return res.data;
+}

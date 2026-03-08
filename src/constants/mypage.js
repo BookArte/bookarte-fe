@@ -8,27 +8,32 @@ export const MYPAGE_STATS_CONFIG = [
     {
         label: "도서 대출현황",
         icon: "/assets/images/ico_loan.png",
-        dataKey: "loanCount"
+        dataKey: "loanCount",
+        path: 'borrow/status'
     },
     {
         label: "도서 예약현황",
         icon: "/assets/images/ico_reserve.png",
-        dataKey: "reserveCount"
+        dataKey: "reserveCount",
+        path: 'borrow/history'
     },
     {
         label: "프로그램 신청현황",
         icon: "/assets/images/ico_program.png",
-        dataKey: "programCount"
+        dataKey: "programCount",
+        path: 'event'
     },
     {
         label: "문의내역",
         icon: "/assets/images/ico_facility.png",
-        dataKey: "qnaCount"
+        dataKey: "qnaCount",
+        path: 'qna'
     },
     {
         label: "나의 관심도서",
         icon: "/assets/images/ico_heart.png",
-        dataKey: "heartCount"
+        dataKey: "heartCount",
+        path: 'wish-list'
     },
 ];
 

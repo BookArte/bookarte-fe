@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { recommendationBookList } from "../../../api/recommendation.api";
+import URL from '@/constants/url';
 
 export function useRecommendationList() {
 
@@ -25,10 +26,14 @@ export function useRecommendationList() {
         }
     };
 
+    // 도서 상세 페이지 이동 함수
+    const handleViewBook = (bookId) => {
+        navigate(URL.BOOK_VIEW(bookId));
+    }
+
     return {
         books,
         loading,
-        navigate
+        handleViewBook
     }
-
 }

@@ -31,6 +31,10 @@ import AdminLayout from "../components/admin/AdminLayout";
 import RecommendationHistory from "../pages/recommendation/RecommendationHistory";
 import BorrowHistory from "../pages/borrow/BorrowHistory";
 import BookStatusList from "../pages/book/BookStatusList";
+import NewArrivalsList from "../pages/book/NewArrivalsList";
+import BestSellerList from "../pages/book/BestSellerList";
+import PopularList from "../pages/book/PopularList";
+import MyBorrowHistory from "../pages/borrow/MyBorrowHistory";
 
 
 const RootRoutes = () => {
@@ -49,6 +53,15 @@ const RootRoutes = () => {
 
         {/* BookList */}
         <Route path={"/book/list"} element={<BookList />} />
+
+        {/* NewArrivalsList */}
+        <Route path={"/book/new"} element={<NewArrivalsList />} />
+
+        {/* BestSellerList */}
+        <Route path={"/book/best"} element={<BestSellerList />} />
+
+        {/* PopularList */}
+        <Route path={"/book/popular"} element={<PopularList />} />
 
         {/* BookDetail */}
         <Route path={"/book/view/:bookId"} element={<BookDetail />} />
@@ -125,6 +138,9 @@ const RootRoutes = () => {
             <Route path="borrow" >
               {/* MyBorrowStatus */}
               <Route path="status" element={<MyBorrowStatusList />} />
+
+              {/* MyBorrowHistory */}
+              <Route path="history" element={<MyBorrowHistory />} />
             </Route>
 
           </Route>
