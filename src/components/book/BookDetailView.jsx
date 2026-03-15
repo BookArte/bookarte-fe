@@ -1,8 +1,9 @@
+import { Heart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 function BookDetailView({ book, stats, relatedBooks, loading, handlers }) {
-    const { handleBorrow, handleViewBook } = handlers;
+    const { handleBorrow, handleViewBook, handleToggleWish } = handlers;
     const navigate = useNavigate();
 
     if (loading) return <div className="book-detail-container">로딩 중...</div>;
@@ -15,13 +16,14 @@ function BookDetailView({ book, stats, relatedBooks, loading, handlers }) {
     return (
         <div className="book-detail-container">
             {/* 상단 버튼 영역 */}
-            <div className="back-btn" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+            <div className="back-btn">
                 <button onClick={() => navigate(-1)} >
                     ← 목록으로 돌아가기
                 </button>
             </div>
 
             <div className="detail-header">
+
                 <img
                     src={book.bookThumbnail || 'https://via.placeholder.com/200x280'}
                     alt={book.bookTitle}
@@ -29,7 +31,21 @@ function BookDetailView({ book, stats, relatedBooks, loading, handlers }) {
                 />
 
                 <div className="detail-main-info">
-                    <h1 className="detail-title">{book.bookTitle}</h1>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <h1 className="detail-title">{book.bookTitle}</h1>
+                        <button
+                            className={`wish-btn ${book.wish ? 'active' : ''}`}
+                            onClick={() => handleToggleWish(book.bookId)}
+                            style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+                        >
+                            <Heart
+                                size={28}
+                                color={book.wish ? "#e74c3c" : "#ccc"}
+                                fill={book.wish ? "#e74c3c" : "none"}
+                                style={{ transition: 'all 0.3s ease' }}
+                            />
+                        </button>
+                    </div>
 
                     <table className="info-table">
                         <tbody>
