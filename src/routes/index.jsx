@@ -35,6 +35,7 @@ import NewArrivalsList from "../pages/book/NewArrivalsList";
 import BestSellerList from "../pages/book/BestSellerList";
 import PopularList from "../pages/book/PopularList";
 import MyBorrowHistory from "../pages/borrow/MyBorrowHistory";
+import MyWishList from "../pages/wish/MyWishList";
 
 
 const RootRoutes = () => {
@@ -142,6 +143,9 @@ const RootRoutes = () => {
               {/* MyBorrowHistory */}
               <Route path="history" element={<MyBorrowHistory />} />
             </Route>
+
+            {/* MyWishList */}
+            <Route path="wish-list" element={<MyWishList />} />
 
           </Route>
         </Route>

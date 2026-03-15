@@ -3618,8 +3618,8 @@ label {
 }
 
 
-/* 마이페이지 대출 이력 스타일 */
-.borrow-item-card {
+/* 마이페이지 도서 관련 목록 카드 스타일 */
+.mypage-book-item-card {
     border: 1px solid #eee;
     margin-bottom: 20px;
     padding: 20px;
@@ -3658,8 +3658,8 @@ label {
     color: #999;
 }
 
-/* 전체 화면 구성 */
-.borrow-status-wrapper {
+/*마이페이지 내 도서 관련 페이지*/
+.mypage-book-status-wrapper {
     background-color: #f8f9fa;
     min-height: 100vh;
     padding: 40px 20px;
@@ -3672,7 +3672,7 @@ label {
 }
 
 /* 도서 대출 현황 카드 */
-.borrow-card {
+.mypage-book-card {
     background-color: #fff;
     border: 1px solid #e1e4e8;
     border-radius: 8px;
@@ -3683,7 +3683,7 @@ label {
     transition: box-shadow 0.2s;
 }
 
-.borrow-card:hover {
+.mypage-book-card:hover {
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 

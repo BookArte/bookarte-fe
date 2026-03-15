@@ -7,8 +7,8 @@ export const addWish = async (bookId) => {
 }
 
 /* 관심 도서 리스트 조회 api */
-export const getWishList = async () => {
-    const res = await apiClient.get('/wish');
+export const getWishList = async (data) => {
+    const res = await apiClient.get('/wish', data);
     return res.data;
 }
 
