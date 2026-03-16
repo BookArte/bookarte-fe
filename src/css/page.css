@@ -3617,50 +3617,8 @@ label {
     background-color: #fff9db !important;
 }
 
-
-/* 마이페이지 도서 관련 목록 카드 스타일 */
-.mypage-book-item-card {
-    border: 1px solid #eee;
-    margin-bottom: 20px;
-    padding: 20px;
-    background: #fff;
-    border-radius: 8px;
-}
-
-.borrow-meta {
-    background-color: #f9f9f9;
-    padding: 12px;
-    border-radius: 6px;
-    margin-top: 10px;
-}
-
-.text-red { color: #e74c3c; font-weight: bold; }
-
-/* 버튼 스타일 */
-.btn-small {
-    padding: 8px 16px;
-    font-size: 13px;
-    border-radius: 4px;
-    cursor: pointer;
-    border: 1px solid #ddd;
-}
-
-.btn-white { background: #fff; color: #333; }
-.btn-primary { background: #3498db; color: #fff; border: none; }
-.btn-small:disabled { background: #eee; color: #aaa; cursor: not-allowed; }
-
-/* 비어있는 상태 */
-.empty-state-card {
-    text-align: center;
-    padding: 100px 0;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    color: #999;
-}
-
 /*마이페이지 내 도서 관련 페이지*/
 .mypage-book-status-wrapper {
-    background-color: #f8f9fa;
     min-height: 100vh;
     padding: 40px 20px;
 }
@@ -3669,6 +3627,11 @@ label {
 .status-content-container {
     max-width: 1000px; 
     margin: 0 auto; 
+}
+
+.mypage-book-title {
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 /* 도서 대출 현황 카드 */
@@ -3691,8 +3654,8 @@ label {
 .borrow-info-bar {
     display: flex;
     gap: 30px;
-    background-color: #f1f3f5;
     padding: 12px 20px;
+    border: 1px solid ;
     border-radius: 4px;
     margin: 15px 0;
 }
@@ -3705,6 +3668,20 @@ label {
     margin-right: 8px;
     font-weight: 600;
 }
+
+
+/* 버튼 스타일 */
+.btn-small {
+    padding: 8px 16px;
+    font-size: 13px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+}
+
+.btn-white { background: #fff; color: #333; }
+.btn-primary { background: #3498db; color: #fff; border: none; }
+.btn-small:disabled { background: #eee; color: #aaa; cursor: not-allowed; }
 
 /* 대출 현황 카드 내 버튼 영역 */
 .action-area {

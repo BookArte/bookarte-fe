@@ -8,7 +8,7 @@ export const MYPAGE_STATS_CONFIG = [
     {
         label: "도서 대출현황",
         icon: "/assets/images/ico_loan.png",
-        dataKey: "loanCount",
+        dataKey: "borrowingCount",
         path: 'borrow/status'
     },
     {
@@ -32,7 +32,7 @@ export const MYPAGE_STATS_CONFIG = [
     {
         label: "나의 관심도서",
         icon: "/assets/images/ico_heart.png",
-        dataKey: "heartCount",
+        dataKey: "wishCount",
         path: 'wish-list'
     },
 ];

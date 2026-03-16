@@ -10,13 +10,13 @@ function MyBorrowHistoryView({ borrowHistory, status, handlers }) {
     if (loading) return <div style={{ textAlign: 'center', padding: '50px' }}>로딩 중...</div>;
 
     return (
-        <div className="borrow-status-wrapper">
-            <h2 className="borrow-status-title">나의 대출 내역</h2>
+        <div className="mypage-book-status-wrapper">
+            <h2 className="mypage-book-title">나의 대출 내역</h2>
             {borrowHistory.length === 0 ? (
                 <p>대출 내역이 없습니다.</p>
             ) : (
                 borrowHistory.map((item) => (
-                    <div key={item.borrowId} className="list-item borrow-card">
+                    <div key={item.borrowId} className="list-item mypage-book-card">
                         <div className="thumbnail-container">
                             <img
                                 src={item.bookThumbnail || 'https://via.placeholder.com/120x170'}
@@ -47,6 +47,35 @@ function MyBorrowHistoryView({ borrowHistory, status, handlers }) {
                         </div>
                     </div>
                 ))
+            )}
+            {borrowHistory.length > 0 && (
+                <div className="pagination">
+                    <button
+                        disabled={currentPage === 0}
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        className="page-nav-btn"
+                    >
+                        이전
+                    </button>
+
+                    {Array.from({ length: endPage - startPage }, (_, i) => startPage + i).map((pageIdx) => (
+                        <button
+                            key={pageIdx}
+                            onClick={() => handlePageChange(pageIdx)}
+                            className={`page-num-btn ${currentPage === pageIdx ? 'active' : ''}`}
+                        >
+                            {pageIdx + 1}
+                        </button>
+                    ))}
+
+                    <button
+                        disabled={currentPage >= totalPages - 1}
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        className="page-nav-btn"
+                    >
+                        다음
+                    </button>
+                </div>
             )}
         </div>
     );

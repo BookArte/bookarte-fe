@@ -11,7 +11,7 @@ function WishListView({ wishes, status, handlers }) {
 
     return (
         <div className="mypage-book-status-wrapper">
-            <h2 className="wish-list-title" >나의 관심 도서</h2>
+            <h2 className="mypage-book-title">나의 관심 도서</h2>
             {wishes.length === 0 ? (
                 < p > 관심 도서가 없습니다.</p>
             ) : (
@@ -32,16 +32,46 @@ function WishListView({ wishes, status, handlers }) {
                             </h3>
                             <div className="author-row">
                                 <span className="text-item">{item.bookAuthor} 지음</span>
-                                <span className="text-item">{item.bookTranslator} 옮김</span>
+                                {item.bookTranslator && <span className="text-item"> | {item.bookTranslator} 옮김</span>}
                                 <span className="text-item"> | {item.publisherName}</span>
                             </div>
                             <div className="book-row">
                                 <span className="text-item">ISBN:{item.bookIsbn}</span>
+                                <span className="text-item"> | 카테고리:{item.category}</span>
                             </div>
 
                         </div>
                     </div>
                 ))
+            )}
+            {wishes.length > 0 && (
+                <div className="pagination">
+                    <button
+                        disabled={currentPage === 0}
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        className="page-nav-btn"
+                    >
+                        이전
+                    </button>
+
+                    {Array.from({ length: endPage - startPage }, (_, i) => startPage + i).map((pageIdx) => (
+                        <button
+                            key={pageIdx}
+                            onClick={() => handlePageChange(pageIdx)}
+                            className={`page-num-btn ${currentPage === pageIdx ? 'active' : ''}`}
+                        >
+                            {pageIdx + 1}
+                        </button>
+                    ))}
+
+                    <button
+                        disabled={currentPage >= totalPages - 1}
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        className="page-nav-btn"
+                    >
+                        다음
+                    </button>
+                </div>
             )}
         </div >
     )
