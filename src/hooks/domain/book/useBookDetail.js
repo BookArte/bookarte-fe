@@ -1,9 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { getBookDetailByBookId, getRelatedBookList } from "../../../api/book.api";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import URL from '@/constants/url';
 import { borrowBook, getBookRollingYear } from "../../../api/borrow.api";
+import { addWish, deleteWish } from "../../../api/wish.api";
 
 
 export function useBookDetail() {
@@ -60,6 +61,27 @@ export function useBookDetail() {
         navigate(URL.BOOK_VIEW(bookId));
     }
 
+    const handleToggleWish = useCallback(async (bookId) => {
+        if (!book) return;
+        try {
+            const res = await (book.wish ? deleteWish(bookId) : addWish(bookId));
+
+            if (res.success) {
+                setBook(prev => ({ ...prev, wish: !prev.wish }));
+                toast.success(res.data);
+            }
+        } catch (error) {
+            console.error("관심도서 처리 실패:", error);
+            if (error.response?.status === 401) {
+                toast.error("로그인이 필요한 서비스입니다.");
+            } else {
+                toast.error("관심도서 처리 중 오류가 발생했습니다.");
+            }
+        }
+
+    }, [book, setBook]);
+
+
     return {
         book,
         stats,
@@ -67,7 +89,8 @@ export function useBookDetail() {
         loading,
         handlers: {
             handleBorrow,
-            handleViewBook
+            handleViewBook,
+            handleToggleWish
         }
 
     };

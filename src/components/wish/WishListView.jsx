@@ -1,6 +1,6 @@
-function MyBorrowHistoryView({ borrowHistory, status, handlers }) {
-    const { loading, totalPages, currentPage } = status;
-    const { handlePageChange, handleViewBook } = handlers;
+function WishListView({ wishes, status, handlers }) {
+    const { loading, totalElements, totalPages, currentPage } = status;
+    const { handleViewBook, handlePageChange } = handlers;
 
     const PAGE_GROUP_SIZE = 5;
     const currentGroup = Math.floor(currentPage / PAGE_GROUP_SIZE);
@@ -11,12 +11,12 @@ function MyBorrowHistoryView({ borrowHistory, status, handlers }) {
 
     return (
         <div className="mypage-book-status-wrapper">
-            <h2 className="mypage-book-title">나의 대출 내역</h2>
-            {borrowHistory.length === 0 ? (
-                <p>대출 내역이 없습니다.</p>
+            <h2 className="mypage-book-title">나의 관심 도서</h2>
+            {wishes.length === 0 ? (
+                < p > 관심 도서가 없습니다.</p>
             ) : (
-                borrowHistory.map((item) => (
-                    <div key={item.borrowId} className="list-item mypage-book-card">
+                wishes.map((item) => (
+                    <div key={item.w} className="list-item mypage-book-card">
                         <div className="thumbnail-container">
                             <img
                                 src={item.bookThumbnail || 'https://via.placeholder.com/120x170'}
@@ -32,23 +32,19 @@ function MyBorrowHistoryView({ borrowHistory, status, handlers }) {
                             </h3>
                             <div className="author-row">
                                 <span className="text-item">{item.bookAuthor} 지음</span>
+                                {item.bookTranslator && <span className="text-item"> | {item.bookTranslator} 옮김</span>}
                                 <span className="text-item"> | {item.publisherName}</span>
                             </div>
-                            <div className="borrow-info-bar">
-                                <div className="info-group">
-                                    <span className="label">대출일</span>
-                                    <span className="value">{item.borrowDate}</span>
-                                </div>
-                                <div className="info-group">
-                                    <span className="label">반납일</span>
-                                    <span className="value">{item.returnDate}</span>
-                                </div>
+                            <div className="book-row">
+                                <span className="text-item">ISBN:{item.bookIsbn}</span>
+                                <span className="text-item"> | 카테고리:{item.category}</span>
                             </div>
+
                         </div>
                     </div>
                 ))
             )}
-            {borrowHistory.length > 0 && (
+            {wishes.length > 0 && (
                 <div className="pagination">
                     <button
                         disabled={currentPage === 0}
@@ -77,8 +73,9 @@ function MyBorrowHistoryView({ borrowHistory, status, handlers }) {
                     </button>
                 </div>
             )}
-        </div>
-    );
+        </div >
+    )
+
 }
 
-export default MyBorrowHistoryView;
+export default WishListView;

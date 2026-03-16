@@ -4,10 +4,10 @@ function MyBorrowStatus({ borrows, loading, getStatusConfig, handlers }) {
     if (loading) return <div className="book-detail-container">로딩 중...</div>;
 
     return (
-        <div className="borrow-status-wrapper">
+        <div className="mypage-book-status-wrapper">
             <div className="status-content-container">
-                <div className="borrow-status-header">
-                    <h2 className="borrow-status-title">대출현황</h2>
+                <div className="mypage-book-status-header">
+                    <h2 className="mypage-book-title">대출현황</h2>
                     <p className="borrow-status-subtitle">
                         대출 후 일주일이 지나면 1회에 한하여 반납 기한을 연장할 수 있습니다.
                         단, 연체 중인 도서에 대해서는 연장이 불가합니다.
@@ -20,7 +20,7 @@ function MyBorrowStatus({ borrows, loading, getStatusConfig, handlers }) {
                             const statusConfig = getStatusConfig(item.status);
                             return (
 
-                                <div key={item.borrowId} className="list-item borrow-card">
+                                <div key={item.borrowId} className="list-item mypage-book-card">
                                     <div className="thumbnail-container">
                                         <img
                                             src={item.bookThumbnail || 'https://via.placeholder.com/120x170'}
