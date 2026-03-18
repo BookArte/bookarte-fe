@@ -3670,18 +3670,32 @@ label {
 }
 
 
-/* 버튼 스타일 */
 .btn-small {
     padding: 8px 16px;
     font-size: 13px;
     border-radius: 4px;
     cursor: pointer;
     border: 1px solid #ddd;
+    transition: transform 0.1s, background-color 0.1s, box-shadow 0.1s;
+    outline: none;
+}
+
+.btn-small:active:not(:disabled) {
+    transform: scale(0.95);
 }
 
 .btn-white { background: #fff; color: #333; }
+.btn-white:hover:not(:disabled) { background: #f8f9fa; border-color: #bbb; }
+
 .btn-primary { background: #3498db; color: #fff; border: none; }
-.btn-small:disabled { background: #eee; color: #aaa; cursor: not-allowed; }
+.btn-primary:hover:not(:disabled) { background: #2980b9; }
+
+.btn-small:disabled { 
+    background: #eee; 
+    color: #aaa; 
+    cursor: not-allowed; 
+    transform: none;
+}
 
 /* 대출 현황 카드 내 버튼 영역 */
 .action-area {

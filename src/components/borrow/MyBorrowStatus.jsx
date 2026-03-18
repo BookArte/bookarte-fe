@@ -17,7 +17,7 @@ function MyBorrowStatus({ borrows, loading, getStatusConfig, handlers }) {
                 <div className="list-container">
                     {borrows.length > 0 ? (
                         borrows.map((item) => {
-                            const statusConfig = getStatusConfig(item.status);
+                            const statusConfig = getStatusConfig(item);
                             return (
 
                                 <div key={item.borrowId} className="list-item mypage-book-card">
