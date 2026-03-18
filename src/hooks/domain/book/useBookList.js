@@ -4,6 +4,7 @@ import { getAllBookList } from "../../../api/book.api";
 import URL from '@/constants/url';
 import { toast } from "react-toastify";
 import { getCategoryList } from "../../../api/category.api";
+import { handleApiError } from "../../utils/errorHandler";
 
 export function useBookList() {
     const [books, setBooks] = useState([]);
@@ -46,7 +47,10 @@ export function useBookList() {
                 setTotalPages(res.data.totalPages);
                 setCurrentPage(res.data.number);
             }
-        } finally {
+        } catch (error) {
+            handleApiError(error, "도서 목록 로드 실패")
+        }
+        finally {
             setLoading(false);
         }
     };
@@ -57,7 +61,7 @@ export function useBookList() {
             const res = await getCategoryList();
             if (res.success) setCategories(res.data);
         } catch (error) {
-            toast.error("카테고리 목록을 불러오는 중 오류가 발생했습니다.");
+            handleApiError(error, "카테고리 로드 실패");
         }
     }
 

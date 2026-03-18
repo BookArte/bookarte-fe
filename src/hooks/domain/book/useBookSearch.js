@@ -1,5 +1,6 @@
 import { getAllBookList } from "../../../api/book.api";
 import { useState } from "react";
+import { handleApiError } from "../../utils/errorHandler";
 
 export function useBookSearch() {
     const [bookTitle, setbookTitle] = useState('');
@@ -19,7 +20,7 @@ export function useBookSearch() {
                 setResults(res.data.content);
             }
         } catch (error) {
-            console.error("검색 실패", error);
+            handleApiError(error, "도서 검색 실패")
         } finally {
             setLoading(false);
         }

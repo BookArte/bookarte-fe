@@ -36,6 +36,8 @@ export function useBookStatusList() {
                 setTotalPages(res.data.totalPages);
                 setCurrentPage(res.data.number);
             }
+        } catch (error) {
+            handleApiError(error, "도서 목록 로드 실패")
         } finally {
             setLoading(false);
         }
@@ -47,7 +49,7 @@ export function useBookStatusList() {
             const res = await getCategoryList();
             if (res.success) setCategories(res.data);
         } catch (error) {
-            toast.error("카테고리 목록을 불러오는 중 오류가 발생했습니다.");
+            handleApiError(error, "카테고리 로드 실패")
         }
     }
 
@@ -137,8 +139,7 @@ export function useBookStatusList() {
                     fetchBooks();
                 }
             } catch (error) {
-                console.error("삭제 작업 중 오류 발생:", error);
-                toast.error("삭제 작업 중 오류가 발생했습니다. 다시 시도해 주세요.");
+                handleApiError(error, "도서 삭제 실패")
             }
         }
     };

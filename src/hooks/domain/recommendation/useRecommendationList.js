@@ -20,7 +20,7 @@ export function useRecommendationList() {
                 setBooks(response.data);
             }
         } catch (error) {
-            console.error("도서 목록 로딩 실패:", error);
+            handleApiError(error, "현재 노출 중인 추천 도서 목록 로드 실패")
         } finally {
             setLoading(false);
         }

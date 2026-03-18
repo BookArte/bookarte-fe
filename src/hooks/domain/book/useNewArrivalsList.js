@@ -37,6 +37,7 @@ export function useNewArrivalsList() {
                 setSelectedDate(latest);
             } catch (error) {
                 setSelectedDate(new Date());
+                handleApiError(error, "신착 도서 로드 실패")
             }
         };
 
@@ -55,8 +56,7 @@ export function useNewArrivalsList() {
             setTotalPages(res.data.totalPages);
             setCurrentPage(page);
         } catch (error) {
-            toast.error("신착 도서 목록을 불러오는 중 오류가 발생했습니다.");
-            console.error("Error fetching new arrivals list:", error);
+            handleApiError(error, "도서 로드 실패")
         } finally {
             setLoading(false);
         }

@@ -27,7 +27,10 @@ export function usePopularList() {
                 setTotalPages(res.data.totalPages);
                 setCurrentPage(res.data.number);
             }
-        } finally {
+        } catch (error) {
+            handleApiError(error, "추천 도서 목록 로드 실패")
+        }
+        finally {
             setLoading(false);
         }
     }, [period]);

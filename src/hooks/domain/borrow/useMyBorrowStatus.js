@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { extendBorrow, getMyBorrowList, sendReturnRequest } from "../../../api/borrow.api";
 import URL from '@/constants/url';
 import { toast } from "react-toastify";
+import { handleApiError } from "../../utils/errorHandler";
 
 export function useMyBorrowList() {
     const [borrows, setBorrows] = useState([]);
@@ -24,7 +25,7 @@ export function useMyBorrowList() {
             const res = await getMyBorrowList({ params: { ...searchParam } });
             setBorrows(res.data.content);
         } catch (error) {
-            toast.error("대출 현황을 불러오지 못했습니다.");
+            handleApiError(error, "대출 중 도서 목록 로드 실패")
         } finally {
             setLoading(false);
         }
@@ -40,8 +41,8 @@ export function useMyBorrowList() {
             toast.success(res.data);
             fetchMyBorrows();
         } catch (error) {
-            console.log(error);
-            toast.error(error.data);
+            handleApiError(error, "도서 대출 연장 실패")
+
         }
     }
     const handleReturnRequest = async (borrowId) => {
@@ -50,8 +51,7 @@ export function useMyBorrowList() {
             toast.success(res.data);
             fetchMyBorrows();
         } catch (error) {
-            console.log(error);
-            toast.error(error.data);
+            handleApiError(error, "반납 요청 실패")
         }
     }
 
