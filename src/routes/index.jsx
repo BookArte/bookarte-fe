@@ -31,6 +31,7 @@ import AdminLayout from "../components/admin/AdminLayout";
 import RecommendationHistory from "../pages/recommendation/RecommendationHistory";
 import BorrowHistory from "../pages/borrow/BorrowHistory";
 import BookStatusList from "../pages/book/BookStatusList";
+import AdminNoticePage from "../pages/admin/notice/AdminNoticePage";
 
 
 const RootRoutes = () => {
@@ -93,6 +94,9 @@ const RootRoutes = () => {
 
           {/*연체 패널티 관리*/}
           <Route path="penalty/management" element={<PenaltyManagement />} />
+
+          {/* 공지사항 관리 */}
+          <Route path="notice" element={<AdminNoticePage />} />
         </Route>
 
 

@@ -64,7 +64,7 @@ const BoardListLayout = ({
                                     />
                                 </td>
                             )}
-                            {renderRow(item)}
+                            {renderRow(item, index)}
                         </tr>
                     ))}
 
