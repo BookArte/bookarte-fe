@@ -1,112 +1,63 @@
+import BoardListLayout from "../admin/BoardListLayout";
+
 function BookStatusListView({ books, categories, status, handlers }) {
     const { loading, totalPages, currentPage, selectedIds, setSelectedIds } = status;
     const { handlePageChange, handleReset, handleUpdateBook, handleSelectAll, handleSelectOne, handleBulkDelete } = handlers;
 
-    const PAGE_GROUP_SIZE = 5;
-    const currentGroup = Math.floor(currentPage / PAGE_GROUP_SIZE);
-    const startPage = currentGroup * PAGE_GROUP_SIZE;
-    const endPage = Math.min(startPage + PAGE_GROUP_SIZE, totalPages);
+    const columns = [
+        { label: '번호', width: '100px' },
+        { label: '도서 정보', width: 'auto' },
+        { label: '출판사', width: '200px' },
+        { label: 'ISBN', width: 'auto' },
+        { label: '상태', width: '200px' },
+        { label: '관리', width: '200px' },
+    ];
+
+    const renderRow = (item) => (
+        <>
+            <td className="number-column">{item.bookId}</td>
+            <td className="book-info-td">
+                <img src={item.bookThumbnail} alt="" className="mini-thumb" />
+                <div>
+                    <div className="book-title">{item.bookTitle}</div>
+                    <div className="book-author">{item.bookAuthor}</div>
+                </div>
+            </td>
+            <td>{item.publisherName}</td>
+            <td>{item.bookIsbn}</td>
+            <td>
+                <span className={`status-badge ${item.canBorrow ? 'green' : 'blue'}`}>
+                    {item.canBorrow ? '대출 가능' : '대출 중'}
+                </span>
+            </td>
+            <td className="manage-column">
+                <button onClick={() => handleUpdateBook(item.bookId)}>수정</button>
+            </td>
+        </>
+    );
 
     if (loading) return <div style={{ textAlign: 'center', padding: '50px' }}>로딩 중...</div>;
 
     return (
-        <div className="book-work-container">
-            <h2 className="book-work-title">도서 현황</h2>
-            <div className="filter-section">
-                <input type="text" placeholder="도서명 또는 대출자 검색..." />
-                <input type="date" name="searchStartDate" /> ~ <input type="date" name="searchEndDate" />
-                <button className="search-btn">조회</button>
-            </div>
-            <div className="table-actions">
-                <button
-                    className="bulk-del-btn"
-                    disabled={selectedIds.length === 0}
-                    onClick={handleBulkDelete}
-                >
-                    선택 삭제 ({selectedIds.length})
-                </button>
-            </div>
-            <table className="work-list-table">
-                <thead>
-                    <tr>
-                        <th className="check-column">
-                            <input
-                                type="checkbox"
-                                onChange={handleSelectAll}
-                                checked={selectedIds.length === books.length && books.length > 0}
-                            />
-                        </th>
-                        <th className="number-column">번호</th>
-                        <th className="book-info-column">도서 정보</th>
-                        <th className="publisher-column">출판사</th>
-                        <th className="isbn-column">ISBN</th>
-                        <th className="status-column">상태</th>
-                        <th className="manage-column">관리</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {books.map((item, index) => (
-                        <tr key={item.bookId} className={selectedIds.includes(item.bookId) ? 'selected-row' : ''}>
-                            <td>
-                                <input
-                                    type="checkbox"
-                                    checked={selectedIds.includes(item.bookId)}
-                                    onChange={() => handleSelectOne(item.bookId)}
-                                />
-                            </td>
-                            <td className="number-column">{item.bookId}</td>
-                            <td className="book-info-td">
-                                <img src={item.bookThumbnail} alt="" className="mini-thumb" />
-                                <div>
-                                    <div className="book-title">{item.bookTitle}</div>
-                                    <div className="book-author">{item.bookAuthor}</div>
-                                </div>
-                            </td>
-                            <td>{item.publisherName}</td>
-                            <td>{item.bookIsbn}</td>
-                            <td>
-                                <span className={`status-badge ${item.canBorrow ? 'green' : 'blue'}`}>
-                                    {item.canBorrow ? '대출 가능' : '대출 중'}
-                                </span>
-                            </td>
-                            <td className="manage-column">
-                                <button onClick={() => handleUpdateBook(item.bookId)}>수정</button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-
-            {books.length > 0 && (
-                <div className="pagination">
-                    <button
-                        disabled={currentPage === 0}
-                        onClick={() => handlePageChange(currentPage - 1)}
-                        className="page-nav-btn"
-                    >
-                        이전
-                    </button>
-
-                    {Array.from({ length: endPage - startPage }, (_, i) => startPage + i).map((pageIdx) => (
-                        <button
-                            key={pageIdx}
-                            onClick={() => handlePageChange(pageIdx)}
-                            className={`page-num-btn ${currentPage === pageIdx ? 'active' : ''}`}
-                        >
-                            {pageIdx + 1}
-                        </button>
-                    ))}
-
-                    <button
-                        disabled={currentPage >= totalPages - 1}
-                        onClick={() => handlePageChange(currentPage + 1)}
-                        className="page-nav-btn"
-                    >
-                        다음
-                    </button>
-                </div>
-            )}
-        </div>
+        <BoardListLayout
+            title="도서 현황"
+            searchPlaceholder="도서명 또는 대출자 검색..."
+            columns={columns}
+            data={books.map(book => ({ ...book, id: book.bookId }))}
+            showCheckbox={true}
+            selection={{
+                selectedIds: selectedIds,
+                onSelectAll: handleSelectAll,
+                onSelectOne: handleSelectOne,
+                onBulkDelete: handleBulkDelete
+            }}
+            pagination={{
+                currentPage,
+                totalPages,
+                handlePageChange
+            }}
+            renderRow={renderRow}
+        />
     );
 }
 
