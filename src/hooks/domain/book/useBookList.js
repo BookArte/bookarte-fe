@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { getAllBookList } from "../../../api/book.api";
 import URL from '@/constants/url';
 import { getCategoryList } from "../../../api/category.api";
-import { handleApiError } from "../../utils/errorHandler";
 import { useDataFetch } from "../../utils/useDataFetch";
 
 export function useBookList() {

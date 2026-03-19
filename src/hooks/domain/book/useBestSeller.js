@@ -28,5 +28,4 @@ export function useBestSeller() {
             loading,
         }
     };
-
 }

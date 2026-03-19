@@ -1,6 +1,5 @@
 import { getAllBookList } from "../../../api/book.api";
 import { useState } from "react";
-import { handleApiError } from "../../utils/errorHandler";
 import { useDataFetch } from "../../utils/useDataFetch";
 
 export function useBookSearch() {
