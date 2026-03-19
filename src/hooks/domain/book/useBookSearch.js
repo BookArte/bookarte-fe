@@ -12,7 +12,6 @@ export function useBookSearch() {
         if (!bookTitle.trim()) return alert("검색어를 입력하세요.");
         setLoading(true);
         try {
-            //도서  검색
             const res = await getAllBookList({
                 params: { [searchType]: bookTitle, size: 10 }
             });
@@ -25,6 +24,7 @@ export function useBookSearch() {
             setLoading(false);
         }
     };
+
     return {
         state: {
             bookTitle,

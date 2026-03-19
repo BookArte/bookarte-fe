@@ -4,12 +4,9 @@ import { toast } from "react-toastify";
 import { getCategoryList } from "../../../api/category.api";
 import URL from '@/constants/url';
 import { useNavigate } from "react-router-dom";
+import { useDataFetch } from "../../utils/useDataFetch";
 
 export function useBookStatusList() {
-    const [books, setBooks] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [totalPages, setTotalPages] = useState(0);
-    const [currentPage, setCurrentPage] = useState(0);
     const [categories, setCategories] = useState([]);
     const [searchParams, setSearchParams] = useState({
         bookTitle: '',
@@ -25,23 +22,13 @@ export function useBookStatusList() {
 
     const [selectedIds, setSelectedIds] = useState([]);
 
-    const fetchBooks = async (page = 0) => {
-        setLoading(true);
-        try {
-            const res = await getAllBookList({
-                params: { ...searchParams, page }
-            });
-            if (res.success) {
-                setBooks(res.data.content);
-                setTotalPages(res.data.totalPages);
-                setCurrentPage(res.data.number);
-            }
-        } catch (error) {
-            handleApiError(error, "도서 목록 로드 실패")
-        } finally {
-            setLoading(false);
-        }
-    };
+    const {
+        data: books,
+        status,
+        fetchData
+    } = useDataFetch(getAllBookList);
+
+    const { loading, totalElements, currentPage, totalPages } = status;
 
     // 카테고리 목록 조회 함수
     const fetrcCategories = async () => {
@@ -70,13 +57,13 @@ export function useBookStatusList() {
 
 
     useEffect(() => {
-        fetchBooks();
+        fetchData(0, searchParams);
         fetrcCategories();
     }, [searchParams]);
 
     const handlePageChange = (page) => {
         if (page >= 0 && page < totalPages) {
-            fetchBooks(page);
+            fetchData(page);
             window.scrollTo(0, 0);
         }
     };
