@@ -7,9 +7,6 @@ import { handleApiError } from "../../utils/errorHandler";
 import { useDataFetch } from "../../utils/useDataFetch";
 
 export function useBookList() {
-
-    const [categories, setCategories] = useState([]);
-
     const navigate = useNavigate();
 
     const [isDetailOpen, setIsDetailOpen] = useState(false); // 상세검색 패널 열림 상태
@@ -26,27 +23,24 @@ export function useBookList() {
     });
 
     useEffect(() => {
-        fetchData(0, searchParams);
-        fetrcCategories();
+        fetchBooks(0, searchParams);
+        fetchCategories();
     }, [searchParams.sort]);
 
+    // 도서 목록 조회
     const {
         data: books,
         status,
-        fetchData
+        fetchData: fetchBooks
     } = useDataFetch(getAllBookList);
 
     const { loading, totalElements, currentPage, totalPages } = status;
 
-    // 카테고리 목록 조회 함수
-    const fetrcCategories = async () => {
-        try {
-            const res = await getCategoryList();
-            if (res.success) setCategories(res.data);
-        } catch (error) {
-            handleApiError(error, "카테고리 로드 실패");
-        }
-    }
+    //카테고리 목록 조회
+    const {
+        data: categories,
+        fetchData: fetchCategories
+    } = useDataFetch(getCategoryList)
 
     // 초기화 함수
     const handleReset = () => {
@@ -89,7 +83,7 @@ export function useBookList() {
     //페이지 변경 핸들러
     const handlePageChange = (newPage) => {
         if (newPage >= 0 && newPage < totalPages) {
-            fetchData(newPage);
+            fetchBooks(newPage);
             window.scrollTo(0, 0);
         }
     };
@@ -111,7 +105,7 @@ export function useBookList() {
         },
         searchParams,
         handlers: {
-            fetchData,
+            fetchBooks,
             handleReset,
             handleViewBook,
             handleDateChange,

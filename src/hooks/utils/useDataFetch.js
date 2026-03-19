@@ -12,14 +12,22 @@ export const useDataFetch = (apiFunction) => {
         setLoading(true);
 
         try {
-            const res = await apiFunction({
-                params: { ...extraParams, page }
-            });
+            const requestParams = page !== null
+                ? { ...extraParams, page }
+                : { ...extraParams };
+
+            const res = await apiFunction({ params: requestParams });
             if (res.success) {
-                setData(res.data.content || res.data);
-                setTotalPages(res.data.totalPages || 0);
-                setTotalElements(res.data.totalElements || 0);
-                setCurrentPage(res.data.number !== undefined ? res.data.number : page);
+                if (res.data && res.data.content) {
+                    // 페이징 응답인 경우
+                    setData(res.data.content);
+                    setTotalPages(res.data.totalPages || 0);
+                    setTotalElements(res.data.totalElements || 0);
+                    setCurrentPage(res.data.number || 0);
+                } else {
+                    // 일반 리스트 응답인 경우
+                    setData(res.data || []);
+                }
             }
         } catch (error) {
             handleApiError(error, "데이터 로드 실패")

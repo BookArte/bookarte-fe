@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { useDataFetch } from "../../utils/useDataFetch";
 
 export function useBookStatusList() {
-    const [categories, setCategories] = useState([]);
     const [searchParams, setSearchParams] = useState({
         bookTitle: '',
         bookAuthor: '',
@@ -30,15 +29,11 @@ export function useBookStatusList() {
 
     const { loading, totalElements, currentPage, totalPages } = status;
 
-    // 카테고리 목록 조회 함수
-    const fetrcCategories = async () => {
-        try {
-            const res = await getCategoryList();
-            if (res.success) setCategories(res.data);
-        } catch (error) {
-            handleApiError(error, "카테고리 로드 실패")
-        }
-    }
+    const {
+        data: categories,
+        fetchData: fetchCategories
+    } = useDataFetch(getCategoryList)
+
 
     // 초기화 함수
     const handleReset = () => {
@@ -58,7 +53,7 @@ export function useBookStatusList() {
 
     useEffect(() => {
         fetchData(0, searchParams);
-        fetrcCategories();
+        fetchCategories();
     }, [searchParams]);
 
     const handlePageChange = (page) => {
@@ -137,6 +132,7 @@ export function useBookStatusList() {
         status: {
             loading,
             totalPages,
+            totalElements,
             currentPage,
             selectedIds,
             setSelectedIds
