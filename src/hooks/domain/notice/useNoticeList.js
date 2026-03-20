@@ -2,6 +2,7 @@ import { getBoardList, deleteBoards } from "@/api/board.api";
 import { useBoardList } from "../common/useBoardList"
 
 export function useNoticeList() {
+    const TYPE = 'notice';
     const {
         data: data,
         loading,
@@ -11,7 +12,7 @@ export function useNoticeList() {
         handlers: boardHandlers,
         getVirtualNumber
     } = useBoardList({
-        type: 'notice',
+        type: TYPE,
         fetchFn: getBoardList,
         deleteFn: deleteBoards,
         idKey: 'id',
@@ -32,12 +33,14 @@ export function useNoticeList() {
         });
     };
 
-    const onBulkDelete = async () => {
+    const onBulkDelete = async (ids) => {
         const confirmMessage =
             "선택한 공지사항을 삭제하시겠습니까?\n" +
             "삭제된 데이터는 복구할 수 없습니다.";
 
-        await boardHandlers.handleBulkDelete(confirmMessage);
+        const actualIds = (ids && ids.nativeEvent) ? null : ids;
+
+        await boardHandlers.handleBulkDelete(actualIds, confirmMessage);
     };
 
     return {
@@ -46,12 +49,14 @@ export function useNoticeList() {
             loading,
             ...pagination,
             selectedIds: selection.selectedIds,
+            type: TYPE
         },
         handlers: {
             ...pagination,
             ...selection,
             handleReset,
             handleBulkDelete: onBulkDelete,
+            handleView: boardHandlers.handleView,
             setSearchParams: params.setSearchParams
         },
         getVirtualNumber

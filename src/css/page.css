@@ -4422,17 +4422,31 @@ input[type="checkbox"] {
 .work-list-table button {
   padding: 8px 12px;
   background-color: white;
-  color: #0056b3;
-  border: 1px solid #0056b3;
   border-radius: 6px;
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
+  margin: 0 4px;
 }
 
-.work-list-table button:hover {
+.work-list-table .blue-btn {
+  color: #0056b3;
+  border: 1px solid #0056b3;
+}
+
+.work-list-table .red-btn {
+  color: #dc3545;
+  border: 1px solid #dc3545;
+}
+
+.work-list-table .blue-btn:hover {
   background-color: #0056b3;
+  color: white;
+}
+
+.work-list-table .red-btn:hover {
+  background-color: #dc3545;
   color: white;
 }
 

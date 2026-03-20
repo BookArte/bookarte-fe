@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import URL from '@/constants/url';
 
 export function useBoardList({
     type,
@@ -8,6 +10,7 @@ export function useBoardList({
     idKey = 'id',
     initialParams = {}
 }) {
+    const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [totalPages, setTotalPages] = useState(0);
@@ -62,17 +65,27 @@ export function useBoardList({
         );
     };
 
-    const handleBulkDelete = async (confirmMessage) => {
-        if (selectedIds.length === 0 || !deleteFn) return;
+    const handleBulkDelete = async (ids = null, confirmMessage = "해당 항목을 삭제하시겠습니까?") => {
 
-        if (window.confirm(confirmMessage || "선택한 항목을 삭제하시겠습니까?")) {
+        const targetIds = ids ? (Array.isArray(ids) ? ids : [ids]) : selectedIds;
+
+        if (targetIds.length === 0 || !deleteFn) {
+            toast.warn("삭제할 항목을 선택해주세요.");
+            return;
+        }
+
+        if (window.confirm(confirmMessage)) {
             try {
-                const response = await deleteFn({ [`${idKey}s`]: selectedIds });
+                const response = await deleteFn(type, targetIds);
 
                 if (response.success) {
                     toast.success("삭제 작업이 완료되었습니다.");
                     setSelectedIds([]);
-                    fetchData(currentPage);
+
+                    const isLastItemOnPage = data.length <= targetIds.length && currentPage > 0;
+                    const targetPage = isLastItemOnPage ? currentPage - 1 : currentPage;
+
+                    fetchData(targetPage);
                 }
                 return response;
             } catch (error) {
@@ -80,6 +93,10 @@ export function useBoardList({
             }
         }
     };
+
+    const handleView = (type, id) => {
+        navigate(URL.ADMIN_BOARD_VIEW(type, id));
+    }
 
     return {
         data,
@@ -90,6 +107,6 @@ export function useBoardList({
             return totalElements - (currentPage * searchParams.size) - index;
         },
         selection: { selectedIds, setSelectedIds, handleSelectAll, handleSelectOne },
-        handlers: { fetchData, handleBulkDelete }
+        handlers: { fetchData, handleBulkDelete, handleView }
     };
 }

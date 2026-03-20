@@ -31,7 +31,7 @@ function BookStatusListView({ books, categories, status, handlers }) {
                 </span>
             </td>
             <td className="manage-column">
-                <button onClick={() => handleUpdateBook(item.bookId)}>수정</button>
+                <button className="blue-btn" onClick={() => handleUpdateBook(item.bookId)}>수정</button>
             </td>
         </>
     );

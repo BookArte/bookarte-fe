@@ -6,6 +6,6 @@ export const getBoardList = async (type, params) => {
 };
 
 export const deleteBoards = async (type, ids) => {
-    const res = await apiClient.delete(`/board/${type}/dels`, { data: { ids } });
+    const res = await apiClient.delete(`/board/${type}`, { data: { boardIds: ids } });
     return res.data;
 }

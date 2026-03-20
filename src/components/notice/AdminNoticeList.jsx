@@ -10,8 +10,8 @@ function AdminNoticeList({ data, status, handlers, getVirtualNumber }) {
                 <td>{item.regMemberUserId}</td>
                 <td>{new Date(item.createdAt).toLocaleDateString()}</td>
                 <td>
-                    <button className="edit-btn">수정</button>
-                    <button className="del-btn">삭제</button>
+                    <button className="blue-btn" onClick={() => { handlers.handleView(status.type, item.id) }}>수정</button>
+                    <button className="red-btn" onClick={() => { handlers.handleBulkDelete(item.id) }}>삭제</button>
                 </td>
             </>
         );

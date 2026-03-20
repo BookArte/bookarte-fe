@@ -132,6 +132,9 @@ const URL = {
   ADMIN_NEWS_VIEW: "/admin/news/view", // 사이트관리/새소식관리상세
   ADMIN_NEWS_WRITE: "/admin/news/write", // 사이트관리/새소식관리등록
 
+  ADMIN_BOARD_VIEW: (type, id) => `/admin/${type}/view/${id}`, // 사이트관리/게시판상세
+  ADMIN_BOARD_WRITE: (type, id) => `/admin/${type}/write/${id}`, // 사이트관리/게시판등록
+
 };
 
 
