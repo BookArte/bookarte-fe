@@ -3941,6 +3941,124 @@ label {
   background: #eee;
 }
 
+/* 패널티 영역 */
+.penalty-badge-wrapper {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.penalty-badge-trigger {
+    background-color: #ff4d4f;
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(255, 77, 79, 0.3);
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.penalty-badge-trigger:hover {
+    background-color: #f5222d;
+    transform: translateY(-1px);
+}
+
+.penalty-modal-inner {
+    padding: 5px 0;
+}
+
+.penalty-summary-card {
+    background: #fff1f0;
+    border: 1px solid #ffa39e;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.summary-label {
+    font-size: 13px;
+    color: #8c8c8c;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.summary-date-range {
+    font-size: 1.25rem;
+    color: #262626;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+}
+
+.summary-countdown {
+    font-size: 15px;
+    color: #cf1322;
+    margin: 0;
+}
+
+.summary-countdown strong {
+    font-size: 18px;
+    text-decoration: underline;
+}
+
+.detail-title {
+    font-size: 14px;
+    color: #595959;
+    margin-bottom: 12px;
+    border-left: 3px solid #bfbfbf;
+    padding-left: 8px;
+}
+
+.penalty-reason-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 180px;
+    overflow-y: auto; 
+}
+
+.penalty-reason-item {
+    font-size: 14px;
+    color: #434343;
+    padding: 12px 10px;
+    border-bottom: 1px solid #f0f0f0;
+    line-height: 1.5;
+}
+
+.penalty-reason-item:last-child {
+    border-bottom: none;
+}
+
+.footer-notice {
+    font-size: 12px;
+    color: #bfbfbf;
+    text-align: center;
+    margin: 20px 0 12px;
+}
+
+.penalty-confirm-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #262626;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.penalty-confirm-btn:hover {
+    background-color: #434343;
+}
+
+.penalty-confirm-btn:active {
+    transform: scale(0.98);
+}
+
 /* 마이페이지 개인정보 페이지 */
 .member-info-container {
   background-color: #fff;

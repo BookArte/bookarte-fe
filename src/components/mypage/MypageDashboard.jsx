@@ -5,11 +5,11 @@ import MypageStatusCard from './MypageStatusCard';
 
 function MypageDashboard() {
 
-    const { userData, stats } = useOutletContext();
+    const { userData, stats, penalties } = useOutletContext();
 
     return (
         <>
-            <MypageHeader name={userData.name} />
+            <MypageHeader name={userData.name} penalties={penalties} />
             <MypagePointBox point={userData.point} grade={userData.grade} />
             <div className="mypage-status-grid">
                 {stats.map((item, index) => (
