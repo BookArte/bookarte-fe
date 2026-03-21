@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import { getBestSellerBookList } from "../../../api/book.api";
+import { handleApiError } from "../../utils/errorHandler";
 
 export function useBestSeller() {
     const [bestSellers, setBestSellers] = useState([]);
@@ -12,8 +12,7 @@ export function useBestSeller() {
             const res = await getBestSellerBookList();
             setBestSellers(res.data);
         } catch (error) {
-            toast.error("베스트셀러 목록을 불러오는 중 오류가 발생했습니다.");
-            console.error("Error fetching best sellers list:", error);
+            handleApiError(error, "베스트/스테디셀러 로드 실패");
         } finally {
             setLoading(false);
         }
@@ -29,5 +28,4 @@ export function useBestSeller() {
             loading,
         }
     };
-
 }

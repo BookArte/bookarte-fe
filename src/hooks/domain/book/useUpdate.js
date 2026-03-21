@@ -28,25 +28,25 @@ export function useUpdate() {
 
 
     useEffect(() => {
-        const getBookDetailHandler = async () => {
-            try {
-                const res = await getBookDetailByBookId(bookId);
-                if (res.success) {
-                    const data = res.data;
-                    Object.entries(data).forEach(([fieldName, value]) => {
-                        setBookForm(fieldName, value);
-                    });
-                }
-            } catch (error) {
-                console.error("상세 정보 로딩 실패:", error);
-                toast.error(error.data);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        getBookDetailHandler();
+        fetchBookDetail();
     }, [bookId]);
+
+    const fetchBookDetail = async () => {
+        try {
+            const res = await getBookDetailByBookId(bookId);
+            if (res.success) {
+                const data = res.data;
+                Object.entries(data).forEach(([fieldName, value]) => {
+                    setBookForm(fieldName, value);
+                });
+            }
+        } catch (error) {
+            handleApiError(error, "도서 상세 정보 로드 실패")
+        } finally {
+            setLoading(false);
+        }
+
+    }
 
     const handleSubmit = async (e) => {
         const { bookId: _, ...updateData } = bookForm;

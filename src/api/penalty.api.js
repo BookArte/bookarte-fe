@@ -16,3 +16,8 @@ export const releasePenalty = async (penaltyId, releaseReason) => {
     });
     return res.data;
 }
+
+export const getMyPenalties = async () => {
+    const res = await apiClient.get('/penalty')
+    return res.data;
+}

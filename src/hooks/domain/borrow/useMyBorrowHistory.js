@@ -28,8 +28,7 @@ export function useMyBorrowHistory() {
             setTotalPages(res.data.totalPages);
             setCurrentPage(res.data.number);
         } catch (error) {
-            console.error("내 대출 내역을 불러오는 중 오류 발생:", error);
-            toast.error("내 대출 내역을 불러오는 중 오류가 발생했습니다.");
+            handleApiError(error, "개인 대출 이력 로드 실패")
         } finally {
             setLoading(false);
         }

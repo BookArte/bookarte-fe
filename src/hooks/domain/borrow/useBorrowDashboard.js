@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { approveReturn, getAllBorrowList } from "../../../api/borrow.api";
 import { toast } from "react-toastify";
+import { handleApiError } from "../../utils/errorHandler";
 
 export function useBorrowDashboard() {
     const [borrow, setBorrow] = useState({
@@ -28,8 +29,7 @@ export function useBorrowDashboard() {
             const res = await getAllBorrowList({ params: { ...searchParams } });
             setBorrow(res.data);
         } catch (error) {
-            console.error("대출 현황 목록 로드 실패:", error);
-            toast.error("대출 현황 목록을 불러오는데 실패했습니다.");
+            handleApiError(error, "대출 중인 도서 상황 목록 로드 실패")
         } finally {
             setLoading(false);
         }

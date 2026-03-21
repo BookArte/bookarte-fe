@@ -4,13 +4,9 @@ import { toast } from "react-toastify";
 import { getCategoryList } from "../../../api/category.api";
 import URL from '@/constants/url';
 import { useNavigate } from "react-router-dom";
+import { useDataFetch } from "../../utils/useDataFetch";
 
 export function useBookStatusList() {
-    const [books, setBooks] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [totalPages, setTotalPages] = useState(0);
-    const [currentPage, setCurrentPage] = useState(0);
-    const [categories, setCategories] = useState([]);
     const [searchParams, setSearchParams] = useState({
         bookTitle: '',
         bookAuthor: '',
@@ -25,31 +21,19 @@ export function useBookStatusList() {
 
     const [selectedIds, setSelectedIds] = useState([]);
 
-    const fetchBooks = async (page = 0) => {
-        setLoading(true);
-        try {
-            const res = await getAllBookList({
-                params: { ...searchParams, page }
-            });
-            if (res.success) {
-                setBooks(res.data.content);
-                setTotalPages(res.data.totalPages);
-                setCurrentPage(res.data.number);
-            }
-        } finally {
-            setLoading(false);
-        }
-    };
+    const {
+        data: books,
+        status,
+        fetchData
+    } = useDataFetch(getAllBookList);
 
-    // 카테고리 목록 조회 함수
-    const fetrcCategories = async () => {
-        try {
-            const res = await getCategoryList();
-            if (res.success) setCategories(res.data);
-        } catch (error) {
-            toast.error("카테고리 목록을 불러오는 중 오류가 발생했습니다.");
-        }
-    }
+    const { loading, totalElements, currentPage, totalPages } = status;
+
+    const {
+        data: categories,
+        fetchData: fetchCategories
+    } = useDataFetch(getCategoryList)
+
 
     // 초기화 함수
     const handleReset = () => {
@@ -68,13 +52,13 @@ export function useBookStatusList() {
 
 
     useEffect(() => {
-        fetchBooks();
-        fetrcCategories();
+        fetchData(0, searchParams);
+        fetchCategories();
     }, [searchParams]);
 
     const handlePageChange = (page) => {
         if (page >= 0 && page < totalPages) {
-            fetchBooks(page);
+            fetchData(page);
             window.scrollTo(0, 0);
         }
     };
@@ -137,8 +121,7 @@ export function useBookStatusList() {
                     fetchBooks();
                 }
             } catch (error) {
-                console.error("삭제 작업 중 오류 발생:", error);
-                toast.error("삭제 작업 중 오류가 발생했습니다. 다시 시도해 주세요.");
+                handleApiError(error, "도서 삭제 실패")
             }
         }
     };
@@ -149,6 +132,7 @@ export function useBookStatusList() {
         status: {
             loading,
             totalPages,
+            totalElements,
             currentPage,
             selectedIds,
             setSelectedIds

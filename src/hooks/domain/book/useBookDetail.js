@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import URL from '@/constants/url';
 import { borrowBook, getBookRollingYear } from "../../../api/borrow.api";
 import { addWish, deleteWish } from "../../../api/wish.api";
+import { handleApiError } from "../../utils/errorHandler";
 
 
 export function useBookDetail() {
@@ -29,8 +30,7 @@ export function useBookDetail() {
                 if (statsRes.success) setStats(statsRes.data);
                 if (relatedRes.success) setRelatedBooks(relatedRes.data);
             } catch (error) {
-                console.error("상세 정보 로딩 실패:", error);
-                toast.error("존재하지 않는 도서이거나 오류가 발생했습니다.");
+                handleApiError(error, "도서 상세 정보 로드 실패");
             } finally {
                 setLoading(false);
             }
@@ -47,12 +47,9 @@ export function useBookDetail() {
 
                 if (res.success) {
                     toast.success(res.data);
-                } else {
-                    toast.error(res.data);
                 }
             } catch (error) {
-                console.error("삭제 요청 중 오류 발생:", error);
-                toast.error("대출 처리 중 서버 오류가 발생했습니다.");
+                handleApiError(error, "도서 대출 실패");
             }
         }
     }
@@ -71,12 +68,7 @@ export function useBookDetail() {
                 toast.success(res.data);
             }
         } catch (error) {
-            console.error("관심도서 처리 실패:", error);
-            if (error.response?.status === 401) {
-                toast.error("로그인이 필요한 서비스입니다.");
-            } else {
-                toast.error("관심도서 처리 중 오류가 발생했습니다.");
-            }
+            handleApiError(error, "관심 도서 추가 실패");
         }
 
     }, [book, setBook]);

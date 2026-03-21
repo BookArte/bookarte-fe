@@ -1,16 +1,10 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { getAllBookList, getLatestBookRegistrationDate } from "../../../api/book.api";
 import { useNavigate } from "react-router-dom";
 import URL from '@/constants/url';
-import { toast } from "react-toastify";
+import { useDataFetch } from "../../utils/useDataFetch";
 
 export function useNewArrivalsList() {
-    const [arrivals, setArrivals] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [totalElements, setTotalElements] = useState(0);
-    const [totalPages, setTotalPages] = useState(0);
-    const [currentPage, setCurrentPage] = useState(0);
-
     const [selectedDate, setSelectedDate] = useState(new Date());
 
     const navigate = useNavigate();
@@ -37,30 +31,21 @@ export function useNewArrivalsList() {
                 setSelectedDate(latest);
             } catch (error) {
                 setSelectedDate(new Date());
+                handleApiError(error, "신착 도서 로드 실패")
             }
         };
 
         latestDate();
     }, []);
 
-    const fetchNewArrivalsList = useCallback(async (page = 0, params) => {
-        setLoading(true);
-        try {
-            const res = await getAllBookList({
-                params: { ...params, page }
-            });
+    const {
+        data: arrivals,
+        status,
+        fetchData
+    } = useDataFetch(getAllBookList);
 
-            setArrivals(res.data.content);
-            setTotalElements(res.data.totalElements);
-            setTotalPages(res.data.totalPages);
-            setCurrentPage(page);
-        } catch (error) {
-            toast.error("신착 도서 목록을 불러오는 중 오류가 발생했습니다.");
-            console.error("Error fetching new arrivals list:", error);
-        } finally {
-            setLoading(false);
-        }
-    }, []);
+    const { loading, totalElements, currentPage, totalPages } = status;
+
 
     const dateRange = useMemo(() => {
         const year = selectedDate.getFullYear();
@@ -79,8 +64,8 @@ export function useNewArrivalsList() {
             sort: 'createdAt,desc'
         };
 
-        fetchNewArrivalsList(0, params);
-    }, [dateRange, searchParams.sort, fetchNewArrivalsList]);
+        fetchData(0, params);
+    }, [dateRange, searchParams.sort, fetchData]);
 
     // 도서 상세 페이지 이동 함수
     const handleViewBook = (bookId) => {
@@ -90,7 +75,7 @@ export function useNewArrivalsList() {
     //페이지 변경 핸들러
     const handlePageChange = (newPage) => {
         if (newPage >= 0 && newPage < totalPages) {
-            fetchNewArrivalsList(newPage);
+            fetchData(newPage);
             window.scrollTo(0, 0);
         }
     };

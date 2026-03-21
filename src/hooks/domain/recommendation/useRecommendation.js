@@ -28,8 +28,7 @@ export function useRecommendation(closeModal) {
             setSelectedBook(book);
 
         } catch (error) {
-            console.error("도서 선택 중 오류 발생:", error);
-            toast.error("도서 선택 중 오류가 발생했습니다.");
+            handleApiError(error, "도서 선택 실패")
         }
 
     };

@@ -59,7 +59,7 @@ export function reorderRecommendation() {
             toast.success(res.data)
             setIsChanged(false); // 저장 완료 후 상태 초기화
         } catch (error) {
-            alert("저장에 실패했습니다. 다시 시도해주세요.");
+            handleApiError(error, "추천 도서 재정렬 실패")
         }
     };
 
@@ -72,16 +72,19 @@ export function reorderRecommendation() {
     }
 
     const handleDel = async (recommendationId) => {
-        if (window.confirm("정말로 이 도서를 추천 리스트에서 삭제하시겠습니까?")) {
-            const res = await deleteRecommendationBook(recommendationId);
-            if (res.success) {
-                toast.success(res.data);
-                fetchBooks();
-            } else {
-                toast.error("삭제에 실패했습니다. 다시 시도해주세요.");
+        try {
+            if (window.confirm("정말로 이 도서를 추천 리스트에서 삭제하시겠습니까?")) {
+                const res = await deleteRecommendationBook(recommendationId);
+                if (res.success) {
+                    toast.success(res.data);
+                    fetchBooks();
+                } else {
+                    toast.error("삭제에 실패했습니다. 다시 시도해주세요.");
+                }
             }
+        } catch (error) {
+            handleApiError(error, "추천 도서 삭제 실패")
         }
-
     }
 
     return {
