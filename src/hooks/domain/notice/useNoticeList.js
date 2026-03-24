@@ -56,7 +56,7 @@ export function useNoticeList() {
             ...selection,
             handleReset,
             handleBulkDelete: onBulkDelete,
-            handleView: boardHandlers.handleView,
+            handleModify: boardHandlers.handleModify,
             handleWrite: boardHandlers.handleWrite,
             setSearchParams: params.setSearchParams
         },

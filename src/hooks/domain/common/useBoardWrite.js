@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import URL from '@/constants/url';
+import DOMPurify from "dompurify";
 
 export function useBoardWrite({
     type,
@@ -86,11 +87,14 @@ export function useBoardWrite({
         setLoading(true);
         try {
             const sendData = new FormData();
+
+            const cleanContents = DOMPurify.sanitize(formData.contents);
+
             sendData.append("noticeYn", formData.noticeYn);
             sendData.append("category", formData.category);
             sendData.append("orderNum", formData.orderNum);
             sendData.append("title", formData.title);
-            sendData.append("contents", formData.contents);
+            sendData.append("contents", cleanContents);
 
             if (formData.thumbnailFile) {
                 sendData.append("thumbnailFile", formData.thumbnailFile);
