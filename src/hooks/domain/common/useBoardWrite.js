@@ -94,7 +94,7 @@ export function useBoardWrite({
             sendData.append("category", formData.category);
             sendData.append("orderNum", formData.orderNum);
             sendData.append("title", formData.title);
-            sendData.append("contents", cleanContents);
+            sendData.append("editor", cleanContents);
 
             if (formData.thumbnailFile) {
                 sendData.append("thumbnailFile", formData.thumbnailFile);
