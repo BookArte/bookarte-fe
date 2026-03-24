@@ -9,18 +9,19 @@ const BoardListLayout = ({
     showCheckbox,
     selection,
     renderRow,
-    searchPlaceholder
+    searchPlaceholder,
+    showCreateButton = true
 }) => {
     return (
-        <div className="board-common-container">
-            <h2 className="board-common-title">{title}</h2>
+        <div className="board-list-common-container">
+            <h2 className="board-list-common-title">{title}</h2>
 
             {searchPlaceholder && (
                 <BoardSearchBar placeholder={searchPlaceholder} />
             )}
 
-            {showCheckbox && (
-                <div className="table-actions">
+            <div className="table-actions">
+                {showCheckbox && (
                     <button
                         className="bulk-del-btn"
                         disabled={selection.selectedIds.length === 0}
@@ -28,8 +29,16 @@ const BoardListLayout = ({
                     >
                         선택 삭제 ({selection.selectedIds.length})
                     </button>
-                </div>
-            )}
+                )}
+                {showCreateButton && (
+                    <button
+                        className="create-btn"
+                        onClick={selection.onCreate}
+                    >
+                        생성
+                    </button>
+                )}
+            </div>
 
             <table className="work-list-table">
                 <thead>

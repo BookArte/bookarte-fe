@@ -57,6 +57,7 @@ function BookStatusListView({ books, categories, status, handlers }) {
                 handlePageChange
             }}
             renderRow={renderRow}
+            showCreateButton={false}
         />
     );
 }

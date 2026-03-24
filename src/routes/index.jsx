@@ -32,6 +32,7 @@ import RecommendationHistory from "../pages/recommendation/RecommendationHistory
 import BorrowHistory from "../pages/borrow/BorrowHistory";
 import BookStatusList from "../pages/book/BookStatusList";
 import AdminNoticePage from "../pages/admin/notice/AdminNoticePage";
+import AdminNoticeWritePage from "../pages/admin/notice/AdminNoticeWritePage";
 
 
 const RootRoutes = () => {
@@ -96,7 +97,11 @@ const RootRoutes = () => {
           <Route path="penalty/management" element={<PenaltyManagement />} />
 
           {/* 공지사항 관리 */}
-          <Route path="notice" element={<AdminNoticePage />} />
+          <Route path="notice">
+            <Route index element={<AdminNoticePage />} />
+            <Route path="write" element={<AdminNoticeWritePage />} />
+          </Route>
+
         </Route>
 
 

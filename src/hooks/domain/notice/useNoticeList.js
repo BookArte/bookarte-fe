@@ -57,6 +57,7 @@ export function useNoticeList() {
             handleReset,
             handleBulkDelete: onBulkDelete,
             handleView: boardHandlers.handleView,
+            handleWrite: boardHandlers.handleWrite,
             setSearchParams: params.setSearchParams
         },
         getVirtualNumber

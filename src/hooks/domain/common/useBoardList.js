@@ -94,8 +94,12 @@ export function useBoardList({
         }
     };
 
-    const handleView = (type, id) => {
+    const handleView = (id) => {
         navigate(URL.ADMIN_BOARD_VIEW(type, id));
+    }
+
+    const handleWrite = () => {
+        navigate(URL.ADMIN_BOARD_WRITE(type));
     }
 
     return {
@@ -107,6 +111,6 @@ export function useBoardList({
             return totalElements - (currentPage * searchParams.size) - index;
         },
         selection: { selectedIds, setSelectedIds, handleSelectAll, handleSelectOne },
-        handlers: { fetchData, handleBulkDelete, handleView }
+        handlers: { fetchData, handleBulkDelete, handleView, handleWrite }
     };
 }

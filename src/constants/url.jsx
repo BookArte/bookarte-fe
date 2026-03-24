@@ -133,7 +133,8 @@ const URL = {
   ADMIN_NEWS_WRITE: "/admin/news/write", // 사이트관리/새소식관리등록
 
   ADMIN_BOARD_VIEW: (type, id) => `/admin/${type}/view/${id}`, // 사이트관리/게시판상세
-  ADMIN_BOARD_WRITE: (type, id) => `/admin/${type}/write/${id}`, // 사이트관리/게시판등록
+  ADMIN_BOARD_WRITE: (type) => `/admin/${type}/write`, // 사이트관리/게시판등록
+  ADMIN_BOARD_LIST: (type) => `/admin/${type}`, // 사이트관리/게시판리스트
 
 };
 
