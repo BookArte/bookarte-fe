@@ -31,6 +31,9 @@ import AdminLayout from "../components/admin/AdminLayout";
 import RecommendationHistory from "../pages/recommendation/RecommendationHistory";
 import BorrowHistory from "../pages/borrow/BorrowHistory";
 import BookStatusList from "../pages/book/BookStatusList";
+import AdminNoticePage from "../pages/admin/notice/AdminNoticePage";
+import AdminNoticeWritePage from "../pages/admin/notice/AdminNoticeWritePage";
+import AdminNoticeModifyPage from "../pages/admin/notice/AdminNoticeModifyPage";
 import NewArrivalsList from "../pages/book/NewArrivalsList";
 import BestSellerList from "../pages/book/BestSellerList";
 import PopularList from "../pages/book/PopularList";
@@ -104,6 +107,13 @@ const RootRoutes = () => {
 
           {/*연체 패널티 관리*/}
           <Route path="penalty/management" element={<PenaltyManagement />} />
+
+          {/* 공지사항 관리 */}
+          <Route path="notice">
+            <Route index element={<AdminNoticePage />} />
+            <Route path="write" element={<AdminNoticeWritePage />} />
+            <Route path="modify/:id" element={<AdminNoticeModifyPage />} />
+          </Route>
         </Route>
 
 

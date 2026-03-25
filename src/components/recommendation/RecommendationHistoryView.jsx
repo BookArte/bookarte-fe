@@ -40,7 +40,7 @@ function RecommendationHistoryView({ recommendationHistory, handlePageChange, st
                             <td>{item.startDate} ~ {item.endDate}</td>
                             <td>{item.priority}위</td>
                             <td>
-                                <button onClick={() => handleRePublish(item)}>재등록</button>
+                                <button className="blue-btn" onClick={() => handleRePublish(item)}>재등록</button>
                             </td>
                         </tr>
                     ))}

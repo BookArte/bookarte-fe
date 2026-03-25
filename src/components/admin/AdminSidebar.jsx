@@ -7,7 +7,8 @@ const AdminSidebar = () => {
         book: true,
         recommend: true,
         borrow: true,
-        penalty: true
+        penalty: true,
+        board: true
     });
 
     const toggleMenu = (menuName) => {
@@ -68,6 +69,18 @@ const AdminSidebar = () => {
                     </h3>
                     <ul className="submenu">
                         <li><NavLink to={URL.PENALTY_MANAGEMENT} className={({ isActive }) => isActive ? "active" : ""}>패널티 관리 페이지</NavLink></li>
+                    </ul>
+                </div>
+
+                {/* 게시판 관리 */}
+                <div className={`menu_group ${openMenus.board ? 'open' : ''}`}>
+                    <h3 className="group_title" onClick={() => toggleMenu('board')}>
+                        게시판 관리
+                        <span className="arrow_icon">{openMenus.board ? '▲' : '▼'}</span>
+                    </h3>
+                    <ul className="submenu">
+                        <li><NavLink to={URL.ADMIN_NOTICE} className={({ isActive }) => isActive ? "active" : ""}>공지사항 관리 페이지</NavLink></li>
+                        <li><NavLink to={URL.ADMIN_NEWS} className={({ isActive }) => isActive ? "active" : ""}>뉴스 관리 페이지</NavLink></li>
                     </ul>
                 </div>
 
