@@ -1,4 +1,4 @@
-const BoardWrite = ({
+const BoardModify = ({
     title,
     children
 }) => {
@@ -11,4 +11,4 @@ const BoardWrite = ({
     );
 }
 
-export default BoardWrite;
+export default BoardModify;

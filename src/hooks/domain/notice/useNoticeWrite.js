@@ -1,14 +1,19 @@
 import { createBoard } from "@/api/board.api";
-import { useBoardWrite } from "../common/useBoardWrite";
+import { useBoardForm } from "../common/useBoardForm";
 
 export function useNoticeWrite() {
     const TYPE = 'notice';
 
-    return useBoardWrite({
+    return useBoardForm({
         type: TYPE,
+        isEdit: false,
         submitFn: createBoard,
         initialData: {
-            noticeYn: 'N'
+            noticeYn: 'N',
+            category: '',
+            orderNum: 0,
+            title: '',
+            contents: ''
         }
     });
 }

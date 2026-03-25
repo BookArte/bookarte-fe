@@ -42,6 +42,7 @@ function BookStatusListView({ books, categories, status, handlers }) {
         <BoardListLayout
             title="도서 현황"
             searchPlaceholder="도서명 또는 대출자 검색..."
+            run={false}
             columns={columns}
             data={books.map(book => ({ ...book, id: book.bookId }))}
             showCheckbox={true}

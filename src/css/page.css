@@ -4626,7 +4626,7 @@ input[type="checkbox"] {
   text-align: center;
 }
 
-.board-write-common-container {
+.board-common-container {
   max-width: 900px;
   margin: 40px auto;
   padding: 30px;
@@ -4635,7 +4635,7 @@ input[type="checkbox"] {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-.board-write-common-title {
+.board-common-title {
   font-size: 24px;
   font-weight: 700;
   color: #333;
@@ -4643,38 +4643,38 @@ input[type="checkbox"] {
   text-align: center;
 }
 
-.board-write-form .notice-check-area {
+.board-form .notice-check-area {
   display: flex;
   gap: 15px;
 }
 
-.board-write-form .notice-check-area input[type="radio"] {
+.board-form .notice-check-area input[type="radio"] {
   margin-right: 4px;
 }
 
-.board-write-form .form-top-section {
+.board-form .form-top-section {
   display: flex;
   gap: 30px;
   margin-bottom: 30px;
 }
 
-.board-write-form .input-info-group {
+.board-form .input-info-group {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.board-write-form .input-row {
+.board-form .input-row {
   display: flex;
   gap: 15px;
 }
 
-.board-write-form .input-col {
+.board-form .input-col {
   flex: 1;
 }
 
-.board-write-form .thumbnail-preview-section {
+.board-form .thumbnail-preview-section {
   width: 150px;
   height: 200px;
   border: 1px solid #ddd;
@@ -4686,29 +4686,29 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
-.board-write-form .thumbnail-no-img {
+.board-form .thumbnail-no-img {
   font-size: 13px;
   color: #adb5bd;
 }
 
-.board-write-form textarea.input-style {
+.board-form textarea.input-style {
   resize: none;
 }
 
-.board-write-form .form-file-attachment-section {
+.board-form .form-file-attachment-section {
   margin-top: 30px;
   padding-top: 20px;
   border-top: 1px solid #eee;
 }
 
-.board-write-form .file-attach-header {
+.board-form .file-attach-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
 }
 
-.board-write-form .file-add-btn {
+.board-form .file-add-btn {
   padding: 6px 14px;
   background-color: #fff;
   border: 1px solid #ddd;
@@ -4719,12 +4719,12 @@ input[type="checkbox"] {
   transition: all 0.2s ease;
 }
 
-.board-write-form .file-add-btn:hover {
+.board-form .file-add-btn:hover {
   background-color: #f8f9fa;
   border-color: #adb5bd;
 }
 
-.board-write-form .attached-file-list {
+.board-form .attached-file-list {
   background-color: #f8f9fa;
   border: 1px dashed #ddd;
   border-radius: 8px;
@@ -4732,14 +4732,14 @@ input[type="checkbox"] {
   min-height: 50px;
 }
 
-.board-write-form .no-file-msg {
+.board-form .no-file-msg {
   text-align: center;
   font-size: 13px;
   color: #adb5bd;
   margin: 10px 0;
 }
 
-.board-write-form .attached-file-item {
+.board-form .attached-file-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -4750,16 +4750,16 @@ input[type="checkbox"] {
   margin-bottom: 6px;
 }
 
-.board-write-form .attached-file-item:last-child {
+.board-form .attached-file-item:last-child {
   margin-bottom: 0;
 }
 
-.board-write-form .file-name {
+.board-form .file-name {
   font-size: 13px;
   color: #444;
 }
 
-.board-write-form .file-del-btn {
+.board-form .file-del-btn {
   background: none;
   border: none;
   color: #ff5252;
@@ -4769,6 +4769,12 @@ input[type="checkbox"] {
   padding: 0;
 }
 
-.board-write-form .file-del-btn:hover {
+.board-form .file-del-btn:hover {
   color: #d32f2f;
+}
+
+.required {
+  color: #e03131;
+  margin-left: 4px;
+  font-size: 14px;
 }

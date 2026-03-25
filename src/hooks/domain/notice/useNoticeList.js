@@ -17,8 +17,9 @@ export function useNoticeList() {
         deleteFn: deleteBoards,
         idKey: 'id',
         initialParams: {
-            title: '',
-            content: '',
+            searchText: '',
+            searchStartDate: '',
+            searchEndDate: '',
             size: 10,
             sort: 'createdAt,desc'
         }
@@ -26,8 +27,7 @@ export function useNoticeList() {
 
     const handleReset = () => {
         params.setSearchParams({
-            title: '',
-            content: '',
+            searchText: '',
             size: 10,
             sort: 'createdAt,desc'
         });
@@ -58,7 +58,9 @@ export function useNoticeList() {
             handleBulkDelete: onBulkDelete,
             handleModify: boardHandlers.handleModify,
             handleWrite: boardHandlers.handleWrite,
-            setSearchParams: params.setSearchParams
+            handleChangeSearchParams: boardHandlers.handleChangeSearchParams,
+            setSearchParams: params.setSearchParams,
+            handleSearch: boardHandlers.handleSearch
         },
         getVirtualNumber
     };

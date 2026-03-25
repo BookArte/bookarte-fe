@@ -37,7 +37,9 @@ function AdminNoticeList({ data, status, handlers, getVirtualNumber }) {
                 onSelectAll: handlers.handleSelectAll,
                 onSelectOne: handlers.handleSelectOne,
                 onBulkDelete: handlers.handleBulkDelete,
-                onCreate: handlers.handleWrite
+                onCreate: handlers.handleWrite,
+                handleChangeSearchParams: handlers.handleChangeSearchParams,
+                handleSearch: handlers.handleSearch
             }}
 
             pagination={{

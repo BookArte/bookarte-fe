@@ -1,16 +1,21 @@
 import Editor from "../common/Editor";
 
-const BoardWriteForm = ({
+const BoardForm = ({
     formData,
     loading,
     handlers,
-    refs
+    refs,
+    isEdit = false
 }) => {
+
+    const submitBtnText = isEdit ? "수정 완료" : "등록 완료";
+    const processingText = isEdit ? "수정 중..." : "등록 중...";
+
     return (
-        <form className="input-form board-write-form" autoComplete="off" onSubmit={handlers.handleSubmit}>
+        <form className="input-form board-form" autoComplete="off" onSubmit={handlers.handleSubmit}>
             <div className="form-top-section">
                 <div className="input-thumbnail-flex">
-                    <label className="input-label">썸네일</label>
+                    <label className="input-label">썸네일<span className="required">*</span></label>
                     <div className={`thumbnail-preview-section ${formData.thumbnail ? 'has-image' : ''}`}
                         onClick={handlers.onThumbnailClick}
                     >
@@ -52,7 +57,7 @@ const BoardWriteForm = ({
 
                     <div className="input-row">
                         <div className="input-col">
-                            <label className="input-label">카테고리</label>
+                            <label className="input-label">카테고리<span className="required">*</span></label>
                             <input
                                 name="category"
                                 className="input-style"
@@ -73,7 +78,7 @@ const BoardWriteForm = ({
                     </div>
 
                     <div>
-                        <label className="input-label">제목</label>
+                        <label className="input-label">제목<span className="required">*</span></label>
                         <input
                             name="title"
                             className="input-style"
@@ -86,7 +91,7 @@ const BoardWriteForm = ({
             </div>
 
             <div>
-                <label className="input-label">내용</label>
+                <label className="input-label">내용<span className="required">*</span></label>
                 <Editor
                     value={formData.contents}
                     onChange={handlers.handleEditorChange}
@@ -110,10 +115,25 @@ const BoardWriteForm = ({
                 </div>
 
                 <div className="attached-file-list">
+                    {isEdit && formData.existingFiles && formData.existingFiles.length > 0 && (
+                        formData.existingFiles.map((file, index) => (
+                            <div key={`ex-${file.fileId}`} className="attached-file-item existing">
+                                <span className="file-name">{file.originalName}</span>
+                                <button
+                                    type="button"
+                                    className="file-del-btn"
+                                    onClick={() => handlers.handleFileDelete(index, true, file.fileId)}
+                                >
+                                    삭제
+                                </button>
+                            </div>
+                        ))
+                    )}
+
                     {formData.files && formData.files.length > 0 ? (
                         formData.files.map((file, index) => (
-                            <div key={index} className="attached-file-item">
-                                <span className="file-name">{file.name}</span>
+                            <div key={`new-${index}`} className="attached-file-item new">
+                                <span className="file-name">{file.name} (새 파일)</span>
                                 <button
                                     type="button"
                                     className="file-del-btn"
@@ -124,7 +144,9 @@ const BoardWriteForm = ({
                             </div>
                         ))
                     ) : (
-                        <p className="no-file-msg">첨부된 파일이 없습니다.</p>
+                        (!formData.existingFiles || formData.existingFiles.length === 0) && (
+                            <p className="no-file-msg">첨부된 파일이 없습니다.</p>
+                        )
                     )}
                 </div>
             </div>
@@ -132,11 +154,11 @@ const BoardWriteForm = ({
             <div className="form-btn-group">
                 <button type="button" className="cnl-btn" onClick={handlers.handleCancel}>취소</button>
                 <button type="submit" className="input-btn" disabled={loading}>
-                    {loading ? "등록 중..." : "등록 완료"}
+                    {loading ? processingText : submitBtnText}
                 </button>
             </div>
         </form>
     );
 };
 
-export default BoardWriteForm;
+export default BoardForm;

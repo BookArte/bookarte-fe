@@ -10,14 +10,22 @@ const BoardListLayout = ({
     selection,
     renderRow,
     searchPlaceholder,
-    showCreateButton = true
+    showCreateButton = true,
+    run = true
 }) => {
     return (
         <div className="board-list-common-container">
             <h2 className="board-list-common-title">{title}</h2>
 
             {searchPlaceholder && (
-                <BoardSearchBar placeholder={searchPlaceholder} />
+                <BoardSearchBar
+                    placeholder={searchPlaceholder}
+                    handler={{
+                        handleChangeSearchParams: selection.handleChangeSearchParams,
+                        handleSearch: selection.handleSearch
+                    }}
+                    run={run}
+                />
             )}
 
             <div className="table-actions">

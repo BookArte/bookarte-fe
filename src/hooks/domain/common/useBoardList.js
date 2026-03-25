@@ -22,11 +22,12 @@ export function useBoardList({
         sort: 'createdAt,desc',
         ...initialParams
     });
+    const [appliedParams, setAppliedParams] = useState(searchParams);
 
-    const fetchData = useCallback(async (page = 0) => {
+    const fetchData = useCallback(async (page = 0, params = appliedParams) => {
         setLoading(true);
         try {
-            const res = await fetchFn(type, { ...searchParams, page });
+            const res = await fetchFn(type, { ...params, page });
             if (res.success) {
                 setData(res.data.content);
                 setTotalPages(res.data.totalPages);
@@ -38,15 +39,15 @@ export function useBoardList({
         } finally {
             setLoading(false);
         }
-    }, [fetchFn, searchParams]);
+    }, [fetchFn, type, searchParams]);
 
     useEffect(() => {
         fetchData(0);
-    }, [fetchData]);
+    }, []);
 
     const handlePageChange = (page) => {
         if (page >= 0 && page < totalPages) {
-            fetchData(page);
+            fetchData(page, appliedParams);
             window.scrollTo(0, 0);
         }
     };
@@ -102,6 +103,16 @@ export function useBoardList({
         navigate(URL.ADMIN_BOARD_WRITE(type));
     }
 
+    const handleChangeSearchParams = (target) => {
+        setSearchParams(prev => ({ ...prev, [target.name]: target.value }));
+    };
+
+    const handleSearch = () => {
+        const newParams = { ...searchParams };
+        setAppliedParams(newParams);
+        fetchData(0, newParams);
+    };
+
     return {
         data,
         loading,
@@ -111,6 +122,6 @@ export function useBoardList({
             return totalElements - (currentPage * searchParams.size) - index;
         },
         selection: { selectedIds, setSelectedIds, handleSelectAll, handleSelectOne },
-        handlers: { fetchData, handleBulkDelete, handleModify, handleWrite }
+        handlers: { fetchData, handleBulkDelete, handleModify, handleWrite, handleChangeSearchParams, handleSearch }
     };
 }

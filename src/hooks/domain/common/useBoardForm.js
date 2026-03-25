@@ -1,16 +1,16 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import URL from '@/constants/url';
 import DOMPurify from "dompurify";
 
-export function useBoardWrite({
+export function useBoardForm({
     type,
     submitFn,
-    initialData = {}
+    initialData = null,
+    isEdit = false
 }) {
     const navigate = useNavigate();
-
     const thumbnailInputRef = useRef(null);
     const fileInputRef = useRef(null);
 
@@ -23,10 +23,22 @@ export function useBoardWrite({
         thumbnail: null,
         thumbnailFile: null,
         files: [],
-        ...initialData
+        existingFiles: [],
+        deletedFiles: [],
     });
 
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        if (isEdit && initialData) {
+            setFormData(prev => ({
+                ...prev,
+                ...initialData,
+                thumbnail: initialData.thumbnailPath || null,
+                existingFiles: initialData.fileList || [],
+            }));
+        }
+    }, [isEdit, initialData]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -42,7 +54,9 @@ export function useBoardWrite({
     const handleThumbnailChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            if (formData.thumbnail) window.URL.revokeObjectURL(formData.thumbnail);
+            if (formData.thumbnail && formData.thumbnail.startsWith('blob:')) {
+                window.URL.revokeObjectURL(formData.thumbnail);
+            }
             const previewUrl = window.URL.createObjectURL(file);
             setFormData(prev => ({
                 ...prev,
@@ -64,15 +78,23 @@ export function useBoardWrite({
         e.target.value = '';
     };
 
-    const handleFileDelete = (index) => {
-        setFormData(prev => ({
-            ...prev,
-            files: prev.files.filter((_, i) => i !== index)
-        }));
+    const handleFileDelete = (index, isExisting = false, fileId = null) => {
+        if (isExisting) {
+            setFormData(prev => ({
+                ...prev,
+                existingFiles: prev.existingFiles.filter((_, i) => i !== index),
+                deletedFiles: [...prev.deletedFiles, fileId]
+            }));
+        } else {
+            setFormData(prev => ({
+                ...prev,
+                files: prev.files.filter((_, i) => i !== index)
+            }));
+        }
     };
 
     const handleCancel = () => {
-        if (window.confirm("작성을 취소하시겠습니까? 변경사항이 저장되지 않습니다.")) {
+        if (window.confirm(`${isEdit ? '수정' : '작성'}을 취소하시겠습니까?`)) {
             navigate(-1);
         }
     };
@@ -87,7 +109,6 @@ export function useBoardWrite({
         setLoading(true);
         try {
             const sendData = new FormData();
-
             const cleanContents = DOMPurify.sanitize(formData.contents);
 
             sendData.append("noticeYn", formData.noticeYn);
@@ -96,23 +117,28 @@ export function useBoardWrite({
             sendData.append("title", formData.title);
             sendData.append("editor", cleanContents);
 
+            if (isEdit && formData.deletedFiles.length > 0) {
+                formData.deletedFiles.forEach(id => {
+                    sendData.append("deletedFileIds", id);
+                });
+            }
+
             if (formData.thumbnailFile) {
                 sendData.append("thumbnailFile", formData.thumbnailFile);
             }
 
-            if (formData.files && formData.files.length > 0) {
-                formData.files.forEach(file => {
-                    sendData.append("files", file);
-                });
+            if (formData.files.length > 0) {
+                formData.files.forEach(file => sendData.append("files", file));
             }
 
             const res = await submitFn(type, sendData);
+
             if (res.success) {
-                toast.success("등록되었습니다.");
+                toast.success(isEdit ? "수정되었습니다." : "등록되었습니다.");
                 navigate(URL.ADMIN_BOARD_LIST(type));
             }
         } catch (error) {
-            toast.error("등록 중 오류가 발생했습니다.");
+            toast.error(`${isEdit ? '수정' : '등록'} 중 오류가 발생했습니다.`);
         } finally {
             setLoading(false);
         }
