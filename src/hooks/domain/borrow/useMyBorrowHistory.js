@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { getAllBorrowList } from "../../../api/borrow.api";
-import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import URL from '@/constants/url';
+import { getMyBorrowList } from "../../../api/borrow.api";
 
-export function useBorrowHistory() {
+export function useMyBorrowHistory() {
     const [borrowHistory, setBorrowHistory] = useState([]);
     const [loading, setLoading] = useState(false);
     const [totalPages, setTotalPages] = useState(0);
@@ -17,38 +18,47 @@ export function useBorrowHistory() {
         searchKeyword: '',
     });
 
-    const fetchBorrowHistory = async (page = 0) => {
+    const navigate = useNavigate();
+
+    const fetchMyBorrowHistory = async (page = 0) => {
         setLoading(true);
         try {
-            const res = await getAllBorrowList({ params: { ...searchParams, page } });
+            const res = await getMyBorrowList({ params: { ...searchParams, page } });
             setBorrowHistory(res.data.content);
             setTotalPages(res.data.totalPages);
             setCurrentPage(res.data.number);
         } catch (error) {
-            handleApiError(error, "전체 대출 이력 로드 실패")
+            handleApiError(error, "개인 대출 이력 로드 실패")
         } finally {
             setLoading(false);
         }
     };
 
     useEffect(() => {
-        fetchBorrowHistory();
+        fetchMyBorrowHistory();
     }, [searchParams]);
 
     const handlePageChange = (page) => {
         if (page >= 0 && page < totalPages) {
-            fetchBorrowHistory(page);
+            fetchMyBorrowHistory(page);
             window.scrollTo(0, 0);
         }
     };
 
+    const handleViewBook = (bookId) => {
+        navigate(URL.BOOK_VIEW(bookId));
+    }
+
     return {
         borrowHistory,
-        handlePageChange,
         status: {
             loading,
             totalPages,
             currentPage
         },
+        handlers: {
+            handlePageChange,
+            handleViewBook
+        }
     };
 }

@@ -5,8 +5,8 @@ export const borrowBook = async (bookId) => {
     return res.data
 }
 
-export const getMyBorrowList = async () => {
-    const res = await apiClient.get('borrow');
+export const getMyBorrowList = async (data) => {
+    const res = await apiClient.get('borrow', data);
     return res.data
 }
 
@@ -22,6 +22,11 @@ export const extendBorrow = async (borrowId) => {
 
 export const getBookRollingYear = async (bookId) => {
     const res = await apiClient.get(`borrow/${bookId}`)
+    return res.data
+}
+
+export const getPopularBooks = async ({ params }) => {
+    const res = await apiClient.get('borrow/popular', { params })
     return res.data
 }
 

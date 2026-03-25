@@ -53,7 +53,7 @@ function BorrowDashboard({ borrow, stats, loading, handlers, getStatusConfig }) 
                         </thead>
                         <tbody>
                             {content?.map((item) => {
-                                const statusConfig = getStatusConfig(item.status);
+                                const statusConfig = getStatusConfig(item);
                                 const isActionRequired = item.status === 'RETURN_REQUESTED';
 
                                 return (
@@ -63,13 +63,9 @@ function BorrowDashboard({ borrow, stats, loading, handlers, getStatusConfig }) 
                                         <td className="text-center">{item.borrowDate}</td>
                                         <td className="text-center">{item.returnDueDate}</td>
                                         <td className="text-center">
-                                            {item.overdue ? (
-                                                <span className="status-badge red">연체 {item.overdueDays}일</span>
-                                            ) : (
-                                                <span className={statusConfig.className}>
-                                                    {statusConfig.label}
-                                                </span>
-                                            )}
+                                            <span className={statusConfig.className}>
+                                                {statusConfig.label}
+                                            </span>
                                         </td>
                                         <td className="text-center">
                                             <button

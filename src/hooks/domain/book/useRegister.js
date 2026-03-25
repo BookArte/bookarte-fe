@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 import { useForm } from "../../form/useForm";
 import { registerBookByAdmin, searchBooksWithAPi, checkBookDuplicate } from "../../../api/book.api";
 import { validateBookForm } from "../../../utils/validation/book.validation";
-import { toast } from "react-toastify";
 import { handleFormSubmission } from "../../form/handleFormSubmisson";
 
 export function useRegister() {
@@ -40,8 +39,7 @@ export function useRegister() {
             const res = await searchBooksWithAPi(searchQuery);
             setSearchResults(res.data || []);
         } catch (error) {
-            console.error("검색 중 오류 발생:", error);
-            toast.error("도서 검색 중 오류가 발생했습니다.");
+            handleApiError(error, "도서 검색 실패")
         } finally {
             setIsSearching(false);
         }
@@ -64,8 +62,7 @@ export function useRegister() {
             setDuplicateError('');
         }
         catch (error) {
-            console.error("도서 선택 중 오류 발생:", error);
-            toast.error("도서 선택 중 오류가 발생했습니다.");
+            handleApiError(error, "도서 선택 실패")
         }
     };
 
@@ -75,9 +72,7 @@ export function useRegister() {
             const res = await checkBookDuplicate(isbn);
             return res.data;
         } catch (error) {
-            console.error("도서 중복 체크 중 오류 발생:", error);
-            toast.error("도서 중복 체크 중 오류가 발생했습니다.");
-            return false;
+            handleApiError(error, "도서 중복 체크 실패")
         }
     };
 

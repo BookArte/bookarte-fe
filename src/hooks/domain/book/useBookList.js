@@ -2,17 +2,10 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllBookList } from "../../../api/book.api";
 import URL from '@/constants/url';
-import { toast } from "react-toastify";
 import { getCategoryList } from "../../../api/category.api";
+import { useDataFetch } from "../../utils/useDataFetch";
 
 export function useBookList() {
-    const [books, setBooks] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [totalElements, setTotalElements] = useState(0);
-    const [categories, setCategories] = useState([]);
-    const [totalPages, setTotalPages] = useState(0);
-    const [currentPage, setCurrentPage] = useState(0);
-
     const navigate = useNavigate();
 
     const [isDetailOpen, setIsDetailOpen] = useState(false); // 상세검색 패널 열림 상태
@@ -29,37 +22,24 @@ export function useBookList() {
     });
 
     useEffect(() => {
-        fetchBooks();
-        fetrcCategories();
+        fetchBooks(0, searchParams);
+        fetchCategories();
     }, [searchParams.sort]);
 
-    // 검색 실행 함수
-    const fetchBooks = async (page = 0) => {
-        setLoading(true);
-        try {
-            const res = await getAllBookList({
-                params: { ...searchParams, page }
-            });
-            if (res.success) {
-                setBooks(res.data.content);
-                setTotalElements(res.data.totalElements);
-                setTotalPages(res.data.totalPages);
-                setCurrentPage(res.data.number);
-            }
-        } finally {
-            setLoading(false);
-        }
-    };
+    // 도서 목록 조회
+    const {
+        data: books,
+        status,
+        fetchData: fetchBooks
+    } = useDataFetch(getAllBookList);
 
-    // 카테고리 목록 조회 함수
-    const fetrcCategories = async () => {
-        try {
-            const res = await getCategoryList();
-            if (res.success) setCategories(res.data);
-        } catch (error) {
-            toast.error("카테고리 목록을 불러오는 중 오류가 발생했습니다.");
-        }
-    }
+    const { loading, totalElements, currentPage, totalPages } = status;
+
+    //카테고리 목록 조회
+    const {
+        data: categories,
+        fetchData: fetchCategories
+    } = useDataFetch(getCategoryList)
 
     // 초기화 함수
     const handleReset = () => {

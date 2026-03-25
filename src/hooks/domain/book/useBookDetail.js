@@ -1,9 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteBooks, getBookDetailByBookId, getRelatedBookList } from "../../../api/book.api";
-import { useEffect, useState } from "react";
+import { getBookDetailByBookId, getRelatedBookList } from "../../../api/book.api";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import URL from '@/constants/url';
 import { borrowBook, getBookRollingYear } from "../../../api/borrow.api";
+import { addWish, deleteWish } from "../../../api/wish.api";
+import { handleApiError } from "../../utils/errorHandler";
 
 
 export function useBookDetail() {
@@ -28,8 +30,7 @@ export function useBookDetail() {
                 if (statsRes.success) setStats(statsRes.data);
                 if (relatedRes.success) setRelatedBooks(relatedRes.data);
             } catch (error) {
-                console.error("상세 정보 로딩 실패:", error);
-                toast.error("존재하지 않는 도서이거나 오류가 발생했습니다.");
+                handleApiError(error, "도서 상세 정보 로드 실패");
             } finally {
                 setLoading(false);
             }
@@ -37,25 +38,6 @@ export function useBookDetail() {
 
         fetchAllData(bookId);
     }, [bookId]);
-
-    // 삭제 핸들러
-    const handleDelete = async (bookId) => {
-        if (window.confirm("정말로 이 도서를 삭제하시겠습니까?")) {
-            try {
-                const res = await deleteBooks({ bookIds: [bookId] });
-
-                if (res.success) {
-                    toast.success(res.data);
-                    navigate('/book/list');
-                } else {
-                    toast.error(res.data);
-                }
-            } catch (error) {
-                console.error("삭제 요청 중 오류 발생:", error);
-                toast.error("삭제 처리 중 서버 오류가 발생했습니다.");
-            }
-        }
-    };
 
     //대출 핸들러
     const handleBorrow = async (bookId) => {
@@ -65,23 +47,32 @@ export function useBookDetail() {
 
                 if (res.success) {
                     toast.success(res.data);
-                } else {
-                    toast.error(res.data);
                 }
             } catch (error) {
-                console.error("삭제 요청 중 오류 발생:", error);
-                toast.error("삭제 처리 중 서버 오류가 발생했습니다.");
+                handleApiError(error, "도서 대출 실패");
             }
         }
-    }
-
-    const handleUpdate = (bookId) => {
-        navigate(URL.BOOK_UPDATE(bookId));
     }
 
     const handleViewBook = (bookId) => {
         navigate(URL.BOOK_VIEW(bookId));
     }
+
+    const handleToggleWish = useCallback(async (bookId) => {
+        if (!book) return;
+        try {
+            const res = await (book.wish ? deleteWish(bookId) : addWish(bookId));
+
+            if (res.success) {
+                setBook(prev => ({ ...prev, wish: !prev.wish }));
+                toast.success(res.data);
+            }
+        } catch (error) {
+            handleApiError(error, "관심 도서 추가 실패");
+        }
+
+    }, [book, setBook]);
+
 
     return {
         book,
@@ -89,10 +80,9 @@ export function useBookDetail() {
         relatedBooks,
         loading,
         handlers: {
-            handleDelete,
-            handleUpdate,
             handleBorrow,
-            handleViewBook
+            handleViewBook,
+            handleToggleWish
         }
 
     };

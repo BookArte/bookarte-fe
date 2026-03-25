@@ -30,8 +30,7 @@ export function useUpdateRecommendation() {
                     });
                 }
             } catch (error) {
-                console.error("상세 정보 로딩 실패:", error);
-                toast.error("존재하지 않는 도서이거나 오류가 발생했습니다.")
+                handleApiError(error, "도서 추천 정보 조회 로드 실패")
             } finally {
                 setLoading(false);
             }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { recommendationBookList } from "../../../api/recommendation.api";
+import URL from '@/constants/url';
 
 export function useRecommendationList() {
 
@@ -19,16 +20,20 @@ export function useRecommendationList() {
                 setBooks(response.data);
             }
         } catch (error) {
-            console.error("도서 목록 로딩 실패:", error);
+            handleApiError(error, "현재 노출 중인 추천 도서 목록 로드 실패")
         } finally {
             setLoading(false);
         }
     };
 
+    // 도서 상세 페이지 이동 함수
+    const handleViewBook = (bookId) => {
+        navigate(URL.BOOK_VIEW(bookId));
+    }
+
     return {
         books,
         loading,
-        navigate
+        handleViewBook
     }
-
 }

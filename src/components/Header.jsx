@@ -203,15 +203,15 @@ function Header() {
               </li>
               <li>
                 <NavLink
-                  to={URL.INTRO_SERVICE}
+                  to={URL.BOOK_NEW}
                   className={({ isActive }) => (isActive ? "cur" : "")}
                 >
-                  새로들어온 책
+                  신착 도서
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to={URL.INTRO_SERVICE}
+                  to={URL.BOOK_BEST}
                   className={({ isActive }) => (isActive ? "cur" : "")}
                 >
                   베스트/스테디셀러
@@ -219,7 +219,7 @@ function Header() {
               </li>
               <li>
                 <NavLink
-                  to={URL.INTRO_SERVICE}
+                  to={URL.BOOK_POPULAR}
                   className={({ isActive }) => (isActive ? "cur" : "")}
                 >
                   인기대출도서

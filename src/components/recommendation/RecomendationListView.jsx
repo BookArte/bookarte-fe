@@ -1,5 +1,5 @@
 
-function RecommendationListView({ books, loading, navigate }) {
+function RecommendationListView({ books, loading, handleViewBook }) {
 
     if (loading) return <div style={{ textAlign: 'center', padding: '50px' }}>로딩 중...</div>;
 
@@ -7,24 +7,19 @@ function RecommendationListView({ books, loading, navigate }) {
         <div className="book-list-container">
             <h2 className="recommend-list-title"> 추천 도서 TOP {books.length}</h2>
 
-            {books.map((book) => (
-                <div key={book.recommendationId} className="list-item recommend-item">
-                    {/* 순위 배지 추가 */}
-                    <div className="rank-badge">
-                        <span className="rank-num">{book.priority}</span>
-                        <span className="rank-text">위</span>
-                    </div>
+            <div className="list-header"></div>
 
+            {books.map((book, index) => (
+                <div key={book.recommendationId} className="list-item recommend-item">
                     <div className="thumbnail-container">
-                        <img
-                            src={book.bookThumbnail}
-                            alt={book.bookTitle}
-                            className="thumbnail-img"
-                        />
+                        <div className={`rank-tag rank-${index + 1}`}>
+                            {index + 1}
+                        </div>
+                        <img src={book.bookThumbnail} alt={book.bookTitle} className="thumbnail-img" />
                     </div>
 
                     <div className="info-container">
-                        <h3 className="title" onClick={() => navigate(`/book/view/${book.bookId}`)}>
+                        <h3 className="title" onClick={() => handleViewBook(book.bookId)}>
                             {book.bookTitle}
                         </h3>
 
@@ -46,7 +41,7 @@ function RecommendationListView({ books, loading, navigate }) {
 
                         <div className="meta-container">
                             <div className="meta-item">
-                                <span className="meta-label">자료실</span>
+                                <span className="meta-label">카테고리</span>
                                 <span className="meta-value">{book.bookCategoryName}</span>
                             </div>
                             <div className="meta-item">

@@ -28,8 +28,8 @@ function RecommendationForm({ recommended, fieldErrors, book, handlers, openModa
                             </button>
                         )}
                     </div>
+                    <ErrorMsg message={fieldErrors.bookId} />
                 </div>
-                {recommended && <div className='book-error-message'>{recommended}</div>}
 
                 {/* 상세 내용 섹션 */}
                 <div className="recommendation-form-section">

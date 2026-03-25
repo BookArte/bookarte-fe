@@ -30,11 +30,6 @@ export const getRecommedBookDetail = async (recommendationId) => {
     return res.data;
 }
 
-export const isRecommend = async (bookId) => {
-    const res = await apiClient.get(`/recommendation/is-recommend?bookId=${bookId}`);
-    return res.data;
-}
-
 export const getActiveRecommendationList = async () => {
     const res = await apiClient.get('/recommendation/admin/active-list');
     return res.data;

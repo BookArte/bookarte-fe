@@ -26,8 +26,7 @@ export function usePenaltyManage() {
             setUsers(res.data || []);
 
         } catch (error) {
-            console.log(error);
-            toast.error("사용자 목록을 불러오는 과정에서 오류가 발생했습니다.")
+            handleApiError(error, "유저 목록 로드 실패")
         } finally {
             setLoading(false);
         }
@@ -46,8 +45,8 @@ export function usePenaltyManage() {
                 }
             }
         } catch (error) {
-            console.log(error);
-            toast.error("패널티 목록을 불러오는 과정에서 오류가 발생했습니다.")
+            handleApiError(error, "특정 사용자 패널티 목록 로드 실패")
+
         } finally {
             setLoading(false);
         }
@@ -71,13 +70,10 @@ export function usePenaltyManage() {
                 toast.success("패널티가 성공적으로 복구되었습니다.");
 
                 if (selectedUser) fetchPenaltys(selectedUser.userId, penaltyId);
-            } else {
-                toast.error("패널티 복구에 실패했습니다.");
             }
         }
         catch (error) {
-            console.log(error);
-            toast.error("패널티 복구 과정에서 오류가 발생했습니다.");
+            handleApiError(error, "패널티 복구 실패")
         }
     }
 
@@ -91,13 +87,10 @@ export function usePenaltyManage() {
             if (res.data) {
                 toast.success("패널티가 성공적으로 해제되었습니다.");
                 if (selectedUser) fetchPenaltys(selectedUser.userId, penaltyId);
-            } else {
-                toast.error("패널티 해제에 실패했습니다.");
             }
         }
         catch (error) {
-            console.log(error);
-            toast.error("패널티 해제 과정에서 오류가 발생했습니다.");
+            handleApiError(error, "패널티 해제 실패")
         }
     }
 

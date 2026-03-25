@@ -34,6 +34,11 @@ import BookStatusList from "../pages/book/BookStatusList";
 import AdminNoticePage from "../pages/admin/notice/AdminNoticePage";
 import AdminNoticeWritePage from "../pages/admin/notice/AdminNoticeWritePage";
 import AdminNoticeModifyPage from "../pages/admin/notice/AdminNoticeModifyPage";
+import NewArrivalsList from "../pages/book/NewArrivalsList";
+import BestSellerList from "../pages/book/BestSellerList";
+import PopularList from "../pages/book/PopularList";
+import MyBorrowHistory from "../pages/borrow/MyBorrowHistory";
+import MyWishList from "../pages/wish/MyWishList";
 
 
 const RootRoutes = () => {
@@ -53,14 +58,20 @@ const RootRoutes = () => {
         {/* BookList */}
         <Route path={"/book/list"} element={<BookList />} />
 
+        {/* NewArrivalsList */}
+        <Route path={"/book/new"} element={<NewArrivalsList />} />
+
+        {/* BestSellerList */}
+        <Route path={"/book/best"} element={<BestSellerList />} />
+
+        {/* PopularList */}
+        <Route path={"/book/popular"} element={<PopularList />} />
+
         {/* BookDetail */}
         <Route path={"/book/view/:bookId"} element={<BookDetail />} />
 
         {/* RecommendationBookList */}
         <Route path={"/book/recommendation"} element={< RecommedationBookList />} />
-
-        {/* MyBorrowStatus */}
-        <Route path={"/mypage/borrow/status"} element={<MyBorrowStatusList />} />
 
         <Route path="/admin" element={<AdminLayout />} >
 
@@ -134,6 +145,18 @@ const RootRoutes = () => {
             <Route index element={<MypageDashboard />} />
             {/* MypageInfo */}
             <Route path="info" element={<MypageInfo />} />
+
+            <Route path="borrow" >
+              {/* MyBorrowStatus */}
+              <Route path="status" element={<MyBorrowStatusList />} />
+
+              {/* MyBorrowHistory */}
+              <Route path="history" element={<MyBorrowHistory />} />
+            </Route>
+
+            {/* MyWishList */}
+            <Route path="wish-list" element={<MyWishList />} />
+
           </Route>
         </Route>
 
