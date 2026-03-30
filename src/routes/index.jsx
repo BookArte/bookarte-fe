@@ -39,6 +39,9 @@ import BestSellerList from "../pages/book/BestSellerList";
 import PopularList from "../pages/book/PopularList";
 import MyBorrowHistory from "../pages/borrow/MyBorrowHistory";
 import MyWishList from "../pages/wish/MyWishList";
+import AdminNewsPage from "../pages/admin/news/AdminNewsPage";
+import AdminNewsWritePage from "../pages/admin/news/AdminNewsWritePage";
+import AdminNewsModifyPage from "../pages/admin/news/AdminNewsModifyPage";
 
 
 const RootRoutes = () => {
@@ -113,6 +116,13 @@ const RootRoutes = () => {
             <Route index element={<AdminNoticePage />} />
             <Route path="write" element={<AdminNoticeWritePage />} />
             <Route path="modify/:id" element={<AdminNoticeModifyPage />} />
+          </Route>
+
+          {/* 뉴스 관리 */}
+          <Route path="news">
+            <Route index element={<AdminNewsPage />} />
+            <Route path="write" element={<AdminNewsWritePage />} />
+            <Route path="modify/:id" element={<AdminNewsModifyPage />} />
           </Route>
         </Route>
 
