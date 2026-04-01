@@ -81,6 +81,8 @@ const AdminSidebar = () => {
                     <ul className="submenu">
                         <li><NavLink to={URL.ADMIN_NOTICE} className={({ isActive }) => isActive ? "active" : ""}>공지사항 관리 페이지</NavLink></li>
                         <li><NavLink to={URL.ADMIN_NEWS} className={({ isActive }) => isActive ? "active" : ""}>뉴스 관리 페이지</NavLink></li>
+                        <li><NavLink to={URL.ADMIN_FAQ} className={({ isActive }) => isActive ? "active" : ""}>FAQ 관리 페이지</NavLink></li>
+                        <li><NavLink to={URL.ADMIN_QNA} className={({ isActive }) => isActive ? "active" : ""}>Q&A 관리 페이지</NavLink></li>
                     </ul>
                 </div>
 

@@ -6,6 +6,7 @@ function AdminNoticeList({ data, status, handlers, getVirtualNumber }) {
         return (
             <>
                 <td>{item.noticeYn === 'Y' ? '공지' : getVirtualNumber(index)}</td>
+                <td>{item.orderNum}</td>
                 <td>{item.title}</td>
                 <td>{item.regMemberUserId}</td>
                 <td>{new Date(item.createdAt).toLocaleDateString()}</td>
@@ -22,6 +23,7 @@ function AdminNoticeList({ data, status, handlers, getVirtualNumber }) {
             title="공지사항 관리"
             columns={[
                 { label: "번호", width: "10%" },
+                { label: "정렬 순서", width: "8%" },
                 { label: "제목", width: "40%" },
                 { label: "작성자", width: "15%" },
                 { label: "작성일", width: "15%" },

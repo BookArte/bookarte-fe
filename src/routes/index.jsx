@@ -42,7 +42,12 @@ import MyWishList from "../pages/wish/MyWishList";
 import AdminNewsPage from "../pages/admin/news/AdminNewsPage";
 import AdminNewsWritePage from "../pages/admin/news/AdminNewsWritePage";
 import AdminNewsModifyPage from "../pages/admin/news/AdminNewsModifyPage";
-
+import AdminQnaPage from "../pages/admin/qna/AdminQnaPage";
+import AdminQnaWritePage from "../pages/admin/qna/AdminQnaWritePage";
+import AdminQnaModifyPage from "../pages/admin/qna/AdminQnaModifyPage";
+import AdminFaqPage from "../pages/admin/faq/AdminFaqPage";
+import AdminFaqWritePage from "../pages/admin/faq/AdminFaqWritePage";
+import AdminFaqModifyPage from "../pages/admin/faq/AdminFaqModifyPage";
 
 const RootRoutes = () => {
 
@@ -124,6 +129,21 @@ const RootRoutes = () => {
             <Route path="write" element={<AdminNewsWritePage />} />
             <Route path="modify/:id" element={<AdminNewsModifyPage />} />
           </Route>
+
+          {/* Q&A 관리 */}
+          <Route path="qna">
+            <Route index element={<AdminQnaPage />} />
+            <Route path="write" element={<AdminQnaWritePage />} />
+            <Route path="modify/:id" element={<AdminQnaModifyPage />} />
+          </Route>
+
+          {/* FAQ 관리 */}
+          <Route path="faq">
+            <Route index element={<AdminFaqPage />} />
+            <Route path="write" element={<AdminFaqWritePage />} />
+            <Route path="modify/:id" element={<AdminFaqModifyPage />} />
+          </Route>
+
         </Route>
 
 
