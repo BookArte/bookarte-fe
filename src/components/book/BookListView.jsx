@@ -1,5 +1,5 @@
 function BookListView({ books, categories, params, status, handlers }) {
-    const { fetchBooks, handleReset, handleViewBook, handleDateChange, handlePageChange } = handlers;
+    const { handleReset, handleViewBook, handleDateChange, handlePageChange, handleSearch } = handlers;
     const { loading, totalElements, isDetailOpen, setIsDetailOpen, totalPages, currentPage } = status;
     const { searchParams, setSearchParams } = params;
 
@@ -21,9 +21,9 @@ function BookListView({ books, categories, params, status, handlers }) {
                         placeholder="도서명으로 빠르게 검색하세요..."
                         value={searchParams.bookTitle}
                         onChange={(e) => setSearchParams({ ...searchParams, bookTitle: e.target.value })}
-                        onKeyPress={(e) => e.key === 'Enter' && fetchBooks()}
+                        onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                     />
-                    <button className="search-icon-btn" onClick={fetchBooks}>🔍</button>
+                    <button className="search-icon-btn" onClick={handleSearch}>🔍</button>
                 </div>
                 <button
                     className={`detail-toggle-btn ${isDetailOpen ? 'active' : ''}`}
@@ -139,7 +139,7 @@ function BookListView({ books, categories, params, status, handlers }) {
                         </div>
                         <div className="bottom-btn-group">
                             <button className="reset-btn" onClick={handleReset}>🔄 초기화</button>
-                            <button className="submit-btn" onClick={fetchBooks}>🔍 검색</button>
+                            <button className="submit-btn" onClick={handleSearch}>🔍 검색</button>
                         </div>
                     </div>
                 </div>

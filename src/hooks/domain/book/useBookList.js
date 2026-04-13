@@ -41,6 +41,10 @@ export function useBookList() {
         fetchData: fetchCategories
     } = useDataFetch(getCategoryList)
 
+    const handleSearch = () => {
+        fetchBooks(0, searchParams);
+    };
+
     // 초기화 함수
     const handleReset = () => {
         setSearchParams({
@@ -109,6 +113,7 @@ export function useBookList() {
             handleViewBook,
             handleDateChange,
             handlePageChange,
+            handleSearch
         },
 
 
