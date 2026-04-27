@@ -1,5 +1,5 @@
-function PenaltyManagementForm({ state, users, searchId, setSearchId, penaltys, handlers }) {
-    const { selectedUser, selectedPenalty, setSelectedPenalty, releaseReason, setReleaseReason } = state;
+function PenaltyManagementForm({ state, users, searchId, setSearchId, fetchUsers, penaltys, handlers, loading }) {
+    const { selectedUser, selectedPenalty, setSelectedPenalty, releaseReason, setReleaseReason, lastUserElementRef } = state;
     const { handleSearch, handleUserClick, hanadleRevokePenalty, handleReleasePenalty } = handlers;
 
     return (
@@ -24,20 +24,27 @@ function PenaltyManagementForm({ state, users, searchId, setSearchId, penaltys, 
                     <div className="user_list_container">
                         <h3 className="list_title">사용자 목록</h3>
                         <ul className="user_list">
-                            {users.length > 0 ? (
-                                users.map(user => (
+                            {users.map((user, index) => {
+                                const isLastElement = users.length === index + 1;
+                                return (
                                     <li
-                                        key={user.userId}
-                                        className={`user_item ${state.selectedUser?.userId === user.userId ? 'active' : ''}`}
+                                        key={user.id}
+                                        className={`user_item ${selectedUser?.id === user.id ? 'active' : ''}`}
                                         onClick={() => handleUserClick(user)}
                                     >
                                         <span className="user_name">{user.name}</span>
                                         <span className="user_id">{user.userId}</span>
                                     </li>
-                                ))
-                            ) : (
-                                <li className="no_data">조회된 사용자가 없습니다.</li>
-                            )}
+                                );
+                            })}
+
+                            {/* 로딩 표시기 */}
+                            {loading && <li className="loading_msg">데이터 불러오는 중...</li>}
+
+                            {/* 데이터가 아예 없는 경우 */}
+                            {!loading && users.length === 0 && <li className="no_data">조회된 사용자가 없습니다.</li>}
+
+                            <div ref={lastUserElementRef} style={{ height: '10px' }} />
                         </ul>
                     </div>
                 </div>

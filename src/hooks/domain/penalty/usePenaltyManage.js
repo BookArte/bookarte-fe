@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { getMemberList } from "../../../api/member.api";
 import { toast } from "react-toastify";
 import { getPenaltyList, releasePenalty, revokePenalty } from "../../../api/penalty.api";
+import { handleApiError } from "../../utils/errorHandler";
+
 
 export function usePenaltyManage() {
 
@@ -12,21 +14,36 @@ export function usePenaltyManage() {
     const [selectedPenalty, setSelectedPenalty] = useState(null);
     const [releaseReason, setReleaseReason] = useState("");
     const [penaltys, setPenaltys] = useState([]);
+    const [hasNext, setHasNext] = useState(false);
     const [loading, setLoading] = useState(true);
+
+    const observer = useRef();
 
     useEffect(() => {
         fetchUsers();
     }, [])
 
-    const fetchUsers = async (userId) => {
+    const fetchUsers = async (userId, isMore = false) => {
         setLoading(true);
 
         try {
-            const res = await getMemberList(userId || "");
-            setUsers(res.data || []);
+            const lastId = isMore && users.length > 0 ? users[users.length - 1].id : null;
+            const res = await getMemberList(lastId, userId || "");
+
+            const newUsers = res.data.content || [];
+            const hasNext = res.data.hasNext;
+
+            setHasNext(hasNext);
+
+            if (isMore) {
+                setUsers(prev => [...prev, ...newUsers]);
+            } else {
+                setUsers(newUsers);
+            }
 
         } catch (error) {
-            handleApiError(error, "유저 목록 로드 실패")
+            console.error("프론트엔드 로직 에러 확인:", error);
+            handleApiError(error, "유저 목록 로드 실패");
         } finally {
             setLoading(false);
         }
@@ -94,6 +111,18 @@ export function usePenaltyManage() {
         }
     }
 
+    const lastUserElementRef = useCallback(node => {
+        if (loading) return;
+        if (observer.current) observer.current.disconnect();
+
+        observer.current = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting && hasNext) {
+                fetchUsers(searchId, true); // 내부 상태인 searchId와 fetchUsers 사용
+            }
+        });
+
+        if (node) observer.current.observe(node);
+    }, [loading, hasNext, searchId]); // 의존성 관리 주의
 
     return {
         state: {
@@ -101,10 +130,12 @@ export function usePenaltyManage() {
             selectedPenalty,
             setSelectedPenalty,
             releaseReason,
-            setReleaseReason
+            setReleaseReason,
+            lastUserElementRef
         },
         searchId,
         setSearchId,
+        fetchUsers,
         users,
         penaltys,
         loading,
