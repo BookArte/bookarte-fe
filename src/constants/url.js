@@ -60,10 +60,17 @@ const URL = {
   SUPPORT_QNA_MODIFY: "/support/qna/modify", // 고객지원/묻고답하기/수정
 
   //BOARD
-  NOTICE: "/board/notice", // 게시판/공지사항
-  NOTICE_VIEW: "/board/notice/view", // 게시판/공지사항/상세
-  NEWS: "/board/news", // 게시판/새소식
-  NEWS_VIEW: "/board/news/view", // 게시판/새소식/상세
+  NOTICE: "/notice", // 게시판/공지사항
+  NOTICE_VIEW: "/notice/view", // 게시판/공지사항/상세
+  NEWS: "/news", // 게시판/새소식
+  NEWS_VIEW: "/news/view", // 게시판/새소식/상세
+  FAQ: "/faq", // 고객지원/자주묻는질문
+  FAQ_VIEW: "/faq/view", // 고객지원/자주묻는질문/상세
+  QNA: "/qna", // 고객지원/묻고답하기
+  QNA_WRITE: "/qna/write", // 고객지원/묻고답하기/글쓰기
+  QNA_VIEW: "/qna/view", // 고객지원/묻고답하기/상세
+  QNA_MODIFY: "/qna/modify", // 고객지원/묻고답하기/수정
+  BOARD_VIEW: (type, id) => `/${type}/view/${id}`, // 게시판상세
 
   //MEMBER
   MEMBER_AGREEMENT: "/member/agreement", // 회원가입약관

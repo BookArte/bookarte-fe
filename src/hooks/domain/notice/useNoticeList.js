@@ -6,6 +6,7 @@ export function useNoticeList() {
     const {
         data: data,
         loading,
+        total: total,
         pagination,
         selection,
         params,
@@ -49,13 +50,15 @@ export function useNoticeList() {
             loading,
             ...pagination,
             selectedIds: selection.selectedIds,
-            type: TYPE
+            type: TYPE,
+            total: total
         },
         handlers: {
             ...pagination,
             ...selection,
             handleReset,
             handleBulkDelete: onBulkDelete,
+            handleView: boardHandlers.handleView,
             handleModify: boardHandlers.handleModify,
             handleWrite: boardHandlers.handleWrite,
             handleChangeSearchParams: boardHandlers.handleChangeSearchParams,

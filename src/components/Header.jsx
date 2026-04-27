@@ -239,7 +239,7 @@ function Header() {
               </li>
               <li>
                 <NavLink
-                  to={URL.SUPPORT_QNA}
+                  to={URL.FAQ}
                   className={({ isActive }) => (isActive ? "cur" : "")}
                 >
                   FAQ
@@ -247,7 +247,7 @@ function Header() {
               </li>
               <li>
                 <NavLink
-                  to={URL.SUPPORT_APPLY}
+                  to={URL.QNA}
                   className={({ isActive }) => (isActive ? "cur" : "")}
                 >
                   QNA
@@ -262,7 +262,7 @@ function Header() {
               </li>
               <li>
                 <NavLink
-                  to={URL.INFORM_WEEKLY}
+                  to={URL.NOTICE}
                   className={({ isActive }) => (isActive ? "cur" : "")}
                 >
                   공지사항
@@ -270,7 +270,7 @@ function Header() {
               </li>
               <li>
                 <NavLink
-                  to={URL.INFORM_NOTICE}
+                  to={URL.NEWS}
                   className={({ isActive }) => (isActive ? "cur" : "")}
                 >
                   뉴스

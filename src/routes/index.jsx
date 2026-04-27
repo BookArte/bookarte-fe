@@ -48,6 +48,13 @@ import AdminQnaModifyPage from "../pages/admin/qna/AdminQnaModifyPage";
 import AdminFaqPage from "../pages/admin/faq/AdminFaqPage";
 import AdminFaqWritePage from "../pages/admin/faq/AdminFaqWritePage";
 import AdminFaqModifyPage from "../pages/admin/faq/AdminFaqModifyPage";
+import BoardLayout from "../components/common/BoardLayout";
+import NoticeListPage from "../pages/notice/NoticeListPage";
+import NoticeDetailPage from "../pages/notice/NoticeDetailPage";
+import NewsListPage from "../pages/news/NewsListPage";
+import NewsDetailPage from "../pages/news/NewsDetailPage";
+import FaqListPage from "../pages/faq/FaqListPage";
+import FaqDetailPage from "../pages/faq/FaqDetailPage";
 
 const RootRoutes = () => {
 
@@ -188,6 +195,21 @@ const RootRoutes = () => {
             <Route path="wish-list" element={<MyWishList />} />
 
           </Route>
+        </Route>
+
+        <Route path="/notice" element={<BoardLayout />} >
+          <Route index element={<NoticeListPage />} />
+          <Route path="view/:id" element={<NoticeDetailPage />} />
+        </Route>
+
+        <Route path="/news" element={<BoardLayout />} >
+          <Route index element={<NewsListPage />} />
+          <Route path="view/:id" element={<NewsDetailPage />} />
+        </Route>
+
+        <Route path="/faq" element={<BoardLayout />} >
+          <Route index element={<FaqListPage />} />
+          <Route path="view/:id" element={<FaqDetailPage />} />
         </Route>
 
       </Routes>

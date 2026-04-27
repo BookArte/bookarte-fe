@@ -56,6 +56,7 @@ export function useFaqList() {
             ...selection,
             handleReset,
             handleBulkDelete: onBulkDelete,
+            handleView: boardHandlers.handleView,
             handleModify: boardHandlers.handleModify,
             handleWrite: boardHandlers.handleWrite,
             handleChangeSearchParams: boardHandlers.handleChangeSearchParams,

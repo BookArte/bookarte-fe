@@ -11,6 +11,7 @@ export function useBoardList({
     initialParams = {}
 }) {
     const navigate = useNavigate();
+    const savedPage = Number(sessionStorage.getItem(`${type}_page`)) || 0;
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [totalPages, setTotalPages] = useState(0);
@@ -42,11 +43,12 @@ export function useBoardList({
     }, [fetchFn, type, searchParams]);
 
     useEffect(() => {
-        fetchData(0);
+        fetchData(savedPage);
     }, []);
 
     const handlePageChange = (page) => {
         if (page >= 0 && page < totalPages) {
+            sessionStorage.setItem(`${type}_page`, page);
             fetchData(page, appliedParams);
             window.scrollTo(0, 0);
         }
@@ -95,6 +97,10 @@ export function useBoardList({
         }
     };
 
+    const handleView = (id) => {
+        navigate(URL.BOARD_VIEW(type, id));
+    }
+
     const handleModify = (id) => {
         navigate(URL.ADMIN_BOARD_MODIFY(type, id));
     }
@@ -116,12 +122,13 @@ export function useBoardList({
     return {
         data,
         loading,
+        total: totalElements,
         params: { searchParams, setSearchParams },
         pagination: { currentPage, totalPages, handlePageChange },
         getVirtualNumber: (index) => {
             return totalElements - (currentPage * searchParams.size) - index;
         },
         selection: { selectedIds, setSelectedIds, handleSelectAll, handleSelectOne },
-        handlers: { fetchData, handleBulkDelete, handleModify, handleWrite, handleChangeSearchParams, handleSearch }
+        handlers: { fetchData, handleBulkDelete, handleView, handleModify, handleWrite, handleChangeSearchParams, handleSearch }
     };
 }

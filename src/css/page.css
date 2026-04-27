@@ -5079,3 +5079,289 @@ input[type="checkbox"] {
   font-size: 14px;
   background-color: #fff;
 }
+
+
+/* 사용자 게시판 페이지 */
+
+/* 레이아웃 공통 */
+.board-list-user-container {
+  min-height: calc(100vh - 300px);
+}
+
+.board-list-user-wrap {
+  width: 1400px;
+  margin: 0 auto;
+  padding: 0 50px;
+}
+
+.board-list-user-layout {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* 위치 경로 (Location) */
+.board-list-user-location {
+  height: 70px;
+  padding-top: 43px;
+  text-align: right;
+}
+
+.board-list-user-location ul li {
+  display: inline-block;
+  color: #666;
+  font-size: 14px;
+  position: relative;
+}
+
+.board-list-user-location ul li+li::before {
+  content: ">";
+  margin: 0 8px;
+  font-size: 12px;
+  color: #ccc;
+}
+
+/* 사이드 네비게이션 */
+.board-list-user-nav {
+  display: table-cell;
+  width: 260px;
+  vertical-align: top;
+}
+
+.nav-inner-box {
+  border: 1px solid #dde2e5;
+  border-radius: 10px;
+}
+
+.nav-title {
+  padding: 35px 30px 26px;
+  border-bottom: 4px solid #dde2e5;
+  font-size: 24px;
+  color: #222;
+}
+
+.nav-menu-list {
+  padding: 20px 30px;
+  list-style: none;
+}
+
+.nav-menu-list li a {
+  display: block;
+  padding: 12px 0;
+  color: #666;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.nav-menu-list li a.is-active {
+  color: #1a7d5e;
+  font-weight: 700;
+}
+
+.board-list-user-contents {
+  display: table-cell;
+  width: auto;
+  padding: 0 0 120px 70px;
+  vertical-align: top;
+}
+
+.contents-title {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #222;
+}
+
+/* 검색창 및 필터 */
+.board-list-user-condition {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #222;
+}
+
+.total-count strong {
+  color: #1a7d5e;
+}
+
+.search-filter-box {
+  display: flex;
+  gap: 8px;
+}
+
+.search-select,
+.search-input {
+  height: 40px;
+  border: 1px solid #ddd;
+  padding: 0 10px;
+  border-radius: 4px;
+}
+
+.search-submit-btn {
+  height: 40px;
+  padding: 0 20px;
+  background: #1a7d5e;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.board-list-user-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.board-list-user-table th {
+  height: 60px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+  font-weight: 600;
+}
+
+.board-list-user-table td {
+  height: 60px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  color: #555;
+}
+
+.board-list-user-table td a {
+  color: #000000;
+  cursor: pointer;
+}
+
+.board-list-user-table .text-left {
+  text-align: left;
+  padding-left: 20px;
+}
+
+.board-list-user-table tr.is-notice {
+  background: #fdfaf3;
+}
+
+.board-list-user-table tr.is-notice td:first-child {
+  font-weight: bold;
+  color: #e67e22;
+}
+
+/* 페이지네이션 */
+.common-pagination {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.page-num,
+.page-prev,
+.page-next {
+  display: inline-block;
+  padding: 8px 14px;
+  margin: 0 2px;
+  border: 1px solid #ddd;
+  color: #666;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.page-num.is-active {
+  background: #1a7d5e;
+  color: #fff;
+  border-color: #1a7d5e;
+}
+
+/* 게시판 상세 페이지 */
+.board-detail-user-container {
+    border-top: 2px solid #dde2e5;
+    margin-top: 10px;
+}
+
+/* 제목 및 정보 영역 */
+.detail-header {
+    padding: 30px 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.detail-title {
+    font-size: 24px;
+    color: #111;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 0;
+    flex: 1;
+    padding-right: 20px;
+}
+
+.detail-info {
+    flex-shrink: 0;
+}
+
+.detail-info dl {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #888;
+}
+
+.detail-info dt {
+    font-weight: 500;
+    margin-right: 5px;
+}
+
+.detail-info dt::before {
+    display: none;
+}
+
+/* 첨부파일 영역 */
+.detail-files {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    background: #f9f9f9;
+}
+
+.file-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #666;
+    margin-right: 20px;
+    background: #eee;
+    padding: 3px 10px;
+    border-radius: 3px;
+}
+
+.detail-content {
+    padding: 40px 10px;
+    min-height: 300px;
+    line-height: 1.8;
+    font-size: 16px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+}
+
+.detail-footer {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-list-go {
+    min-width: 150px;
+    padding: 15px 40px;
+    background: #444;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-list-go:hover {
+    background: #1a7d5e;
+}
