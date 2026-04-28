@@ -1,12 +1,12 @@
 import BoardListLayout from "../admin/BoardListLayout";
 
-function AdminNoticeList({ data, status, handlers, getVirtualNumber }) {
+function AdminQnaList({ data, status, handlers, getVirtualNumber }) {
 
     const renderRow = (item, index) => {
         return (
             <>
                 <td>{item.noticeYn === 'Y' ? '공지' : getVirtualNumber(index)}</td>
-                <td>{item.orderNum}</td>
+                <td>{item.answerStatus}</td>
                 <td>{item.title}</td>
                 <td>{item.regMemberUserId}</td>
                 <td>{new Date(item.createdAt).toLocaleDateString()}</td>
@@ -20,10 +20,10 @@ function AdminNoticeList({ data, status, handlers, getVirtualNumber }) {
 
     return (
         <BoardListLayout
-            title="공지사항 관리"
+            title="Q&A 관리"
             columns={[
                 { label: "번호", width: "10%" },
-                { label: "정렬 순서", width: "8%" },
+                { label: "답변 상태", width: "8%" },
                 { label: "제목", width: "40%" },
                 { label: "작성자", width: "15%" },
                 { label: "작성일", width: "15%" },
@@ -31,8 +31,9 @@ function AdminNoticeList({ data, status, handlers, getVirtualNumber }) {
             ]}
             data={data}
             renderRow={(item, index) => renderRow(item, index)}
-            searchPlaceholder="공지사항 제목 또는 내용 검색"
+            searchPlaceholder="Q&A 제목 또는 내용 검색"
             showCheckbox={true}
+            showCreateButton={false}
 
             selection={{
                 selectedIds: status.selectedIds,
@@ -53,4 +54,4 @@ function AdminNoticeList({ data, status, handlers, getVirtualNumber }) {
     );
 }
 
-export default AdminNoticeList;
+export default AdminQnaList;

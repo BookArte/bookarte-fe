@@ -19,6 +19,7 @@ export function useBoardForm({
         category: "",
         orderNum: 0,
         title: "",
+        editor: "",
         contents: "",
         thumbnail: null,
         thumbnailFile: null,
@@ -34,6 +35,8 @@ export function useBoardForm({
             setFormData(prev => ({
                 ...prev,
                 ...initialData,
+                editor: initialData.editor || initialData.contents || "",
+                contents: initialData.contents || initialData.editor || "",
                 thumbnail: initialData.thumbnailPath || null,
                 existingFiles: initialData.fileList || [],
             }));
@@ -45,8 +48,8 @@ export function useBoardForm({
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleEditorChange = (contents) => {
-        setFormData(prev => ({ ...prev, contents }));
+    const handleEditorChange = (editor) => {
+        setFormData(prev => ({ ...prev, editor }));
     };
 
     const onThumbnailClick = () => thumbnailInputRef.current?.click();
@@ -109,13 +112,16 @@ export function useBoardForm({
         setLoading(true);
         try {
             const sendData = new FormData();
-            const cleanContents = DOMPurify.sanitize(formData.contents);
+            const cleanContents = DOMPurify.sanitize(formData.editor);
+            const cleanAdmAnswer = DOMPurify.sanitize(formData.admAnswer);
 
             sendData.append("noticeYn", formData.noticeYn);
             sendData.append("category", formData.category);
             sendData.append("orderNum", formData.orderNum);
             sendData.append("title", formData.title);
             sendData.append("editor", cleanContents);
+            sendData.append("contents", formData.contents);
+            sendData.append("admAnswer", cleanAdmAnswer);
 
             if (isEdit && formData.deletedFiles.length > 0) {
                 formData.deletedFiles.forEach(id => {
@@ -146,6 +152,7 @@ export function useBoardForm({
 
     return {
         formData,
+        setFormData,
         loading,
         refs: { thumbnailInputRef, fileInputRef },
         handlers: {
