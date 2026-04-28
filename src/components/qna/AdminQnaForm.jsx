@@ -14,46 +14,8 @@ const BoardForm = ({
     return (
         <form className="input-form board-form" autoComplete="off" onSubmit={handlers.handleSubmit}>
             <div className="form-top-section">
-                <div className="input-thumbnail-flex">
-                    <label className="input-label">썸네일<span className="required">*</span></label>
-                    <div className={`thumbnail-preview-section ${formData.thumbnail ? 'has-image' : ''}`}
-                        onClick={handlers.onThumbnailClick}
-                    >
-                        {formData.thumbnail ? (
-                            <img src={formData.thumbnail} alt="미리보기" className="thumbnail-preview-style" />
-                        ) : (
-                            <span className="thumbnail-no-img">이미지 등록</span>
-                        )}
-                    </div>
-                    <input
-                        type="file"
-                        accept="image/*"
-                        ref={refs.thumbnailInputRef}
-                        onChange={handlers.handleThumbnailChange}
-                        style={{ display: 'none' }}
-                    />
-                </div>
 
                 <div className="input-info-group">
-                    <div>
-                        <label className="input-label">공지여부</label>
-                        <div className="notice-check-area">
-                            <label htmlFor="notice-yes">
-                                <input
-                                    type="radio" name="noticeYn" id="notice-yes" value="Y"
-                                    checked={formData.noticeYn === "Y"}
-                                    onChange={handlers.handleChange}
-                                /> 여
-                            </label>
-                            <label htmlFor="notice-no">
-                                <input
-                                    type="radio" name="noticeYn" id="notice-no" value="N"
-                                    checked={formData.noticeYn === "N"}
-                                    onChange={handlers.handleChange}
-                                /> 부
-                            </label>
-                        </div>
-                    </div>
 
                     <div className="input-row">
                         <div className="input-col">
@@ -63,16 +25,7 @@ const BoardForm = ({
                                 className="input-style"
                                 value={formData.category}
                                 onChange={handlers.handleChange}
-                            />
-                        </div>
-                        <div className="input-col">
-                            <label className="input-label">정렬순서</label>
-                            <input
-                                type="number"
-                                name="orderNum"
-                                className="input-style"
-                                value={formData.orderNum}
-                                onChange={handlers.handleChange}
+                                readOnly={isEdit}
                             />
                         </div>
                     </div>
@@ -85,6 +38,7 @@ const BoardForm = ({
                             placeholder="제목"
                             value={formData.title}
                             onChange={handlers.handleChange}
+                            readOnly={isEdit}
                         />
                     </div>
                 </div>
@@ -92,11 +46,7 @@ const BoardForm = ({
 
             <div>
                 <label className="input-label">내용<span className="required">*</span></label>
-                <Editor
-                    value={formData.editor}
-                    onChange={handlers.handleEditorChange}
-                    height="400px"
-                />
+                <textarea name="contents" className="qna-textarea" onChange={handlers.handleChange} value={formData.contents} readOnly={isEdit} />
             </div>
 
             <div className="form-file-attachment-section">
@@ -117,18 +67,10 @@ const BoardForm = ({
                 <div className="attached-file-list">
                     {isEdit && formData.existingFiles && formData.existingFiles.length > 0 && (
                         formData.existingFiles.map((file, index) => (
-
                             <div key={`ex-${file.fileId}`} className="attached-file-item existing">
                                 <a href={`${import.meta.env.VITE_API_BASE_URL}/board/file/download/${file.fileId}`} download={file.originalName} >
                                     <span className="file-name">{file.originalName}</span>
                                 </a>
-                                <button
-                                    type="button"
-                                    className="file-del-btn"
-                                    onClick={() => handlers.handleFileDelete(index, true, file.fileId)}
-                                >
-                                    삭제
-                                </button>
                             </div>
                         ))
                     )}
@@ -153,6 +95,30 @@ const BoardForm = ({
                     )}
                 </div>
             </div>
+
+            {isEdit && (
+                <div className="form-file-attachment-section" >
+                    <div>
+                        <label className="input-label">답변 상태</label>
+                        <input type="text" className="input-style" readOnly value={formData.answerStatus} />
+                    </div>
+                    <br />
+                    <div>
+                        <label className="input-label">관리자 답변</label>
+                        <Editor
+                            value={formData.admAnswer}
+                            onChange={handlers.handleAdmAnswerChange}
+                            height="400px"
+                        />
+                    </div>
+                    <br /><br /><br />
+                    <div>
+                        <label className="input-label">답변일</label>
+                        <input type="text" className="input-style" readOnly value={formData.admAnswerDate} />
+                    </div>
+                </div>
+
+            )}
 
             <div className="form-btn-group">
                 <button type="button" className="cnl-btn" onClick={handlers.handleCancel}>취소</button>

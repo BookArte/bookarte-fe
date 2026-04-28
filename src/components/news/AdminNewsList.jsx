@@ -1,6 +1,6 @@
 import BoardListLayout from "../admin/BoardListLayout";
 
-function AdminNoticeList({ data, status, handlers, getVirtualNumber }) {
+function AdminNewsList({ data, status, handlers, getVirtualNumber }) {
 
     const renderRow = (item, index) => {
         return (
@@ -20,7 +20,7 @@ function AdminNoticeList({ data, status, handlers, getVirtualNumber }) {
 
     return (
         <BoardListLayout
-            title="공지사항 관리"
+            title="뉴스 관리"
             columns={[
                 { label: "번호", width: "10%" },
                 { label: "정렬 순서", width: "8%" },
@@ -31,7 +31,7 @@ function AdminNoticeList({ data, status, handlers, getVirtualNumber }) {
             ]}
             data={data}
             renderRow={(item, index) => renderRow(item, index)}
-            searchPlaceholder="공지사항 제목 또는 내용 검색"
+            searchPlaceholder="뉴스 제목 또는 내용 검색"
             showCheckbox={true}
 
             selection={{
@@ -53,4 +53,4 @@ function AdminNoticeList({ data, status, handlers, getVirtualNumber }) {
     );
 }
 
-export default AdminNoticeList;
+export default AdminNewsList;

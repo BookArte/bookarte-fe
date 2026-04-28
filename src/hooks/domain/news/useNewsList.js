@@ -1,12 +1,11 @@
 import { getBoardList, deleteBoards } from "@/api/board.api";
 import { useBoardList } from "../common/useBoardList"
 
-export function useNoticeList() {
-    const TYPE = 'notice';
+export function useNewsList() {
+    const TYPE = 'news';
     const {
         data: data,
         loading,
-        total: total,
         pagination,
         selection,
         params,
@@ -36,7 +35,7 @@ export function useNoticeList() {
 
     const onBulkDelete = async (ids) => {
         const confirmMessage =
-            "선택한 공지사항을 삭제하시겠습니까?\n" +
+            "선택한 뉴스를 삭제하시겠습니까?\n" +
             "삭제된 데이터는 복구할 수 없습니다.";
 
         const actualIds = (ids && ids.nativeEvent) ? null : ids;
@@ -50,8 +49,7 @@ export function useNoticeList() {
             loading,
             ...pagination,
             selectedIds: selection.selectedIds,
-            type: TYPE,
-            total: total
+            type: TYPE
         },
         handlers: {
             ...pagination,
