@@ -7,6 +7,7 @@ function RegisterBookForm({ search, form, handlers }) {
         isSearching,
         duplicateError,
         searchInputRef,
+        thumbnailInputRef
     } = search;
 
     const { form: bookForm } = form;
@@ -16,7 +17,9 @@ function RegisterBookForm({ search, form, handlers }) {
         handleSearch,
         handleSelectBook,
         handleSubmit,
-        handleCancel
+        handleCancel,
+        onThumbnailClick,
+        handleThumbnailChange
     } = handlers;
 
     const { fieldErrors } = search;
@@ -63,15 +66,27 @@ function RegisterBookForm({ search, form, handlers }) {
                 <div style={{ display: 'flex', gap: '30px', marginBottom: '30px' }}>
                     <div className='input-thumbnail-flex'>
                         <label className='input-label'>도서 표지</label>
-                        <div className={`thumbnail-preview-section ${bookForm.bookThumbnail ? 'has-image' : ''}`}>
+                        <div
+                            className={`thumbnail-preview-section ${bookForm.bookThumbnail ? 'has-image' : ''}`}
+                            onClick={handlers.onThumbnailClick}
+                            style={{ cursor: 'pointer' }}
+                        >
                             {bookForm.bookThumbnail ? (
                                 <img src={bookForm.bookThumbnail} alt="미리보기" className="thumbnail-preview-style" />
                             ) : (
-                                <span style={{ fontSize: '13px', color: '#adb5bd' }}>이미지 없음</span>
+                                <span className="thumbnail-no-img">이미지 등록</span>
                             )}
                         </div>
+                        {/* 숨겨진 파일 인풋 */}
+                        <input
+                            type="file"
+                            accept="image/*"
+                            ref={search.thumbnailInputRef}
+                            onChange={handlers.handleThumbnailChange}
+                            style={{ display: 'none' }}
+                        />
+                        <ErrorMsg message={fieldErrors.bookThumbnail} />
                     </div>
-
                     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '20px' }}>
                         <div>
                             <label className='input-label'>도서 제목</label>
@@ -82,10 +97,12 @@ function RegisterBookForm({ search, form, handlers }) {
                             <div style={{ flex: 1 }}>
                                 <label className='input-label'>카테고리</label>
                                 <input name="bookCategory" value={bookForm.bookCategory} onChange={handleChange} className='input-style' />
+                                <ErrorMsg message={fieldErrors.bookCategory} />
                             </div>
                             <div style={{ flex: 1 }}>
                                 <label className='input-label'>ISBN</label>
                                 <input name="bookIsbn" value={bookForm.bookIsbn} onChange={handleChange} className='input-style' />
+                                <ErrorMsg message={fieldErrors.bookIsbn} />
                             </div>
                         </div>
                     </div>
@@ -95,18 +112,22 @@ function RegisterBookForm({ search, form, handlers }) {
                     <div>
                         <label className='input-label'>저자</label>
                         <input name="bookAuthor" value={bookForm.bookAuthor} onChange={handleChange} className='input-style' />
+                        <ErrorMsg message={fieldErrors.bookAuthor} />
                     </div>
                     <div>
                         <label className='input-label'>역자</label>
                         <input name="bookTranslator" value={bookForm.bookTranslator} onChange={handleChange} className='input-style' />
+                        <ErrorMsg message={fieldErrors.bookTranslator} />
                     </div>
                     <div>
                         <label className='input-label'>출판사</label>
                         <input name="publisherName" value={bookForm.publisherName} onChange={handleChange} className='input-style' />
+                        <ErrorMsg message={fieldErrors.publisherName} />
                     </div>
                     <div>
                         <label className='input-label'>출판일</label>
                         <input type="date" name="publicationDate" value={bookForm.publicationDate} onChange={handleChange} className='input-style' />
+                        <ErrorMsg message={fieldErrors.publicationDate} />
                     </div>
                 </div>
 
@@ -119,6 +140,7 @@ function RegisterBookForm({ search, form, handlers }) {
                 <div>
                     <label className='input-label'>책 소개</label>
                     <textarea name="bookContents" value={bookForm.bookContents} onChange={handleChange} rows="5" className='input-style' style={{ resize: 'none' }} />
+                    <ErrorMsg message={fieldErrors.bookContents} />
                 </div>
 
                 <div className='form-btn-group'>

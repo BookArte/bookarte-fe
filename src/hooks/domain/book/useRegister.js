@@ -13,6 +13,9 @@ export function useRegister() {
     const [duplicateError, setDuplicateError] = useState('');
     const [fieldErrors, setFieldErrors] = useState({});
 
+    const thumbnailInputRef = useRef(null);
+    const [thumbnailFile, setThumbnailFile] = useState(null);
+
     //초기 폼
     const initForm = {
         bookTitle: '',
@@ -28,6 +31,19 @@ export function useRegister() {
     }
 
     const { form, handleChange, setField } = useForm({ initForm });
+
+    const onThumbnailClick = () => {
+        thumbnailInputRef.current?.click();
+    };
+
+    // 파일 선택 시 처리
+    const handleThumbnailChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setThumbnailFile(file); // 서버 전송용 파일 저장
+            setField('bookThumbnail', URL.createObjectURL(file)); // 미리보기용 임시 URL
+        }
+    };
 
     // 검색 API 호출
     const handleSearch = async (e) => {
@@ -55,6 +71,7 @@ export function useRegister() {
                 setDuplicateError('이미 등록된 도서입니다.');
                 return;
             }
+            setThumbnailFile(null);
             Object.entries(book).forEach(([fieldName, value]) => {
                 setField(fieldName, value || '');
             });
@@ -90,9 +107,36 @@ export function useRegister() {
 
     // 도서 등록 제출
     const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        const requiredFields = [
+            'bookTitle',
+            'bookAuthor',
+            'publisherName',
+            'publicationDate',
+            'bookIsbn',
+            'bookCategory',
+            'bookCallNumber',
+            'bookContents',
+            'bookThumbnail'
+        ];
+
+        requiredFields.forEach(key => {
+            const value = form[key];
+            if (value !== null && value !== undefined) {
+                formData.append(key, value);
+            }
+        });
+
+
+        if (thumbnailFile) {
+            formData.append('bookThumbnailFile', thumbnailFile);
+        }
+
         await handleFormSubmission({
             e,
-            form,
+            form: formData,
             validateFunc: validateBookForm,
             apiFunc: registerBookByAdmin,
             onSuccess: () => {
@@ -113,7 +157,8 @@ export function useRegister() {
             isSearching,
             duplicateError,
             fieldErrors,
-            searchInputRef
+            searchInputRef,
+            thumbnailInputRef
         },
         form: {
             form,
@@ -123,7 +168,9 @@ export function useRegister() {
             handleSearch,
             handleSelectBook,
             handleSubmit,
-            handleCancel
+            handleCancel,
+            onThumbnailClick,
+            handleThumbnailChange
         }
     };
 }

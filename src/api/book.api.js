@@ -2,8 +2,8 @@ import { apiClient, fileApiClient } from "./client";
 
 /* 관리자 요청 api */
 /* DB 내 도서 등록 api */
-export const registerBookByAdmin = async (data) => {
-    const res = await apiClient.post('/book/register', data);
+export const registerBookByAdmin = async (formData) => {
+    const res = await fileApiClient.post('/book/register', formData);
     return res.data;
 }
 
