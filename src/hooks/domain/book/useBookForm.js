@@ -6,6 +6,7 @@ import { validateBookForm } from "../../../utils/validation/book.validation";
 import { handleFormSubmission } from "../../form/handleFormSubmisson";
 import { toast } from "react-toastify";
 import { handleApiError } from "../../utils/errorHandler";
+import DOMPurify from "dompurify";
 
 export function useBookForm({
     submitFn,
@@ -34,6 +35,7 @@ export function useBookForm({
         publicationDate: '',
         bookIsbn: '',
         bookContents: '',
+        editor: '',
         bookThumbnail: '',
         bookCallNumber: '',
         bookCategory: ''
@@ -48,6 +50,10 @@ export function useBookForm({
 
     const setField = (name, value) => {
         setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleEditorChange = (editor) => {
+        setFormData(prev => ({ ...prev, editor }));
     };
 
     const onThumbnailClick = () => {
@@ -83,15 +89,22 @@ export function useBookForm({
         setDuplicateError('');
         try {
             const isDuplicate = await handleDuplicateCheck(book.bookIsbn);
+
             if (isDuplicate) {
                 setSearchResults([]);
                 setDuplicateError('이미 등록된 도서입니다.');
                 return;
             }
+
             setThumbnailFile(null);
+            const contentsValue = book.bookContents || '';
+            const cleanContents = DOMPurify.sanitize(contentsValue);
+
             setFormData(prev => ({
                 ...prev,
-                ...book
+                ...book,
+                editor: cleanContents,
+                bookContents: cleanContents
             }));
             setSearchResults([]); // 검색 결과 레이어 닫기
             setDuplicateError('');
@@ -128,6 +141,7 @@ export function useBookForm({
         e.preventDefault();
 
         const sendData = new FormData();
+
         const requiredFields = [
             'bookTitle',
             'bookAuthor',
@@ -191,7 +205,8 @@ export function useBookForm({
             handleSelectBook,
             handleSubmit,
             handleCancel,
-            handleChange
+            handleChange,
+            handleEditorChange
         }
     };
 }

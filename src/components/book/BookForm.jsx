@@ -128,7 +128,11 @@ const BookForm = ({
 
                 <div>
                     <label className='input-label'>책 소개</label>
-                    <textarea name="bookContents" value={formData.bookContents} onChange={handlers.handleChange} rows="5" className='input-style' style={{ resize: 'none' }} />
+                    <Editor
+                        value={formData.editor}
+                        onChange={handlers.handleEditorChange}
+                        height="300px"
+                    />
                     <ErrorMsg message={errors.bookContents} />
                 </div>
 
