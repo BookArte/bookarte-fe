@@ -4,7 +4,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import initPage from "@/js/ui";
 import { useEffect } from "react";
-import RegisterBook from "../pages/book/RegisterBook";
 import BookList from "../pages/book/BookList";
 import BookDetail from "../pages/book/BookDetail";
 import UpdateBook from "../pages/book/UpdateBook";
@@ -55,6 +54,7 @@ import NewsListPage from "../pages/news/NewsListPage";
 import NewsDetailPage from "../pages/news/NewsDetailPage";
 import FaqListPage from "../pages/faq/FaqListPage";
 import FaqDetailPage from "../pages/faq/FaqDetailPage";
+import RegisterBookPage from "../pages/book/RegisterBookPage";
 
 const RootRoutes = () => {
 
@@ -93,7 +93,7 @@ const RootRoutes = () => {
           {/* 도서 업무 */}
           <Route path="book">
             {/* 도서 등록 */}
-            <Route path="register" element={<RegisterBook />} />
+            <Route path="register" element={<RegisterBookPage />} />
             {/* 도서 현황 */}
             <Route path="status" element={<BookStatusList />} />
             {/* 도서 수정 */}

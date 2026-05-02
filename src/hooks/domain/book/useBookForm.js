@@ -1,10 +1,21 @@
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "../../form/useForm";
-import { registerBookByAdmin, searchBooksWithAPi, checkBookDuplicate } from "../../../api/book.api";
+import { searchBooksWithAPi, checkBookDuplicate } from "../../../api/book.api";
 import { validateBookForm } from "../../../utils/validation/book.validation";
 import { handleFormSubmission } from "../../form/handleFormSubmisson";
+import { toast } from "react-toastify";
+import { handleApiError } from "../../utils/errorHandler";
 
-export function useRegister() {
+export function useBookForm({
+    submitFn,
+    initialData = null,
+    isEdit = false
+}) {
+    const navigate = useNavigate();
+    const thumbnailInputRef = useRef(null);
+
+    const [loading, setLoading] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [isSearching, setIsSearching] = useState(false); // 로딩 상태
@@ -12,8 +23,6 @@ export function useRegister() {
 
     const [duplicateError, setDuplicateError] = useState('');
     const [fieldErrors, setFieldErrors] = useState({});
-
-    const thumbnailInputRef = useRef(null);
     const [thumbnailFile, setThumbnailFile] = useState(null);
 
     //초기 폼
@@ -30,7 +39,16 @@ export function useRegister() {
         bookCategory: ''
     }
 
-    const { form, handleChange, setField } = useForm({ initForm });
+    const [formData, setFormData] = useState({ initForm });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const setField = (name, value) => {
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
 
     const onThumbnailClick = () => {
         thumbnailInputRef.current?.click();
@@ -49,7 +67,6 @@ export function useRegister() {
     const handleSearch = async (e) => {
         e.preventDefault();
         if (!searchQuery.trim()) return;
-
         setIsSearching(true);
         try {
             const res = await searchBooksWithAPi(searchQuery);
@@ -72,9 +89,10 @@ export function useRegister() {
                 return;
             }
             setThumbnailFile(null);
-            Object.entries(book).forEach(([fieldName, value]) => {
-                setField(fieldName, value || '');
-            });
+            setFormData(prev => ({
+                ...prev,
+                ...book
+            }));
             setSearchResults([]); // 검색 결과 레이어 닫기
             setDuplicateError('');
         }
@@ -109,7 +127,7 @@ export function useRegister() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const formData = new FormData();
+        const sendData = new FormData();
         const requiredFields = [
             'bookTitle',
             'bookAuthor',
@@ -123,22 +141,22 @@ export function useRegister() {
         ];
 
         requiredFields.forEach(key => {
-            const value = form[key];
+            const value = formData[key];
             if (value !== null && value !== undefined) {
-                formData.append(key, value);
+                sendData.append(key, value);
             }
         });
 
 
         if (thumbnailFile) {
-            formData.append('bookThumbnailFile', thumbnailFile);
+            sendData.append('bookThumbnailFile', thumbnailFile);
         }
 
         await handleFormSubmission({
             e,
-            form: formData,
+            form: sendData,
             validateFunc: validateBookForm,
-            apiFunc: registerBookByAdmin,
+            apiFunc: submitFn,
             onSuccess: () => {
                 resetAllFields();
             },
@@ -148,29 +166,32 @@ export function useRegister() {
 
     const handleCancel = () => {
         window.history.back();
-    }
+    };
 
     return {
         search: {
             searchQuery, setSearchQuery,
             searchResults,
             isSearching,
-            duplicateError,
-            fieldErrors,
-            searchInputRef,
-            thumbnailInputRef
         },
-        form: {
-            form,
+        formData,
+        loading,
+        errors: {
+            duplicateError,
+            fieldErrors
+        },
+        refs: {
+            thumbnailInputRef,
+            searchInputRef
         },
         handlers: {
-            handleChange,
+            onThumbnailClick,
+            handleThumbnailChange,
             handleSearch,
             handleSelectBook,
             handleSubmit,
             handleCancel,
-            onThumbnailClick,
-            handleThumbnailChange
+            handleChange
         }
     };
 }
