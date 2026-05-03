@@ -6,7 +6,6 @@ import initPage from "@/js/ui";
 import { useEffect } from "react";
 import BookList from "../pages/book/BookList";
 import BookDetail from "../pages/book/BookDetail";
-import UpdateBook from "../pages/book/UpdateBook";
 import SetRecommedation from "../pages/recommendation/SetRecommedation";
 import Login from "../pages/member/Login";
 import Join from "../pages/member/Join";
@@ -55,6 +54,7 @@ import NewsDetailPage from "../pages/news/NewsDetailPage";
 import FaqListPage from "../pages/faq/FaqListPage";
 import FaqDetailPage from "../pages/faq/FaqDetailPage";
 import RegisterBookPage from "../pages/book/RegisterBookPage";
+import UpdateBookPage from "../pages/book/UpdateBookPage";
 
 const RootRoutes = () => {
 
@@ -97,7 +97,7 @@ const RootRoutes = () => {
             {/* 도서 현황 */}
             <Route path="status" element={<BookStatusList />} />
             {/* 도서 수정 */}
-            <Route path="update/:bookId" element={<UpdateBook />} />
+            <Route path="update/:bookId" element={<UpdateBookPage />} />
           </Route>
 
           {/* 추천 도서 업무 */}

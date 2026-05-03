@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../../form/useForm";
 import { searchBooksWithAPi, checkBookDuplicate } from "../../../api/book.api";
@@ -42,6 +42,17 @@ export function useBookForm({
     }
 
     const [formData, setFormData] = useState({ initForm });
+
+    useEffect(() => {
+        if (isEdit && initialData) {
+            setFormData(prev => ({
+                ...prev,
+                ...initialData,
+                // 서버에서 넘어오는 데이터가 bookContents 필드에 있다면 에디터에 매핑
+                editor: initialData.bookContents || ""
+            }));
+        }
+    }, [isEdit, initialData]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
