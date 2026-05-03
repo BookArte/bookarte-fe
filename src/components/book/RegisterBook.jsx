@@ -1,12 +1,18 @@
 import BookForm from "./BookForm";
+import BookFormSearchBar from "./BookFormSearchBar";
 
 function RegisterBook({ search, formData, loading, errors, handlers, refs }) {
 
     return (
         <div className='book-form-container'>
             <h2 className='book-work-title'>새 도서 등록</h2>
-            <BookForm
+            <BookFormSearchBar
                 search={search}
+                errors={errors}
+                handlers={handlers}
+                refs={refs}
+            />
+            <BookForm
                 formData={formData}
                 loading={loading}
                 errors={errors}
