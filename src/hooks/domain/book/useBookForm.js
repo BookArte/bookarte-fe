@@ -176,7 +176,6 @@ export function useBookForm({
         if (thumbnailFile) {
             sendData.append('bookThumbnailFile', thumbnailFile);
         }
-
         await handleFormSubmission({
             e,
             form: sendData,

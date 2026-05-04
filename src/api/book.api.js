@@ -9,7 +9,7 @@ export const registerBookByAdmin = async (formData) => {
 
 /*도서 정보 수정 api*/
 export const updateBookByBookId = async (bookId, data) => {
-    const res = await apiClient.patch(`/book/${bookId}`, data);
+    const res = await fileApiClient.patch(`/book/${bookId}`, data);
     return res.data;
 }
 
