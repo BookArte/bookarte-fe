@@ -23,7 +23,7 @@ const Editor = ({
             value={value}
             onChange={onChange}
             modules={modules}
-            style={{ height: height }}
+            style={{ height: height, width: '850px' }}
         />
     );
 };

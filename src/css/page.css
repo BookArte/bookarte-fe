@@ -5361,6 +5361,11 @@ input[type="checkbox"] {
   border-bottom: 1px solid #eee;
 }
 
+.detail-content .content-inner img {
+  width: 100%;
+  height: auto;
+}
+
 .detail-footer {
   margin-top: 50px;
   display: flex;
