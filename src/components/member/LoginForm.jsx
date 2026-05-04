@@ -14,10 +14,15 @@ function LoginForm({
         isSubmitting
     } = status;
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        submitFormHandler();
+    };
+
     return (
         <div className='login-container'>
             <h2 className='login-title'>로그인</h2>
-            <form className='login-form'>
+            <form className='login-form' onSubmit={handleSubmit}>
                 <div className='form-group'>
                     <input
                         type='text'
@@ -41,8 +46,7 @@ function LoginForm({
                     />
                 </div>
                 <button
-                    type='button'
-                    onClick={submitFormHandler}
+                    type='submit'
                     className='login-button'
                     disabled={isSubmitting}
                 >
