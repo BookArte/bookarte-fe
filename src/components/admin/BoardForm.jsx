@@ -5,6 +5,7 @@ const BoardForm = ({
     loading,
     handlers,
     refs,
+    thumbnail = true,
     isEdit = false
 }) => {
 
@@ -14,26 +15,27 @@ const BoardForm = ({
     return (
         <form className="input-form board-form" autoComplete="off" onSubmit={handlers.handleSubmit}>
             <div className="form-top-section">
-                <div className="input-thumbnail-flex">
-                    <label className="input-label">썸네일<span className="required">*</span></label>
-                    <div className={`thumbnail-preview-section ${formData.thumbnail ? 'has-image' : ''}`}
-                        onClick={handlers.onThumbnailClick}
-                    >
-                        {formData.thumbnail ? (
-                            <img src={formData.thumbnail} alt="미리보기" className="thumbnail-preview-style" />
-                        ) : (
-                            <span className="thumbnail-no-img">이미지 등록</span>
-                        )}
+                {thumbnail && (
+                    <div className="input-thumbnail-flex">
+                        <label className="input-label">썸네일<span className="required">*</span></label>
+                        <div className={`thumbnail-preview-section ${formData.thumbnail ? 'has-image' : ''}`}
+                            onClick={handlers.onThumbnailClick}
+                        >
+                            {formData.thumbnail ? (
+                                <img src={formData.thumbnail} alt="미리보기" className="thumbnail-preview-style" />
+                            ) : (
+                                <span className="thumbnail-no-img">이미지 등록</span>
+                            )}
+                        </div>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            ref={refs.thumbnailInputRef}
+                            onChange={handlers.handleThumbnailChange}
+                            style={{ display: 'none' }}
+                        />
                     </div>
-                    <input
-                        type="file"
-                        accept="image/*"
-                        ref={refs.thumbnailInputRef}
-                        onChange={handlers.handleThumbnailChange}
-                        style={{ display: 'none' }}
-                    />
-                </div>
-
+                )}
                 <div className="input-info-group">
                     <div>
                         <label className="input-label">공지여부</label>
@@ -56,7 +58,7 @@ const BoardForm = ({
                     </div>
 
                     <div className="input-row">
-                        <div className="input-col">
+                        {/* <div className="input-col">
                             <label className="input-label">카테고리<span className="required">*</span></label>
                             <input
                                 name="category"
@@ -64,7 +66,7 @@ const BoardForm = ({
                                 value={formData.category}
                                 onChange={handlers.handleChange}
                             />
-                        </div>
+                        </div> */}
                         <div className="input-col">
                             <label className="input-label">정렬순서</label>
                             <input

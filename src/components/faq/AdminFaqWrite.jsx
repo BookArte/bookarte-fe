@@ -9,6 +9,7 @@ function AdminFaqWrite({ formData, loading, handlers, refs }) {
                 loading={loading}
                 handlers={handlers}
                 refs={refs}
+                thumbnail={false}
             />
         </BoardWrite>
     );
