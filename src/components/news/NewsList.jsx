@@ -7,14 +7,14 @@ function NewsList({
     getVirtualNumber
 }) {
 
-    const renderRow = (item, index) => {
+    const renderGrid = (item, index) => {
         return (
             <>
-                <tr className={`${item.noticeYn === 'Y' ? 'is-notice' : ''}`}>
-                    <td>{item.noticeYn === 'Y' ? '공지' : getVirtualNumber(index)}</td>
-                    <td className="text-left"><a onClick={() => { handlers.handleView(item.id) }}>{item.title}</a></td>
-                    <td>{new Date(item.createdAt).toLocaleDateString()}</td>
-                </tr>
+                <div key={item.id} className="board-card" onClick={() => { handlers.handleView(item.id) }}>
+                    <img src={item.thumbnailPath || '/default-news.png'} alt={item.title} />
+                    <h3>{item.title}</h3>
+                    <p>{new Date(item.createdAt).toLocaleDateString()}</p>
+                </div>
             </>
         );
     };
@@ -28,7 +28,8 @@ function NewsList({
                 { label: "작성일", width: "120px" }
             ]}
             data={data}
-            renderRow={(item, index) => renderRow(item, index)}
+            renderGrid={(item, index) => renderGrid(item, index)}
+            isGrid={true}
             selection={{
                 handleChangeSearchParams: handlers.handleChangeSearchParams,
                 handleSearch: handlers.handleSearch
