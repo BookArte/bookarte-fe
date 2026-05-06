@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAllBookList } from "../../../api/book.api";
 import URL from '@/constants/url';
 import { getCategoryList } from "../../../api/category.api";
 import { useDataFetch } from "../../utils/useDataFetch";
 
-export function useBookList() {
+export function useBookList({
+    type,
+    fetchFn,
+    idKey = 'id',
+    initialParams = {}
+}) {
     const navigate = useNavigate();
 
     const [isDetailOpen, setIsDetailOpen] = useState(false); // 상세검색 패널 열림 상태
+
+    const savedPage = Number(sessionStorage.getItem(`${type}_page`)) || 0;
     const [searchParams, setSearchParams] = useState({
         bookTitle: '',
         bookAuthor: '',
@@ -21,6 +27,8 @@ export function useBookList() {
         sort: 'createdAt,desc'
     });
 
+    const [appliedParams, setAppliedParams] = useState(searchParams);
+
     useEffect(() => {
         fetchBooks(0, searchParams);
         fetchCategories();
@@ -31,7 +39,7 @@ export function useBookList() {
         data: books,
         status,
         fetchData: fetchBooks
-    } = useDataFetch(getAllBookList);
+    } = useDataFetch(fetchFn);
 
     const { loading, totalElements, currentPage, totalPages } = status;
 
@@ -94,19 +102,18 @@ export function useBookList() {
     return {
         books,
         categories,
+        total: totalElements,
         params: {
             searchParams,
             setSearchParams,
         },
         status: {
             loading,
-            totalElements,
             isDetailOpen,
             setIsDetailOpen,
             totalPages,
             currentPage,
         },
-        searchParams,
         handlers: {
             fetchBooks,
             handleReset,
@@ -115,7 +122,13 @@ export function useBookList() {
             handlePageChange,
             handleSearch
         },
-
-
+        pagination: {
+            currentPage,
+            totalPages,
+            handlePageChange
+        },
+        getVirtualNumber: (index) => {
+            return totalElements - (currentPage * searchParams.size) - index;
+        },
     };
 }   

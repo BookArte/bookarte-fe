@@ -4,7 +4,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import initPage from "@/js/ui";
 import { useEffect } from "react";
-import BookList from "../pages/book/BookList";
 import BookDetail from "../pages/book/BookDetail";
 import SetRecommedation from "../pages/recommendation/SetRecommedation";
 import Login from "../pages/member/Login";
@@ -55,6 +54,8 @@ import FaqListPage from "../pages/faq/FaqListPage";
 import FaqDetailPage from "../pages/faq/FaqDetailPage";
 import RegisterBookPage from "../pages/book/RegisterBookPage";
 import UpdateBookPage from "../pages/book/UpdateBookPage";
+import TotalBookListPage from "../pages/book/TotalBookListPage";
+import RecommendationBookList from "../pages/recommendation/RocommendationBookList";
 
 const RootRoutes = () => {
 
@@ -70,23 +71,26 @@ const RootRoutes = () => {
         {/* MAIN */}
         <Route path={"/"} element={<Main />} />
 
-        {/* BookList */}
-        <Route path={"/book/list"} element={<BookList />} />
+        <Route path="book">
+          {/* BookList */}
+          <Route path="list" element={<TotalBookListPage />} />
 
-        {/* NewArrivalsList */}
-        <Route path={"/book/new"} element={<NewArrivalsList />} />
+          {/* NewArrivalsList */}
+          <Route path="new" element={<NewArrivalsList />} />
 
-        {/* BestSellerList */}
-        <Route path={"/book/best"} element={<BestSellerList />} />
+          {/* BestSellerList */}
+          <Route path="best" element={<BestSellerList />} />
 
-        {/* PopularList */}
-        <Route path={"/book/popular"} element={<PopularList />} />
+          {/* PopularList */}
+          <Route path="popular" element={<PopularList />} />
 
-        {/* BookDetail */}
-        <Route path={"/book/view/:bookId"} element={<BookDetail />} />
+          {/* BookDetail */}
+          <Route path="view/:bookId" element={<BookDetail />} />
 
-        {/* RecommendationBookList */}
-        <Route path={"/book/recommendation"} element={< RecommedationBookList />} />
+          {/* RecommendationBookList */}
+          <Route path="recommendation" element={< RecommendationBookList />} />
+
+        </Route>
 
         <Route path="/admin" element={<AdminLayout />} >
 
