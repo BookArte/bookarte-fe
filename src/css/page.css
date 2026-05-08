@@ -5261,7 +5261,288 @@ input[type="checkbox"] {
 .board-grid-container .board-card img {
   width: 100%;
   height: 150px;
-  objectFit: 'cover';
+  object-fit: cover;
+}
+
+/* qna 페이지 */
+.qna-home-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.qna-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.qna-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 45px 30px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.qna-card:hover {
+  border-color: #008161;
+  box-shadow: 0 10px 25px rgba(0, 129, 97, 0.08);
+  transform: translateY(-4px);
+}
+
+.qna-card-icon {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 70px;
+  background: #f0fdf4;
+  border-radius: 50%;
+}
+
+.qna-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+}
+
+.qna-card p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  word-break: keep-all;
+}
+
+.qna-card-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: #008161;
+  border-bottom: 1px solid transparent;
+  transition: border 0.2s ease;
+}
+
+.qna-card:hover .qna-card-link {
+  border-bottom: 1px solid #008161;
+}
+
+.qna-footer-notice {
+  margin-top: 50px;
+  padding: 24px 30px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.qna-footer-notice h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.qna-footer-notice ul {
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.qna-footer-notice ul li {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.8;
+  position: relative;
+  padding-left: 12px;
+}
+
+.qna-footer-notice ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #999;
+}
+
+.qna-write-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.qna-write-form {
+  margin-top: 30px;
+  border-top: 2px solid #333;
+  padding-top: 30px;
+}
+
+.qna-write-form .form-group {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.qna-write-form .form-group label {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.qna-write-form .form-group input[type="text"],
+.qna-write-form .form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.qna-write-form .form-group input:focus,
+.qna-write-form .form-group textarea:focus {
+  border-color: #008161;
+}
+
+.file-upload-wrapper {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.file-name-display {
+  flex: 1;
+  height: 45px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 0 15px;
+  border-radius: 4px;
+  color: #666;
+  font-size: 14px;
+}
+
+.btn-file-select {
+  height: 45px;
+  padding: 0 20px;
+  background-color: #fff;
+  border: 1px solid #008161;
+  color: #008161;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.btn-file-select:hover {
+  background-color: #008161;
+  color: #fff;
+}
+
+.qna-attached-file-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+.qna-file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.qna-file-item:last-child {
+  border-bottom: none;
+}
+
+.file-info {
+  display: flex;
+  gap: 8px;
+  font-size: 13px;
+  color: #444;
+}
+
+.file-size {
+  color: #999;
+}
+
+.btn-file-remove {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  color: #666;
+  padding: 4px 10px;
+  border-radius: 3px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.btn-file-remove:hover {
+  background: #ff4d4f;
+  color: #fff;
+  border-color: #ff4d4f;
+}
+
+.file-notice {
+  font-size: 12px;
+  color: #999;
+  margin-top: 8px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 50px;
+  padding-bottom: 80px;
+}
+
+.btn-cancel,
+.btn-submit {
+  width: 140px;
+  height: 50px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-cancel {
+  background: #fff;
+  border: 1px solid #d1d1d1;
+  color: #666;
+}
+
+.btn-submit {
+  background: #008161;
+  border: none;
+  color: #fff;
+}
+
+.btn-submit:hover {
+  background: #006b50;
+}
+
+.btn-submit:disabled {
+  background: #ccc;
+  cursor: not-allowed;
 }
 
 /* 페이지네이션 */

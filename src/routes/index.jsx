@@ -55,6 +55,8 @@ import NewsListPage from "../pages/news/NewsListPage";
 import NewsDetailPage from "../pages/news/NewsDetailPage";
 import FaqListPage from "../pages/faq/FaqListPage";
 import FaqDetailPage from "../pages/faq/FaqDetailPage";
+import QnaHomePage from "../pages/qna/QnaHomePage";
+import QnaWritePage from "../pages/qna/QnaWritePage";
 
 const RootRoutes = () => {
 
@@ -197,19 +199,28 @@ const RootRoutes = () => {
           </Route>
         </Route>
 
+        {/* 공지사항 */}
         <Route path="/notice" element={<BoardLayout />} >
           <Route index element={<NoticeListPage />} />
           <Route path="view/:id" element={<NoticeDetailPage />} />
         </Route>
 
+        {/* 새소식 */}
         <Route path="/news" element={<BoardLayout />} >
           <Route index element={<NewsListPage />} />
           <Route path="view/:id" element={<NewsDetailPage />} />
         </Route>
 
+        {/* FAQ */}
         <Route path="/faq" element={<BoardLayout />} >
           <Route index element={<FaqListPage />} />
           <Route path="view/:id" element={<FaqDetailPage />} />
+        </Route>
+
+        {/* QNA */}
+        <Route path="/qna" element={<BoardLayout />} >
+          <Route index element={<QnaHomePage />} />
+          <Route path="write" element={<QnaWritePage />} />
         </Route>
 
       </Routes>

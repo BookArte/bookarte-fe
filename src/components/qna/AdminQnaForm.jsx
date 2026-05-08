@@ -17,7 +17,7 @@ const BoardForm = ({
 
                 <div className="input-info-group">
 
-                    <div className="input-row">
+                    {/* <div className="input-row">
                         <div className="input-col">
                             <label className="input-label">카테고리<span className="required">*</span></label>
                             <input
@@ -28,7 +28,7 @@ const BoardForm = ({
                                 readOnly={isEdit}
                             />
                         </div>
-                    </div>
+                    </div> */}
 
                     <div>
                         <label className="input-label">제목<span className="required">*</span></label>

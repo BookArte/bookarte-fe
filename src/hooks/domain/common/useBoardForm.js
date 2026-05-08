@@ -8,11 +8,13 @@ export function useBoardForm({
     type,
     submitFn,
     initialData = null,
-    isEdit = false
+    isEdit = false,
+    redirectUrl = null
 }) {
     const navigate = useNavigate();
     const thumbnailInputRef = useRef(null);
     const fileInputRef = useRef(null);
+    const MAX_FILE_COUNT = 10;
 
     const [formData, setFormData] = useState({
         noticeYn: "N",
@@ -74,6 +76,15 @@ export function useBoardForm({
 
     const handleFileChange = (e) => {
         const selectedFiles = Array.from(e.target.files);
+
+        const currentTotalCount = formData.existingFiles.length + formData.files.length;
+
+        if (currentTotalCount + selectedFiles.length > MAX_FILE_COUNT) {
+            toast.warn(`파일은 최대 ${MAX_FILE_COUNT}개까지만 등록 가능합니다.`);
+            e.target.value = '';
+            return;
+        }
+
         setFormData(prev => ({
             ...prev,
             files: [...prev.files, ...selectedFiles]
@@ -109,6 +120,12 @@ export function useBoardForm({
             return;
         }
 
+        const totalCount = formData.existingFiles.length + formData.files.length;
+        if (totalCount > MAX_FILE_COUNT) {
+            toast.error(`파일은 최대 ${MAX_FILE_COUNT}개까지만 첨부할 수 있습니다.`);
+            return;
+        }
+
         setLoading(true);
         try {
             const sendData = new FormData();
@@ -129,6 +146,14 @@ export function useBoardForm({
                 });
             }
 
+            const MAX_SIZE = 10 * 1024 * 1024;
+            const isTooLarge = formData.files.some(file => file.size > MAX_SIZE);
+            if (isTooLarge) {
+                toast.error("10MB를 초과하는 파일이 포함되어 있습니다.");
+                setLoading(false);
+                return;
+            }
+
             if (formData.thumbnailFile) {
                 sendData.append("thumbnailFile", formData.thumbnailFile);
             }
@@ -141,7 +166,11 @@ export function useBoardForm({
 
             if (res.success) {
                 toast.success(isEdit ? "수정되었습니다." : "등록되었습니다.");
-                navigate(URL.ADMIN_BOARD_LIST(type));
+                if (redirectUrl) {
+                    navigate(redirectUrl);
+                } else {
+                    navigate(URL.ADMIN_BOARD_LIST(type));
+                }
             }
         } catch (error) {
             toast.error(`${isEdit ? '수정' : '등록'} 중 오류가 발생했습니다.`);
