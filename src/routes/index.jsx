@@ -31,7 +31,6 @@ import BookStatusList from "../pages/book/BookStatusList";
 import AdminNoticePage from "../pages/admin/notice/AdminNoticePage";
 import AdminNoticeWritePage from "../pages/admin/notice/AdminNoticeWritePage";
 import AdminNoticeModifyPage from "../pages/admin/notice/AdminNoticeModifyPage";
-import NewArrivalsList from "../pages/book/NewArrivalsList";
 import BestSellerList from "../pages/book/BestSellerList";
 import PopularList from "../pages/book/PopularList";
 import MyBorrowHistory from "../pages/borrow/MyBorrowHistory";
@@ -56,6 +55,7 @@ import RegisterBookPage from "../pages/book/RegisterBookPage";
 import UpdateBookPage from "../pages/book/UpdateBookPage";
 import TotalBookListPage from "../pages/book/TotalBookListPage";
 import RecommendationBookList from "../pages/recommendation/RocommendationBookList";
+import NewArrivalsListPage from "../pages/book/NewArrivalsListPage";
 
 const RootRoutes = () => {
 
@@ -76,7 +76,7 @@ const RootRoutes = () => {
           <Route path="list" element={<TotalBookListPage />} />
 
           {/* NewArrivalsList */}
-          <Route path="new" element={<NewArrivalsList />} />
+          <Route path="new" element={<NewArrivalsListPage />} />
 
           {/* BestSellerList */}
           <Route path="best" element={<BestSellerList />} />

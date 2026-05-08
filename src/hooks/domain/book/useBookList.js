@@ -24,13 +24,13 @@ export function useBookList({
         publicationDateStart: '',
         publicationDateEnd: '',
         size: 10,
-        sort: 'createdAt,desc'
+        sort: 'createdAt,desc',
+        ...initialParams
     });
 
     const [appliedParams, setAppliedParams] = useState(searchParams);
 
     useEffect(() => {
-        fetchBooks(0, searchParams);
         fetchCategories();
     }, [searchParams.sort]);
 
@@ -102,7 +102,6 @@ export function useBookList({
     return {
         books,
         categories,
-        total: totalElements,
         params: {
             searchParams,
             setSearchParams,
@@ -111,8 +110,8 @@ export function useBookList({
             loading,
             isDetailOpen,
             setIsDetailOpen,
-            totalPages,
-            currentPage,
+            totalElements,
+
         },
         handlers: {
             fetchBooks,

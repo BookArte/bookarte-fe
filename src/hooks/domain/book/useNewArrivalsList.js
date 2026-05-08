@@ -1,103 +1,101 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { getAllBookList, getLatestBookRegistrationDate } from "../../../api/book.api";
 import { useNavigate } from "react-router-dom";
 import URL from '@/constants/url';
 import { useDataFetch } from "../../utils/useDataFetch";
+import { useBookList } from "./useBookList";
 
 export function useNewArrivalsList() {
+    const TYPE = 'newArrivals';
     const [selectedDate, setSelectedDate] = useState(new Date());
 
-    const navigate = useNavigate();
+    const now = new Date();
+    const start = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('T')[0];
+    const end = new Date(now.getFullYear(), now.getMonth() + 1, 0).toISOString().split('T')[0];
 
-    const [searchParams, setSearchParams] = useState({
-        bookTitle: '',
-        bookAuthor: '',
-        publisherName: '',
-        bookIsbn: '',
-        category: '',
-        publicationDateStart: '',
-        publicationDateEnd: '',
-        createdAtStart: '',
-        createdAtEnd: '',
-        size: 10,
-        sort: 'createdAt,desc'
+    const {
+        books: arrivals,
+        status: baseStatus,
+        params,
+        handlers: baseHandlers,
+        pagination,
+        getVirtualNumber
+    } = useBookList({
+        type: TYPE,
+        fetchFn: getAllBookList,
+        initialParams: {
+            createdAtStart: start,
+            createdAtEnd: end,
+            sort: 'createdAt,desc'
+        }
     });
 
     useEffect(() => {
-        const latestDate = async () => {
+        const fetchLatestDate = async () => {
             try {
                 const res = await getLatestBookRegistrationDate();
-                const latest = new Date(res.data);
-                setSelectedDate(latest);
+                if (res.success) {
+                    setSelectedDate(new Date(res.data));
+                }
             } catch (error) {
                 setSelectedDate(new Date());
-                handleApiError(error, "신착 도서 로드 실패")
+                handleApiError(error, "최신 등록일 로드 실패");
             }
         };
-
-        latestDate();
+        fetchLatestDate();
     }, []);
-
-    const {
-        data: arrivals,
-        status,
-        fetchData
-    } = useDataFetch(getAllBookList);
-
-    const { loading, totalElements, currentPage, totalPages } = status;
-
 
     const dateRange = useMemo(() => {
         const year = selectedDate.getFullYear();
         const month = selectedDate.getMonth();
+
+
+        const formatDate = (date) => {
+            const offset = date.getTimezoneOffset() * 60000;
+            const localISOTime = new Date(date - offset).toISOString().split('T')[0];
+            return localISOTime;
+        };
+
+        const start = new Date(year, month, 1);
+        const end = new Date(year, month + 1, 0);
+
         return {
-            start: new Date(year, month, 1).toISOString().split('T')[0],
-            end: new Date(year, month + 1, 0).toISOString().split('T')[0]
+            start: formatDate(start),
+            end: formatDate(end)
         };
     }, [selectedDate]);
 
+
     useEffect(() => {
-        const params = {
-            ...searchParams,
+        const newArrivalParams = {
+            ...params.searchParams,
             createdAtStart: dateRange.start,
-            createdAtEnd: dateRange.end,
-            sort: 'createdAt,desc'
+            createdAtEnd: dateRange.end
         };
+        baseHandlers.fetchBooks(0, newArrivalParams);
+    }, [dateRange, baseHandlers.fetchBooks]);
 
-        fetchData(0, params);
-    }, [dateRange, searchParams.sort, fetchData]);
-
-    // 도서 상세 페이지 이동 함수
-    const handleViewBook = (bookId) => {
-        navigate(URL.BOOK_VIEW(bookId));
-    }
-
-    //페이지 변경 핸들러
-    const handlePageChange = (newPage) => {
-        if (newPage >= 0 && newPage < totalPages) {
-            fetchData(newPage);
-            window.scrollTo(0, 0);
-        }
-    };
-
-    const handleMonthChange = (offset) => {
-        const newDate = new Date(selectedDate.setMonth(selectedDate.getMonth() + offset));
-        setSelectedDate(new Date(newDate));
-    };
+    const handleMonthChange = useCallback((offset) => {
+        setSelectedDate(prevDate => {
+            const newDate = new Date(prevDate);
+            newDate.setMonth(newDate.getMonth() + offset);
+            return newDate;
+        });
+    }, []);
 
     return {
         arrivals,
         status: {
-            loading,
-            totalElements,
-            totalPages,
-            currentPage,
-            selectedDate
+            ...baseStatus,
+            selectedDate,
+            total: baseStatus.total || 0
         },
+        params,
+        pagination,
+        getVirtualNumber,
         handlers: {
-            handleViewBook,
-            handlePageChange,
-            handleMonthChange
+            ...baseHandlers,
+            handleMonthChange,
         }
-    }
+    };
 }

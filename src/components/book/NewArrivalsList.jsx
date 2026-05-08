@@ -1,7 +1,20 @@
-import BookListSearchBar from "./BookListSearchBar"
-import BookListLayout from "./BookListLayout"
+import BookListLayout from "./BookListLayout";
 
-function TotalBookList({ books, categories, status, params, handlers, pagination }) {
+function NewArrivalsList({ arrivals, handlers, pagination, status }) {
+    const MonthSelector = (
+        <div className="month-selector">
+            <button onClick={() => handlers.handleMonthChange(-1)} className="month-btn">◀ 이전 달</button>
+            <span className="current-month">
+                {status.selectedDate.getFullYear()}년 {String(status.selectedDate.getMonth() + 1).padStart(2, '0')}월
+            </span>
+            <button onClick={() => handlers.handleMonthChange(1)} className="month-btn">다음 달 ▶</button>
+        </div>
+    );
+
+    const customHeader = (
+        <p>이번 달에 총 <strong>{status.totalElements}</strong>권의 도서가 입고되었습니다.</p>
+    );
+
     const renderBooks = (book) => {
         return (
             <div key={book.bookId} className="list-item">
@@ -46,22 +59,16 @@ function TotalBookList({ books, categories, status, params, handlers, pagination
 
     return (
         <BookListLayout
-            title="도서 검색"
-            data={books}
+            title="신착 도서"
+            data={arrivals}
             pagination={pagination}
             status={status}
-            searchBar={
-                <BookListSearchBar
-                    categories={categories}
-                    search={params}
-                    status={status}
-                    handlers={handlers}
-                    categories={categories}
-                />
-            }
+            searchBar={MonthSelector}
+            customHeader={customHeader}
             renderItem={renderBooks}
         />
-    )
+    );
+
 }
 
-export default TotalBookList;
+export default NewArrivalsList;
