@@ -5,8 +5,10 @@ const BookListLayout = ({
     data = [],
     handlers,
     pagination,
+    status,
     searchBar,
     renderItem,
+    customHeader
 }) => {
     return (
         <div className="book-list-container">
@@ -17,7 +19,9 @@ const BookListLayout = ({
 
             {/* 총 건수 및 헤더 */}
             <div className="list-header">
-                전체 <strong>{pagination.totalElements}</strong> 건
+                {customHeader ? customHeader : (
+                    <>전체 <strong>{status.totalElements}</strong> 건</>
+                )}
             </div>
 
             {/* 도서 리스트 영역 */}

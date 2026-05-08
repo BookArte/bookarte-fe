@@ -8,6 +8,7 @@ function TotalBookListPage() {
         params,
         status,
         handlers,
+        total,
         pagination
     } = useTotalBookList();
     return (
