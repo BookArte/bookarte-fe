@@ -1,7 +1,7 @@
 import { use, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useBookForm } from "./useBookForm";
-import { getBookDetailByBookId, updateBookByBookId } from "../../../api/book.api";
+import { useBookForm } from "@/hooks/domain/book/admin/useBookForm";
+import { getBookDetailByBookId, updateBookByBookId } from "@/api/book.api";
 
 export function useBookUpdate() {
     const { bookId } = useParams();

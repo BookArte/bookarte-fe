@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
-import { getPopularBooks } from "../../../api/borrow.api";
+import { getPopularBooks } from "@/api/borrow.api";
 import URL from '@/constants/url';
 import { useNavigate } from "react-router-dom";
-import { useDataFetch } from "../../utils/useDataFetch";
+import { useDataFetch } from "@/hooks/utils/useDataFetch";
 
 export function usePopularList() {
     const [period, setPeriod] = useState('WEEK'); // WEEK, MONTH, YEAR

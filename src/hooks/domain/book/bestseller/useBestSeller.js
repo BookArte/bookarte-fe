@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getBestSellerBookList } from "../../../api/book.api";
-import { handleApiError } from "../../utils/errorHandler";
+import { getBestSellerBookList } from "@/api/book.api";
+import { handleApiError } from "@/hooks/utils/errorHandler";
 
 export function useBestSeller() {
     const [bestSellers, setBestSellers] = useState([]);

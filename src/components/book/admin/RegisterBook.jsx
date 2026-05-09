@@ -1,5 +1,5 @@
-import BookForm from "./BookForm";
-import BookFormSearchBar from "./BookFormSearchBar";
+import BookForm from "@/components/book/admin/BookForm";
+import BookFormSearchBar from "@/components/book/admin/BookFormSearchBar";
 
 function RegisterBook({ search, formData, loading, errors, handlers, refs }) {
 

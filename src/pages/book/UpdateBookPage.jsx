@@ -1,5 +1,5 @@
-import UpdateBook from "../../components/book/UpdateBook";
-import { useBookUpdate } from "../../hooks/domain/book/useBookUpdate";
+import UpdateBook from "@/components/book/admin/UpdateBook";
+import { useBookUpdate } from "@/hooks/domain/book/admin/useBookUpdate";
 
 function UpdateBookPage() {
     const { formData, loading, errors, handlers, refs } = useBookUpdate();

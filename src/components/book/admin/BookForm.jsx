@@ -1,5 +1,5 @@
-import ErrorMsg from "../common/ErrorMsg";
-import Editor from "../common/Editor";
+import ErrorMsg from "../../common/ErrorMsg";
+import Editor from "../../common/Editor";
 
 const BookForm = ({
     formData,

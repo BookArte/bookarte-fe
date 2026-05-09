@@ -1,6 +1,6 @@
-import RegisterBook from "../../components/book/RegisterBook";
-import { useBookForm } from "../../hooks/domain/book/useBookForm";
-import { useBookRegister } from "../../hooks/domain/book/useBookRegister";
+import RegisterBook from "../../components/book/admin/RegisterBook";
+import { useBookRegister } from "../../hooks/domain/book/admin/useBookRegister";
+
 
 function RegisterBookPage() {
     const { search, formData, loading, errors, handlers, refs } = useBookRegister();

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { deleteBooks, getAllBookList } from "../../../api/book.api";
+import { deleteBooks, getAllBookList } from "@/api/book.api";
 import { toast } from "react-toastify";
-import { getCategoryList } from "../../../api/category.api";
+import { getCategoryList } from "@/api/category.api";
 import URL from '@/constants/url';
 import { useNavigate } from "react-router-dom";
-import { useDataFetch } from "../../utils/useDataFetch";
+import { useDataFetch } from "@/hooks/utils/useDataFetch";
 
 export function useBookStatusList() {
     const [searchParams, setSearchParams] = useState({

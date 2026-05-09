@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { getAllBookList, getLatestBookRegistrationDate } from "../../../api/book.api";
+import { getAllBookList, getLatestBookRegistrationDate } from "@/api/book.api";
 import { useNavigate } from "react-router-dom";
 import URL from '@/constants/url';
-import { useDataFetch } from "../../utils/useDataFetch";
-import { useBookList } from "./useBookList";
+import { useDataFetch } from "@/hooks/utils/useDataFetch";
 
 export function useNewArrivalsList() {
     const TYPE = 'newArrivals';

@@ -1,5 +1,5 @@
-import { useBookForm } from "./useBookForm";
-import { registerBookByAdmin } from "../../../api/book.api";
+import { useBookForm } from "@/hooks/domain/book/admin/useBookForm";
+import { registerBookByAdmin } from "@/api/book.api";
 
 export function useBookRegister() {
     return useBookForm({
