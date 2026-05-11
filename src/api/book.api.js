@@ -40,6 +40,13 @@ export const searchBooksWithAPi = async (query) => {
     return res.data;
 };
 
+export const searchBookWithAPiByIsbn = async (isbn) => {
+    const res = await apiClient.get('/book/library/search', {
+        params: { isbn }
+    });
+    return res.data;
+};
+
 /* 도서 중복 체크 api */
 export const checkBookDuplicate = async (isbn) => {
     const res = await apiClient.get(`/book/is-duplicate-isbn?isbn=${isbn}`);
@@ -59,7 +66,7 @@ export const getLatestBookRegistrationDate = async () => {
 }
 
 /* 알라딘 api 베스트셀러 도서 목록 조회 */
-export const getBestSellerBookList = async () => {
-    const res = await apiClient.get('/book/bestseller');
+export const getBestSellerBookList = async (page = 1, size = 10) => {
+    const res = await apiClient.get(`/book/bestseller?page=${page}&size=${size}`);
     return res.data;
 }

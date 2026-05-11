@@ -30,7 +30,6 @@ import BookStatusList from "../pages/book/BookStatusList";
 import AdminNoticePage from "../pages/admin/notice/AdminNoticePage";
 import AdminNoticeWritePage from "../pages/admin/notice/AdminNoticeWritePage";
 import AdminNoticeModifyPage from "../pages/admin/notice/AdminNoticeModifyPage";
-import BestSellerList from "../pages/book/BestSellerList";
 import PopularList from "../pages/book/PopularList";
 import MyBorrowHistory from "../pages/borrow/MyBorrowHistory";
 import MyWishList from "../pages/wish/MyWishList";
@@ -56,6 +55,7 @@ import TotalBookListPage from "../pages/book/TotalBookListPage";
 import RecommendationBookList from "../pages/recommendation/RocommendationBookList";
 import NewArrivalsListPage from "../pages/book/NewArrivalsListPage";
 import BookDetailPage from "../pages/book/BookDetailPage";
+import BestSellerListPage from "../pages/book/BestSellerListPage";
 
 const RootRoutes = () => {
 
@@ -79,7 +79,7 @@ const RootRoutes = () => {
           <Route path="new" element={<NewArrivalsListPage />} />
 
           {/* BestSellerList */}
-          <Route path="best" element={<BestSellerList />} />
+          <Route path="best" element={<BestSellerListPage />} />
 
           {/* PopularList */}
           <Route path="popular" element={<PopularList />} />

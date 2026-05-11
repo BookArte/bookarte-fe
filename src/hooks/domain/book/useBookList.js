@@ -111,7 +111,6 @@ export function useBookList({
             isDetailOpen,
             setIsDetailOpen,
             totalElements,
-
         },
         handlers: {
             fetchBooks,
