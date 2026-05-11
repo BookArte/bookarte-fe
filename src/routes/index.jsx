@@ -4,7 +4,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import initPage from "@/js/ui";
 import { useEffect } from "react";
-import BookDetail from "../pages/book/BookDetail";
 import SetRecommedation from "../pages/recommendation/SetRecommedation";
 import Login from "../pages/member/Login";
 import Join from "../pages/member/Join";
@@ -56,6 +55,7 @@ import UpdateBookPage from "../pages/book/UpdateBookPage";
 import TotalBookListPage from "../pages/book/TotalBookListPage";
 import RecommendationBookList from "../pages/recommendation/RocommendationBookList";
 import NewArrivalsListPage from "../pages/book/NewArrivalsListPage";
+import BookDetailPage from "../pages/book/BookDetailPage";
 
 const RootRoutes = () => {
 
@@ -85,7 +85,7 @@ const RootRoutes = () => {
           <Route path="popular" element={<PopularList />} />
 
           {/* BookDetail */}
-          <Route path="view/:bookId" element={<BookDetail />} />
+          <Route path="view/:bookId" element={<BookDetailPage />} />
 
           {/* RecommendationBookList */}
           <Route path="recommendation" element={< RecommendationBookList />} />
