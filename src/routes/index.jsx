@@ -56,6 +56,7 @@ import RecommendationBookList from "../pages/recommendation/RocommendationBookLi
 import NewArrivalsListPage from "../pages/book/NewArrivalsListPage";
 import BookDetailPage from "../pages/book/BookDetailPage";
 import BestSellerListPage from "../pages/book/BestSellerListPage";
+import BestSellerDetailPage from "../pages/book/BestSerllerDetailPage";
 
 const RootRoutes = () => {
 
@@ -78,8 +79,12 @@ const RootRoutes = () => {
           {/* NewArrivalsList */}
           <Route path="new" element={<NewArrivalsListPage />} />
 
-          {/* BestSellerList */}
-          <Route path="best" element={<BestSellerListPage />} />
+          {/* BestSeller */}
+          <Route path="best">
+            <Route index element={<BestSellerListPage />} />
+            <Route path="view/:isbn" element={<BestSellerDetailPage />} />
+          </Route>
+
 
           {/* PopularList */}
           <Route path="popular" element={<PopularList />} />

@@ -41,9 +41,7 @@ export const searchBooksWithAPi = async (query) => {
 };
 
 export const searchBookWithAPiByIsbn = async (isbn) => {
-    const res = await apiClient.get('/book/library/search', {
-        params: { isbn }
-    });
+    const res = await apiClient.get(`/book/library/search/view/${isbn}`);
     return res.data;
 };
 

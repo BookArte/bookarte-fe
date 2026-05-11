@@ -36,7 +36,7 @@ export function useBestSeller() {
     }, []);
 
     const handleViewBook = (isbn) => {
-        navigate(URL.BOOK_VIEW(isbn));
+        navigate(URL.BOOK_BEST_VIEW(isbn));
     }
 
     const handlePageChange = (pageIdx) => {
