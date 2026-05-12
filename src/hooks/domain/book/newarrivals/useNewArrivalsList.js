@@ -3,6 +3,7 @@ import { getAllBookList, getLatestBookRegistrationDate } from "@/api/book.api";
 import { useNavigate } from "react-router-dom";
 import URL from '@/constants/url';
 import { useDataFetch } from "@/hooks/utils/useDataFetch";
+import { useBookList } from "../useBookList";
 
 export function useNewArrivalsList() {
     const TYPE = 'newArrivals';
