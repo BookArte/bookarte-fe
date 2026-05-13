@@ -2,16 +2,34 @@ import BoardListLayout from "../admin/BoardListLayout";
 
 function BookStatusListView({ books, categories, status, handlers }) {
     const { loading, totalPages, currentPage, selectedIds, setSelectedIds } = status;
-    const { handlePageChange, handleReset, handleUpdateBook, handleSelectAll, handleSelectOne, handleBulkDelete } = handlers;
+    const { handlePageChange, handleReset, handleUpdateBook, handleSelectAll, handleSelectOne, handleBulkDelete, handleChangeSearchParams, handleSearch, } = handlers;
 
     const columns = [
         { label: '번호', width: '100px' },
         { label: '도서 정보', width: 'auto' },
         { label: '출판사', width: '200px' },
         { label: 'ISBN', width: 'auto' },
+        { label: '등록일', width: 'auto' },
+        { label: '최종수정일', width: 'auto' },
         { label: '상태', width: '200px' },
         { label: '관리', width: '200px' },
     ];
+
+    const onSearchInputChange = (target) => {
+        let name = target.name;
+        let value = target.value;
+
+        if (name === 'searchText') name = 'bookTitle';
+        if (name === 'searchStartDate') name = 'createdAtStart';
+        if (name === 'searchEndDate') name = 'createdAtEnd';
+
+        handleChangeSearchParams({ name, value });
+    };
+
+    const formatDate = (dateString) => {
+        if (!dateString) return '-';
+        return dateString.split('T')[0];
+    }
 
     const renderRow = (item) => (
         <>
@@ -25,6 +43,8 @@ function BookStatusListView({ books, categories, status, handlers }) {
             </td>
             <td>{item.publisherName}</td>
             <td>{item.bookIsbn}</td>
+            <td>{formatDate(item.createdAt)}</td>
+            <td>{formatDate(item.lastUpdatedAt)}</td>
             <td>
                 <span className={`status-badge ${item.canBorrow ? 'green' : 'blue'}`}>
                     {item.canBorrow ? '대출 가능' : '대출 중'}
@@ -42,7 +62,7 @@ function BookStatusListView({ books, categories, status, handlers }) {
         <BoardListLayout
             title="도서 현황"
             searchPlaceholder="도서명 또는 대출자 검색..."
-            run={false}
+            run={true}
             columns={columns}
             data={books.map(book => ({ ...book, id: book.bookId }))}
             showCheckbox={true}
@@ -50,7 +70,9 @@ function BookStatusListView({ books, categories, status, handlers }) {
                 selectedIds: selectedIds,
                 onSelectAll: handleSelectAll,
                 onSelectOne: handleSelectOne,
-                onBulkDelete: handleBulkDelete
+                onBulkDelete: handleBulkDelete,
+                handleSearch: handleSearch,
+                handleChangeSearchParams: onSearchInputChange
             }}
             pagination={{
                 currentPage,
