@@ -72,7 +72,7 @@ function BookStatusListView({ books, categories, status, handlers }) {
                 onSelectOne: handleSelectOne,
                 onBulkDelete: handleBulkDelete,
                 handleSearch: handleSearch,
-                handleChangeSearchParams: onSearchInputChange
+                handleChangeSearchParams: handleChangeSearchParams
             }}
             pagination={{
                 currentPage,
