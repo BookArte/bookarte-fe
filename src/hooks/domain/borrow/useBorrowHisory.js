@@ -21,7 +21,6 @@ export function useBorrowHistory() {
     const fetchBorrowHistory = async (page = 0, params = searchParams) => {
         setLoading(true);
         try {
-            console.log("🚀 [API 요청] 서버로 날아가는 파라미터:", { ...params, page });
             const res = await getAllBorrowList({ params: { ...params, page } });
             setBorrows(res.data.content);
             setTotalPages(res.data.totalPages);
@@ -45,7 +44,6 @@ export function useBorrowHistory() {
     };
 
     const handleSearch = () => {
-        console.log("🔍 [조회 클릭] 현재 상태값:", searchParams);
         fetchBorrowHistory(0, searchParams);
     };
 

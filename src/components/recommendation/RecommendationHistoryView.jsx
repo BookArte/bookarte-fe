@@ -1,82 +1,69 @@
-function RecommendationHistoryView({ recommendationHistory, handlePageChange, status }) {
+import BoardListLayout from "../admin/BoardListLayout";
+
+function RecommendationHistoryView({ recommendations, handlers, status }) {
     const { loading, totalPages, currentPage } = status;
+    const { handlePageChange, handleChangeSearchParams, handleSearch } = handlers;
 
-    const PAGE_GROUP_SIZE = 5;
-    const currentGroup = Math.floor(currentPage / PAGE_GROUP_SIZE);
-    const startPage = currentGroup * PAGE_GROUP_SIZE;
-    const endPage = Math.min(startPage + PAGE_GROUP_SIZE, totalPages);
+    const columns = [
+        { label: '번호', width: '100px' },
+        { label: '도서 정보', width: 'auto' },
+        { label: '노출 기간', width: 'auto' },
+        { label: '최종 우선순위', width: 'auto' },
+        { label: '관리', width: '150px' },
+    ];
 
-    if (loading) return <div style={{ textAlign: 'center', padding: '50px' }}>로딩 중...</div>;
-    return (
-        <div className="book-work-container">
-            <h2 className="book-work-title">만료 추천 도서 이력</h2>
-            <div className="filter-section">
-                <input type="text" placeholder="도서명 또는 저자 검색..." />
-                <input type="date" name="searchStartDate" /> ~ <input type="date" name="searchEndDate" />
-                <button className="search-btn">조회</button>
-            </div>
+    const onSearchInputChange = (target) => {
+        let name = target.name;
+        let value = target.value;
+        if (name === 'searchText') name = 'searchKeyword';
+        if (name === 'searchStartDate') name = 'startDate';
+        if (name === 'searchEndDate') name = 'endDate';
+        handleChangeSearchParams({ name, value });
+    };
 
-            <table className="work-list-table">
-                <thead>
-                    <tr>
-                        <th className="number-column">번호</th>
-                        <th className="book-info-column">도서 정보</th>
-                        <th className="period-column">노출 기간</th>
-                        <th className="priority-column">최종 우선순위</th>
-                        <th className="manage-column">관리</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {recommendationHistory.map((item, index) => (
-                        <tr key={item.recommendationId}>
-                            <td className="number-column">{index + 1 + currentPage * PAGE_GROUP_SIZE}</td>
-                            <td className="book-info-td">
-                                <img src={item.bookThumbnail} alt="" className="mini-thumb" />
-                                <div>
-                                    <div className="book-title">{item.bookTitle}</div>
-                                    <div className="book-author">{item.bookAuthor}</div>
-                                </div>
-                            </td>
-                            <td>{item.startDate} ~ {item.endDate}</td>
-                            <td>{item.priority}위</td>
-                            <td>
-                                <button className="blue-btn" onClick={() => handleRePublish(item)}>재등록</button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-
-            {recommendationHistory.length > 0 && (
-                <div className="pagination">
-                    <button
-                        disabled={currentPage === 0}
-                        onClick={() => handlePageChange(currentPage - 1)}
-                        className="page-nav-btn"
-                    >
-                        이전
-                    </button>
-
-                    {Array.from({ length: endPage - startPage }, (_, i) => startPage + i).map((pageIdx) => (
-                        <button
-                            key={pageIdx}
-                            onClick={() => handlePageChange(pageIdx)}
-                            className={`page-num-btn ${currentPage === pageIdx ? 'active' : ''}`}
-                        >
-                            {pageIdx + 1}
-                        </button>
-                    ))}
-
-                    <button
-                        disabled={currentPage >= totalPages - 1}
-                        onClick={() => handlePageChange(currentPage + 1)}
-                        className="page-nav-btn"
-                    >
-                        다음
-                    </button>
+    const renderRow = (item, index) => (
+        <>
+            <td className="number-column">{index + 1 + currentPage * 5}</td>
+            <td className="book-info-td">
+                <img src={item.bookThumbnail} alt="" className="mini-thumb" />
+                <div>
+                    <div className="book-title">{item.bookTitle}</div>
+                    <div className="book-author">{item.bookAuthor}</div>
                 </div>
-            )}
-        </div>
+            </td>
+            <td>{item.startDate} ~ {item.endDate}</td>
+            <td>{item.priority}위</td>
+            <td>
+                <button className="blue-btn" onClick={() => handleRePublish(item)}>재등록</button>
+            </td>
+        </>
+    );
+
+    return (
+        <BoardListLayout
+            title="만료 추천 도서 이력"
+            searchPlaceholder={"도서명 또는 저자 검색..."}
+            run={true}
+            columns={columns}
+            items={recommendations}
+            data={recommendations.map(book => ({ ...book, id: book.recommendationId }))}
+            showCheckbox={false}
+            selection={{
+                selectedIds: [],
+                onSelectAll: null,
+                onSelectOne: null,
+                onBulkDelete: null,
+                handleSearch: handleSearch,
+                handleChangeSearchParams: onSearchInputChange,
+
+            }}
+            renderRow={renderRow}
+            pagination={{
+                currentPage,
+                totalPages,
+                handlePageChange,
+            }}
+        />
     );
 }
 

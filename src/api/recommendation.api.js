@@ -35,7 +35,7 @@ export const getActiveRecommendationList = async () => {
     return res.data;
 }
 
-export const getExpiredRecommendationHistory = async (page) => {
-    const res = await apiClient.get(`/recommendation/admin/history?page=${page}`);
+export const getExpiredRecommendationHistory = async (page, data) => {
+    const res = await apiClient.get(`/recommendation/admin/history?page=${page}`, { params: data });
     return res.data;
 }
