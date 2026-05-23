@@ -13,7 +13,7 @@ export const useDataFetch = (apiFunction) => {
 
         try {
             const requestParams = page !== null
-                ? { ...extraParams, page }
+                ? { ...extraParams, page: page }
                 : { ...extraParams };
 
             const res = await apiFunction({ params: requestParams });

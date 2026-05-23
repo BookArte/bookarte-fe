@@ -60,7 +60,13 @@ export const modifyPassword = async (data) => {
     return res.data;
 }
 
-export const getMemberList = async (data) => {
-    const res = await apiClient.get(`/member/find_list?userId=${data}`);
-    return res.data;
+export const getMemberList = async (lastMemberId, userId, pageSize = 15) => {
+    const res = await apiClient.get(`/member/find_list`, {
+        params: {
+            lastMemberId: lastMemberId,
+            userId: userId,
+            pageSize: pageSize
+        }
+    });
+    return res.data
 }

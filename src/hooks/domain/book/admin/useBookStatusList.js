@@ -1,43 +1,39 @@
 import { useEffect, useState } from "react";
-import { deleteBooks, getAllBookList } from "../../../api/book.api";
+import { deleteBooks, getAllBookList } from "@/api/book.api";
 import { toast } from "react-toastify";
-import { getCategoryList } from "../../../api/category.api";
+import { getCategoryList } from "@/api/category.api";
 import URL from '@/constants/url';
 import { useNavigate } from "react-router-dom";
-import { useDataFetch } from "../../utils/useDataFetch";
+import { useDataFetch } from "@/hooks/utils/useDataFetch";
+import { useBookList } from "@/hooks/domain/book/useBookList";
 
 export function useBookStatusList() {
-    const [searchParams, setSearchParams] = useState({
-        bookTitle: '',
-        bookAuthor: '',
-        publisherName: '',
-        bookIsbn: '',
-        category: '',
-        publicationDateStart: '',
-        publicationDateEnd: '',
-        size: 10,
-        sort: 'createdAt,desc'
+    const TYPE = 'bookStatus';
+
+    const {
+        books,
+        categories,
+        params,
+        status: baseStatus,
+        pagination,
+        handlers: baseHandlers,
+        getVirtualNumber
+    } = useBookList({
+        type: TYPE,
+        fetchFn: getAllBookList,
+        idKey: 'bookId',
+        initialParams: {
+            sort: 'createdAt,desc',
+            size: 10
+        }
     });
 
     const [selectedIds, setSelectedIds] = useState([]);
-
-    const {
-        data: books,
-        status,
-        fetchData
-    } = useDataFetch(getAllBookList);
-
-    const { loading, totalElements, currentPage, totalPages } = status;
-
-    const {
-        data: categories,
-        fetchData: fetchCategories
-    } = useDataFetch(getCategoryList)
-
+    const { loading, totalElements, currentPage, totalPages } = baseStatus;
 
     // 초기화 함수
     const handleReset = () => {
-        setSearchParams({
+        params.setSearchParams({
             bookTitle: '',
             bookAuthor: '',
             publisherName: '',
@@ -50,22 +46,23 @@ export function useBookStatusList() {
         });
     };
 
-
     useEffect(() => {
-        fetchData(0, searchParams);
-        fetchCategories();
-    }, [searchParams]);
+        baseHandlers.fetchBooks(0, params.searchParams);
+    }, []);
 
-    const handlePageChange = (page) => {
-        if (page >= 0 && page < totalPages) {
-            fetchData(page);
-            window.scrollTo(0, 0);
-        }
+    const handleChangeSearchParams = (target) => {
+        params.setSearchParams(prev => ({
+            ...prev,
+            [target.name]: target.value
+        }));
+    };
+
+    const handleSearch = () => {
+        baseHandlers.fetchBooks(0, params.searchParams);
     };
 
     const navigate = useNavigate();
 
-    // 도서 상세 페이지 이동 함수
     const handleUpdateBook = (bookId) => {
         navigate(URL.BOOK_UPDATE(bookId));
     }
@@ -100,12 +97,10 @@ export function useBookStatusList() {
                 const response = await deleteBooks({ bookIds: selectedIds });
 
                 if (response.success) {
-
                     const { deletedCount, skippedCount, skippedTitles, totalRequestCount } = response.data;
 
                     if (skippedCount > 0) {
                         const titleList = skippedTitles.map(title => `• ${title}`).join("\n");
-
                         alert(
                             `요청하신 ${totalRequestCount}권 중 ${deletedCount}권이 삭제되었습니다.\n\n` +
                             `[삭제 제외 안내]\n` +
@@ -113,12 +108,11 @@ export function useBookStatusList() {
                             `※ 추천 도서 이력이 있는 경우 도서와 함께 정상 삭제되었습니다.`
                         );
                     } else {
-
                         toast.success(`선택하신 ${deletedCount}권의 도서가 모두 삭제되었습니다.`);
                     }
 
                     setSelectedIds([]);
-                    fetchBooks();
+                    baseHandlers.fetchBooks(0, params.searchParams);
                 }
             } catch (error) {
                 handleApiError(error, "도서 삭제 실패")
@@ -129,22 +123,23 @@ export function useBookStatusList() {
     return {
         books,
         categories,
+        params,
+        pagination,
+        getVirtualNumber,
         status: {
-            loading,
-            totalPages,
-            totalElements,
-            currentPage,
+            ...baseStatus,
             selectedIds,
             setSelectedIds
         },
         handlers: {
-            handlePageChange,
-            handleReset,
+            ...baseHandlers,
             handleUpdateBook,
             handleSelectAll,
             handleSelectOne,
-            handleBulkDelete
+            handleBulkDelete,
+            handleReset,
+            handleChangeSearchParams,
+            handleSearch
         }
     };
-
-}   
+}

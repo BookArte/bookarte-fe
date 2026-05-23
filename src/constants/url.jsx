@@ -22,6 +22,9 @@ const URL = {
   BOOK_POPULAR: "/book/popular", // 도서관안내/인기대출도서
   BOOK_SEARCH: "/book/list", // 도서관안내/도서검색
 
+  BOOK_BEST_VIEW: "/book/best/view/:isbn", // 도서관안내/베스트셀러/상세
+  BOOK_BEST_VIEW: (isbn) => `/book/best/view/${isbn}`, // 도서관안내/베스트셀러/상세 함수
+
   BOOK_VIEW_PATH: "/book/view/:bookId", // 도서 상세페이지
   BOOK_VIEW: (bookId) => `/book/view/${bookId}`, // 도서 상세페이지 함수
 

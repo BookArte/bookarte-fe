@@ -1,6 +1,6 @@
-import { getAllBookList } from "../../../api/book.api";
+import { getAllBookList } from "@/api/book.api";
 import { useState } from "react";
-import { useDataFetch } from "../../utils/useDataFetch";
+import { useDataFetch } from "@/hooks/utils/useDataFetch";
 
 export function useBookSearch() {
     const [bookTitle, setbookTitle] = useState('');

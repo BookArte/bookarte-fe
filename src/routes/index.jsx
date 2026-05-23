@@ -4,10 +4,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import initPage from "@/js/ui";
 import { useEffect } from "react";
-import RegisterBook from "../pages/book/RegisterBook";
-import BookList from "../pages/book/BookList";
-import BookDetail from "../pages/book/BookDetail";
-import UpdateBook from "../pages/book/UpdateBook";
 import SetRecommedation from "../pages/recommendation/SetRecommedation";
 import Login from "../pages/member/Login";
 import Join from "../pages/member/Join";
@@ -34,8 +30,6 @@ import BookStatusList from "../pages/book/BookStatusList";
 import AdminNoticePage from "../pages/admin/notice/AdminNoticePage";
 import AdminNoticeWritePage from "../pages/admin/notice/AdminNoticeWritePage";
 import AdminNoticeModifyPage from "../pages/admin/notice/AdminNoticeModifyPage";
-import NewArrivalsList from "../pages/book/NewArrivalsList";
-import BestSellerList from "../pages/book/BestSellerList";
 import PopularList from "../pages/book/PopularList";
 import MyBorrowHistory from "../pages/borrow/MyBorrowHistory";
 import MyWishList from "../pages/wish/MyWishList";
@@ -55,6 +49,14 @@ import NewsListPage from "../pages/news/NewsListPage";
 import NewsDetailPage from "../pages/news/NewsDetailPage";
 import FaqListPage from "../pages/faq/FaqListPage";
 import FaqDetailPage from "../pages/faq/FaqDetailPage";
+import RegisterBookPage from "../pages/book/RegisterBookPage";
+import UpdateBookPage from "../pages/book/UpdateBookPage";
+import TotalBookListPage from "../pages/book/TotalBookListPage";
+import RecommendationBookList from "../pages/recommendation/RocommendationBookList";
+import NewArrivalsListPage from "../pages/book/NewArrivalsListPage";
+import BookDetailPage from "../pages/book/BookDetailPage";
+import BestSellerListPage from "../pages/book/BestSellerListPage";
+import BestSellerDetailPage from "../pages/book/BestSerllerDetailPage";
 
 const RootRoutes = () => {
 
@@ -70,34 +72,41 @@ const RootRoutes = () => {
         {/* MAIN */}
         <Route path={"/"} element={<Main />} />
 
-        {/* BookList */}
-        <Route path={"/book/list"} element={<BookList />} />
+        <Route path="book">
+          {/* BookList */}
+          <Route path="list" element={<TotalBookListPage />} />
 
-        {/* NewArrivalsList */}
-        <Route path={"/book/new"} element={<NewArrivalsList />} />
+          {/* NewArrivalsList */}
+          <Route path="new" element={<NewArrivalsListPage />} />
 
-        {/* BestSellerList */}
-        <Route path={"/book/best"} element={<BestSellerList />} />
+          {/* BestSeller */}
+          <Route path="best">
+            <Route index element={<BestSellerListPage />} />
+            <Route path="view/:isbn" element={<BestSellerDetailPage />} />
+          </Route>
 
-        {/* PopularList */}
-        <Route path={"/book/popular"} element={<PopularList />} />
 
-        {/* BookDetail */}
-        <Route path={"/book/view/:bookId"} element={<BookDetail />} />
+          {/* PopularList */}
+          <Route path="popular" element={<PopularList />} />
 
-        {/* RecommendationBookList */}
-        <Route path={"/book/recommendation"} element={< RecommedationBookList />} />
+          {/* BookDetail */}
+          <Route path="view/:bookId" element={<BookDetailPage />} />
+
+          {/* RecommendationBookList */}
+          <Route path="recommendation" element={< RecommendationBookList />} />
+
+        </Route>
 
         <Route path="/admin" element={<AdminLayout />} >
 
           {/* 도서 업무 */}
           <Route path="book">
             {/* 도서 등록 */}
-            <Route path="register" element={<RegisterBook />} />
+            <Route path="register" element={<RegisterBookPage />} />
             {/* 도서 현황 */}
             <Route path="status" element={<BookStatusList />} />
             {/* 도서 수정 */}
-            <Route path="update/:bookId" element={<UpdateBook />} />
+            <Route path="update/:bookId" element={<UpdateBookPage />} />
           </Route>
 
           {/* 추천 도서 업무 */}

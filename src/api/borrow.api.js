@@ -32,6 +32,7 @@ export const getPopularBooks = async ({ params }) => {
 
 //admin
 export const getAllBorrowList = async (data) => {
+    console.log("🚀 [API 호출] getAllBorrowList 호출됨 with params:", data.params);
     const res = await apiClient.get('borrow/admin', data);
     return res.data
 }
