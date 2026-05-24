@@ -1,9 +1,11 @@
 import { useState } from "react";
 import bannerImg from '@/assets/images/banner-image.png';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 function Main({ props, mainRecommend }) {
     const [activeTab, setActiveTab] = useState('notice');
+    const [keyword, setKeyword] = useState(''); // 2. 검색어 상태 추가
+    const navigate = useNavigate();
 
     const BoardRow = ({ title, date }) => (
         <div className="board-row">
@@ -22,6 +24,19 @@ function Main({ props, mainRecommend }) {
         </NavLink>
     );
 
+    const onSearch = () => {
+        if (!keyword.trim()) return;
+        navigate('/book/list', {
+            state: { bookTitle: keyword }
+        });
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            onSearch();
+        }
+    };
+
     return (
         <div className="main-page-wrapper">
             <div className="main-container">
@@ -34,8 +49,14 @@ function Main({ props, mainRecommend }) {
                 {/* 2. 도서 검색바 */}
                 <div className="search-wrapper">
                     <div className="search-inner">
-                        <input type="text" placeholder="어떤 책을 찾으시나요?" />
-                        <button className="search-icon-btn">🔍</button>
+                        <input
+                            type="text"
+                            placeholder="어떤 책을 찾으시나요?"
+                            value={keyword}
+                            onChange={(e) => setKeyword(e.target.value)}
+                            onKeyDown={handleKeyDown}
+                        />
+                        <button className="search-icon-btn" onClick={onSearch}>🔍</button>
                     </div>
                 </div>
 
