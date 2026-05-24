@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import Main from "@/pages/main/Main";
+import MainPage from "@/pages/main/MainPage";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import initPage from "@/js/ui";
@@ -70,7 +70,7 @@ const RootRoutes = () => {
 
       <Routes>
         {/* MAIN */}
-        <Route path={"/"} element={<Main />} />
+        <Route path={"/"} element={<MainPage />} />
 
         <Route path="book">
           {/* BookList */}
