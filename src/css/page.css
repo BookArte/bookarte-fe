@@ -5744,3 +5744,159 @@ input[type="checkbox"] {
   font-weight: 300;
   opacity: 0.8;
 }
+
+.about-org-wrapper {
+    width: 100%;
+    padding: 50px 0;
+    background-color: #ffffff;
+}
+
+.org-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.org-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+}
+
+.org-section-header h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111;
+}
+
+/* 세련된 다크 그레이/그린 버튼 */
+.btn-org-link {
+    background-color: #222;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s;
+}
+.btn-org-link:hover {
+    background-color: #006644; /* 도서관 테마 컬러 */
+}
+
+/* 기구도 레이아웃 스타일 */
+.chart-box {
+    background: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+}
+
+.director-node {
+    display: inline-block;
+    background-color: #006644; /* 메인 강조색 */
+    color: #fff;
+    padding: 20px 40px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.team-nodes {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    gap: 15px;
+}
+
+.team-node-item {
+    flex: 1;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 15px 10px;
+    border-radius: 30px;
+    font-weight: 600;
+    color: #444;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* 팀별 업무 그리드 */
+.tasks-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-bottom: 60px;
+}
+
+.task-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+
+.card-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.card-icon {
+    font-size: 24px;
+}
+
+.card-head h3 {
+    font-size: 18px;
+    color: #111;
+    font-weight: 600;
+}
+
+.card-body {
+    list-style: square;
+    padding-left: 20px;
+    color: #555;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* 주요 업무 리스트 스타일 */
+.duties-list {
+    list-style: none;
+    padding: 0;
+}
+
+.duties-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.duty-number {
+    background: #555;
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.duty-text {
+    font-size: 15px;
+    color: #333;
+    line-height: 1.5;
+    margin: 0;
+}

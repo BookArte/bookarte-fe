@@ -57,6 +57,7 @@ import NewArrivalsListPage from "../pages/book/NewArrivalsListPage";
 import BookDetailPage from "../pages/book/BookDetailPage";
 import BestSellerListPage from "../pages/book/BestSellerListPage";
 import BestSellerDetailPage from "../pages/book/BestSerllerDetailPage";
+import AboutOrganizationPage from "../pages/about/AboutOrganizationPage";
 
 const RootRoutes = () => {
 
@@ -71,6 +72,10 @@ const RootRoutes = () => {
       <Routes>
         {/* MAIN */}
         <Route path={"/"} element={<MainPage />} />
+
+        <Route path="/about">
+          <Route path="organization" element={<AboutOrganizationPage />} />
+        </Route>
 
         <Route path="book">
           {/* BookList */}
