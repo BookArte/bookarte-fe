@@ -5745,7 +5745,7 @@ input[type="checkbox"] {
   opacity: 0.8;
 }
 
-.about-org-wrapper {
+.about-page-wrapper {
     width: 100%;
     padding: 50px 0;
     background-color: #ffffff;
@@ -5899,12 +5899,6 @@ input[type="checkbox"] {
     color: #333;
     line-height: 1.5;
     margin: 0;
-}
-
-.location-page-wrapper {
-    width: 100%;
-    padding: 60px 0;
-    background-color: #ffffff;
 }
 
 .location-container {

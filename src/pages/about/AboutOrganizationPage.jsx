@@ -54,7 +54,7 @@ function AboutOrganizationPage() {
     ];
 
     return (
-        <div className="about-org-wrapper">
+        <div className="about-page-wrapper">
             <div className="org-container">
 
                 {/* [섹션 1] 조직기구도 */}
