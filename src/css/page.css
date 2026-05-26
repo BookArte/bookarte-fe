@@ -5745,13 +5745,14 @@ input[type="checkbox"] {
   opacity: 0.8;
 }
 
+/*도서관 소개 페이지*/
 .about-page-wrapper {
     width: 100%;
     padding: 50px 0;
     background-color: #ffffff;
 }
 
-.org-container {
+.about-page-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
@@ -5901,11 +5902,6 @@ input[type="checkbox"] {
     margin: 0;
 }
 
-.location-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
 
 .page-title {
     font-size: 32px;

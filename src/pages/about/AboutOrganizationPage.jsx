@@ -1,6 +1,9 @@
+import AboutOrganization from "@/components/about/AboutOrganization";
+import AboutLayout from "@/components/about/AboutLayout";
+
 function AboutOrganizationPage() {
 
-    // 섹션 2: 팀별 업무 데이터
+    // 팀별 업무 데이터
     const teams = [
         {
             id: 'policy',
@@ -40,7 +43,7 @@ function AboutOrganizationPage() {
         }
     ];
 
-    // 섹션 3: 주요 업무 데이터
+    // 주요 업무 데이터
     const coreDuties = [
         '지역도서관 발전 및 도서관서비스 강화를 위한 시책 수립·시행',
         '종합적인 도서관자료의 수집·정리·보존 및 제공',
@@ -54,78 +57,9 @@ function AboutOrganizationPage() {
     ];
 
     return (
-        <div className="about-page-wrapper">
-            <div className="org-container">
-
-                {/* [섹션 1] 조직기구도 */}
-                <section className="org-chart-section">
-                    <div className="org-section-header">
-                        <h2>조직기구</h2>
-                        <button className="btn-org-link" onClick={() => window.open('/org-detail.pdf')}>
-                            전체 조직도 바로가기 ↗
-                        </button>
-                    </div>
-
-                    <div className="chart-box">
-                        <div className="library-logo">📚 북아티 도서관</div>
-                        <div className="director-node">
-                            <span>북아티 도서관장</span>
-                        </div>
-                        <div className="chart-line-wrapper">
-                            {/* CSS로 트리 라인을 그려줄 영역 */}
-                            <div className="horizontal-line"></div>
-                        </div>
-                        <div className="team-nodes">
-                            {teams.map(team => (
-                                <div key={team.id} className="team-node-item">
-                                    {team.name}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                {/* [섹션 2] 팀별업무 */}
-                <section className="team-tasks-section">
-                    <div className="org-section-header">
-                        <h2>팀별업무</h2>
-                    </div>
-                    <div className="tasks-grid">
-                        {teams.map(team => (
-                            <div key={team.id} className="task-card">
-                                <div className="card-head">
-                                    <span className="card-icon">{team.icon}</span>
-                                    <h3>{team.name}</h3>
-                                </div>
-                                <ul className="card-body">
-                                    {team.tasks.map((task, idx) => (
-                                        <li key={idx}>{task}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                {/* [섹션 3] 주요업무 */}
-                <section className="core-duties-section">
-                    <div className="org-section-header">
-                        <h2>주요업무</h2>
-                    </div>
-                    <div className="duties-list-box">
-                        <ol className="duties-list">
-                            {coreDuties.map((duty, idx) => (
-                                <li key={idx}>
-                                    <span className="duty-number">{idx + 1}</span>
-                                    <p className="duty-text">{duty}</p>
-                                </li>
-                            ))}
-                        </ol>
-                    </div>
-                </section>
-
-            </div>
-        </div>
+        <AboutLayout title="조직소개">
+            <AboutOrganization TEAMS_DATA={teams} CORE_DUTIES={coreDuties} />
+        </AboutLayout>
     );
 }
 
