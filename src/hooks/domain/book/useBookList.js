@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import URL from '@/constants/url';
 import { getCategoryList } from "../../../api/category.api";
 import { useDataFetch } from "../../utils/useDataFetch";
@@ -11,10 +11,13 @@ export function useBookList({
     initialParams = {}
 }) {
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [isDetailOpen, setIsDetailOpen] = useState(false); // 상세검색 패널 열림 상태
 
     const savedPage = Number(sessionStorage.getItem(`${type}_page`)) || 0;
+
+    const transferredState = location.state || {};
     const [searchParams, setSearchParams] = useState({
         bookTitle: '',
         bookAuthor: '',
@@ -25,14 +28,11 @@ export function useBookList({
         publicationDateEnd: '',
         size: 10,
         sort: 'createdAt,desc',
-        ...initialParams
+        ...initialParams,
+        bookTitle: transferredState.bookTitle || ''
     });
 
     const [appliedParams, setAppliedParams] = useState(searchParams);
-
-    useEffect(() => {
-        fetchCategories();
-    }, [searchParams.sort]);
 
     // 도서 목록 조회
     const {
@@ -48,6 +48,18 @@ export function useBookList({
         data: categories,
         fetchData: fetchCategories
     } = useDataFetch(getCategoryList)
+
+    useEffect(() => {
+        fetchCategories();
+    }, [searchParams.sort]);
+
+    useEffect(() => {
+        fetchBooks(0, searchParams);
+
+        if (location.state) {
+            navigate(location.pathname, { replace: true, state: null });
+        }
+    }, []);
 
     const handleSearch = () => {
         fetchBooks(0, searchParams);

@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import Main from "@/pages/main/Main";
+import MainPage from "@/pages/main/MainPage";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import initPage from "@/js/ui";
@@ -57,6 +57,8 @@ import NewArrivalsListPage from "../pages/book/NewArrivalsListPage";
 import BookDetailPage from "../pages/book/BookDetailPage";
 import BestSellerListPage from "../pages/book/BestSellerListPage";
 import BestSellerDetailPage from "../pages/book/BestSerllerDetailPage";
+import AboutOrganizationPage from "../pages/about/AboutOrganizationPage";
+import AboutLocationPage from "../pages/about/AboutLocationPage";
 
 const RootRoutes = () => {
 
@@ -70,7 +72,12 @@ const RootRoutes = () => {
 
       <Routes>
         {/* MAIN */}
-        <Route path={"/"} element={<Main />} />
+        <Route path={"/"} element={<MainPage />} />
+
+        <Route path="about">
+          <Route path="organization" element={<AboutOrganizationPage />} />
+          <Route path="location" element={<AboutLocationPage />} />
+        </Route>
 
         <Route path="book">
           {/* BookList */}
