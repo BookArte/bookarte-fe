@@ -64,6 +64,8 @@ import BestSellerListPage from "../pages/book/BestSellerListPage";
 import BestSellerDetailPage from "../pages/book/BestSerllerDetailPage";
 import AboutOrganizationPage from "../pages/about/AboutOrganizationPage";
 import AboutLocationPage from "../pages/about/AboutLocationPage";
+import AboutIntroPage from "../pages/about/AboutIntroPage";
+import AboutHistoryPage from "../pages/about/AboutHistoryPage";
 
 const RootRoutes = () => {
 
@@ -82,6 +84,8 @@ const RootRoutes = () => {
         <Route path="about">
           <Route path="organization" element={<AboutOrganizationPage />} />
           <Route path="location" element={<AboutLocationPage />} />
+          <Route path="intro" element={<AboutIntroPage />} />
+          <Route path="history" element={<AboutHistoryPage />} />
         </Route>
 
         <Route path="book">

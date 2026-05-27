@@ -6,6 +6,7 @@ export function useFaqList() {
     const {
         data: data,
         loading,
+        total: total,
         pagination,
         selection,
         params,
@@ -49,7 +50,8 @@ export function useFaqList() {
             loading,
             ...pagination,
             selectedIds: selection.selectedIds,
-            type: TYPE
+            type: TYPE,
+            total: total
         },
         handlers: {
             ...pagination,
