@@ -5890,6 +5890,14 @@ input[type="checkbox"] {
   color: #444;
 }
 
+.board-empty, .board-loading {
+    padding: 40px 0;
+    text-align: center;
+    color: #888888;
+    font-size: 15px;
+    border-bottom: 1px solid #e9ecef;
+}
+
 /* 5. 베스트셀러 (더보기 우측 정렬) */
 .section-head-with-more {
   display: flex;
