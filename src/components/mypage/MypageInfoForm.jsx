@@ -26,7 +26,7 @@ function MypageInfoForm({
         <div className="member-info-container">
             <h1 className="mypage-main-title">내 정보 조회/수정</h1>
 
-            <div className="info-section">
+            <div className="my_info-section">
                 <InfoField
                     label="아이디"
                     value={userData.userId}
