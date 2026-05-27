@@ -229,14 +229,14 @@ function Header() {
           </div>
           <div className="col" onMouseEnter={() => setHoveredIndex(2)}>
             <ul>
-              <li>
+              {/* <li>
                 <NavLink
                   to={URL.SUPPORT_DOWNLOAD}
                   className={({ isActive }) => (isActive ? "cur" : "")}
                 >
                   행사/이벤트 참여
                 </NavLink>
-              </li>
+              </li> */}
               <li>
                 <NavLink
                   to={URL.FAQ}
@@ -257,9 +257,9 @@ function Header() {
           </div>
           <div className="col" onMouseEnter={() => setHoveredIndex(3)}>
             <ul>
-              <li>
+              {/* <li>
                 <NavLink to={URL.INFORM_DAILY}>오늘의 행사</NavLink>
-              </li>
+              </li> */}
               <li>
                 <NavLink
                   to={URL.NOTICE}
@@ -289,7 +289,7 @@ function Header() {
                     업무관리
                   </NavLink>
                 </li>
-                <li>
+                {/* <li>
                   <NavLink
                     to={URL.ADMIN_SCHEDULE}
                     className={({ isActive }) => (isActive ? "cur" : "")}
@@ -344,7 +344,7 @@ function Header() {
                   >
                     회원관리
                   </NavLink>
-                </li>
+                </li> */}
               </ul>
             </div>
           )}
