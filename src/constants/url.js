@@ -84,6 +84,8 @@ const URL = {
   MYPAGE_BORROW: "/mypage/borrow", // 마이페이지/대출현황
   MYPAGE_EVENT: "/mypage/event", // 마이페이지/참여행사
   MYPAGE_QNA: "/mypage/qna", // 마이페이지/묻고답하기
+  MYPAGE_QNA_VIEW: (id) => `/mypage/qna/view/${id}`, // 마이페이지/묻고답하기/상세
+  MYPAGE_QNA_EDIT: (id) => `/mypage/qna/edit/${id}`, // 마이페이지/묻고답하기/수정
   MYPAGE_WISH_LIST: "/mypage/wish_list", // 마이페이지/위시리스트
   MYPAGE_REVIEW: "/mypage/review", // 마이페이지/내서평
   MYPAGE_POINT: "/mypage/point", // 마이페이지/포인트
