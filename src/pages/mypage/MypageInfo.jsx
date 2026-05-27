@@ -4,14 +4,26 @@ import { useMypageInfo } from '@/hooks/domain/mypage/useMypageInfo';
 import { usePasswordChange } from '@/hooks/domain/mypage/usePasswordChange';
 import PasswordChangeModal from '@/components/modals/PasswordChangeModal';
 import { useModal } from '@/hooks/domain/useModal';
+import { useWithdrawal } from '@/hooks/domain/member/useWithdrawal';
+import WithdrawalModal from '@/components/modals/WithdrawalModal';
 
 function MypageInfo() {
     const { userData, refetch } = useOutletContext();
     const MypageInfoProps = useMypageInfo(userData, refetch);
 
-    const { isOpen, openModal, closeModal } = useModal();
+    const {
+        isOpen: isPwOpen,
+        openModal: openPwModal,
+        closeModal: closePwModal
+    } = useModal();
+    const passwordProps = usePasswordChange(closePwModal);
 
-    const passwordProps = usePasswordChange(closeModal);
+    const {
+        isOpen: isWithdrawOpen,
+        openModal: openWithdrawModal,
+        closeModal: closeWithdrawModal
+    } = useModal();
+    const withdrawalProps = useWithdrawal(closeWithdrawModal);
 
     return (
         <>
@@ -21,17 +33,29 @@ function MypageInfo() {
                     ...MypageInfoProps.handlers,
                     onOpenPasswordModal: () => {
                         passwordProps.handlers.resetForm();
-                        openModal();
+                        openPwModal();
+                    },
+                    onOpenWithdrawalModal: () => {
+                        withdrawalProps.handlers.resetForm();
+                        openWithdrawModal();
                     }
                 }}
             />
 
             <PasswordChangeModal
-                isOpen={isOpen}
-                onClose={closeModal}
+                isOpen={isPwOpen}
+                onClose={closePwModal}
                 formData={passwordProps.formData}
                 handlers={passwordProps.handlers}
                 status={passwordProps.status}
+            />
+
+            <WithdrawalModal
+                isOpen={isWithdrawOpen}
+                onClose={closeWithdrawModal}
+                formData={withdrawalProps.formData}
+                handlers={withdrawalProps.handlers}
+                status={withdrawalProps.status}
             />
         </>
     );
