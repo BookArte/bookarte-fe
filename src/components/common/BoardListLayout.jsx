@@ -8,6 +8,8 @@ function BoardListLayout({
     pagination,
     selection,
     renderRow,
+    renderGrid,
+    isGrid = false,
     run = true
 }) {
     return (
@@ -25,31 +27,43 @@ function BoardListLayout({
                     run={run} />
             </div>
 
-            <table className="board-list-user-table">
-                <thead>
-                    <tr>
-                        {columns.map((col, idx) => (
-                            <th key={idx} style={{ width: col.width }}>
-                                {col.label}
-                            </th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.map((item, index) => (
-                        renderRow(item, index)
-                    ))}
-                </tbody>
-            </table>
 
-            {data.length > 0 && (
-                <Pagination
-                    pageGroupSize={pagination.pageGroupSize}
-                    currentPage={pagination.currentPage}
-                    totalPages={pagination.totalPages}
-                    handlePageChange={pagination.handlePageChange}
-                />
-            )}
+            {isGrid ? (
+                <div className="board-grid-container">
+                    {data.map((item, index) => renderGrid(item, index))}
+                </div>
+            ) : (
+                <table className="board-list-user-table">
+                    <thead>
+                        <tr>
+                            {columns.map((col, idx) => (
+                                <th key={idx} style={{ width: col.width }}>
+                                    {col.label}
+                                </th>
+                            ))}
+                        </tr >
+                    </thead >
+                    <tbody>
+                        {data.map((item, index) => (
+                            renderRow(item, index)
+                        ))}
+                    </tbody>
+                </table >
+            )
+            }
+
+
+
+            {
+                data.length > 0 && (
+                    <Pagination
+                        pageGroupSize={pagination.pageGroupSize}
+                        currentPage={pagination.currentPage}
+                        totalPages={pagination.totalPages}
+                        handlePageChange={pagination.handlePageChange}
+                    />
+                )
+            }
         </>
     );
 }

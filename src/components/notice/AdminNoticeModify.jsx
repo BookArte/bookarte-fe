@@ -9,6 +9,7 @@ function AdminNoticeModify({ formData, loading, handlers, refs }) {
                 loading={loading}
                 handlers={handlers}
                 refs={refs}
+                thumbnail={false}
                 isEdit={true}
             />
         </BoardWrite>

@@ -6,6 +6,7 @@ export function useNewsList() {
     const {
         data: data,
         loading,
+        total: total,
         pagination,
         selection,
         params,
@@ -20,7 +21,7 @@ export function useNewsList() {
             searchText: '',
             searchStartDate: '',
             searchEndDate: '',
-            size: 10,
+            size: 9,
             sort: 'createdAt,desc'
         }
     });
@@ -28,7 +29,7 @@ export function useNewsList() {
     const handleReset = () => {
         params.setSearchParams({
             searchText: '',
-            size: 10,
+            size: 9,
             sort: 'createdAt,desc'
         });
     };
@@ -49,7 +50,8 @@ export function useNewsList() {
             loading,
             ...pagination,
             selectedIds: selection.selectedIds,
-            type: TYPE
+            type: TYPE,
+            total: total
         },
         handlers: {
             ...pagination,

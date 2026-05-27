@@ -1,5 +1,6 @@
 import { createBoard } from "@/api/board.api";
 import { useBoardForm } from "../common/useBoardForm";
+import URL from "@/constants/url";
 
 export function useQnaWrite() {
     const TYPE = 'qna';
@@ -14,6 +15,7 @@ export function useQnaWrite() {
             orderNum: 0,
             title: '',
             contents: ''
-        }
+        },
+        redirectUrl: URL.MYPAGE_QNA
     });
 }
