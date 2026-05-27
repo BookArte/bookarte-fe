@@ -1,14 +1,23 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { getAllBookList } from "../../../api/book.api";
+import { useLocation, useNavigate } from "react-router-dom";
 import URL from '@/constants/url';
 import { getCategoryList } from "../../../api/category.api";
 import { useDataFetch } from "../../utils/useDataFetch";
 
-export function useBookList() {
+export function useBookList({
+    type,
+    fetchFn,
+    idKey = 'id',
+    initialParams = {}
+}) {
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [isDetailOpen, setIsDetailOpen] = useState(false); // 상세검색 패널 열림 상태
+
+    const savedPage = Number(sessionStorage.getItem(`${type}_page`)) || 0;
+
+    const transferredState = location.state || {};
     const [searchParams, setSearchParams] = useState({
         bookTitle: '',
         bookAuthor: '',
@@ -18,20 +27,19 @@ export function useBookList() {
         publicationDateStart: '',
         publicationDateEnd: '',
         size: 10,
-        sort: 'createdAt,desc'
+        sort: 'createdAt,desc',
+        ...initialParams,
+        bookTitle: transferredState.bookTitle || ''
     });
 
-    useEffect(() => {
-        fetchBooks(0, searchParams);
-        fetchCategories();
-    }, [searchParams.sort]);
+    const [appliedParams, setAppliedParams] = useState(searchParams);
 
     // 도서 목록 조회
     const {
         data: books,
         status,
         fetchData: fetchBooks
-    } = useDataFetch(getAllBookList);
+    } = useDataFetch(fetchFn);
 
     const { loading, totalElements, currentPage, totalPages } = status;
 
@@ -40,6 +48,22 @@ export function useBookList() {
         data: categories,
         fetchData: fetchCategories
     } = useDataFetch(getCategoryList)
+
+    useEffect(() => {
+        fetchCategories();
+    }, [searchParams.sort]);
+
+    useEffect(() => {
+        fetchBooks(0, searchParams);
+
+        if (location.state) {
+            navigate(location.pathname, { replace: true, state: null });
+        }
+    }, []);
+
+    const handleSearch = () => {
+        fetchBooks(0, searchParams);
+    };
 
     // 초기화 함수
     const handleReset = () => {
@@ -96,21 +120,25 @@ export function useBookList() {
         },
         status: {
             loading,
-            totalElements,
             isDetailOpen,
             setIsDetailOpen,
-            totalPages,
-            currentPage,
+            totalElements,
         },
-        searchParams,
         handlers: {
             fetchBooks,
             handleReset,
             handleViewBook,
             handleDateChange,
             handlePageChange,
+            handleSearch
         },
-
-
+        pagination: {
+            currentPage,
+            totalPages,
+            handlePageChange
+        },
+        getVirtualNumber: (index) => {
+            return totalElements - (currentPage * searchParams.size) - index;
+        },
     };
 }   

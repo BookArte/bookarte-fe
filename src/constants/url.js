@@ -19,9 +19,13 @@ const URL = {
   BOOK_RECOMMEND: "/book/recommendation", // 도서관안내
   BOOK_NEW: "/book/new", // 도서관안내/신착도서
   BOOK_BEST: "/book/best", // 도서관안내/베스트셀러
+
   BOOK_POPULAR: "/book/popular", // 도서관안내/인기대출도서
   BOOK_VIEW: "/book/view/:bookId", // 도서 상세페이지
   BOOK_SEARCH: "/book/list", // 도서관안내/도서검색
+
+  BOOK_BEST_VIEW: "/book/best/view/:isbn", // 도서관안내/베스트셀러/상세
+  BOOK_BEST_VIEW: (isbn) => `/book/best/view/${isbn}`, // 도서관안내/베스트셀러/상세
 
   BOOK_VIEW_PATH: "/book/view/:bookId", // 도서 상세페이지
   BOOK_VIEW: (bookId) => `/book/view/${bookId}`, // 도서 상세페이지 함수

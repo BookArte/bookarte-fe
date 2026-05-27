@@ -1,4 +1,4 @@
-import { useBookSearch } from '../../hooks/domain/book/useBookSearch';
+import { useBookSearch } from '@/hooks/domain/book/admin/useBookSearch';
 import '@/css/modal.css';
 import ModalLayout from './ModalLayout';
 

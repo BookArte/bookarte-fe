@@ -1,11 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { getBookDetailByBookId, getRelatedBookList } from "../../../api/book.api";
+import { getBookDetailByBookId, getRelatedBookList } from "@/api/book.api";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import URL from '@/constants/url';
-import { borrowBook, getBookRollingYear } from "../../../api/borrow.api";
-import { addWish, deleteWish } from "../../../api/wish.api";
-import { handleApiError } from "../../utils/errorHandler";
+import { borrowBook, getBookRollingYear } from "@/api/borrow.api";
+import { addWish, deleteWish } from "@/api/wish.api";
+import { handleApiError } from "@/hooks/utils/errorHandler";
 
 
 export function useBookDetail() {
