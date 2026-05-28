@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import URL from '@/constants/url';
-import bannerImg from '@/assets/images/banner-image.png';
 import { useRecommendationList } from '@/hooks/domain/recommendation/useRecommendationList';
 import Main from '@/components/main/Main';
 import MainRecommend from '@/components/main/MainRecommend';
+import MainBoard from '@/components/main/MainBoard';
+import { useMainBoard } from '@/hooks/domain/main/useMainBoard';
 
 function MainPage() {
   const { books, loading, handleViewBook } = useRecommendationList();
+  const { currentList, boardLoading, activeTab, setActiveTab } = useMainBoard();
 
   return (
     <Main
@@ -17,6 +16,14 @@ function MainPage() {
         loading={loading}
         handleViewBook={handleViewBook}
       />}
+      mainBoard={
+        <MainBoard
+          currentList={currentList}
+          loading={boardLoading}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        />
+      }
     />
   );
 };

@@ -10,7 +10,7 @@ function MypageDashboard() {
     return (
         <>
             <MypageHeader name={userData.name} penalties={penalties} />
-            <MypagePointBox point={userData.point} grade={userData.grade} />
+            {/* <MypagePointBox point={userData.point} grade={userData.grade} /> */}
             <div className="mypage-status-grid">
                 {stats.map((item, index) => (
                     <MypageStatusCard key={index} {...item} />

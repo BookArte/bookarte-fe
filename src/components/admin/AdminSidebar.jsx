@@ -8,7 +8,8 @@ const AdminSidebar = () => {
         recommend: true,
         borrow: true,
         penalty: true,
-        board: true
+        board: true,
+        member: true
     });
 
     const toggleMenu = (menuName) => {
@@ -83,6 +84,17 @@ const AdminSidebar = () => {
                         <li><NavLink to={URL.ADMIN_NEWS} className={({ isActive }) => isActive ? "active" : ""}>뉴스 관리 페이지</NavLink></li>
                         <li><NavLink to={URL.ADMIN_FAQ} className={({ isActive }) => isActive ? "active" : ""}>FAQ 관리 페이지</NavLink></li>
                         <li><NavLink to={URL.ADMIN_QNA} className={({ isActive }) => isActive ? "active" : ""}>Q&A 관리 페이지</NavLink></li>
+                    </ul>
+                </div>
+
+                {/* 회원 관리 */}
+                <div className={`menu_group ${openMenus.member ? 'open' : ''}`}>
+                    <h3 className="group_title" onClick={() => toggleMenu('member')}>
+                        회원 관리
+                        <span className="arrow_icon">{openMenus.member ? '▲' : '▼'}</span>
+                    </h3>
+                    <ul className="submenu">
+                        <li><NavLink to={URL.ADMIN_MEMBER} className={({ isActive }) => isActive ? "active" : ""}>회원 관리 페이지</NavLink></li>
                     </ul>
                 </div>
 

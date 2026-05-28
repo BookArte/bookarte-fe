@@ -13,7 +13,9 @@ function MypageInfoForm({
         handleTelChange,
         onEdit,
         onCancel,
-        onSave
+        onSave,
+        onOpenPasswordModal,
+        onOpenWithdrawalModal
     } = handlers;
     const {
         isEditing,
@@ -60,7 +62,7 @@ function MypageInfoForm({
                         <button
                             type="button"
                             className="btn-password-change"
-                            onClick={handlers.onOpenPasswordModal}
+                            onClick={onOpenPasswordModal}
                         >
                             비밀번호 변경하기
                         </button>
@@ -82,6 +84,25 @@ function MypageInfoForm({
                 onSave={onSave}
                 disabled={isSubmitting}
             />
+
+            {!isEditing && (
+                <div style={{ marginTop: '40px', textAlign: 'right' }}>
+                    <button
+                        type="button"
+                        onClick={onOpenWithdrawalModal}
+                        style={{
+                            background: 'none',
+                            border: 'none',
+                            color: '#999',
+                            textDecoration: 'underline',
+                            fontSize: '13px',
+                            cursor: 'pointer'
+                        }}
+                    >
+                        회원 탈퇴하기
+                    </button>
+                </div>
+            )}
         </div>
     );
 }

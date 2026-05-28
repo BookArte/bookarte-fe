@@ -64,6 +64,9 @@ import BestSellerListPage from "../pages/book/BestSellerListPage";
 import BestSellerDetailPage from "../pages/book/BestSerllerDetailPage";
 import AboutOrganizationPage from "../pages/about/AboutOrganizationPage";
 import AboutLocationPage from "../pages/about/AboutLocationPage";
+import AboutIntroPage from "../pages/about/AboutIntroPage";
+import AboutHistoryPage from "../pages/about/AboutHistoryPage";
+import AdminMemberPage from "../pages/admin/member/AdminMemberPage";
 
 const RootRoutes = () => {
 
@@ -82,6 +85,8 @@ const RootRoutes = () => {
         <Route path="about">
           <Route path="organization" element={<AboutOrganizationPage />} />
           <Route path="location" element={<AboutLocationPage />} />
+          <Route path="intro" element={<AboutIntroPage />} />
+          <Route path="history" element={<AboutHistoryPage />} />
         </Route>
 
         <Route path="book">
@@ -171,6 +176,9 @@ const RootRoutes = () => {
             <Route path="write" element={<AdminFaqWritePage />} />
             <Route path="modify/:id" element={<AdminFaqModifyPage />} />
           </Route>
+
+          {/* 회원 관리 */}
+          <Route path="member" element={<AdminMemberPage />} />
 
         </Route>
 

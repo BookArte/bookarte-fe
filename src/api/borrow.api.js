@@ -41,3 +41,8 @@ export const approveReturn = async (borrowId) => {
     const res = await apiClient.patch(`borrow/admin/${borrowId}`)
     return res.data
 } 
+
+export const getMemberBorrowList = async (memberId) => {
+    const res = await apiClient.get(`borrow/admin/user_list/${memberId}`)
+    return res.data
+}

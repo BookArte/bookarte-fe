@@ -34,3 +34,8 @@ export const getMyBoardDetail = async (type, boardId) => {
     const res = await apiClient.get(`/board/${type}/my_view/${boardId}`);
     return res.data;
 }
+
+export const getMainBoardList = async (type, params) => {
+    const res = await apiClient.get(`/board/${type}/main_list`, { params: params });
+    return res.data;
+}

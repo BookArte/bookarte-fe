@@ -70,3 +70,13 @@ export const getMemberList = async (lastMemberId, userId, pageSize = 15) => {
     });
     return res.data
 }
+
+export const withdrawMember = async (data) => {
+    const res = await apiClient.patch('/member/delete', data);
+    return res.data;
+}
+
+export const expelMember = async (data) => {
+    const res = await apiClient.patch('/member/expel', data);
+    return res.data;
+}

@@ -4528,6 +4528,18 @@ label {
   margin-top: 15px;
 }
 
+.btn_red {
+  background: #d32f2f;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  flex: 1;
+  border: none;
+  padding: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 .btn_release {
   background: #333;
   color: #fff;
@@ -5890,6 +5902,15 @@ input[type="checkbox"] {
   color: #444;
 }
 
+.board-empty,
+.board-loading {
+  padding: 40px 0;
+  text-align: center;
+  color: #888888;
+  font-size: 15px;
+  border-bottom: 1px solid #e9ecef;
+}
+
 /* 5. 베스트셀러 (더보기 우측 정렬) */
 .section-head-with-more {
   display: flex;
@@ -6484,6 +6505,193 @@ input[type="checkbox"] {
   padding: 0 20px;
 }
 
+:root {
+  --primary-color: #1a5632;
+  --primary-light: #eaf2ec;
+  --primary-gradient: linear-gradient(135deg, #f5f7f6 0%, #eaf2ec 100%);
+  --text-main: #222222;
+  --text-muted: #666666;
+  --border-color: #e9ecef;
+}
+
+.page-title {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 45px;
+  padding-bottom: 18px;
+  border-bottom: 3px solid var(--primary-color);
+  letter-spacing: -0.5px;
+}
+
+.intro-hero-section {
+  background: var(--primary-gradient);
+  border-radius: 16px;
+  padding: 70px 40px;
+  text-align: center;
+  margin-bottom: 65px;
+  box-shadow: 0 10px 30px rgba(26, 86, 50, 0.03);
+  border: 1px solid rgba(26, 86, 50, 0.05);
+}
+
+.intro-hero-section h3 {
+  font-size: 36px;
+  color: var(--primary-color);
+  margin-bottom: 12px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.hero-subtitle {
+  font-size: 19px;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 28px;
+}
+
+.hero-description {
+  line-height: 1.8;
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+.intro-core-values .section-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 35px;
+  padding-left: 15px;
+  border-left: 4px solid var(--primary-color);
+  text-align: left;
+}
+
+.value-cards {
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+}
+
+.value-card {
+  flex: 1;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 40px 24px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.value-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--primary-color);
+  box-shadow: 0 12px 30px rgba(26, 86, 50, 0.08);
+}
+
+.value-icon {
+  font-size: 44px;
+  margin-bottom: 20px;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.value-card:hover .value-icon {
+  transform: scale(1.15);
+}
+
+.value-card h4 {
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: var(--text-main);
+}
+
+.value-card p {
+  font-size: 14.5px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
+.history-timeline {
+  position: relative;
+  padding-left: 40px;
+  margin-top: 20px;
+}
+
+.history-timeline::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 15px;
+  bottom: 15px;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--primary-color) 70%, #e0e0e0 100%);
+}
+
+.history-year-group {
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.year-label {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-bottom: 25px;
+  background: var(--primary-light);
+  display: inline-block;
+  padding: 6px 20px;
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(26, 86, 50, 0.05);
+}
+
+.year-label::before {
+  content: '';
+  position: absolute;
+  left: -40px;
+  top: 11px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  border: 4px solid #fff;
+  box-shadow: 0 0 0 3px var(--primary-color);
+}
+
+.event-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.event-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.event-item:hover {
+  background-color: #f8f9fa;
+}
+
+.event-month {
+  font-weight: 700;
+  font-size: 16px;
+  width: 70px;
+  color: var(--primary-color);
+}
+
+.event-desc {
+  color: #333;
+  font-size: 16px;
+  flex: 1;
+  line-height: 1.5;
+}
+
+
 .org-section-header {
   display: flex;
   justify-content: space-between;
@@ -6766,5 +6974,18 @@ input[type="checkbox"] {
 
   .map-wrapper {
     height: 300px;
+  }
+
+  .value-cards {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .intro-hero-section {
+    padding: 45px 20px;
+  }
+
+  .intro-hero-section h3 {
+    font-size: 26px;
   }
 }

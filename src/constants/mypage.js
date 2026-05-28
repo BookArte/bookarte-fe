@@ -17,12 +17,12 @@ export const MYPAGE_STATS_CONFIG = [
         dataKey: "reserveCount",
         path: 'borrow/history'
     },
-    {
-        label: "프로그램 신청현황",
-        icon: "/assets/images/ico_program.png",
-        dataKey: "programCount",
-        path: 'event'
-    },
+    // {
+    //     label: "프로그램 신청현황",
+    //     icon: "/assets/images/ico_program.png",
+    //     dataKey: "programCount",
+    //     path: 'event'
+    // },
     {
         label: "문의내역",
         icon: "/assets/images/ico_facility.png",
@@ -42,9 +42,9 @@ export const MYPAGE_MENUS = [
     { name: '내정보', path: 'info' },
     { name: '대출현황', path: 'borrow/status' },
     { name: '대출이력', path: 'borrow/history' },
-    { name: '프로그램 신청', path: 'event' },
+    // { name: '프로그램 신청', path: 'event' },
     { name: '문의내역', path: 'qna' },
     { name: '나의 관심도서', path: 'wish-list' },
-    { name: '리뷰', path: 'review' },
-    { name: '독서 포인트', path: 'point' },
+    // { name: '리뷰', path: 'review' },
+    // { name: '독서 포인트', path: 'point' },
 ];
