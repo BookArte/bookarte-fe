@@ -4528,6 +4528,18 @@ label {
   margin-top: 15px;
 }
 
+.btn_red {
+  background: #d32f2f;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  flex: 1;
+  border: none;
+  padding: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 .btn_release {
   background: #333;
   color: #fff;
@@ -5890,12 +5902,13 @@ input[type="checkbox"] {
   color: #444;
 }
 
-.board-empty, .board-loading {
-    padding: 40px 0;
-    text-align: center;
-    color: #888888;
-    font-size: 15px;
-    border-bottom: 1px solid #e9ecef;
+.board-empty,
+.board-loading {
+  padding: 40px 0;
+  text-align: center;
+  color: #888888;
+  font-size: 15px;
+  border-bottom: 1px solid #e9ecef;
 }
 
 /* 5. 베스트셀러 (더보기 우측 정렬) */

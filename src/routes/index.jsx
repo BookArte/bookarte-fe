@@ -66,6 +66,7 @@ import AboutOrganizationPage from "../pages/about/AboutOrganizationPage";
 import AboutLocationPage from "../pages/about/AboutLocationPage";
 import AboutIntroPage from "../pages/about/AboutIntroPage";
 import AboutHistoryPage from "../pages/about/AboutHistoryPage";
+import AdminMemberPage from "../pages/admin/member/AdminMemberPage";
 
 const RootRoutes = () => {
 
@@ -175,6 +176,9 @@ const RootRoutes = () => {
             <Route path="write" element={<AdminFaqWritePage />} />
             <Route path="modify/:id" element={<AdminFaqModifyPage />} />
           </Route>
+
+          {/* 회원 관리 */}
+          <Route path="member" element={<AdminMemberPage />} />
 
         </Route>
 
