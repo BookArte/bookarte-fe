@@ -22,7 +22,7 @@ const URL = {
   BOOK_POPULAR: "/book/popular", // 도서관안내/인기대출도서
   BOOK_SEARCH: "/book/list", // 도서관안내/도서검색
 
-  BOOK_BEST_VIEW: "/book/best/view/:isbn", // 도서관안내/베스트셀러/상세
+  BOOK_BEST_VIEW_URL: "/book/best/view/:isbn", // 도서관안내/베스트셀러/상세
   BOOK_BEST_VIEW: (isbn) => `/book/best/view/${isbn}`, // 도서관안내/베스트셀러/상세 함수
 
   BOOK_VIEW_PATH: "/book/view/:bookId", // 도서 상세페이지
@@ -32,15 +32,15 @@ const URL = {
   BOOK_REGISTER: "/admin/book/register", // 관리자 도서등록
   BOOK_STATUS: "/admin/book/status", // 관리자 도서현황
 
-  BOOK_UPDATE: "/admin/book/update/:bookId", // 도서 수정페이지
+  BOOK_UPDATE_URL: "/admin/book/update/:bookId", // 도서 수정페이지
   BOOK_UPDATE: (bookId) => `/admin/book/update/${bookId}`, // 도서 수정페이지 함수
 
   //RECOMMENDATION
   RECOMMENDATION_SET: "/admin/recommendation/set", // 관리자 추천도서 등록
   RECOMMENDATION_REORDER: "/admin/recommendation/reorder", // 관리자 추천도서 순서변경
 
-  RECOMMENDATEION_UPDATE: "/admin/recommendation/update/:recommendationId", // 관리자 추천도서 수정
-  RECOMMENDATEION_UPDATE: (recommendationId) => `/admin/recommendation/update/${recommendationId}`, // 관리자 추천도서 수정 함수
+  RECOMMENDATION_UPDATE_URL: "/admin/recommendation/update/:recommendationId", // 관리자 추천도서 수정
+  RECOMMENDATION_UPDATE: (recommendationId) => `/admin/recommendation/update/${recommendationId}`, // 관리자 추천도서 수정 함수
   RECOMMENDATION_HISTORY: "/admin/recommendation/history", // 관리자 추천도서 이력
 
   //BORROW
