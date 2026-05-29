@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import RootRoutes from "@/routes";
+import { BrowserRouter as Router } from "react-router-dom";
+
+import "@/css/base.css";
+import "@/css/layout.css";
+import "@/css/component.css";
+import "@/css/page.css";
+import "@/css/response.css";
+import { useEffect, useState } from "react";
+import { refreshToken } from "./api/member.api";
+import { useAuthStore } from "./store/useAuthStore";
+import { jwtDecode } from "jwt-decode";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const setLogin = useAuthStore((state) => state.setLogin);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  useEffect(() => {
+    const initLogin = async () => {
+      try {
+        const res = await refreshToken();
+        if (res.success) {
+          
+          const decoded = jwtDecode(res.data.accessToken);
+
+          setLogin(res.data.accessToken, {
+            userId: decoded.userId,
+            userName: decoded.userName,
+            role: decoded.role
+          });
+        }
+      } catch (err) {
+        // console.log("비로그인 상태 또는 토큰 만료");
+      } finally {
+        setIsInitialized(true);
+      }
+    };
+
+    initLogin();
+  }, [setLogin]);
+
+  if (!isInitialized) return null;
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="wrap">
+      <Router>
+        <RootRoutes />
+      </Router>
+    </div>
+  );
 }
 
 export default App
+

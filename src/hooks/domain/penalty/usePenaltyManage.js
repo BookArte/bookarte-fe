@@ -1,0 +1,149 @@
+import { useCallback, useEffect, useRef, useState } from "react";
+import { getMemberList } from "../../../api/member.api";
+import { toast } from "react-toastify";
+import { getPenaltyList, releasePenalty, revokePenalty } from "../../../api/penalty.api";
+import { handleApiError } from "../../utils/errorHandler";
+
+
+export function usePenaltyManage() {
+
+    const [users, setUsers] = useState([])
+    const [searchId, setSearchId] = useState("");
+
+    const [selectedUser, setSelectedUser] = useState(null);
+    const [selectedPenalty, setSelectedPenalty] = useState(null);
+    const [releaseReason, setReleaseReason] = useState("");
+    const [penaltys, setPenaltys] = useState([]);
+    const [hasNext, setHasNext] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+    const observer = useRef();
+
+    useEffect(() => {
+        fetchUsers();
+    }, [])
+
+    const fetchUsers = async (userId, isMore = false) => {
+        setLoading(true);
+
+        try {
+            const lastId = isMore && users.length > 0 ? users[users.length - 1].id : null;
+            const res = await getMemberList(lastId, userId || "");
+
+            const newUsers = res.data.content || [];
+            const hasNext = res.data.hasNext;
+
+            setHasNext(hasNext);
+
+            if (isMore) {
+                setUsers(prev => [...prev, ...newUsers]);
+            } else {
+                setUsers(newUsers);
+            }
+
+        } catch (error) {
+            console.error("프론트엔드 로직 에러 확인:", error);
+            handleApiError(error, "유저 목록 로드 실패");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const fetchPenaltys = async (userId, targetPenaltyId = null) => {
+        setLoading(true);
+        try {
+            const res = await getPenaltyList(userId);
+            const newPenaltys = res.data || [];
+            setPenaltys(newPenaltys);
+            if (targetPenaltyId) {
+                const updatedPenalty = newPenaltys.find(p => p.penaltyId === targetPenaltyId);
+                if (updatedPenalty) {
+                    setSelectedPenalty(updatedPenalty);
+                }
+            }
+        } catch (error) {
+            handleApiError(error, "특정 사용자 패널티 목록 로드 실패")
+
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    const handleSearch = () => {
+        fetchUsers(searchId);
+    }
+
+    const handleUserClick = (user) => {
+        setSelectedUser(user);
+        setSelectedPenalty(null);
+        fetchPenaltys(user.userId);
+        setReleaseReason("");
+    }
+
+    const hanadleRevokePenalty = async (penaltyId) => {
+        try {
+            const res = await revokePenalty(penaltyId);
+            if (res.data) {
+                toast.success("패널티가 성공적으로 복구되었습니다.");
+
+                if (selectedUser) fetchPenaltys(selectedUser.userId, penaltyId);
+            }
+        }
+        catch (error) {
+            handleApiError(error, "패널티 복구 실패")
+        }
+    }
+
+    const handleReleasePenalty = async (penaltyId) => {
+        if (!releaseReason.trim()) {
+            toast.warn("해제 사유를 입력해주세요.");
+            return;
+        }
+        try {
+            const res = await releasePenalty(penaltyId, releaseReason);
+            if (res.data) {
+                toast.success("패널티가 성공적으로 해제되었습니다.");
+                if (selectedUser) fetchPenaltys(selectedUser.userId, penaltyId);
+            }
+        }
+        catch (error) {
+            handleApiError(error, "패널티 해제 실패")
+        }
+    }
+
+    const lastUserElementRef = useCallback(node => {
+        if (loading) return;
+        if (observer.current) observer.current.disconnect();
+
+        observer.current = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting && hasNext) {
+                fetchUsers(searchId, true); // 내부 상태인 searchId와 fetchUsers 사용
+            }
+        });
+
+        if (node) observer.current.observe(node);
+    }, [loading, hasNext, searchId]); // 의존성 관리 주의
+
+    return {
+        state: {
+            selectedUser,
+            selectedPenalty,
+            setSelectedPenalty,
+            releaseReason,
+            setReleaseReason,
+            lastUserElementRef
+        },
+        searchId,
+        setSearchId,
+        fetchUsers,
+        users,
+        penaltys,
+        loading,
+        handlers: {
+            handleSearch,
+            handleUserClick,
+            hanadleRevokePenalty,
+            handleReleasePenalty
+        }
+    }
+}
