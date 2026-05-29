@@ -52,7 +52,6 @@ function TotalBookList({ books, categories, status, params, handlers, pagination
             status={status}
             searchBar={
                 <BookListSearchBar
-                    categories={categories}
                     search={params}
                     status={status}
                     handlers={handlers}
