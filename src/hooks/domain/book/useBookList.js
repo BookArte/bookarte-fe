@@ -19,7 +19,7 @@ export function useBookList({
 
     const transferredState = location.state || {};
     const [searchParams, setSearchParams] = useState({
-        bookTitle: '',
+        bookTitle: transferredState.bookTitle || '',
         bookAuthor: '',
         publisherName: '',
         bookIsbn: '',
@@ -28,8 +28,7 @@ export function useBookList({
         publicationDateEnd: '',
         size: 10,
         sort: 'createdAt,desc',
-        ...initialParams,
-        bookTitle: transferredState.bookTitle || ''
+        ...initialParams
     });
 
     const [appliedParams, setAppliedParams] = useState(searchParams);
