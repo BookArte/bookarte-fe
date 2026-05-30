@@ -1,19 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useForm } from "@/hooks/form/useForm";
 import { searchBooksWithAPi, checkBookDuplicate } from "@/api/book.api";
 import { validateBookForm } from "@/utils/validation/book.validation";
 import { handleFormSubmission } from "@/hooks/form/handleFormSubmisson";
-import { toast } from "react-toastify";
 import { handleApiError } from "@/hooks/utils/errorHandler";
 import DOMPurify from "dompurify";
 
 export function useBookForm({
     submitFn,
     initialData = null,
-    isEdit = false
+    isEdit = false,
+    onSuccess
 }) {
-    const navigate = useNavigate();
     const thumbnailInputRef = useRef(null);
 
     const [loading, setLoading] = useState(false);
@@ -41,7 +38,7 @@ export function useBookForm({
         bookCategory: ''
     }
 
-    const [formData, setFormData] = useState({ initForm });
+    const [formData, setFormData] = useState(initForm);
 
     useEffect(() => {
         if (isEdit && initialData) {
@@ -64,7 +61,11 @@ export function useBookForm({
     };
 
     const handleEditorChange = (editor) => {
-        setFormData(prev => ({ ...prev, editor }));
+        setFormData(prev => ({
+            ...prev,
+            editor,
+            bookContents: editor
+        }));
     };
 
     const onThumbnailClick = () => {
@@ -153,9 +154,10 @@ export function useBookForm({
 
         const sendData = new FormData();
 
-        const requiredFields = [
+        const payloadFields = [
             'bookTitle',
             'bookAuthor',
+            'bookTranslator',
             'publisherName',
             'publicationDate',
             'bookIsbn',
@@ -165,8 +167,14 @@ export function useBookForm({
             'bookThumbnail'
         ];
 
-        requiredFields.forEach(key => {
-            const value = formData[key];
+        const cleanContents = DOMPurify.sanitize(formData.editor || formData.bookContents || '');
+        const submitData = {
+            ...formData,
+            bookContents: cleanContents
+        };
+
+        payloadFields.forEach(key => {
+            const value = submitData[key];
             if (value !== null && value !== undefined) {
                 sendData.append(key, value);
             }
@@ -181,9 +189,7 @@ export function useBookForm({
             form: sendData,
             validateFunc: validateBookForm,
             apiFunc: submitFn,
-            onSuccess: () => {
-                resetAllFields();
-            },
+            onSuccess: onSuccess || resetAllFields,
             setFieldErrors
         });
     };

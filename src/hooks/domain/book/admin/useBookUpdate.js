@@ -1,10 +1,12 @@
-import { use, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useBookForm } from "@/hooks/domain/book/admin/useBookForm";
 import { getBookDetailByBookId, updateBookByBookId } from "@/api/book.api";
+import URL from "@/constants/url";
 
 export function useBookUpdate() {
     const { bookId } = useParams();
+    const navigate = useNavigate();
     const [initialData, setInitialData] = useState(null);
     const [fetching, setFetching] = useState(true);
 
@@ -28,7 +30,10 @@ export function useBookUpdate() {
     const formProps = useBookForm({
         initialData: initialData,
         submitFn: (data) => updateBookByBookId(bookId, data),
-        isEdit: true
+        isEdit: true,
+        onSuccess: () => {
+            navigate(URL.BOOK_STATUS);
+        }
     });
 
     return {
