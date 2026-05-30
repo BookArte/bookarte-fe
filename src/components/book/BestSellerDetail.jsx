@@ -5,6 +5,7 @@ function BestSellerDetail({ book, loading }) {
         <BookDetailLayout
             book={book}
             loading={loading}
+            showLibraryActions={false}
             renderBorrowGraph={() => null}
             renderRelatedBooks={() => null}
         />
