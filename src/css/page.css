@@ -6076,6 +6076,9 @@ input[type="checkbox"] {
 
 /* 마이페이지 내 섹션 헤더 */
 .mypage-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   margin-bottom: 25px;
   padding-bottom: 15px;
   border-bottom: 1px solid #eee;
@@ -6091,6 +6094,34 @@ input[type="checkbox"] {
 .mypage-section-header p {
   font-size: 14px;
   color: #888;
+}
+
+.mypage-section-title-group h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.mypage-section-title-group p {
+  font-size: 14px;
+  color: #888;
+  margin: 0;
+}
+
+.write-qna-btn {
+  padding: 8px 16px;
+  background-color: #186255;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  height: fit-content;
+}
+
+.write-qna-btn:hover {
+  background-color: #124a40;
 }
 
 /* QNA 테이블 스타일 */
