@@ -29,7 +29,7 @@ export function useBookStatusList() {
     });
 
     const [selectedIds, setSelectedIds] = useState([]);
-    const { loading, totalElements, currentPage, totalPages } = baseStatus;
+    const { loading, totalElements } = baseStatus;
 
     // 초기화 함수
     const handleReset = () => {
@@ -128,6 +128,8 @@ export function useBookStatusList() {
         getVirtualNumber,
         status: {
             ...baseStatus,
+            currentPage: pagination.currentPage,
+            totalPages: pagination.totalPages,
             selectedIds,
             setSelectedIds
         },
