@@ -40,6 +40,14 @@ export function useBookForm({
 
     const [formData, setFormData] = useState(initForm);
 
+    const normalizeBookContents = (contents) => {
+        const cleanHtml = DOMPurify.sanitize(contents || '');
+        const temp = document.createElement('div');
+        temp.innerHTML = cleanHtml;
+
+        return temp.textContent.replace(/\u00a0/g, ' ').trim();
+    };
+
     useEffect(() => {
         if (isEdit && initialData) {
             setFormData(prev => ({
@@ -64,7 +72,7 @@ export function useBookForm({
         setFormData(prev => ({
             ...prev,
             editor,
-            bookContents: editor
+            bookContents: normalizeBookContents(editor)
         }));
     };
 
@@ -167,7 +175,7 @@ export function useBookForm({
             'bookThumbnail'
         ];
 
-        const cleanContents = DOMPurify.sanitize(formData.editor || formData.bookContents || '');
+        const cleanContents = normalizeBookContents(formData.editor || formData.bookContents || '');
         const submitData = {
             ...formData,
             bookContents: cleanContents
