@@ -69,12 +69,12 @@ function MypageInfoForm({
                     </div>
                 </div>
 
-                <InfoField
+                {/* <InfoField
                     label="포인트 등급"
                     name="grade"
                     value={userData.grade}
                     readOnly={true}
-                />
+                /> */}
             </div>
 
             <InfoActionButtons
