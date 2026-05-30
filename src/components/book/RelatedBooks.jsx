@@ -1,4 +1,4 @@
-function RelatedBooks({ relatedBooks }) {
+function RelatedBooks({ relatedBooks, handlers }) {
     if (!relatedBooks || relatedBooks.length === 0) return null;
 
     return (
