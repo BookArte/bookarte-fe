@@ -6,6 +6,7 @@ function BookDetailLayout({
     stats,
     loading,
     handlers,
+    showLibraryActions = true,
     renderBorrowGraph,
     renderRelatedBooks,
 }) {
@@ -34,18 +35,20 @@ function BookDetailLayout({
                 <div className="detail-main-info">
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                         <h1 className="detail-title">{book.bookTitle}</h1>
-                        <button
-                            className={`wish-btn ${book.wish ? 'active' : ''}`}
-                            onClick={() => handlers.handleToggleWish(book.bookId)}
-                            style={{ background: 'none', border: 'none', cursor: 'pointer' }}
-                        >
-                            <Heart
-                                size={28}
-                                color={book.wish ? "#e74c3c" : "#ccc"}
-                                fill={book.wish ? "#e74c3c" : "none"}
-                                style={{ transition: 'all 0.3s ease' }}
-                            />
-                        </button>
+                        {showLibraryActions && (
+                            <button
+                                className={`wish-btn ${book.wish ? 'active' : ''}`}
+                                onClick={() => handlers.handleToggleWish(book.bookId)}
+                                style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+                            >
+                                <Heart
+                                    size={28}
+                                    color={book.wish ? "#e74c3c" : "#ccc"}
+                                    fill={book.wish ? "#e74c3c" : "none"}
+                                    style={{ transition: 'all 0.3s ease' }}
+                                />
+                            </button>
+                        )}
                     </div>
 
                     <table className="info-table">
@@ -76,6 +79,7 @@ function BookDetailLayout({
                             </tr>
                         </tbody>
                     </table>
+                    {showLibraryActions && (
                     <div className="button-area">
                         <button
                             className={`borrow-btn ${!book.canBorrow ? 'disabled' : ''}`}
@@ -85,6 +89,7 @@ function BookDetailLayout({
                             {book.canBorrow ? '대출' : '대출 불가'}
                         </button>
                     </div>
+                    )}
                 </div>
             </div>
 

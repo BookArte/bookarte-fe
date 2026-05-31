@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { getMainBoardList } from "@/api/board.api";
+import { useNavigate } from "react-router-dom";
+import URL from "@/constants/url";
 
 export function useMainBoard() {
+    const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('notice');
     const [boardData, setBoardData] = useState({ notice: [], news: [] });
     const [loading, setLoading] = useState(true);
@@ -33,10 +36,15 @@ export function useMainBoard() {
         fetchMainData();
     }, []);
 
+    const handleView = (id) => {
+        navigate(URL.BOARD_VIEW(activeTab, id));
+    }
+
     return {
         currentList: boardData[activeTab] || [],
         loading,
         activeTab,
-        setActiveTab
+        setActiveTab,
+        handleView
     };
 }

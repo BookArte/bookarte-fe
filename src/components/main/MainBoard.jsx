@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-function MainBoard({ currentList, loading, activeTab, setActiveTab }) {
+function MainBoard({ currentList, loading, activeTab, setActiveTab, handleView }) {
 
-    const BoardRow = ({ title, date }) => (
-        <div className="board-row">
+    const BoardRow = ({ id, title, date }) => (
+        <div className="board-row" onClick={() => handleView(id)} style={{ cursor: 'pointer' }}>
             <span className="row-title">{title}</span>
             <span className="row-date">{date}</span>
         </div>
@@ -34,8 +34,8 @@ function MainBoard({ currentList, loading, activeTab, setActiveTab }) {
                             <div className="board-empty">게시물이 존재하지 않습니다.</div>
                         ) : (
                             currentList.map((item) => (
-                                <BoardRow
-                                    key={item.id}
+                                < BoardRow
+                                    id={item.id}
                                     title={item.title}
                                     date={item.createdAt ? new Date(item.createdAt).toLocaleDateString() : ''}
                                 />

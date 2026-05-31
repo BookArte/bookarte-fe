@@ -6,7 +6,7 @@ function BookStatusListView({ books, categories, status, handlers }) {
 
     const columns = [
         { label: '번호', width: '100px' },
-        { label: '도서 정보', width: 'auto' },
+        { label: '도서 제목', width: 'auto' },
         { label: '출판사', width: '200px' },
         { label: 'ISBN', width: 'auto' },
         { label: '등록일', width: 'auto' },
@@ -36,9 +36,9 @@ function BookStatusListView({ books, categories, status, handlers }) {
             <td className="number-column">{item.bookId}</td>
             <td className="book-info-td">
                 <img src={item.bookThumbnail} alt="" className="mini-thumb" />
-                <div>
-                    <div className="book-title">{item.bookTitle}</div>
-                    <div className="book-author">{item.bookAuthor}</div>
+                <div className="book-status-text">
+                    <div className="book-title" title={item.bookTitle}>{item.bookTitle}</div>
+                    <div className="book-author" title={item.bookAuthor}>{item.bookAuthor}</div>
                 </div>
             </td>
             <td>{item.publisherName}</td>
@@ -61,7 +61,7 @@ function BookStatusListView({ books, categories, status, handlers }) {
     return (
         <BoardListLayout
             title="도서 현황"
-            searchPlaceholder="도서명 또는 대출자 검색..."
+            searchPlaceholder="도서명으로 검색..."
             run={true}
             columns={columns}
             data={books.map(book => ({ ...book, id: book.bookId }))}
@@ -72,7 +72,7 @@ function BookStatusListView({ books, categories, status, handlers }) {
                 onSelectOne: handleSelectOne,
                 onBulkDelete: handleBulkDelete,
                 handleSearch: handleSearch,
-                handleChangeSearchParams: handleChangeSearchParams
+                handleChangeSearchParams: onSearchInputChange
             }}
             pagination={{
                 currentPage,

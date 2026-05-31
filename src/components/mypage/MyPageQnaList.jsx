@@ -2,6 +2,7 @@ import React from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import Loading from '@/components/common/Loading';
 import Pagination from '../common/Pagination';
+import URL from '@/constants/url';
 
 function MyPageQnaList({ data, status, handlers, getVirtualNumber }) {
     const navigate = useNavigate();
@@ -10,8 +11,17 @@ function MyPageQnaList({ data, status, handlers, getVirtualNumber }) {
     return (
         <div className="mypage-content-container">
             <div className="mypage-section-header">
-                <h2>문의내역</h2>
-                <p>회원님이 작성하신 1:1 문의 목록입니다.</p>
+                <div className="mypage-section-title-group">
+                    <h2>문의내역</h2>
+                    <p>회원님이 작성하신 1:1 문의 목록입니다.</p>
+                </div>
+
+                <button
+                    className="write-qna-btn"
+                    onClick={() => navigate('/qna/write')}
+                >
+                    질문하러 가기
+                </button>
             </div>
 
             <div className="qna-list-table-wrapper">
