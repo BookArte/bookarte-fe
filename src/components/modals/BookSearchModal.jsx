@@ -22,7 +22,7 @@ function BookSearchModal({ isOpen, onSelect, onClose }) {
                 </select>
                 <input
                     type="text"
-                    placeholder="검색어를 입력하세요..."
+                    placeholder="두 글자 이상 입력하여 검색하세요"
                     value={bookTitle}
                     onChange={(e) => setbookTitle(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && handleSearch()}

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { approveReturn, getAllBorrowList } from "../../../api/borrow.api";
 import { toast } from "react-toastify";
 import { handleApiError } from "../../utils/errorHandler";
@@ -12,6 +12,11 @@ export function useBorrowDashboard() {
     })
 
     const [loading, setLoading] = useState(true);
+    const [stats, setStats] = useState({
+        totalElements: 0,
+        pendingReturns: 0,
+        overdueCount: 0
+    });
 
     const [searchParams, setSearchParams] = useState({
         bookId: '',
@@ -35,24 +40,54 @@ export function useBorrowDashboard() {
         }
     }
 
+    const fetchStats = async () => {
+        const baseParams = {
+            bookId: searchParams.bookId,
+            statusNot: 'RETURNED',
+            startDate: searchParams.startDate,
+            endDate: searchParams.endDate,
+            searchKeyword: searchParams.searchKeyword,
+            page: 0,
+            size: 1
+        };
+
+        try {
+            const [allRes, pendingRes, overdueRes] = await Promise.all([
+                getAllBorrowList({ params: baseParams }),
+                getAllBorrowList({ params: { ...baseParams, status: 'RETURN_REQUESTED' } }),
+                getAllBorrowList({ params: { ...baseParams, isOverdue: true } })
+            ]);
+
+            setStats({
+                totalElements: allRes.data.totalElements || 0,
+                pendingReturns: pendingRes.data.totalElements || 0,
+                overdueCount: overdueRes.data.totalElements || 0
+            });
+        } catch (error) {
+            handleApiError(error, "?異? ?듦퀎 濡쒕뱶 ?ㅽ뙣")
+        }
+    };
+
     useEffect(() => {
         fetchBorrows();
     }, [searchParams]);
 
-    const stats = useMemo(() => {
-        const content = borrow.content || [];
-        return {
-            totalElements: borrow.totalElements,
-            overdueCount: content.filter(item => item.overdue).length,
-            pendingReturns: content.filter(item => item.status === 'RETURN_REQUESTED' && !item.returnDate).length
-        }
-    }, [borrow]);
+    useEffect(() => {
+        fetchStats();
+    }, [
+        searchParams.bookId,
+        searchParams.statusNot,
+        searchParams.startDate,
+        searchParams.endDate,
+        searchParams.searchKeyword
+    ]);
 
     const handleApprove = async (borrowId) => {
         if (!window.confirm("반납 승인 처리를 하시겠습니까?")) return;
         const res = await approveReturn(borrowId);
         toast.success(res.data);
         fetchBorrows();
+        fetchStats();
     };
 
     const handleFilterChange = (filterType) => {
