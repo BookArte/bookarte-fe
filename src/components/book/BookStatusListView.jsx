@@ -61,7 +61,7 @@ function BookStatusListView({ books, categories, status, handlers }) {
     return (
         <BoardListLayout
             title="도서 현황"
-            searchPlaceholder="도서명 또는 대출자 검색..."
+            searchPlaceholder="도서명으로 검색..."
             run={true}
             columns={columns}
             data={books.map(book => ({ ...book, id: book.bookId }))}
@@ -72,7 +72,7 @@ function BookStatusListView({ books, categories, status, handlers }) {
                 onSelectOne: handleSelectOne,
                 onBulkDelete: handleBulkDelete,
                 handleSearch: handleSearch,
-                handleChangeSearchParams: handleChangeSearchParams
+                handleChangeSearchParams: onSearchInputChange
             }}
             pagination={{
                 currentPage,
