@@ -63,6 +63,7 @@ function RecommendationHistoryView({ recommendations, handlers, status }) {
                 totalPages,
                 handlePageChange,
             }}
+            showCreateButton={false}
         />
     );
 }
