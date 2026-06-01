@@ -2,7 +2,7 @@
   "rewrites": [
 {
       "source": "/api/:path*",
-      "destination": "__VITE_API_BASE_URL__/api/:path*"
+      "destination": "http://bookarte.duckdns.org:8080/api/:path*"
     },
     {"source": "/((?!api/).*)",
       "destination": "/index.html"
