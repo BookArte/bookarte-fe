@@ -255,7 +255,9 @@ const RootRoutes = () => {
         {/* QNA */}
         <Route path="/qna" element={<BoardLayout />} >
           <Route index element={<QnaHomePage />} />
-          <Route path="write" element={<QnaWritePage />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="write" element={<QnaWritePage />} />
+          </Route>
         </Route>
 
       </Routes>
