@@ -86,7 +86,7 @@ function Header() {
             >
               <span>안내/소식</span>
             </li>
-            {true && (
+            {"ROLE01".includes(userInfo?.role) && (
               <li
                 onMouseEnter={() => setHoveredIndex(4)}
                 className={hoveredIndex === 4 ? "active" : ""}
@@ -278,7 +278,7 @@ function Header() {
               </li>
             </ul>
           </div>
-          {true && (
+          {"ROLE01".includes(userInfo?.role) && (
             <div className="col" onMouseEnter={() => setHoveredIndex(4)}>
               <ul>
                 <li>
