@@ -63,7 +63,7 @@ function Main({ props, mainRecommend, mainBoard }) {
                     <QuickItem icon="✨" label="신착도서" link={URL.BOOK_NEW} />
                     <QuickItem icon="🥇" label="인기대출 도서" link={URL.BOOK_POPULAR} />
                     <QuickItem icon="❓" label="자주묻는질문" link={URL.FAQ} />
-                    <QuickItem icon="📍" label="찾아오시는길" link={URL.INTRO} />
+                    <QuickItem icon="📍" label="찾아오시는길" link={URL.ABOUT_LOCATION} />
                 </section>
 
                 {/* 5. 하단 공지사항 및 뉴스 영역 (베스트셀러 위치로 이동) */}
