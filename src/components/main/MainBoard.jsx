@@ -35,6 +35,7 @@ function MainBoard({ currentList, loading, activeTab, setActiveTab, handleView }
                         ) : (
                             currentList.map((item) => (
                                 < BoardRow
+                                    key={item.id}
                                     id={item.id}
                                     title={item.title}
                                     date={item.createdAt ? new Date(item.createdAt).toLocaleDateString() : ''}

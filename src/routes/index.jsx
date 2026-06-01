@@ -67,6 +67,7 @@ import AboutLocationPage from "../pages/about/AboutLocationPage";
 import AboutIntroPage from "../pages/about/AboutIntroPage";
 import AboutHistoryPage from "../pages/about/AboutHistoryPage";
 import AdminMemberPage from "../pages/admin/member/AdminMemberPage";
+import ProtectedRoute from "@/routes/components/ProtectedRoute";
 
 const RootRoutes = () => {
 
@@ -114,72 +115,74 @@ const RootRoutes = () => {
 
         </Route>
 
-        <Route path="/admin" element={<AdminLayout />} >
+        <Route element={<ProtectedRoute allowedRoles={['ROLE01']} />}>
+          <Route path="/admin" element={<AdminLayout />} >
 
-          {/* 도서 업무 */}
-          <Route path="book">
-            {/* 도서 등록 */}
-            <Route path="register" element={<RegisterBookPage />} />
-            {/* 도서 현황 */}
-            <Route path="status" element={<BookStatusList />} />
-            {/* 도서 수정 */}
-            <Route path="update/:bookId" element={<UpdateBookPage />} />
+            {/* 도서 업무 */}
+            <Route path="book">
+              {/* 도서 등록 */}
+              <Route path="register" element={<RegisterBookPage />} />
+              {/* 도서 현황 */}
+              <Route path="status" element={<BookStatusList />} />
+              {/* 도서 수정 */}
+              <Route path="update/:bookId" element={<UpdateBookPage />} />
+            </Route>
+
+            {/* 추천 도서 업무 */}
+            <Route path="recommendation">
+              {/* 추천 도서 설정 */}
+              <Route path="set" element={<SetRecommedation />} />
+              {/* 추천 도서 순서 변경 */}
+              <Route path="reorder" element={<ReorderRecommendation />} />
+              {/* 추천 도서 수정 */}
+              <Route path="update/:recommendationId" element={<UpdateRecommendation />} />
+              {/* 추천 도서 히스토리 */}
+              <Route path="history" element={<RecommendationHistory />} />
+            </Route>
+
+            {/* 대출 업무 */}
+            <Route path="borrow">
+              {/* 전체 대출 이력 */}
+              <Route path="history" element={<BorrowHistory />} />
+              { /* 대출 대시보드 */}
+              <Route path="dashboard" element={<BorrowDashboardPage />} />
+            </Route>
+
+            {/*연체 패널티 관리*/}
+            <Route path="penalty/management" element={<PenaltyManagement />} />
+
+            {/* 공지사항 관리 */}
+            <Route path="notice">
+              <Route index element={<AdminNoticePage />} />
+              <Route path="write" element={<AdminNoticeWritePage />} />
+              <Route path="modify/:id" element={<AdminNoticeModifyPage />} />
+            </Route>
+
+            {/* 뉴스 관리 */}
+            <Route path="news">
+              <Route index element={<AdminNewsPage />} />
+              <Route path="write" element={<AdminNewsWritePage />} />
+              <Route path="modify/:id" element={<AdminNewsModifyPage />} />
+            </Route>
+
+            {/* Q&A 관리 */}
+            <Route path="qna">
+              <Route index element={<AdminQnaPage />} />
+              <Route path="write" element={<AdminQnaWritePage />} />
+              <Route path="modify/:id" element={<AdminQnaModifyPage />} />
+            </Route>
+
+            {/* FAQ 관리 */}
+            <Route path="faq">
+              <Route index element={<AdminFaqPage />} />
+              <Route path="write" element={<AdminFaqWritePage />} />
+              <Route path="modify/:id" element={<AdminFaqModifyPage />} />
+            </Route>
+
+            {/* 회원 관리 */}
+            <Route path="member" element={<AdminMemberPage />} />
+
           </Route>
-
-          {/* 추천 도서 업무 */}
-          <Route path="recommendation">
-            {/* 추천 도서 설정 */}
-            <Route path="set" element={<SetRecommedation />} />
-            {/* 추천 도서 순서 변경 */}
-            <Route path="reorder" element={<ReorderRecommendation />} />
-            {/* 추천 도서 수정 */}
-            <Route path="update/:recommendationId" element={<UpdateRecommendation />} />
-            {/* 추천 도서 히스토리 */}
-            <Route path="history" element={<RecommendationHistory />} />
-          </Route>
-
-          {/* 대출 업무 */}
-          <Route path="borrow">
-            {/* 전체 대출 이력 */}
-            <Route path="history" element={<BorrowHistory />} />
-            { /* 대출 대시보드 */}
-            <Route path="dashboard" element={<BorrowDashboardPage />} />
-          </Route>
-
-          {/*연체 패널티 관리*/}
-          <Route path="penalty/management" element={<PenaltyManagement />} />
-
-          {/* 공지사항 관리 */}
-          <Route path="notice">
-            <Route index element={<AdminNoticePage />} />
-            <Route path="write" element={<AdminNoticeWritePage />} />
-            <Route path="modify/:id" element={<AdminNoticeModifyPage />} />
-          </Route>
-
-          {/* 뉴스 관리 */}
-          <Route path="news">
-            <Route index element={<AdminNewsPage />} />
-            <Route path="write" element={<AdminNewsWritePage />} />
-            <Route path="modify/:id" element={<AdminNewsModifyPage />} />
-          </Route>
-
-          {/* Q&A 관리 */}
-          <Route path="qna">
-            <Route index element={<AdminQnaPage />} />
-            <Route path="write" element={<AdminQnaWritePage />} />
-            <Route path="modify/:id" element={<AdminQnaModifyPage />} />
-          </Route>
-
-          {/* FAQ 관리 */}
-          <Route path="faq">
-            <Route index element={<AdminFaqPage />} />
-            <Route path="write" element={<AdminFaqWritePage />} />
-            <Route path="modify/:id" element={<AdminFaqModifyPage />} />
-          </Route>
-
-          {/* 회원 관리 */}
-          <Route path="member" element={<AdminMemberPage />} />
-
         </Route>
 
 
@@ -205,28 +208,29 @@ const RootRoutes = () => {
         </Route>
 
         {/* Mypage */}
-        <Route path="/mypage" element={<MypageLayout />}>
-          <Route element={<Mypage />} >
-            {/* MypageDashboard */}
-            <Route index element={<MypageDashboard />} />
-            {/* MypageInfo */}
-            <Route path="info" element={<MypageInfo />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/mypage" element={<MypageLayout />}>
+            <Route element={<Mypage />} >
+              {/* MypageDashboard */}
+              <Route index element={<MypageDashboard />} />
+              {/* MypageInfo */}
+              <Route path="info" element={<MypageInfo />} />
 
-            <Route path="borrow" >
-              {/* MyBorrowStatus */}
-              <Route path="status" element={<MyBorrowStatusList />} />
+              <Route path="borrow" >
+                {/* MyBorrowStatus */}
+                <Route path="status" element={<MyBorrowStatusList />} />
+                {/* MyBorrowHistory */}
+                <Route path="history" element={<MyBorrowHistory />} />
+              </Route>
 
-              {/* MyBorrowHistory */}
-              <Route path="history" element={<MyBorrowHistory />} />
+              {/* MyWishList */}
+              <Route path="wish-list" element={<MyWishList />} />
+
+              {/* My QnA */}
+              <Route path="qna" element={<MyPageQnaListPage />} />
+              <Route path="qna/view/:id" element={<MypageQnaDetailPage />} />
+              <Route path="qna/edit/:id" element={<MypageQnaEditPage />} />
             </Route>
-
-            {/* MyWishList */}
-            <Route path="wish-list" element={<MyWishList />} />
-
-            {/* My QnA */}
-            <Route path="qna" element={<MyPageQnaListPage />} />
-            <Route path="qna/view/:id" element={<MypageQnaDetailPage />} />
-            <Route path="qna/edit/:id" element={<MypageQnaEditPage />} />
           </Route>
         </Route>
 
