@@ -17,10 +17,9 @@ function Main({ props, mainRecommend, mainBoard }) {
     );
 
     const onSearch = () => {
-        if (!keyword.trim()) return;
-        navigate('/book/list', {
-            state: { bookTitle: keyword }
-        });
+        const bookTitle = keyword.trim();
+        if (!bookTitle) return;
+        navigate(`${URL.BOOK_SEARCH}?bookTitle=${encodeURIComponent(bookTitle)}`);
     };
 
     const handleKeyDown = (e) => {

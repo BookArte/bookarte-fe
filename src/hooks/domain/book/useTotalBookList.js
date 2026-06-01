@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { getAllBookList } from "../../../api/book.api";
 import { useBookList } from "./useBookList";
 
@@ -28,10 +27,6 @@ export function useTotalBookList() {
             sort: 'createdAt,desc'
         }
     });
-
-    useEffect(() => {
-        handlers.fetchBooks(0, params.searchParams);
-    }, []);
 
     return {
         books,
