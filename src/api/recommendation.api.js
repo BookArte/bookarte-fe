@@ -1,7 +1,7 @@
 import { apiClient } from "./client";
 
 export const setRecommendationBook = async (data) => {
-    const res = await apiClient.post('/recommendation/set', data);
+    const res = await apiClient.post('/recommendation/admin/set', data);
     return res.data;
 };
 
@@ -11,17 +11,17 @@ export const recommendationBookList = async (data) => {
 };
 
 export const reorderRecommendationList = async (data) => {
-    const res = await apiClient.patch('/recommendation/reorder', data);
+    const res = await apiClient.patch('/recommendation/admin/reorder', data);
     return res.data;
 };
 
 export const deleteRecommendationBook = async (id) => {
-    const res = await apiClient.delete(`/recommendation/${id}`);
+    const res = await apiClient.delete(`/recommendation/admin/${id}`);
     return res.data;
 };
 
 export const updateRecommendation = async (recommendationId, data) => {
-    const res = await apiClient.patch(`/recommendation/${recommendationId}`, data);
+    const res = await apiClient.patch(`/recommendation/admin/${recommendationId}`, data);
     return res.data;
 };
 

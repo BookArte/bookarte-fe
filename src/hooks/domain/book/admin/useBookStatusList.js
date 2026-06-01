@@ -6,6 +6,7 @@ import URL from '@/constants/url';
 import { useNavigate } from "react-router-dom";
 import { useDataFetch } from "@/hooks/utils/useDataFetch";
 import { useBookList } from "@/hooks/domain/book/useBookList";
+import { handleApiError } from "@/hooks/utils/errorHandler";
 
 export function useBookStatusList() {
     const TYPE = 'bookStatus';
