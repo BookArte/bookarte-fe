@@ -31,7 +31,6 @@ import AdminNoticePage from "../pages/admin/notice/AdminNoticePage";
 import AdminNoticeWritePage from "../pages/admin/notice/AdminNoticeWritePage";
 import AdminNoticeModifyPage from "../pages/admin/notice/AdminNoticeModifyPage";
 import PopularList from "../pages/book/PopularList";
-import MyBorrowHistory from "../pages/borrow/MyBorrowHistory";
 import MyWishList from "../pages/wish/MyWishList";
 import AdminNewsPage from "../pages/admin/news/AdminNewsPage";
 import AdminNewsWritePage from "../pages/admin/news/AdminNewsWritePage";
@@ -68,6 +67,7 @@ import AboutIntroPage from "../pages/about/AboutIntroPage";
 import AboutHistoryPage from "../pages/about/AboutHistoryPage";
 import AdminMemberPage from "../pages/admin/member/AdminMemberPage";
 import ProtectedRoute from "@/routes/components/ProtectedRoute";
+import MypageBorrowHistoryListPage from "../pages/mypage/MypageBorrowHistoryListPage";
 
 const RootRoutes = () => {
 
@@ -220,7 +220,7 @@ const RootRoutes = () => {
                 {/* MyBorrowStatus */}
                 <Route path="status" element={<MyBorrowStatusList />} />
                 {/* MyBorrowHistory */}
-                <Route path="history" element={<MyBorrowHistory />} />
+                <Route path="history" element={<MypageBorrowHistoryListPage />} />
               </Route>
 
               {/* MyWishList */}
