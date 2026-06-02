@@ -3957,6 +3957,10 @@ label {
 }
 
 /* 현황 카드 */
+.status-card-wrapper {
+  height: 100%;
+}
+
 .mypage-status-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -3967,17 +3971,20 @@ label {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px;
+  padding: 40px 30px;
+  height: 100%;
+  box-sizing: border-box;
   background-color: #fff;
-  border: 1px solid #eee;
-  border-radius: 12px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .status-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
 .status-card-left {
@@ -3987,8 +3994,14 @@ label {
 }
 
 .status-card-icon-box {
-  width: 45px;
-  height: 45px;
+  width: 54px;
+  height: 54px;
+  background-color: #f4f7f9;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
 }
 
 .status-card-icon-box img {
@@ -3998,14 +4011,14 @@ label {
 }
 
 .status-card-label {
-  font-size: 16px;
-  color: #666;
-  font-weight: 500;
+  font-size: 18px;
+  color: #444;
+  font-weight: 600;
 }
 
 .status-card-count {
-  font-size: 48px;
-  font-weight: bold;
+  font-size: 56px;
+  font-weight: 700;
   color: #222;
 }
 
