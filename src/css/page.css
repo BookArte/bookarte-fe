@@ -5340,6 +5340,23 @@ input[type="checkbox"] {
   object-fit: cover;
 }
 
+.no-post-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 150px;
+  border: 1px solid #ddd;
+  margin-top: 10px;
+  box-sizing: border-box;
+}
+
+.no-post-container p {
+  color: #888;
+  font-size: 16px;
+  margin: 0;
+}
+
 /* qna 페이지 */
 .qna-home-container {
   width: 100%;

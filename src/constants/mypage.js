@@ -11,12 +11,12 @@ export const MYPAGE_STATS_CONFIG = [
         dataKey: "borrowingCount",
         path: 'borrow/status'
     },
-    {
-        label: "도서 예약현황",
-        icon: "/assets/images/ico_reserve.png",
-        dataKey: "reserveCount",
-        path: 'borrow/history'
-    },
+    // {
+    //     label: "도서 예약현황",
+    //     icon: "/assets/images/ico_reserve.png",
+    //     dataKey: "reserveCount",
+    //     path: 'borrow/history'
+    // },
     // {
     //     label: "프로그램 신청현황",
     //     icon: "/assets/images/ico_program.png",
