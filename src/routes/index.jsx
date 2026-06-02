@@ -31,7 +31,6 @@ import AdminNoticePage from "../pages/admin/notice/AdminNoticePage";
 import AdminNoticeWritePage from "../pages/admin/notice/AdminNoticeWritePage";
 import AdminNoticeModifyPage from "../pages/admin/notice/AdminNoticeModifyPage";
 import PopularList from "../pages/book/PopularList";
-import MyWishList from "../pages/wish/MyWishList";
 import AdminNewsPage from "../pages/admin/news/AdminNewsPage";
 import AdminNewsWritePage from "../pages/admin/news/AdminNewsWritePage";
 import AdminNewsModifyPage from "../pages/admin/news/AdminNewsModifyPage";
@@ -68,6 +67,7 @@ import AboutHistoryPage from "../pages/about/AboutHistoryPage";
 import AdminMemberPage from "../pages/admin/member/AdminMemberPage";
 import ProtectedRoute from "@/routes/components/ProtectedRoute";
 import MypageBorrowHistoryListPage from "../pages/mypage/MypageBorrowHistoryListPage";
+import MypageWishLisstytPage from "../pages/mypage/MypageWishListPage";
 
 const RootRoutes = () => {
 
@@ -224,7 +224,7 @@ const RootRoutes = () => {
               </Route>
 
               {/* MyWishList */}
-              <Route path="wish-list" element={<MyWishList />} />
+              <Route path="wish-list" element={<MypageWishLisstytPage />} />
 
               {/* My QnA */}
               <Route path="qna" element={<MypageQnaListPage />} />
