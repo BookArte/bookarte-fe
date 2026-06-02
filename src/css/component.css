@@ -17,11 +17,12 @@
 /* Go template link */
 .lnk_go_template {
   position: absolute;
-  left: 50px;
-  top: 20px;
-  width: 26px;
-  height: 26px;
-  background: url(./images/ico_question.png) no-repeat;
+  left: 60px;
+  top: 10px;
+  width: 200px;
+  height: 60px;
+  background: url(./images/logo_b.png) no-repeat;
+  background-size: contain;
 }
 
 /* SNS Login */
