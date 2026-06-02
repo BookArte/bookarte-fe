@@ -1,12 +1,12 @@
-import MyPageQnaList from "@/components/mypage/MyPageQnaList";
+import MypageQnaList from "@/components/mypage/MypageQnaList";
 import { useMyQnaList } from "@/hooks/domain/qna/useMyQnaList";
 
-function MyPageQnaListPage() {
+function MypageQnaListPage() {
 
   const { data, status, handlers, getVirtualNumber } = useMyQnaList();
 
   return (
-    <MyPageQnaList
+    <MypageQnaList
       data={data}
       status={status}
       handlers={handlers}
@@ -15,4 +15,4 @@ function MyPageQnaListPage() {
   );
 }
 
-export default MyPageQnaListPage;
+export default MypageQnaListPage;

@@ -51,7 +51,7 @@ import FaqListPage from "../pages/faq/FaqListPage";
 import FaqDetailPage from "../pages/faq/FaqDetailPage";
 import QnaHomePage from "../pages/qna/QnaHomePage";
 import QnaWritePage from "../pages/qna/QnaWritePage";
-import MyPageQnaListPage from "../pages/mypage/MypageQnaListPage";
+import MypageQnaListPage from "../pages/mypage/MypageQnaListPage";
 import MypageQnaDetailPage from "../pages/mypage/MypageQnaDetailPage";
 import MypageQnaEditPage from "../pages/mypage/MypageQnaEditPage";
 import RegisterBookPage from "../pages/book/RegisterBookPage";
@@ -227,7 +227,7 @@ const RootRoutes = () => {
               <Route path="wish-list" element={<MyWishList />} />
 
               {/* My QnA */}
-              <Route path="qna" element={<MyPageQnaListPage />} />
+              <Route path="qna" element={<MypageQnaListPage />} />
               <Route path="qna/view/:id" element={<MypageQnaDetailPage />} />
               <Route path="qna/edit/:id" element={<MypageQnaEditPage />} />
             </Route>
