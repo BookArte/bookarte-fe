@@ -17,7 +17,6 @@ import ReorderRecommendation from "../pages/recommendation/ReorderRecommendation
 import ResetPassword from "../pages/member/ResetPassword";
 import UpdateRecommendation from "../pages/recommendation/UpdateRecommendation";
 import BorrowDashboardPage from "../pages/borrow/BorrowDashboardPage";
-import MyBorrowStatusList from "../pages/borrow/MyBorrowStatusList";
 import Mypage from "../pages/mypage/Mypage";
 import MypageInfo from "../pages/mypage/MypageInfo";
 import MypageLayout from "../components/mypage/MypageLayout";
@@ -67,7 +66,8 @@ import AboutHistoryPage from "../pages/about/AboutHistoryPage";
 import AdminMemberPage from "../pages/admin/member/AdminMemberPage";
 import ProtectedRoute from "@/routes/components/ProtectedRoute";
 import MypageBorrowHistoryListPage from "../pages/mypage/MypageBorrowHistoryListPage";
-import MypageWishLisstytPage from "../pages/mypage/MypageWishListPage";
+import MypageBorrowStatusListPage from "../pages/mypage/MypageBorrowStatusListPage";
+import MypageWishListPage from "../pages/mypage/MypageWishListPage";
 
 const RootRoutes = () => {
 
@@ -218,13 +218,13 @@ const RootRoutes = () => {
 
               <Route path="borrow" >
                 {/* MyBorrowStatus */}
-                <Route path="status" element={<MyBorrowStatusList />} />
+                <Route path="status" element={<MypageBorrowStatusListPage />} />
                 {/* MyBorrowHistory */}
                 <Route path="history" element={<MypageBorrowHistoryListPage />} />
               </Route>
 
               {/* MyWishList */}
-              <Route path="wish-list" element={<MypageWishLisstytPage />} />
+              <Route path="wish-list" element={<MypageWishListPage />} />
 
               {/* My QnA */}
               <Route path="qna" element={<MypageQnaListPage />} />

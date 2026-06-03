@@ -25,7 +25,7 @@ function MypageBorrowHistoryList({ data, status, handlers, getVirtualNumber }) {
         <div className="mypage-content-container">
             <div className="mypage-section-header">
                 <div className="mypage-section-title-group">
-                    <h2>대출 내역</h2>
+                    <h2>대출내역</h2>
                     <p>회원님이 대출하신 책의 내역입니다.</p>
                 </div>
             </div>

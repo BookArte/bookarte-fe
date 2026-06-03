@@ -1,7 +1,7 @@
 import MypageWishList from "../../components/mypage/MypageWishList";
 import { useMyWishList } from "../../hooks/domain/wish/useMyWishList";
 
-function MypageWishLisstytPage() {
+function MypageWishListPage() {
     const { data, status, handlers, getVirtualNumber } = useMyWishList();
 
     return (
@@ -14,4 +14,4 @@ function MypageWishLisstytPage() {
     );
 }
 
-export default MypageWishLisstytPage;
+export default MypageWishListPage;

@@ -22,7 +22,7 @@ function MypageWishList({ data, status, handlers, getVirtualNumber }) {
         <div className="mypage-content-container">
             <div className="mypage-section-header">
                 <div className="mypage-section-title-group">
-                    <h2>관심 도서</h2>
+                    <h2>관심도서</h2>
                     <p>회원님이 관심 등록하신 책의 내역입니다.</p>
                 </div>
             </div>
