@@ -4,7 +4,8 @@ function MypageWishList({ data, status, handlers, getVirtualNumber }) {
     const columns = [
         { label: "번호", width: "80px" },
         { label: "책 제목", width: "" },
-        { label: "저자", width: "200px" }
+        { label: "저자", width: "200px" },
+        { label: "출판사", width: "200px" },
     ]
 
     const renderRow = (item, index) => {
