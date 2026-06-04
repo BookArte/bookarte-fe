@@ -18,8 +18,9 @@ export function useBookList({
     const savedPage = Number(sessionStorage.getItem(`${type}_page`)) || 0;
 
     const transferredState = location.state || {};
+    const queryParams = new URLSearchParams(location.search);
+    const initialBookTitle = transferredState.bookTitle || queryParams.get('bookTitle') || initialParams.bookTitle || '';
     const [searchParams, setSearchParams] = useState({
-        bookTitle: transferredState.bookTitle || '',
         bookAuthor: '',
         publisherName: '',
         bookIsbn: '',
@@ -28,7 +29,8 @@ export function useBookList({
         publicationDateEnd: '',
         size: 10,
         sort: 'createdAt,desc',
-        ...initialParams
+        ...initialParams,
+        bookTitle: initialBookTitle
     });
 
     const [appliedParams, setAppliedParams] = useState(searchParams);
@@ -56,11 +58,12 @@ export function useBookList({
         fetchBooks(0, searchParams);
 
         if (location.state) {
-            navigate(location.pathname, { replace: true, state: null });
+            navigate(`${location.pathname}${location.search}`, { replace: true, state: null });
         }
     }, []);
 
     const handleSearch = () => {
+        setAppliedParams(searchParams);
         fetchBooks(0, searchParams);
     };
 
@@ -105,7 +108,7 @@ export function useBookList({
     //페이지 변경 핸들러
     const handlePageChange = (newPage) => {
         if (newPage >= 0 && newPage < totalPages) {
-            fetchBooks(newPage);
+            fetchBooks(newPage, appliedParams);
             window.scrollTo(0, 0);
         }
     };

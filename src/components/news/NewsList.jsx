@@ -1,4 +1,5 @@
 import BoardListLayout from "../common/BoardListLayout";
+import news_default from '@/assets/images/news_default.png';
 
 function NewsList({
     data,
@@ -11,7 +12,7 @@ function NewsList({
         return (
             <>
                 <div key={item.id} className="board-card" onClick={() => { handlers.handleView(item.id) }}>
-                    <img src={item.thumbnailPath || '/default-news.png'} alt={item.title} />
+                    <img src={item.thumbnailPath || `${news_default}`} alt={item.title} />
                     <h3>{item.title}</h3>
                     <p>{new Date(item.createdAt).toLocaleDateString()}</p>
                 </div>

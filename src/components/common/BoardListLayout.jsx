@@ -29,9 +29,15 @@ function BoardListLayout({
 
 
             {isGrid ? (
-                <div className="board-grid-container">
-                    {data.map((item, index) => renderGrid(item, index))}
-                </div>
+                data.length > 0 ? (
+                    <div className="board-grid-container">
+                        {data.map((item, index) => renderGrid(item, index))}
+                    </div>
+                ) : (
+                    <div className="no-post-container">
+                        <p>게시글이 존재하지 않습니다.</p>
+                    </div>
+                )
             ) : (
                 <table className="board-list-user-table">
                     <thead>
@@ -44,14 +50,20 @@ function BoardListLayout({
                         </tr >
                     </thead >
                     <tbody>
-                        {data.map((item, index) => (
-                            renderRow(item, index)
-                        ))}
+                        {data?.length > 0 ? (
+                            data.map((item, index) => (
+                                renderRow(item, index)
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="3" className="empty-row">
+                                    게시글이 존재하지 않습니다.
+                                </td>
+                            </tr>
+                        )}
                     </tbody>
                 </table >
-            )
-            }
-
+            )}
 
 
             {

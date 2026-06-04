@@ -7,7 +7,7 @@ const BookListSearchBar = ({ categories, search, status, handlers }) => {
                     <input
                         type="text"
                         placeholder="도서명으로 빠르게 검색하세요..."
-                        value={search.bookTitle}
+                        value={search.searchParams.bookTitle}
                         onChange={(e) => search.setSearchParams({ ...search.searchParams, bookTitle: e.target.value })}
                         onKeyPress={(e) => e.key === 'Enter' && handlers.handleSearch()}
                     />

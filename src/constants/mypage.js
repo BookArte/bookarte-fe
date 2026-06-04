@@ -1,3 +1,7 @@
+import icon_borrow from '@/assets/images/icon_borrow.svg';
+import icon_inquiry from '@/assets/images/icon_inquiry.svg';
+import icon_heart from '@/assets/images/icon_heart.svg';
+
 export const MEMBER_GRADES = {
     VIP: { NAME: 'VIP회원', MIN_POINT: 10000 },
     GOLD: { NAME: '우수회원', MIN_POINT: 5000 },
@@ -7,16 +11,16 @@ export const MEMBER_GRADES = {
 export const MYPAGE_STATS_CONFIG = [
     {
         label: "도서 대출현황",
-        icon: "/assets/images/ico_loan.png",
+        icon: icon_borrow,
         dataKey: "borrowingCount",
         path: 'borrow/status'
     },
-    {
-        label: "도서 예약현황",
-        icon: "/assets/images/ico_reserve.png",
-        dataKey: "reserveCount",
-        path: 'borrow/history'
-    },
+    // {
+    //     label: "도서 예약현황",
+    //     icon: "/assets/images/ico_reserve.png",
+    //     dataKey: "reserveCount",
+    //     path: 'borrow/history'
+    // },
     // {
     //     label: "프로그램 신청현황",
     //     icon: "/assets/images/ico_program.png",
@@ -25,13 +29,13 @@ export const MYPAGE_STATS_CONFIG = [
     // },
     {
         label: "문의내역",
-        icon: "/assets/images/ico_facility.png",
+        icon: icon_inquiry,
         dataKey: "qnaCount",
         path: 'qna'
     },
     {
         label: "나의 관심도서",
-        icon: "/assets/images/ico_heart.png",
+        icon: icon_heart,
         dataKey: "wishCount",
         path: 'wish-list'
     },

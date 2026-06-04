@@ -3738,28 +3738,10 @@ label {
   color: #999;
 }
 
-/* 전체 화면 구성 */
 .borrow-status-wrapper {
   background-color: #f8f9fa;
   min-height: 100vh;
   padding: 40px 20px;
-}
-
-/*마이페이지 내 도서 관련 페이지*/
-.mypage-book-status-wrapper {
-  min-height: 100vh;
-  padding: 40px 20px;
-}
-
-/* 2. 중앙 정렬 컨테이너 */
-.status-content-container {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.mypage-book-title {
-  text-align: center;
-  margin-bottom: 40px;
 }
 
 /* 도서 대출 현황 카드 */
@@ -3957,6 +3939,10 @@ label {
 }
 
 /* 현황 카드 */
+.status-card-wrapper {
+  height: 100%;
+}
+
 .mypage-status-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -3967,17 +3953,20 @@ label {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px;
+  padding: 40px 30px;
+  height: 100%;
+  box-sizing: border-box;
   background-color: #fff;
-  border: 1px solid #eee;
-  border-radius: 12px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .status-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
 .status-card-left {
@@ -3987,8 +3976,14 @@ label {
 }
 
 .status-card-icon-box {
-  width: 45px;
-  height: 45px;
+  width: 54px;
+  height: 54px;
+  background-color: #f4f7f9;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
 }
 
 .status-card-icon-box img {
@@ -3998,14 +3993,14 @@ label {
 }
 
 .status-card-label {
-  font-size: 16px;
-  color: #666;
-  font-weight: 500;
+  font-size: 18px;
+  color: #444;
+  font-weight: 600;
 }
 
 .status-card-count {
-  font-size: 48px;
-  font-weight: bold;
+  font-size: 56px;
+  font-weight: 700;
   color: #222;
 }
 
@@ -5340,6 +5335,23 @@ input[type="checkbox"] {
   object-fit: cover;
 }
 
+.no-post-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 150px;
+  border: 1px solid #ddd;
+  margin-top: 10px;
+  box-sizing: border-box;
+}
+
+.no-post-container p {
+  color: #888;
+  font-size: 16px;
+  margin: 0;
+}
+
 /* qna 페이지 */
 .qna-home-container {
   width: 100%;
@@ -6141,19 +6153,19 @@ input[type="checkbox"] {
 }
 
 /* QNA 테이블 스타일 */
-.qna-list-table-wrapper {
+.mypage-list-table-wrapper {
   background: #fff;
   border-radius: 8px;
   overflow: hidden;
 }
 
-.qna-list-table {
+.mypage-list-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
 }
 
-.qna-list-table th {
+.mypage-list-table th {
   background: #f8f9fa;
   padding: 15px 10px;
   border-bottom: 2px solid #eee;
@@ -6161,14 +6173,14 @@ input[type="checkbox"] {
   font-weight: 600;
 }
 
-.qna-list-table td {
+.mypage-list-table td {
   padding: 15px 10px;
   border-bottom: 1px solid #f1f1f1;
   text-align: center;
   color: #666;
 }
 
-.qna-list-table tr:hover {
+.mypage-list-table tr:hover {
   background-color: #fcfcfc;
 }
 
