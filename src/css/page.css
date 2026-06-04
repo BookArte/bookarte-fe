@@ -3738,28 +3738,10 @@ label {
   color: #999;
 }
 
-/* 전체 화면 구성 */
 .borrow-status-wrapper {
   background-color: #f8f9fa;
   min-height: 100vh;
   padding: 40px 20px;
-}
-
-/*마이페이지 내 도서 관련 페이지*/
-.mypage-book-status-wrapper {
-  min-height: 100vh;
-  padding: 40px 20px;
-}
-
-/* 2. 중앙 정렬 컨테이너 */
-.status-content-container {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.mypage-book-title {
-  text-align: center;
-  margin-bottom: 40px;
 }
 
 /* 도서 대출 현황 카드 */
