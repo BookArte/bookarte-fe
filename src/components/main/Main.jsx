@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import URL from '@/constants/url';
 
 function Main({ props, mainRecommend, mainBoard }) {
-    const [keyword, setKeyword] = useState(''); // 2. 검색어 상태 추가
+    const [keyword, setKeyword] = useState('');
     const navigate = useNavigate();
 
     const QuickItem = ({ icon, label, link = "/" }) => (
@@ -31,7 +31,7 @@ function Main({ props, mainRecommend, mainBoard }) {
     return (
         <div className="main-page-wrapper">
             <div className="main-container">
-                {/* 1. 상단 비주얼 배너 (단독 배치로 몰입감 향상) */}
+                {/* 1. 상단 비주얼 배너 */}
                 <section className="top-visual">
                     <div className="main-banner" style={{ backgroundImage: `url(${bannerImg})` }}>
                     </div>
