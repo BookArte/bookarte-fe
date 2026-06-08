@@ -1,8 +1,8 @@
 import BoardListLayout from "../admin/BoardListLayout";
 
-function BookStatusListView({ books, categories, status, handlers }) {
-    const { loading, totalPages, currentPage, selectedIds, setSelectedIds } = status;
-    const { handlePageChange, handleReset, handleUpdateBook, handleSelectAll, handleSelectOne, handleBulkDelete, handleChangeSearchParams, handleSearch, } = handlers;
+function BookStatusListView({ books, status, handlers, pagination }) {
+    const { loading, selectedIds } = status;
+    const { handleUpdateBook, handleSelectAll, handleSelectOne, handleBulkDelete, handleChangeSearchParams, handleSearch } = handlers;
 
     const columns = [
         { label: '번호', width: '100px' },
@@ -74,11 +74,7 @@ function BookStatusListView({ books, categories, status, handlers }) {
                 handleSearch: handleSearch,
                 handleChangeSearchParams: onSearchInputChange
             }}
-            pagination={{
-                currentPage,
-                totalPages,
-                handlePageChange
-            }}
+            pagination={pagination}
             renderRow={renderRow}
             showCreateButton={false}
         />
