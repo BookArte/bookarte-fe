@@ -1,7 +1,10 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+
 import MainPage from "@/pages/main/MainPage";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Chatbot from "@/components/chatbot/Chatbot";
+
 import initPage from "@/js/ui";
 import { useEffect } from "react";
 import SetRecommedation from "../pages/recommendation/SetRecommedation";
@@ -70,10 +73,13 @@ import MypageBorrowStatusListPage from "../pages/mypage/MypageBorrowStatusListPa
 import MypageWishListPage from "../pages/mypage/MypageWishListPage";
 
 const RootRoutes = () => {
+  const location = useLocation();
 
   useEffect(() => {
     initPage();
   }, []);
+
+  const isAdminPage = location.pathname.startsWith('/admin');
 
   return (
     <>
@@ -263,6 +269,9 @@ const RootRoutes = () => {
       </Routes>
 
       <Footer />
+
+      {!isAdminPage && <Chatbot />}
+
       <ToastContainer
         position="top-center"   // toast 위치
         autoClose={3000}       // 3초 후 자동 종료
