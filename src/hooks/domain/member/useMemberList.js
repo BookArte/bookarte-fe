@@ -52,7 +52,6 @@ export function useMemberList() {
             const res = await getMemberBorrowList(memberId);
             const newBorrows = res.data || [];
             setBorrows(newBorrows);
-            console.log(newBorrows); // 기존 borrows(null) 대신 실시간 변수인 newBorrows 출력으로 놔두었습니다.
 
             if (targetBorrowId) {
                 const updatedBorrow = newBorrows.find(b => b.borrowId === targetBorrowId);

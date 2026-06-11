@@ -46,6 +46,7 @@ export function useBookDetail() {
                 const res = await borrowBook(bookId);
 
                 if (res.success) {
+                    setBook(prev => prev ? { ...prev, canBorrow: false } : prev);
                     toast.success(res.data);
                 }
             } catch (error) {
