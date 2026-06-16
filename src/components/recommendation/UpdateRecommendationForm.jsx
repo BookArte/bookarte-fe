@@ -2,6 +2,7 @@ import ErrorMsg from "../common/ErrorMsg";
 
 function UpdateRecommendationForm({ loading, form, fieldErrors, handlers }) {
     const { handleChange, handleSubmit, handleCancel } = handlers;
+    const hasBookInfo = form.bookThumbnail || form.bookTitle || form.bookAuthor || form.publisherName;
 
     if (loading) return <div className="book-detail-container">로딩 중...</div>;
 
@@ -9,6 +10,21 @@ function UpdateRecommendationForm({ loading, form, fieldErrors, handlers }) {
         <div className="book-work-container">
             <h2 className='book-work-title'> 관리자 추천 도서 수정</h2>
             <div className="recommendation-set-container">
+                {hasBookInfo && (
+                    <div className="book-search-section">
+                        <label>추천 도서</label>
+                        <div className="book-selector">
+                            <div className="selected-card">
+                                {form.bookThumbnail && <img src={form.bookThumbnail} alt={form.bookTitle || ''} />}
+                                <div className="info">
+                                    <strong>{form.bookTitle}</strong>
+                                    <span>{form.bookAuthor} | {form.publisherName}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
                 {/* 상세 내용 섹션 */}
                 <div className="recommendation-form-section">
                     <label>추천 코멘트</label>
