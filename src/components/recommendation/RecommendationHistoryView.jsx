@@ -34,7 +34,7 @@ function RecommendationHistoryView({ recommendations, handlers, status }) {
             <td>{item.startDate} ~ {item.endDate}</td>
             <td>{item.priority}위</td>
             <td>
-                <button className="blue-btn" onClick={() => handleRePublish(item)}>재등록</button>
+                <button className="blue-btn" onClick={() => handlers.handleReRecommend(item.recommendationId)}>재등록</button>
             </td>
         </>
     );
