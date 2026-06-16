@@ -68,7 +68,7 @@ export function reorderRecommendation() {
     }
 
     const updateHandle = (recommendationId) => {
-        navigator(URL.RECOMMENDATEION_UPDATE(recommendationId), { replace: true });
+        navigator(URL.RECOMMENDATION_UPDATE(recommendationId), { replace: true });
     }
 
     const handleDel = async (recommendationId) => {

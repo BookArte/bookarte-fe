@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { getExpiredRecommendationHistory } from "../../../api/recommendation.api";
+import URL from '@/constants/url';
+import { useNavigate } from "react-router-dom";
 
 export function useRecommendationHistory() {
+    const navigator = useNavigate();
     const [recommendations, setRecommendations] = useState([]);
     const [loading, setLoading] = useState(false);
     const [totalPages, setTotalPages] = useState(0);
@@ -49,11 +52,17 @@ export function useRecommendationHistory() {
         }
     };
 
+    const handleReRecommend = (recommendationId) => {
+        navigator(URL.RECOMMENDATION_UPDATE(recommendationId), { replace: true })
+    }
+
+
     return {
         recommendations,
         handlers: {
             handleChangeSearchParams,
             handleSearch,
+            handleReRecommend
         },
         status: {
             loading,
