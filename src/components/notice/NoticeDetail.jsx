@@ -1,6 +1,6 @@
 import BoardDetailLayout from "../common/BoardDetailLayout";
 
-function NoticeDetail({ data }) {
+function NoticeDetail({ data, handlers }) {
 
     if (!data) return null;
 
@@ -21,6 +21,7 @@ function NoticeDetail({ data }) {
             date={noticeData.date}
             content={noticeData.content}
             files={noticeData.files}
+            handlers={handlers}
         />
     );
 }

@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getBoardDetail } from "@/api/board.api";
+import URL from "@/constants/url";
 
 export function useNewsDetail() {
     const { id } = useParams();
     const TYPE = 'news';
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchDetail = async () => {
@@ -26,5 +28,9 @@ export function useNewsDetail() {
         if (id) fetchDetail();
     }, [id]);
 
-    return { data, loading };
+    const handleBack = () => {
+        navigate(URL.NEWS);
+    }
+
+    return { data, loading, handlers: { handleBack } };
 }
