@@ -48,6 +48,24 @@ export function useBookForm({
         return temp.textContent.replace(/\u00a0/g, ' ').trim();
     };
 
+    const removeIncompleteSentence = (contents) => {
+        if (!contents) return '';
+
+        const trimmed = contents.trim();
+
+        const lastPeriod = trimmed.lastIndexOf('.');
+        const lastQuestion = trimmed.lastIndexOf('?');
+        const lastExclamation = trimmed.lastIndexOf('!');
+
+        const lastSentenceEnd = Math.max(lastPeriod, Math.max(lastQuestion, lastExclamation));
+
+        if (lastSentenceEnd !== -1 && lastSentenceEnd < trimmed.length - 1) {
+            return trimmed.substring(0, lastSentenceEnd + 1);
+        }
+
+        return trimmed;
+    };
+
     useEffect(() => {
         if (isEdit && initialData) {
             setFormData(prev => ({
@@ -117,8 +135,10 @@ export function useBookForm({
             }
 
             setThumbnailFile(null);
-            const contentsValue = book.bookContents || '';
-            const cleanContents = DOMPurify.sanitize(contentsValue);
+
+            const rawContents = book.bookContents || '';
+            const sanitizedContents = removeIncompleteSentence(rawContents);
+            const cleanContents = DOMPurify.sanitize(sanitizedContents);
 
             setFormData(prev => ({
                 ...prev,
