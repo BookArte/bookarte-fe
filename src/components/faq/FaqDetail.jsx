@@ -1,6 +1,6 @@
 import BoardDetailLayout from "../common/BoardDetailLayout";
 
-function FaqDetail({ data }) {
+function FaqDetail({ data, handlers }) {
 
     if (!data) return null;
 
@@ -21,6 +21,7 @@ function FaqDetail({ data }) {
             date={faqData.date}
             content={faqData.content}
             files={faqData.files}
+            handlers={handlers}
         />
     );
 }

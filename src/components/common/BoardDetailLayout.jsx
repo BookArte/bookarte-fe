@@ -5,6 +5,7 @@ function BoardDetailLayout({
     date,
     content,
     files = [],
+    handlers
 }) {
     const navigate = useNavigate();
 
@@ -46,7 +47,7 @@ function BoardDetailLayout({
                 <button
                     type="button"
                     className="btn-list-go"
-                    onClick={() => navigate(-1)}
+                    onClick={handlers.handleBack}
                 >
                     목록으로
                 </button>

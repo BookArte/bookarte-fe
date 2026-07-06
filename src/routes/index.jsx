@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Outlet } from "react-router-dom";
 
 import MainPage from "@/pages/main/MainPage";
 import Header from "@/components/Header";
@@ -71,6 +71,17 @@ import ProtectedRoute from "@/routes/components/ProtectedRoute";
 import MypageBorrowHistoryListPage from "../pages/mypage/MypageBorrowHistoryListPage";
 import MypageBorrowStatusListPage from "../pages/mypage/MypageBorrowStatusListPage";
 import MypageWishListPage from "../pages/mypage/MypageWishListPage";
+import NotFound from "../pages/error/NotFound";
+
+const AppLayout = ({ children }) => {
+  return (
+    <>
+      <Header />
+      {children}
+      <Footer />
+    </>
+  );
+}
 
 const RootRoutes = () => {
   const location = useLocation();
@@ -83,192 +94,194 @@ const RootRoutes = () => {
 
   return (
     <>
-      <Header />
-
       <Routes>
-        {/* MAIN */}
-        <Route path={"/"} element={<MainPage />} />
+        <Route element={<AppLayout > <Outlet /> </AppLayout>}>
 
-        <Route path="about">
-          <Route path="organization" element={<AboutOrganizationPage />} />
-          <Route path="location" element={<AboutLocationPage />} />
-          <Route path="intro" element={<AboutIntroPage />} />
-          <Route path="history" element={<AboutHistoryPage />} />
-        </Route>
+          {/* MAIN */}
+          <Route path={"/"} element={<MainPage />} />
 
-        <Route path="book">
-          {/* BookList */}
-          <Route path="list" element={<TotalBookListPage />} />
-
-          {/* NewArrivalsList */}
-          <Route path="new" element={<NewArrivalsListPage />} />
-
-          {/* BestSeller */}
-          <Route path="best">
-            <Route index element={<BestSellerListPage />} />
-            <Route path="view/:isbn" element={<BestSellerDetailPage />} />
+          <Route path="about">
+            <Route path="organization" element={<AboutOrganizationPage />} />
+            <Route path="location" element={<AboutLocationPage />} />
+            <Route path="intro" element={<AboutIntroPage />} />
+            <Route path="history" element={<AboutHistoryPage />} />
           </Route>
 
+          <Route path="book">
+            {/* BookList */}
+            <Route path="list" element={<TotalBookListPage />} />
 
-          {/* PopularList */}
-          <Route path="popular" element={<PopularList />} />
+            {/* NewArrivalsList */}
+            <Route path="new" element={<NewArrivalsListPage />} />
 
-          {/* BookDetail */}
-          <Route path="view/:bookId" element={<BookDetailPage />} />
-
-          {/* RecommendationBookList */}
-          <Route path="recommendation" element={< RecommendationBookList />} />
-
-        </Route>
-
-        <Route element={<ProtectedRoute allowedRoles={['ROLE01']} />}>
-          <Route path="/admin" element={<AdminLayout />} >
-
-            {/* 도서 업무 */}
-            <Route path="book">
-              {/* 도서 등록 */}
-              <Route path="register" element={<RegisterBookPage />} />
-              {/* 도서 현황 */}
-              <Route path="status" element={<BookStatusList />} />
-              {/* 도서 수정 */}
-              <Route path="update/:bookId" element={<UpdateBookPage />} />
+            {/* BestSeller */}
+            <Route path="best">
+              <Route index element={<BestSellerListPage />} />
+              <Route path="view/:isbn" element={<BestSellerDetailPage />} />
             </Route>
 
-            {/* 추천 도서 업무 */}
-            <Route path="recommendation">
-              {/* 추천 도서 설정 */}
-              <Route path="set" element={<SetRecommedation />} />
-              {/* 추천 도서 순서 변경 */}
-              <Route path="reorder" element={<ReorderRecommendation />} />
-              {/* 추천 도서 수정 */}
-              <Route path="update/:recommendationId" element={<UpdateRecommendation />} />
-              {/* 추천 도서 히스토리 */}
-              <Route path="history" element={<RecommendationHistory />} />
-            </Route>
 
-            {/* 대출 업무 */}
-            <Route path="borrow">
-              {/* 전체 대출 이력 */}
-              <Route path="history" element={<BorrowHistory />} />
-              { /* 대출 대시보드 */}
-              <Route path="dashboard" element={<BorrowDashboardPage />} />
-            </Route>
+            {/* PopularList */}
+            <Route path="popular" element={<PopularList />} />
 
-            {/*연체 패널티 관리*/}
-            <Route path="penalty/management" element={<PenaltyManagement />} />
+            {/* BookDetail */}
+            <Route path="view/:bookId" element={<BookDetailPage />} />
 
-            {/* 공지사항 관리 */}
-            <Route path="notice">
-              <Route index element={<AdminNoticePage />} />
-              <Route path="write" element={<AdminNoticeWritePage />} />
-              <Route path="modify/:id" element={<AdminNoticeModifyPage />} />
-            </Route>
-
-            {/* 뉴스 관리 */}
-            <Route path="news">
-              <Route index element={<AdminNewsPage />} />
-              <Route path="write" element={<AdminNewsWritePage />} />
-              <Route path="modify/:id" element={<AdminNewsModifyPage />} />
-            </Route>
-
-            {/* Q&A 관리 */}
-            <Route path="qna">
-              <Route index element={<AdminQnaPage />} />
-              <Route path="write" element={<AdminQnaWritePage />} />
-              <Route path="modify/:id" element={<AdminQnaModifyPage />} />
-            </Route>
-
-            {/* FAQ 관리 */}
-            <Route path="faq">
-              <Route index element={<AdminFaqPage />} />
-              <Route path="write" element={<AdminFaqWritePage />} />
-              <Route path="modify/:id" element={<AdminFaqModifyPage />} />
-            </Route>
-
-            {/* 회원 관리 */}
-            <Route path="member" element={<AdminMemberPage />} />
+            {/* RecommendationBookList */}
+            <Route path="recommendation" element={< RecommendationBookList />} />
 
           </Route>
-        </Route>
 
+          <Route element={<ProtectedRoute allowedRoles={['ROLE01']} />}>
+            <Route path="/admin" element={<AdminLayout />} >
 
-        {/* Member */}
-        <Route path="/member">
-          {/* Login */}
-          <Route path="login" element={<Login />} />
-
-          {/* Join */}
-          <Route path="join" element={<Join />} />
-
-          {/* Agreement */}
-          <Route path="agreement" element={<Agreement />} />
-
-          {/* FindId */}
-          <Route path="find_id" element={<FindId />} />
-
-          {/* FindPassword */}
-          <Route path="find_password" element={<FindPassword />} />
-
-          {/* ResetPassword */}
-          <Route path="reset_password" element={<ResetPassword />} />
-        </Route>
-
-        {/* Mypage */}
-        <Route element={<ProtectedRoute />}>
-          <Route path="/mypage" element={<MypageLayout />}>
-            <Route element={<Mypage />} >
-              {/* MypageDashboard */}
-              <Route index element={<MypageDashboard />} />
-              {/* MypageInfo */}
-              <Route path="info" element={<MypageInfo />} />
-
-              <Route path="borrow" >
-                {/* MyBorrowStatus */}
-                <Route path="status" element={<MypageBorrowStatusListPage />} />
-                {/* MyBorrowHistory */}
-                <Route path="history" element={<MypageBorrowHistoryListPage />} />
+              {/* 도서 업무 */}
+              <Route path="book">
+                {/* 도서 등록 */}
+                <Route path="register" element={<RegisterBookPage />} />
+                {/* 도서 현황 */}
+                <Route path="status" element={<BookStatusList />} />
+                {/* 도서 수정 */}
+                <Route path="update/:bookId" element={<UpdateBookPage />} />
               </Route>
 
-              {/* MyWishList */}
-              <Route path="wish-list" element={<MypageWishListPage />} />
+              {/* 추천 도서 업무 */}
+              <Route path="recommendation">
+                {/* 추천 도서 설정 */}
+                <Route path="set" element={<SetRecommedation />} />
+                {/* 추천 도서 순서 변경 */}
+                <Route path="reorder" element={<ReorderRecommendation />} />
+                {/* 추천 도서 수정 */}
+                <Route path="update/:recommendationId" element={<UpdateRecommendation />} />
+                {/* 추천 도서 히스토리 */}
+                <Route path="history" element={<RecommendationHistory />} />
+              </Route>
 
-              {/* My QnA */}
-              <Route path="qna" element={<MypageQnaListPage />} />
-              <Route path="qna/view/:id" element={<MypageQnaDetailPage />} />
-              <Route path="qna/edit/:id" element={<MypageQnaEditPage />} />
+              {/* 대출 업무 */}
+              <Route path="borrow">
+                {/* 전체 대출 이력 */}
+                <Route path="history" element={<BorrowHistory />} />
+                { /* 대출 대시보드 */}
+                <Route path="dashboard" element={<BorrowDashboardPage />} />
+              </Route>
+
+              {/*연체 패널티 관리*/}
+              <Route path="penalty/management" element={<PenaltyManagement />} />
+
+              {/* 공지사항 관리 */}
+              <Route path="notice">
+                <Route index element={<AdminNoticePage />} />
+                <Route path="write" element={<AdminNoticeWritePage />} />
+                <Route path="modify/:id" element={<AdminNoticeModifyPage />} />
+              </Route>
+
+              {/* 뉴스 관리 */}
+              <Route path="news">
+                <Route index element={<AdminNewsPage />} />
+                <Route path="write" element={<AdminNewsWritePage />} />
+                <Route path="modify/:id" element={<AdminNewsModifyPage />} />
+              </Route>
+
+              {/* Q&A 관리 */}
+              <Route path="qna">
+                <Route index element={<AdminQnaPage />} />
+                <Route path="write" element={<AdminQnaWritePage />} />
+                <Route path="modify/:id" element={<AdminQnaModifyPage />} />
+              </Route>
+
+              {/* FAQ 관리 */}
+              <Route path="faq">
+                <Route index element={<AdminFaqPage />} />
+                <Route path="write" element={<AdminFaqWritePage />} />
+                <Route path="modify/:id" element={<AdminFaqModifyPage />} />
+              </Route>
+
+              {/* 회원 관리 */}
+              <Route path="member" element={<AdminMemberPage />} />
+
+            </Route>
+          </Route>
+
+
+          {/* Member */}
+          <Route path="/member">
+            {/* Login */}
+            <Route path="login" element={<Login />} />
+
+            {/* Join */}
+            <Route path="join" element={<Join />} />
+
+            {/* Agreement */}
+            <Route path="agreement" element={<Agreement />} />
+
+            {/* FindId */}
+            <Route path="find_id" element={<FindId />} />
+
+            {/* FindPassword */}
+            <Route path="find_password" element={<FindPassword />} />
+
+            {/* ResetPassword */}
+            <Route path="reset_password" element={<ResetPassword />} />
+          </Route>
+
+          {/* Mypage */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/mypage" element={<MypageLayout />}>
+              <Route element={<Mypage />} >
+                {/* MypageDashboard */}
+                <Route index element={<MypageDashboard />} />
+                {/* MypageInfo */}
+                <Route path="info" element={<MypageInfo />} />
+
+                <Route path="borrow" >
+                  {/* MyBorrowStatus */}
+                  <Route path="status" element={<MypageBorrowStatusListPage />} />
+                  {/* MyBorrowHistory */}
+                  <Route path="history" element={<MypageBorrowHistoryListPage />} />
+                </Route>
+
+                {/* MyWishList */}
+                <Route path="wish-list" element={<MypageWishListPage />} />
+
+                {/* My QnA */}
+                <Route path="qna" element={<MypageQnaListPage />} />
+                <Route path="qna/view/:id" element={<MypageQnaDetailPage />} />
+                <Route path="qna/edit/:id" element={<MypageQnaEditPage />} />
+              </Route>
+            </Route>
+          </Route>
+
+          {/* 공지사항 */}
+          <Route path="/notice" element={<BoardLayout />} >
+            <Route index element={<NoticeListPage />} />
+            <Route path="view/:id" element={<NoticeDetailPage />} />
+          </Route>
+
+          {/* 새소식 */}
+          <Route path="/news" element={<BoardLayout />} >
+            <Route index element={<NewsListPage />} />
+            <Route path="view/:id" element={<NewsDetailPage />} />
+          </Route>
+
+          {/* FAQ */}
+          <Route path="/faq" element={<BoardLayout />} >
+            <Route index element={<FaqListPage />} />
+            <Route path="view/:id" element={<FaqDetailPage />} />
+          </Route>
+
+          {/* QNA */}
+          <Route path="/qna" element={<BoardLayout />} >
+            <Route index element={<QnaHomePage />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="write" element={<QnaWritePage />} />
             </Route>
           </Route>
         </Route>
 
-        {/* 공지사항 */}
-        <Route path="/notice" element={<BoardLayout />} >
-          <Route index element={<NoticeListPage />} />
-          <Route path="view/:id" element={<NoticeDetailPage />} />
-        </Route>
 
-        {/* 새소식 */}
-        <Route path="/news" element={<BoardLayout />} >
-          <Route index element={<NewsListPage />} />
-          <Route path="view/:id" element={<NewsDetailPage />} />
-        </Route>
-
-        {/* FAQ */}
-        <Route path="/faq" element={<BoardLayout />} >
-          <Route index element={<FaqListPage />} />
-          <Route path="view/:id" element={<FaqDetailPage />} />
-        </Route>
-
-        {/* QNA */}
-        <Route path="/qna" element={<BoardLayout />} >
-          <Route index element={<QnaHomePage />} />
-          <Route element={<ProtectedRoute />}>
-            <Route path="write" element={<QnaWritePage />} />
-          </Route>
-        </Route>
+        <Route path="*" element={<NotFound />} />
 
       </Routes>
-
-      <Footer />
 
       {!isAdminPage && <Chatbot />}
 

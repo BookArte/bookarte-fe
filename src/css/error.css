@@ -1,0 +1,35 @@
+.not-found-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+.not-found-container h1 {
+    font-size: 8rem;
+    margin: 0;
+    color: #ff6b6b;
+}
+
+.not-found-container p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.home-link {
+    padding: 10px 25px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.home-link:hover {
+    background-color: #555;
+}
