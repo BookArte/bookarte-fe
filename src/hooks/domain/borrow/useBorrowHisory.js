@@ -10,7 +10,7 @@ export function useBorrowHistory() {
     const [currentPage, setCurrentPage] = useState(0);
     const [searchParams, setSearchParams] = useState({
         bookId: '',
-        status: 'RETURNED',
+        status: '',
         statusNot: '',
         isOverdue: '',
         startDate: '',
