@@ -137,7 +137,8 @@ export function useBookList({
         pagination: {
             currentPage,
             totalPages,
-            handlePageChange
+            handlePageChange,
+            pageGroupSize: 5,
         },
         getVirtualNumber: (index) => {
             return totalElements - (currentPage * searchParams.size) - index;

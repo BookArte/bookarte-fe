@@ -131,6 +131,7 @@ export function useBookStatusList() {
             ...baseStatus,
             currentPage: pagination.currentPage,
             totalPages: pagination.totalPages,
+            pageGroupSize: 5,
             selectedIds,
             setSelectedIds
         },
