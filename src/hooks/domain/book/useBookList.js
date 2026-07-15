@@ -102,7 +102,7 @@ export function useBookList({
 
     // 도서 상세 페이지 이동 함수
     const handleViewBook = (bookId) => {
-        navigate(URL.BOOK_VIEW(bookId));
+        navigate(URL.BOOK_VIEW(bookId), { state: { fromPage: currentPage } });
     }
 
     //페이지 변경 핸들러
@@ -138,10 +138,6 @@ export function useBookList({
             currentPage,
             totalPages,
             handlePageChange,
-            pageGroupSize: 5,
-        },
-        getVirtualNumber: (index) => {
-            return totalElements - (currentPage * searchParams.size) - index;
-        },
+        }
     };
 }   
