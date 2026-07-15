@@ -16,6 +16,7 @@ export function useBorrowHistory() {
         startDate: '',
         endDate: '',
         searchKeyword: '',
+        size: 10,
     });
 
     const fetchBorrowHistory = async (page = 0, params = searchParams) => {
@@ -64,6 +65,7 @@ export function useBorrowHistory() {
         handlers: {
             handleChangeSearchParams,
             handleSearch,
+            handlePageChange
         },
         pagination: {
             currentPage,

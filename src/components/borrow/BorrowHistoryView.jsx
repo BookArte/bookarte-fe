@@ -25,7 +25,7 @@ function BorrowHistoryView({ borrows, status, handlers }) {
 
     const renderRow = (item, index) => (
         <>
-            <td className="number-column">{index + 1 + currentPage * 5}</td>
+            <td className="number-column">{item.borrowId}</td>
             <td className="book-info-td">
                 <img src={item.bookThumbnail} alt="" className="mini-thumb" />
                 <div className="book-status-text">
