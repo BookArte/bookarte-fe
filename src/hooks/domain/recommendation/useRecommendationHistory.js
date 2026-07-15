@@ -13,6 +13,7 @@ export function useRecommendationHistory() {
         searchKeyword: '',
         startDate: '',
         endDate: '',
+        size: 5,
     });
 
     const fetchRecommendationHistory = async (page = 0) => {
@@ -62,7 +63,8 @@ export function useRecommendationHistory() {
         handlers: {
             handleChangeSearchParams,
             handleSearch,
-            handleReRecommend
+            handleReRecommend,
+            handlePageChange
         },
         status: {
             loading,
