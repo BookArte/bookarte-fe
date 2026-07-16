@@ -15,9 +15,13 @@ export function useBookList({
 
     const [isDetailOpen, setIsDetailOpen] = useState(false); // 상세검색 패널 열림 상태
 
-    const savedPage = Number(sessionStorage.getItem(`${type}_page`)) || 0;
-
     const transferredState = location.state || {};
+    const restoredPage = transferredState.restorePage !== undefined ? transferredState.restorePage : null;
+
+    const savedPage = restoredPage !== null
+        ? restoredPage
+        : (Number(sessionStorage.getItem(`${type}_page`)) || 0);
+
     const queryParams = new URLSearchParams(location.search);
     const initialBookTitle = transferredState.bookTitle || queryParams.get('bookTitle') || initialParams.bookTitle || '';
     const [searchParams, setSearchParams] = useState({
@@ -58,7 +62,7 @@ export function useBookList({
         fetchBooks(0, searchParams);
 
         if (location.state) {
-            navigate(`${location.pathname}${location.search}`, { replace: true, state: null });
+            navigate(location.pathname, { replace: true, state: null });
         }
     }, []);
 

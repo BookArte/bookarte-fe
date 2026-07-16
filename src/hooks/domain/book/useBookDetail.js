@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getBookDetailByBookId, getRelatedBookList } from "@/api/book.api";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -45,8 +45,11 @@ export function useBookDetail() {
                 if (relatedRes.success) setRelatedBooks(relatedRes.data);
             } catch (error) {
                 handleApiError(error, "도서 상세 정보 로드 실패");
-                const savedPage = location.state?.fromPage || 1;
-                navigate(`/boook?page=${savedPage}`, { replace: true });
+                const savedPage = location.state?.fromPage !== undefined ? location.state.fromPage : 0;
+                navigate('/book/list', {
+                    replace: true,
+                    state: { restorePage: savedPage }
+                });
             } finally {
                 setLoading(false);
             }
