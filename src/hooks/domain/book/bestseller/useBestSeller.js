@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getBestSellerBookList } from "@/api/book.api";
 import { handleApiError } from "@/hooks/utils/errorHandler";
 import URL from '@/constants/url';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export function useBestSeller() {
     const [bestSellers, setBestSellers] = useState([]);
@@ -11,6 +11,15 @@ export function useBestSeller() {
     const [totalPages, setTotalPages] = useState(0);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+
+    const location = useLocation();
+
+    const transferredState = location.state || {};
+    const restoredPage = transferredState.restorePage !== undefined ? transferredState.restorePage : null;
+
+    const savedPage = restoredPage !== null
+        ? restoredPage
+        : (Number(sessionStorage.getItem(`page`)) || 0);
 
     const size = 10;
     const fetchBestSellers = async (page = 0) => {
@@ -36,7 +45,11 @@ export function useBestSeller() {
     }, []);
 
     const handleViewBook = (isbn) => {
-        navigate(URL.BOOK_BEST_VIEW(isbn));
+        navigate(URL.BOOK_BEST_VIEW(isbn), {
+            state: {
+                fromPage: currentPage
+            }
+        });
     }
 
     const handlePageChange = (pageIdx) => {

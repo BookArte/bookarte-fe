@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { searchBookWithAPiByIsbn } from "../../../../api/book.api";
 import { useEffect, useState } from "react";
 import { handleApiError } from "../../../utils/errorHandler";
@@ -9,6 +9,7 @@ export function useBestSellerDetail() {
     const navigate = useNavigate();
     const [book, setBook] = useState(null);
     const [loading, setLoading] = useState(true);
+    const location = useLocation();
 
     useEffect(() => {
         const fetchBestSeller = async () => {
@@ -18,7 +19,8 @@ export function useBestSellerDetail() {
                 setBook(res.data);
             } catch (error) {
                 handleApiError(error, "베스트셀러 도서 상세 정보 로드 실패");
-                navigate(URL.BOOK_BEST);
+                const savedPage = location.state?.fromPage !== undefined ? location.state.fromPage : 0;
+                navigate('/book/best', { replace: true, state: { restorePage: savedPage } });
             } finally {
                 setLoading(false);
             }
