@@ -40,13 +40,18 @@ export function useBookDetail() {
                     getRelatedBookList(bookId)
                 ]);
 
-                if (bookRes.success) setBook(bookRes.data);
+                if (!bookRes.success || !bookRes.data) {
+                    throw new Error('Book not found');
+                }
+
+                setBook(bookRes.data);
                 if (statsRes.success) setStats(statsRes.data);
                 if (relatedRes.success) setRelatedBooks(relatedRes.data);
             } catch (error) {
                 handleApiError(error, "도서 상세 정보 로드 실패");
                 const savedPage = location.state?.fromPage !== undefined ? location.state.fromPage : 0;
-                navigate('/book/list', {
+                const fallbackPath = location.state?.fromPath || URL.BOOK_SEARCH;
+                navigate(fallbackPath, {
                     replace: true,
                     state: { restorePage: savedPage }
                 });
@@ -56,7 +61,7 @@ export function useBookDetail() {
         };
 
         fetchAllData(bookId);
-    }, [bookId, navigate]);
+    }, [bookId, navigate, location.state]);
 
     //대출 핸들러
     const handleBorrow = async (bookId) => {

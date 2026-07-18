@@ -16,17 +16,21 @@ export function useBestSellerDetail() {
             setLoading(true);
             try {
                 const res = await searchBookWithAPiByIsbn(isbn);
+                if (res.success === false || !res.data) {
+                    throw new Error('Book not found');
+                }
                 setBook(res.data);
             } catch (error) {
                 handleApiError(error, "베스트셀러 도서 상세 정보 로드 실패");
                 const savedPage = location.state?.fromPage !== undefined ? location.state.fromPage : 0;
-                navigate('/book/best', { replace: true, state: { restorePage: savedPage } });
+                const fallbackPath = location.state?.fromPath || URL.BOOK_BEST;
+                navigate(fallbackPath, { replace: true, state: { restorePage: savedPage } });
             } finally {
                 setLoading(false);
             }
         };
         fetchBestSeller();
-    }, [isbn, navigate]);
+    }, [isbn, navigate, location.state]);
 
     return {
         book,

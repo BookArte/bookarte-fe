@@ -5,6 +5,7 @@ import URL from '@/constants/url';
 import { useLocation, useNavigate } from "react-router-dom";
 
 export function useBestSeller() {
+    const STORAGE_KEY = 'bestSeller_page';
     const [bestSellers, setBestSellers] = useState([]);
     const [totalElements, setTotalElements] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
@@ -19,7 +20,7 @@ export function useBestSeller() {
 
     const savedPage = restoredPage !== null
         ? restoredPage
-        : (Number(sessionStorage.getItem(`page`)) || 0);
+        : (Number(sessionStorage.getItem(STORAGE_KEY) ?? sessionStorage.getItem('page')) || 0);
 
     const size = 10;
     const fetchBestSellers = async (page = 0) => {
@@ -41,19 +42,25 @@ export function useBestSeller() {
     };
 
     useEffect(() => {
-        fetchBestSellers(0);
+        fetchBestSellers(savedPage);
+
+        if (location.state) {
+            navigate(location.pathname, { replace: true, state: null });
+        }
     }, []);
 
     const handleViewBook = (isbn) => {
         navigate(URL.BOOK_BEST_VIEW(isbn), {
             state: {
-                fromPage: currentPage
+                fromPage: currentPage,
+                fromPath: location.pathname
             }
         });
     }
 
     const handlePageChange = (pageIdx) => {
         if (pageIdx < 0 || pageIdx >= totalPages) return;
+        sessionStorage.setItem(STORAGE_KEY, pageIdx);
         fetchBestSellers(pageIdx);
         window.scrollTo(0, 0);
     };

@@ -7,7 +7,6 @@ import { useDataFetch } from "../../utils/useDataFetch";
 export function useBookList({
     type,
     fetchFn,
-    idKey = 'id',
     initialParams = {}
 }) {
     const navigate = useNavigate();
@@ -59,7 +58,7 @@ export function useBookList({
     }, [searchParams.sort]);
 
     useEffect(() => {
-        fetchBooks(0, searchParams);
+        fetchBooks(savedPage, searchParams);
 
         if (location.state) {
             navigate(location.pathname, { replace: true, state: null });
@@ -106,12 +105,18 @@ export function useBookList({
 
     // 도서 상세 페이지 이동 함수
     const handleViewBook = (bookId) => {
-        navigate(URL.BOOK_VIEW(bookId), { state: { fromPage: currentPage } });
+        navigate(URL.BOOK_VIEW(bookId), {
+            state: {
+                fromPage: currentPage,
+                fromPath: location.pathname
+            }
+        });
     }
 
     //페이지 변경 핸들러
     const handlePageChange = (newPage) => {
         if (newPage >= 0 && newPage < totalPages) {
+            sessionStorage.setItem(`${type}_page`, newPage);
             fetchBooks(newPage, appliedParams);
             window.scrollTo(0, 0);
         }
