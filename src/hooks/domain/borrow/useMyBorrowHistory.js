@@ -28,7 +28,6 @@ export function useMyBorrowHistory() {
         fetchFn: fetchReturnedBorrowHistory,
         idKey: 'borrowId',
         initialParams: {
-            status: 'RETURNED',
             size: 10,
             sort: 'createdAt,desc'
         }

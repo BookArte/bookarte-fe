@@ -10,12 +10,13 @@ export function useBorrowHistory() {
     const [currentPage, setCurrentPage] = useState(0);
     const [searchParams, setSearchParams] = useState({
         bookId: '',
-        status: 'RETURNED',
+        status: '',
         statusNot: '',
         isOverdue: '',
         startDate: '',
         endDate: '',
         searchKeyword: '',
+        size: 10,
     });
 
     const fetchBorrowHistory = async (page = 0, params = searchParams) => {
@@ -64,6 +65,7 @@ export function useBorrowHistory() {
         handlers: {
             handleChangeSearchParams,
             handleSearch,
+            handlePageChange
         },
         pagination: {
             currentPage,
