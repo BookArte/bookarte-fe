@@ -126,7 +126,6 @@ export function useBookStatusList() {
         categories,
         params,
         pagination,
-        getVirtualNumber,
         status: {
             ...baseStatus,
             currentPage: pagination.currentPage,

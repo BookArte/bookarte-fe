@@ -7,7 +7,6 @@ import { useDataFetch } from "../../utils/useDataFetch";
 export function useBookList({
     type,
     fetchFn,
-    idKey = 'id',
     initialParams = {}
 }) {
     const navigate = useNavigate();
@@ -15,9 +14,13 @@ export function useBookList({
 
     const [isDetailOpen, setIsDetailOpen] = useState(false); // 상세검색 패널 열림 상태
 
-    const savedPage = Number(sessionStorage.getItem(`${type}_page`)) || 0;
-
     const transferredState = location.state || {};
+    const restoredPage = transferredState.restorePage !== undefined ? transferredState.restorePage : null;
+
+    const savedPage = restoredPage !== null
+        ? restoredPage
+        : (Number(sessionStorage.getItem(`${type}_page`)) || 0);
+
     const queryParams = new URLSearchParams(location.search);
     const initialBookTitle = transferredState.bookTitle || queryParams.get('bookTitle') || initialParams.bookTitle || '';
     const [searchParams, setSearchParams] = useState({
@@ -55,10 +58,10 @@ export function useBookList({
     }, [searchParams.sort]);
 
     useEffect(() => {
-        fetchBooks(0, searchParams);
+        fetchBooks(savedPage, searchParams);
 
         if (location.state) {
-            navigate(`${location.pathname}${location.search}`, { replace: true, state: null });
+            navigate(location.pathname, { replace: true, state: null });
         }
     }, []);
 
@@ -102,12 +105,18 @@ export function useBookList({
 
     // 도서 상세 페이지 이동 함수
     const handleViewBook = (bookId) => {
-        navigate(URL.BOOK_VIEW(bookId));
+        navigate(URL.BOOK_VIEW(bookId), {
+            state: {
+                fromPage: currentPage,
+                fromPath: location.pathname
+            }
+        });
     }
 
     //페이지 변경 핸들러
     const handlePageChange = (newPage) => {
         if (newPage >= 0 && newPage < totalPages) {
+            sessionStorage.setItem(`${type}_page`, newPage);
             fetchBooks(newPage, appliedParams);
             window.scrollTo(0, 0);
         }
@@ -137,10 +146,7 @@ export function useBookList({
         pagination: {
             currentPage,
             totalPages,
-            handlePageChange
-        },
-        getVirtualNumber: (index) => {
-            return totalElements - (currentPage * searchParams.size) - index;
-        },
+            handlePageChange,
+        }
     };
 }   

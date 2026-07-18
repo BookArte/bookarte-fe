@@ -2,15 +2,25 @@ import { useEffect, useState } from "react";
 import { getBestSellerBookList } from "@/api/book.api";
 import { handleApiError } from "@/hooks/utils/errorHandler";
 import URL from '@/constants/url';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export function useBestSeller() {
+    const STORAGE_KEY = 'bestSeller_page';
     const [bestSellers, setBestSellers] = useState([]);
     const [totalElements, setTotalElements] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+
+    const location = useLocation();
+
+    const transferredState = location.state || {};
+    const restoredPage = transferredState.restorePage !== undefined ? transferredState.restorePage : null;
+
+    const savedPage = restoredPage !== null
+        ? restoredPage
+        : (Number(sessionStorage.getItem(STORAGE_KEY) ?? sessionStorage.getItem('page')) || 0);
 
     const size = 10;
     const fetchBestSellers = async (page = 0) => {
@@ -32,15 +42,25 @@ export function useBestSeller() {
     };
 
     useEffect(() => {
-        fetchBestSellers(0);
+        fetchBestSellers(savedPage);
+
+        if (location.state) {
+            navigate(location.pathname, { replace: true, state: null });
+        }
     }, []);
 
     const handleViewBook = (isbn) => {
-        navigate(URL.BOOK_BEST_VIEW(isbn));
+        navigate(URL.BOOK_BEST_VIEW(isbn), {
+            state: {
+                fromPage: currentPage,
+                fromPath: location.pathname
+            }
+        });
     }
 
     const handlePageChange = (pageIdx) => {
         if (pageIdx < 0 || pageIdx >= totalPages) return;
+        sessionStorage.setItem(STORAGE_KEY, pageIdx);
         fetchBestSellers(pageIdx);
         window.scrollTo(0, 0);
     };
