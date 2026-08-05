@@ -68,6 +68,10 @@ export function useBookStatusList() {
         navigate(URL.BOOK_UPDATE(bookId));
     }
 
+    const handleDeleteBook = async (bookId) => {
+        navigate(URL.BOOK_DELETE(bookId));
+    };
+
     const handleSelectAll = (e) => {
         if (e.target.checked) {
             setSelectedIds(books.map(book => book.bookId));
@@ -136,6 +140,7 @@ export function useBookStatusList() {
         handlers: {
             ...baseHandlers,
             handleUpdateBook,
+            handleDeleteBook,
             handleSelectAll,
             handleSelectOne,
             handleBulkDelete,

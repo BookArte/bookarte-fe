@@ -15,7 +15,12 @@ export const updateBookByBookId = async (bookId, data) => {
 
 /* 도서 삭제 */
 export const deleteBooks = async (data) => {
-    const res = await apiClient.delete('/book/admin', { data });
+    const res = await apiClient.delete('/book/admin/bulk', { data });
+    return res.data;
+}
+
+export const deleteBookByBookId = async (bookId, data) => {
+    const res = await apiClient.delete(`/book/admin/${bookId}`, { data });
     return res.data;
 }
 

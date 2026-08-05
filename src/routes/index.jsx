@@ -72,6 +72,7 @@ import MypageBorrowHistoryListPage from "../pages/mypage/MypageBorrowHistoryList
 import MypageBorrowStatusListPage from "../pages/mypage/MypageBorrowStatusListPage";
 import MypageWishListPage from "../pages/mypage/MypageWishListPage";
 import NotFound from "../pages/error/NotFound";
+import DeleteBookPage from "../pages/book/DeleteBookPage";
 
 const AppLayout = ({ children }) => {
   return (
@@ -143,6 +144,8 @@ const RootRoutes = () => {
                 <Route path="status" element={<BookStatusList />} />
                 {/* 도서 수정 */}
                 <Route path="update/:bookId" element={<UpdateBookPage />} />
+                {/* 도서 삭제 */}
+                <Route path="delete/:bookId" element={<DeleteBookPage />} />
               </Route>
 
               {/* 추천 도서 업무 */}

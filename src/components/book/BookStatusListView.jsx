@@ -2,7 +2,7 @@ import BoardListLayout from "../admin/BoardListLayout";
 
 function BookStatusListView({ books, status, handlers, pagination }) {
     const { loading, selectedIds } = status;
-    const { handleUpdateBook, handleSelectAll, handleSelectOne, handleBulkDelete, handleChangeSearchParams, handleSearch } = handlers;
+    const { handleUpdateBook, handleDeleteBook, handleSelectAll, handleSelectOne, handleBulkDelete, handleChangeSearchParams, handleSearch } = handlers;
 
     const columns = [
         { label: '번호', width: '100px' },
@@ -52,6 +52,7 @@ function BookStatusListView({ books, status, handlers, pagination }) {
             </td>
             <td className="manage-column">
                 <button className="blue-btn" onClick={() => handleUpdateBook(item.bookId)}>수정</button>
+                <button className="red-btn" onClick={() => handleDeleteBook(item.bookId)}>삭제</button>
             </td>
         </>
     );
