@@ -66,7 +66,7 @@ function BookStatusListView({ books, status, handlers, pagination }) {
             run={true}
             columns={columns}
             data={books.map(book => ({ ...book, id: book.bookId }))}
-            showCheckbox={true}
+            showCheckbox={false}
             selection={{
                 selectedIds: selectedIds,
                 onSelectAll: handleSelectAll,
