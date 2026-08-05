@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import { getCategoryList } from "@/api/category.api";
 import URL from '@/constants/url';
 import { useNavigate } from "react-router-dom";
-import { useDataFetch } from "@/hooks/utils/useDataFetch";
 import { useBookList } from "@/hooks/domain/book/useBookList";
 import { handleApiError } from "@/hooks/utils/errorHandler";
 
@@ -24,6 +23,7 @@ export function useBookStatusList() {
         fetchFn: getAllBookList,
         idKey: 'bookId',
         initialParams: {
+            isDeleted: false,
             sort: 'createdAt,desc',
             size: 10
         }
@@ -42,6 +42,7 @@ export function useBookStatusList() {
             publicationDateStart: '',
             publicationDateEnd: '',
             category: '',
+            isDeleted: false,
             size: 10,
             sort: 'createdAt,desc'
         });
