@@ -23,7 +23,7 @@ export function useDeletedBookManager() {
         fetchFn: getAllBookList,
         idKey: 'bookId',
         initialParams: {
-            isDeleted: true,
+            deleted: true,
             sort: 'createdAt,desc',
             size: 10
         }
@@ -40,15 +40,11 @@ export function useDeletedBookManager() {
             publicationDateStart: '',
             publicationDateEnd: '',
             category: '',
-            isDeleted: true,
+            deleted: true,
             size: 10,
             sort: 'createdAt,desc'
         });
     };
-
-    useEffect(() => {
-        baseHandlers.fetchBooks(0, params.searchParams);
-    }, []);
 
     const handleChangeSearchParams = (target) => {
         params.setSearchParams(prev => ({
