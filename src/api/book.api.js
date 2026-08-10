@@ -24,6 +24,12 @@ export const deleteBookByBookId = async (bookId, data) => {
     return res.data;
 }
 
+/* 도서 삭제 복구 */
+export const restoreBookByBookId = async (bookId, data) => {
+    const res = await apiClient.patch(`/book/admin/restore/${bookId}`, data);
+    return res.data;
+}
+
 /* 공통 요청 */
 /*도서 상세 정보 조회 api*/
 export const getBookDetailByBookId = async (bookId) => {
