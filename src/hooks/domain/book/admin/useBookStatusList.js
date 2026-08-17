@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import { getCategoryList } from "@/api/category.api";
 import URL from '@/constants/url';
 import { useNavigate } from "react-router-dom";
-import { useDataFetch } from "@/hooks/utils/useDataFetch";
 import { useBookList } from "@/hooks/domain/book/useBookList";
 import { handleApiError } from "@/hooks/utils/errorHandler";
 
@@ -24,6 +23,7 @@ export function useBookStatusList() {
         fetchFn: getAllBookList,
         idKey: 'bookId',
         initialParams: {
+            deleted: false,
             sort: 'createdAt,desc',
             size: 10
         }
@@ -42,14 +42,11 @@ export function useBookStatusList() {
             publicationDateStart: '',
             publicationDateEnd: '',
             category: '',
+            deleted: false,
             size: 10,
             sort: 'createdAt,desc'
         });
     };
-
-    useEffect(() => {
-        baseHandlers.fetchBooks(0, params.searchParams);
-    }, []);
 
     const handleChangeSearchParams = (target) => {
         params.setSearchParams(prev => ({
@@ -58,15 +55,15 @@ export function useBookStatusList() {
         }));
     };
 
-    const handleSearch = () => {
-        baseHandlers.fetchBooks(0, params.searchParams);
-    };
-
     const navigate = useNavigate();
 
     const handleUpdateBook = (bookId) => {
         navigate(URL.BOOK_UPDATE(bookId));
     }
+
+    const handleDeleteBook = async (bookId) => {
+        navigate(URL.BOOK_DELETE(bookId));
+    };
 
     const handleSelectAll = (e) => {
         if (e.target.checked) {
@@ -136,12 +133,13 @@ export function useBookStatusList() {
         handlers: {
             ...baseHandlers,
             handleUpdateBook,
+            handleDeleteBook,
             handleSelectAll,
             handleSelectOne,
             handleBulkDelete,
             handleReset,
-            handleChangeSearchParams,
-            handleSearch
-        }
+            handleChangeSearchParams
+        },
+        getVirtualNumber
     };
 }

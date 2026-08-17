@@ -35,6 +35,7 @@ const AdminSidebar = () => {
                     <ul className="submenu">
                         <li><NavLink to={URL.BOOK_STATUS} className={({ isActive }) => isActive ? "active" : ""}>도서 현황</NavLink></li>
                         <li><NavLink to={URL.BOOK_REGISTER} className={({ isActive }) => isActive ? "active" : ""}>신규 도서 등록</NavLink></li>
+                        <li><NavLink to={URL.BOOK_DELETED} className={({ isActive }) => isActive ? "active" : ""}>삭제 도서 목록</NavLink></li>
                     </ul>
                 </div>
 

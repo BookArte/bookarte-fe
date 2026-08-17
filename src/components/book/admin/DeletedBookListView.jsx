@@ -1,8 +1,10 @@
-import BoardListLayout from "../admin/BoardListLayout";
+import BoardListLayout from "../../admin/BoardListLayout";
 
-function BookStatusListView({ books, status, handlers, pagination }) {
-    const { loading, selectedIds } = status;
-    const { handleUpdateBook, handleDeleteBook, handleSelectAll, handleSelectOne, handleBulkDelete, handleChangeSearchParams, handleSearch } = handlers;
+
+function DeletedBookListView({ books, status, handlers, pagination }) {
+    const loading = status.loading;
+
+    const { handleDeleteBook, handleRestoreBook, handleChangeSearchParams, handleSearch } = handlers;
 
     const columns = [
         { label: '번호', width: '100px' },
@@ -11,7 +13,6 @@ function BookStatusListView({ books, status, handlers, pagination }) {
         { label: 'ISBN', width: 'auto' },
         { label: '등록일', width: 'auto' },
         { label: '최종수정일', width: 'auto' },
-        { label: '상태', width: '200px' },
         { label: '관리', width: '200px' },
     ];
 
@@ -22,7 +23,6 @@ function BookStatusListView({ books, status, handlers, pagination }) {
         if (name === 'searchText') name = 'bookTitle';
         if (name === 'searchStartDate') name = 'createdAtStart';
         if (name === 'searchEndDate') name = 'createdAtEnd';
-
         handleChangeSearchParams({ name, value });
     };
 
@@ -44,15 +44,10 @@ function BookStatusListView({ books, status, handlers, pagination }) {
             <td>{item.publisherName}</td>
             <td>{item.bookIsbn}</td>
             <td>{formatDate(item.createdAt)}</td>
-            <td>{formatDate(item.lastUpdatedAt)}</td>
-            <td>
-                <span className={`status-badge ${item.canBorrow ? 'green' : 'blue'}`}>
-                    {item.canBorrow ? '대출 가능' : '대출 중'}
-                </span>
-            </td>
+            <td>{formatDate(item.deletedAt)}</td>
             <td className="manage-column">
-                <button className="blue-btn" onClick={() => handleUpdateBook(item.bookId)}>수정</button>
-                <button className="red-btn" onClick={() => handleDeleteBook(item.bookId)}>삭제</button>
+                <button className="blue-btn" onClick={() => handleRestoreBook(item.bookId)}>복원</button>
+                <button className="red-btn" onClick={() => handleDeleteBook(item.bookId)}>삭제 사유 변경</button>
             </td>
         </>
     );
@@ -61,25 +56,30 @@ function BookStatusListView({ books, status, handlers, pagination }) {
 
     return (
         <BoardListLayout
-            title="도서 목록 현황"
+            title="삭제 도서 목록"
             searchPlaceholder="도서명으로 검색..."
             run={true}
             columns={columns}
             data={books.map(book => ({ ...book, id: book.bookId }))}
             showCheckbox={false}
             selection={{
-                selectedIds: selectedIds,
-                onSelectAll: handleSelectAll,
-                onSelectOne: handleSelectOne,
-                onBulkDelete: handleBulkDelete,
+                selectedIds: [],
+                onSelectAll: null,
+                onSelectOne: null,
+                onBulkDelete: null,
                 handleSearch: handleSearch,
                 handleChangeSearchParams: onSearchInputChange
             }}
-            pagination={pagination}
+
+            pagination={{
+                currentPage: status.currentPage,
+                totalPages: status.totalPages,
+                handlePageChange: handlers.handlePageChange,
+            }}
             renderRow={renderRow}
             showCreateButton={false}
         />
     );
-}
+};
 
-export default BookStatusListView;
+export default DeletedBookListView;

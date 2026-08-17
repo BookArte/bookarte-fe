@@ -30,10 +30,11 @@ export function useBookList({
         category: '',
         publicationDateStart: '',
         publicationDateEnd: '',
+        deleted: false,
         size: 10,
         sort: 'createdAt,desc',
-        ...initialParams,
-        bookTitle: initialBookTitle
+        bookTitle: initialBookTitle,
+        ...initialParams
     });
 
     const [appliedParams, setAppliedParams] = useState(searchParams);
@@ -147,6 +148,10 @@ export function useBookList({
             currentPage,
             totalPages,
             handlePageChange,
+
+        },
+        getVirtualNumber: (index) => {
+            return totalElements - (currentPage * searchParams.size) - index;
         }
     };
 }   
