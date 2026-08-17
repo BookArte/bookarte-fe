@@ -54,9 +54,6 @@ export function useDeletedBookManager() {
         }));
     }
 
-    const handleSearch = () => {
-        baseHandlers.fetchBooks(0, params.searchParams);
-    };
 
     const navigate = useNavigate();
 
@@ -65,17 +62,21 @@ export function useDeletedBookManager() {
     };
 
     const handleRestoreBook = async (bookId) => {
-        const confirmRestore = window.confirm('정말로 도서를 복구하시겠습니까?');
-        if (!confirmRestore) return;
+        try {
+            const confirmRestore = window.confirm('정말로 도서를 복구하시겠습니까?');
+            if (!confirmRestore) return;
 
-        const response = await restoreBookByBookId(bookId);
+            const response = await restoreBookByBookId(bookId);
 
-        if (response) {
-            toast.success('도서가 성공적으로 복구되었습니다.');
-            baseHandlers.fetchBooks(0, params.searchParams);
-        } else {
+            if (response) {
+                toast.success('도서가 성공적으로 복구되었습니다.');
+                baseHandlers.fetchBooks(0, params.searchParams);
+            }
+
+        } catch (error) {
             handleApiError(error, "도서 복구 오류");
         }
+
     };
 
     return {
@@ -93,7 +94,6 @@ export function useDeletedBookManager() {
             handleDeleteBook,
             handleReset,
             handleChangeSearchParams,
-            handleSearch,
             handleRestoreBook
         }
     };

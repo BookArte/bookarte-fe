@@ -3,7 +3,7 @@ import { useBookDelete } from "../../hooks/domain/book/admin/useBookDelete";
 
 function DeleteBookPage() {
 
-    const { formData, loading, errors, handlers, refs } = useBookDelete();
+    const { formData, loading, errors, handlers, refs, isAlreadyDeleted } = useBookDelete();
 
     return (
         <DeleteBook
@@ -12,6 +12,7 @@ function DeleteBookPage() {
             errors={errors}
             handlers={handlers}
             refs={refs}
+            isAlreadyDeleted={isAlreadyDeleted}
         />
     );
 }

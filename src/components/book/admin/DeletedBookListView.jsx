@@ -4,7 +4,7 @@ import BoardListLayout from "../../admin/BoardListLayout";
 function DeletedBookListView({ books, status, handlers, pagination }) {
     const loading = status.loading;
 
-    const { handleDeleteBook, handleReset, handleRestoreBook, handleChangeSearchParams, handleSearch } = handlers;
+    const { handleDeleteBook, handleRestoreBook, handleChangeSearchParams, handleSearch } = handlers;
 
     const columns = [
         { label: '번호', width: '100px' },
@@ -44,7 +44,7 @@ function DeletedBookListView({ books, status, handlers, pagination }) {
             <td>{item.publisherName}</td>
             <td>{item.bookIsbn}</td>
             <td>{formatDate(item.createdAt)}</td>
-            <td>{formatDate(item.lastUpdatedAt)}</td>
+            <td>{formatDate(item.deletedAt)}</td>
             <td className="manage-column">
                 <button className="blue-btn" onClick={() => handleRestoreBook(item.bookId)}>복원</button>
                 <button className="red-btn" onClick={() => handleDeleteBook(item.bookId)}>삭제 사유 변경</button>
@@ -70,7 +70,12 @@ function DeletedBookListView({ books, status, handlers, pagination }) {
                 handleSearch: handleSearch,
                 handleChangeSearchParams: onSearchInputChange
             }}
-            pagination={pagination}
+
+            pagination={{
+                currentPage: status.currentPage,
+                totalPages: status.totalPages,
+                handlePageChange: handlers.handlePageChange,
+            }}
             renderRow={renderRow}
             showCreateButton={false}
         />

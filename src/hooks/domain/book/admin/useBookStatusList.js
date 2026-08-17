@@ -23,7 +23,7 @@ export function useBookStatusList() {
         fetchFn: getAllBookList,
         idKey: 'bookId',
         initialParams: {
-            isDeleted: false,
+            deleted: false,
             sort: 'createdAt,desc',
             size: 10
         }
@@ -42,25 +42,17 @@ export function useBookStatusList() {
             publicationDateStart: '',
             publicationDateEnd: '',
             category: '',
-            isDeleted: false,
+            deleted: false,
             size: 10,
             sort: 'createdAt,desc'
         });
     };
-
-    useEffect(() => {
-        baseHandlers.fetchBooks(0, params.searchParams);
-    }, []);
 
     const handleChangeSearchParams = (target) => {
         params.setSearchParams(prev => ({
             ...prev,
             [target.name]: target.value
         }));
-    };
-
-    const handleSearch = () => {
-        baseHandlers.fetchBooks(0, params.searchParams);
     };
 
     const navigate = useNavigate();
@@ -146,8 +138,8 @@ export function useBookStatusList() {
             handleSelectOne,
             handleBulkDelete,
             handleReset,
-            handleChangeSearchParams,
-            handleSearch
-        }
+            handleChangeSearchParams
+        },
+        getVirtualNumber
     };
 }

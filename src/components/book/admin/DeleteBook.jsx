@@ -1,9 +1,9 @@
 import BookForm from "./BookForm";
 
-function DeleteBook({ formData, loading, errors, handlers, refs }) {
+function DeleteBook({ formData, loading, errors, handlers, refs, isAlreadyDeleted }) {
     return (
         <div className='book-form-container'>
-            <h2 className='book-work-title'>도서 삭제</h2>
+            <h2 className='book-work-title'>{isAlreadyDeleted ? "도서 삭제 사유 수정" : "도서 삭제"}</h2>
             <BookForm
                 formData={formData}
                 loading={loading}
@@ -11,6 +11,7 @@ function DeleteBook({ formData, loading, errors, handlers, refs }) {
                 handlers={handlers}
                 refs={refs}
                 isDelete={true}
+                isAlreadyDeleted={isAlreadyDeleted}
             />
         </div>
     );

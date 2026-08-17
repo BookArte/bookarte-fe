@@ -148,6 +148,10 @@ export function useBookList({
             currentPage,
             totalPages,
             handlePageChange,
+
+        },
+        getVirtualNumber: (index) => {
+            return totalElements - (currentPage * searchParams.size) - index;
         }
     };
 }   

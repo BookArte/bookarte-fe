@@ -8,15 +8,16 @@ const BookForm = ({
     handlers,
     refs,
     isEdit = false,
-    isDelete = false
+    isDelete = false,
+    isAlreadyDeleted = false
 }) => {
 
     const submitBtnText = isDelete
-        ? "삭제하기"
+        ? (isAlreadyDeleted ? "수정 완료" : "삭제하기")
         : (isEdit ? "수정 완료" : "등록 완료");
 
     const processingText = isDelete
-        ? "삭제 중..."
+        ? (isAlreadyDeleted ? "수정 중..." : "삭제 중...")
         : (isEdit ? "수정 중..." : "등록 중...")
 
     const btnStyle = isDelete
