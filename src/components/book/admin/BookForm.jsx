@@ -7,11 +7,23 @@ const BookForm = ({
     errors,
     handlers,
     refs,
-    isEdit = false
+    isEdit = false,
+    isDelete = false,
+    isAlreadyDeleted = false
 }) => {
 
-    const submitBtnText = isEdit ? "수정 완료" : "등록 완료";
-    const processingText = isEdit ? "수정 중..." : "등록 중...";
+    const submitBtnText = isDelete
+        ? (isAlreadyDeleted ? "수정 완료" : "삭제하기")
+        : (isEdit ? "수정 완료" : "등록 완료");
+
+    const processingText = isDelete
+        ? (isAlreadyDeleted ? "수정 중..." : "삭제 중...")
+        : (isEdit ? "수정 중..." : "등록 중...")
+
+    const btnStyle = isDelete
+        ? "book-delete-btn"
+        : "input-btn";
+
 
     return (
         <div>
@@ -21,8 +33,8 @@ const BookForm = ({
                         <label className='input-label'>도서 표지</label>
                         <div
                             className={`thumbnail-preview-section ${formData.bookThumbnail ? 'has-image' : ''}`}
-                            onClick={handlers.onThumbnailClick}
-                            style={{ cursor: 'pointer' }}
+                            onClick={isDelete ? undefined : handlers.onThumbnailClick}
+                            style={{ cursor: isDelete ? 'default' : 'pointer' }}
                         >
                             {formData.bookThumbnail ? (
                                 <img src={formData.bookThumbnail} alt="미리보기" className="thumbnail-preview-style" />
@@ -36,25 +48,25 @@ const BookForm = ({
                             ref={refs.thumbnailInputRef}
                             onChange={handlers.handleThumbnailChange}
                             style={{ display: 'none' }}
+                            disabled={isDelete}
                         />
                         <ErrorMsg message={errors.fieldErrors.bookThumbnail} />
                     </div>
                     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '20px' }}>
                         <div>
                             <label className='input-label'>도서 제목</label>
-                            <input name="bookTitle" value={formData.bookTitle} onChange={handlers.handleChange} className='input-style' placeholder="제목이 자동 입력됩니다" />
-                            <ErrorMsg message={errors.fieldErrors.bookTitle} />
+                            <input name="bookTitle" value={formData.bookTitle} onChange={handlers.handleChange} className='input-style' placeholder="제목이 자동 입력됩니다" disabled={isDelete} />
                         </div>
                         <div style={{ display: 'flex', gap: '15px' }}>
                             <div style={{ flex: 1 }}>
                                 <label className='input-label'>카테고리</label>
-                                <input name="bookCategory" value={formData.bookCategory} onChange={handlers.handleChange} className='input-style' />
-                                <ErrorMsg message={errors.fieldErrors.bookCategory} />
+                                <input name="bookCategory" value={formData.bookCategory} onChange={handlers.handleChange} className='input-style' disabled={isDelete} />
+
                             </div>
                             <div style={{ flex: 1 }}>
                                 <label className='input-label'>ISBN</label>
-                                <input name="bookIsbn" value={formData.bookIsbn} onChange={handlers.handleChange} className='input-style' />
-                                <ErrorMsg message={errors.fieldErrors.bookIsbn} />
+                                <input name="bookIsbn" value={formData.bookIsbn} onChange={handlers.handleChange} className='input-style' disabled={isDelete} />
+
                             </div>
                         </div>
                     </div>
@@ -63,45 +75,57 @@ const BookForm = ({
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
                     <div>
                         <label className='input-label'>저자</label>
-                        <input name="bookAuthor" value={formData.bookAuthor} onChange={handlers.handleChange} className='input-style' />
-                        <ErrorMsg message={errors.fieldErrors.bookAuthor} />
+                        <input name="bookAuthor" value={formData.bookAuthor} onChange={handlers.handleChange} className='input-style' disabled={isDelete} />
                     </div>
                     <div>
                         <label className='input-label'>역자</label>
-                        <input name="bookTranslator" value={formData.bookTranslator} onChange={handlers.handleChange} className='input-style' />
-                        <ErrorMsg message={errors.fieldErrors.bookTranslator} />
+                        <input name="bookTranslator" value={formData.bookTranslator} onChange={handlers.handleChange} className='input-style' disabled={isDelete} />
                     </div>
                     <div>
                         <label className='input-label'>출판사</label>
-                        <input name="publisherName" value={formData.publisherName} onChange={handlers.handleChange} className='input-style' />
-                        <ErrorMsg message={errors.fieldErrors.publisherName} />
+                        <input name="publisherName" value={formData.publisherName} onChange={handlers.handleChange} className='input-style' disabled={isDelete} />
                     </div>
                     <div>
                         <label className='input-label'>출판일</label>
-                        <input type="date" name="publicationDate" value={formData.publicationDate} onChange={handlers.handleChange} className='input-style' />
-                        <ErrorMsg message={errors.fieldErrors.publicationDate} />
+                        <input type="date" name="publicationDate" value={formData.publicationDate} onChange={handlers.handleChange} className='input-style' disabled={isDelete} />
                     </div>
                 </div>
 
-                <div style={{ marginBottom: '20px' }}>
-                    <label className='input-label input-unique-label'>청구기호 (필수)</label>
-                    <input name="bookCallNumber" value={formData.bookCallNumber} onChange={handlers.handleChange} className='input-style input-unique-style' placeholder="예: 813.6-박24-ㄴ" />
-                    <ErrorMsg message={errors.fieldErrors.bookCallNumber} />
-                </div>
+                {isDelete ? (
+                    <div style={{ marginBottom: '20px' }}>
+                        <label className='input-label' >청구기호</label>
+                        <input name="bookCallNumber" value={formData.bookCallNumber} className='input-style' disabled />
+                    </div>
+                ) : (
+                    <div style={{ marginBottom: '20px' }}>
+                        <label className='input-label input-unique-label'>청구기호 (필수)</label>
+                        <input name="bookCallNumber" value={formData.bookCallNumber} onChange={handlers.handleChange} className='input-style input-unique-style' placeholder="예: 813.6-박24-ㄴ" disabled={isDelete} />
+                        <ErrorMsg message={errors.fieldErrors.bookCallNumber} />
+                    </div>
+                )
+                }
 
-                <div>
-                    <label className='input-label'>책 소개</label>
-                    <Editor
-                        value={formData.editor}
-                        onChange={handlers.handleEditorChange}
-                        height="300px"
-                    />
-                    <ErrorMsg message={errors.fieldErrors.bookContents} />
-                </div>
+
+                {isDelete ? (
+                    <div>
+                        <label className='input-label'>삭제 사유</label>
+                        <input name="delReason" value={formData.delReason} onChange={handlers.handleChange} className='input-style' />
+                        <ErrorMsg message={errors.fieldErrors.delReason} />
+                    </div>
+                ) :
+                    (<div>
+                        <label className='input-label'>도서 소개</label>
+                        <Editor
+                            value={formData.editor}
+                            onChange={handlers.handleEditorChange}
+                            height="300px"
+                        />
+                        <ErrorMsg message={errors.fieldErrors.bookContents} />
+                    </div>)}
 
                 <div className='form-btn-group'>
                     <button type="button" className="cnl-btn" onClick={handlers.handleCancel}>취소</button>
-                    <button type="submit" className="input-btn" disabled={loading}>
+                    <button type="submit" className={btnStyle} disabled={loading}>
                         {loading ? processingText : submitBtnText}
                     </button>
                 </div>

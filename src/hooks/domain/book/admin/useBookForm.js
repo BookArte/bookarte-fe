@@ -9,6 +9,7 @@ export function useBookForm({
     submitFn,
     initialData = null,
     isEdit = false,
+    isDelete = false,
     onSuccess
 }) {
     const thumbnailInputRef = useRef(null);
@@ -67,7 +68,7 @@ export function useBookForm({
     };
 
     useEffect(() => {
-        if (isEdit && initialData) {
+        if (isEdit && initialData || isDelete && initialData) {
             setFormData(prev => ({
                 ...prev,
                 ...initialData,
@@ -75,7 +76,7 @@ export function useBookForm({
                 editor: initialData.bookContents || ""
             }));
         }
-    }, [isEdit, initialData]);
+    }, [isEdit, isDelete, initialData]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;

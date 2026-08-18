@@ -2340,6 +2340,18 @@
   cursor: pointer;
 }
 
+.book-delete-btn {
+  flex: 2;
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .cnl-btn {
   flex: 1;
   background-color: #fff;

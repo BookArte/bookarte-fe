@@ -16,7 +16,6 @@ const BoardListLayout = ({
     return (
         <div className="board-list-common-container">
             <h2 className="board-list-common-title">{title}</h2>
-
             {searchPlaceholder && (
                 <BoardSearchBar
                     placeholder={searchPlaceholder}
@@ -27,7 +26,6 @@ const BoardListLayout = ({
                     run={run}
                 />
             )}
-
             <div className="table-actions">
                 {showCheckbox && (
                     <button
